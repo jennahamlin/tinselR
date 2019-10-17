@@ -2,7 +2,7 @@ Package: Tinsel
 Title: PKG_TITLE
 Version: 0.0.0.9000
 Authors@R: person('Jenna', 'Hamlin', email = 'ptx4@cdc.gov', role = c('cre', 'aut'))
-Description: PKG_DESC.
+Description: Tinsel is a phylogenetic application for adding additional information to trees.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
