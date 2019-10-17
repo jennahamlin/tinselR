@@ -1,8 +1,8 @@
 Package: Tinsel
-Title: An Amazing Shiny App
+Title: PKG_TITLE
 Version: 0.0.0.9000
-Authors@R: person("firstname", "lastname", email = "your@email.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person('Jenna', 'Hamlin', email = 'ptx4@cdc.gov', role = c('cre', 'aut'))
+Description: PKG_DESC.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
