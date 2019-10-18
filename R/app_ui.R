@@ -5,7 +5,8 @@ app_ui <- function() {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
-      h1("Tinsel")
+      h1("Tinsel"),
+      mod_read_in_data_ui("read_in_data_ui_1")
     )
   )
 }
