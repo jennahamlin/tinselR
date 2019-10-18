@@ -5,9 +5,9 @@
 \alias{mod_read_in_data_server}
 \title{mod_read_in_data_ui and mod_read_in_data_server}
 \usage{
-mod_read_in_data_ui(id)
+mod_read_in_data_ui(id, label = " upload your meta data CSV file")
 
-mod_read_in_data_server(input, output, session)
+mod_read_in_data_server(input, output, session, stringsAsFactors)
 }
 \arguments{
 \item{id}{shiny id}
