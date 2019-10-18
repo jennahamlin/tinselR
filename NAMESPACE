@@ -2,5 +2,11 @@
 
 export(run_app)
 import(shiny)
-importFrom(shiny,addResourcePath)
-importFrom(shiny,runApp)
+importFrom(glue,glue)
+importFrom(golem,with_golem_options)
+importFrom(htmltools,HTML)
+importFrom(htmltools,tagAppendAttributes)
+importFrom(htmltools,tagList)
+importFrom(htmltools,tags)
+importFrom(shiny,column)
+importFrom(shiny,shinyApp)

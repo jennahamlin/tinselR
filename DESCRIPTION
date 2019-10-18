@@ -9,8 +9,12 @@ LazyData: true
 Imports: 
     shiny,
     golem,
-    processx
-RoxygenNote: 6.1.0
+    processx,
+    attempt,
+    DT,
+    glue,
+    htmltools
+RoxygenNote: 6.1.1
 URL: https://github.com/jennahamlin/Tinsel
 BugReports: https://github.com/jennahamlin/Tinsel/issues
 Suggests: 

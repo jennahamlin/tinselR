@@ -11,11 +11,11 @@
 golem::fill_desc(
   pkg_name = "Tinsel", # The Name of the package containing the App 
   pkg_title = "PKG_TITLE", # The Title of the package containing the App 
-  pkg_description = "PKG_DESC.", # The Description of the package containing the App 
-  author_first_name = "AUTHOR_FIRST", # Your First Name
-  author_last_name = "AUTHOR_LAST",  # Your Last Name
-  author_email = "AUTHOR@MAIL.COM",      # Your Email
-  repo_url = NULL # The (optional) URL of the GitHub Repo
+  pkg_description = "Tinsel is a phylogenetic application for adding additional information to trees.", # The Description of the package containing the App 
+  author_first_name = "Jenna", # Your First Name
+  author_last_name = "Hamlin",  # Your Last Name
+  author_email = "ptx4@cdc.gov",      # Your Email
+  repo_url = "https://github.com/jennahamlin/Tinsel" # The (optional) URL of the GitHub Repo
 )     
 
 ## Use this desc to set {golem} options
@@ -26,12 +26,12 @@ golem::set_golem_options()
 ## 
 ## If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news
 
-usethis::use_mit_license( name = "Golem User" )  # You can set another licence here
-usethis::use_readme_rmd( open = FALSE )
-usethis::use_code_of_conduct()
-usethis::use_lifecycle_badge( "Experimental" )
+usethis::use_mit_license( name = "Jenna Hamlin" )  # You can set another licence here
+#usethis::use_readme_rmd( open = FALSE )
+#usethis::use_code_of_conduct()
+#usethis::use_lifecycle_badge( "Experimental" )
 
-usethis::use_news_md( open = FALSE )
+#usethis::use_news_md( open = FALSE )
 usethis::use_git()
 
 ## 1.3 - Add a data-raw folder
@@ -49,11 +49,14 @@ golem::use_recommended_tests()
 
 golem::use_recommended_deps()
 
+#essentially step 1.5 runs the code use_package("packagename"),
+#which adds the dependencies needed for importing
+
 ## 1.6 Add various tools
 
-# If you want to change the favicon (default is golem's one)
-golem::remove_favicon()
-golem::use_favicon() # path = "path/to/ico". Can be an online file. 
+# If you want to change the favicon (default is golem's one) #can make my own https://favicon.io/favicon-generator/
+#golem::remove_favicon()
+#golem::use_favicon() # path = "path/to/ico". Can be an online file. 
 
 # Add helper functions 
 golem::use_utils_ui()
