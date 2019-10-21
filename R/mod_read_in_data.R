@@ -18,7 +18,7 @@ mod_read_in_data_ui <- function(id, label = " upload your meta data CSV file"){
   # Create a namespace function using the provided id
   ns <- NS(id)
     tagList(
-    fileInput(ns("file"), label)
+    fileInput(ns("file"),label)
   )
 }
     
@@ -50,6 +50,10 @@ mod_read_in_data_server <-   function(input, output, session, stringsAsFactors) 
   
   # Return the reactive that yields the data frame
   return(dataframe)
+  
+  output$table <- renderDataTable({
+    datafile()
+  })
 }
 ## To be copied in the UI
     

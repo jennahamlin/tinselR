@@ -6,14 +6,7 @@ app_ui <- function() {
     # List the first level UI elements here 
     fluidPage(
       mod_package_description_ui("package_description_ui_1"),
-      sidebarLayout(
-        sidebarPanel(
-          mod_read_in_data_ui("read_in_data_ui_1")
-        ),
-        mainPanel(
-          dataTableOutput("table")
-        )
-      )
+      mod_read_in_data_ui("read_in_data_ui_1")
     )
   )
 }
