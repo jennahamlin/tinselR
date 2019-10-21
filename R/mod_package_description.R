@@ -16,7 +16,7 @@
 mod_package_description_ui <- function(id){
   ns <- NS(id)
   withTags({p(b('Tinsel:'), 
-    'A Phylogenetic Tool')}
+              'A Phylogenetic Tool')}
   )
 }
     
