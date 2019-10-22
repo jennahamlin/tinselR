@@ -2,8 +2,6 @@
 
 export(mod_csvFileInput_server)
 export(mod_csvFileInput_ui)
-export(mod_filterTable_server)
-export(mod_filterTable_ui)
 export(run_app)
 import(shiny)
 importFrom(glue,glue)
