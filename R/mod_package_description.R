@@ -16,7 +16,7 @@
 mod_package_description_ui <- function(id){
   ns <- NS(id)
   withTags({p(b('Tinsel:'), 
-    'A Phylogenetic Tool')}
+              'A Phylogenetic Tool')}
   )
 }
     
@@ -28,6 +28,7 @@ mod_package_description_ui <- function(id){
     
 mod_package_description_server <- function(input, output, session){
   ns <- session$ns
+  
 }
     
 ## To be copied in the UI
