@@ -1,6 +1,6 @@
 # Module UI
-  
-#' @title   mod_csvFileInput_ui and mod_csvFileInput_server
+
+#' @title   mod_read_in_data_ui and mod_read_in_data_server
 #' @description  A shiny Module.
 #'
 #' @param id shiny id
@@ -8,30 +8,27 @@
 #' @param output internal
 #' @param session internal
 #'
-#' @rdname mod_csvFileInput
+#' @rdname mod_read_in_data
 #'
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_csvFileInput_ui <- function(id){
+#Modules UI function should be suffixed with input, output, or ui
+mod_read_in_data_ui <- function(id, label = " upload your meta data CSV file"){
+  # Create a namespace function using the provided id
   ns <- NS(id)
-    tagList(
-      fileInput(ns("file"), label),
-      checkboxInput(ns("heading"), "Has heading"),
-      selectInput(ns("quote"), "Quote", c(
-        "None" = "",
-        "Double quote" = "\"",
-        "Single quote" = "'"
-      ))
-    )
+  tagList(
+    fileInput(ns("file"), label)
+  )
 }
+
 # Module Server
-    
-#' @rdname mod_csvFileInput
+
+#' @rdname mod_read_in_data
 #' @export
 #' @keywords internal
-    
-mod_csvFileInput_server <- function(input, output, session, stringsAsFactors) {
+
+mod_read_in_data_server <-   function(input, output, session, stringsAsFactors) {
   # The selected file, if any
   userFile <- reactive({
     # If no file is selected, don't do anything
@@ -42,8 +39,6 @@ mod_csvFileInput_server <- function(input, output, session, stringsAsFactors) {
   # The user's data, parsed into a data frame
   dataframe <- reactive({
     read.csv(userFile()$datapath,
-             header = input$heading,
-             quote = input$quote,
              stringsAsFactors = stringsAsFactors)
   })
   
@@ -56,10 +51,7 @@ mod_csvFileInput_server <- function(input, output, session, stringsAsFactors) {
   # Return the reactive that yields the data frame
   return(dataframe)
 }
-    
 ## To be copied in the UI
-# mod_csvFileInput_ui("csvFileInput_ui_1")
-    
+
 ## To be copied in the server
-# callModule(mod_csvFileInput_server, "csvFileInput_ui_1")
- 
+
