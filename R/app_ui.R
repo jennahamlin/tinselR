@@ -7,18 +7,18 @@ app_ui <- function() {
     fluidPage(
       sidebarLayout(
         sidebarPanel(
-          mod_csvFileInput_ui("csvFileInput_ui_1", label = "Metadata CSV file")
+          mod_csvFileInput_ui("csvFileInput_ui_meta", label = "Metadata CSV file")
         ),
         mainPanel(
-          dataTableOutput("table")
+          dataTableOutput("metatable")
         )
       ),
       sidebarLayout(
         sidebarPanel(
-          mod_csvFileInput_ui("csvFileInput_ui_1", label = "Genetic Distance CSV file")
+          mod_csvFileInput_ui("csvFileInput_ui_genetic", label = "Genetic Distance CSV file")
         ),
         mainPanel(
-          dataTableOutput("table"))
+          dataTableOutput("genetable"))
       )
     )  
   )
