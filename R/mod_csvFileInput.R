@@ -19,7 +19,12 @@ mod_csvFileInput_ui <- function(id, label = "CSV file") {
   
   tagList(
     fileInput(ns("file"), label),
-    checkboxInput(ns("heading"), "Has heading")
+    checkboxInput(ns("heading"), "Has heading"),
+    selectInput(ns("sep"), "CSV or TSV", c(
+      "Select" = "",
+      "CSV" = ",",
+      "TSV" = "\t"
+    ))
    )
 }
     
@@ -43,6 +48,7 @@ mod_csvFileInput_server <- function(input, output, session, stringsAsFactors) {
   dataframe <- reactive({
     read.csv(userFile()$datapath,
              header = input$heading,
+             sep=input$sep,
              quote = input$quote,
              stringsAsFactors = stringsAsFactors)
   })
