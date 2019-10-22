@@ -5,10 +5,9 @@ app_ui <- function() {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
-      mod_package_description_ui("package_description_ui_1"),
       sidebarLayout(
         sidebarPanel(
-          mod_read_in_data_ui("read_in_data_ui_1")
+          mod_csvFileInput_ui("csvFileInput_ui_1")
         ),
         mainPanel(
           dataTableOutput("table")
