@@ -49,8 +49,7 @@ mod_dataInput_server <- function(input, output, session) {
   # The selected file, if any
   userFile <- reactive({
     # If no file is selected, don't do anything
-    validate(need(input$file, message = FALSE))
-    input$file
+   req(input$file)
   })    
   
   
@@ -59,9 +58,7 @@ mod_dataInput_server <- function(input, output, session) {
              header = input$header,
              sep = input$sep)
   })
-  
-  
-  return(df)
+#does this need return(df); works with out it
 }
 
     
