@@ -20,7 +20,7 @@ mod_dataInput_ui <- function(id, label = "CSV file") {
   tagList(
     
     # Input: Select a file ----
-    fileInput(ns("file"), "Choose CSV File",
+    fileInput(ns("file"), label,
               multiple = FALSE,
               accept = c("text/csv",
                          "text/comma-separated-values,text/plain",

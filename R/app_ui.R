@@ -11,17 +11,34 @@ app_ui <- function() {
         
         # Sidebar panel for inputs ----
         sidebarPanel(
-          mod_dataInput_ui("dataInput_ui_1", "User data (.csv format)")
+          mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)")
         ),
         
         # Main panel for displaying outputs ----
         mainPanel(
           
           # Output: Data file ----
-          tableOutput("contents")
+          tableOutput("metacontents")
+          
+        )
+      ),
+      # Sidebar layout with input and output definitions ----
+      sidebarLayout(
+        
+        # Sidebar panel for inputs ----
+        sidebarPanel(
+          mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)")
+        ),
+        
+        # Main panel for displaying outputs ----
+        mainPanel(
+          
+          # Output: Data file ----
+          tableOutput("genecontents")
           
         )
       )
+      
     )
   )
 }
