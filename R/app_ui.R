@@ -5,24 +5,27 @@ app_ui <- function() {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
+      
+      # Sidebar layout with input and output definitions ----
       sidebarLayout(
+        
+        # Sidebar panel for inputs ----
         sidebarPanel(
-          mod_csvFileInput_ui("csvFileInput_ui_meta", label = "Metadata File")
+          mod_dataInput_ui("dataInput_ui_1", "User data (.csv format)")
         ),
+        
+        # Main panel for displaying outputs ----
         mainPanel(
-          dataTableOutput("metatable")
+          
+          # Output: Data file ----
+          tableOutput("contents")
+          
         )
-      ),
-      sidebarLayout(
-        sidebarPanel(
-          mod_csvFileInput_ui("csvFileInput_ui_genetic", label = "Genetic Distance File")
-        ),
-        mainPanel(
-          dataTableOutput("genetable"))
       )
-    )  
+    )
   )
 }
+
 
 #' @import shiny
 golem_add_external_resources <- function(){
