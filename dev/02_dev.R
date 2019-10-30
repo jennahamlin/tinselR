@@ -15,7 +15,7 @@ usethis::use_package( "dplyr" ) # To call each time you need a new package
 
 ## 2.3 Add tests
 
-usethis::use_test( "app" )
+usethis::use_test( "inputData" )
 
 ## 2.4 Add a browser button
 

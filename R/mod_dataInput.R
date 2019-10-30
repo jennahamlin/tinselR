@@ -57,6 +57,7 @@ mod_dataInput_server <- function(input, output, session) {
     read.csv(userFile()$datapath,
              header = input$header,
              sep = input$sep)
+    
   })
 #does this need return(df); works with out it
 }
