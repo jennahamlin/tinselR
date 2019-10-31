@@ -1,5 +1,5 @@
 # Module UI
-  
+
 #' @title   mod_dataInput_ui and mod_dataInput_server
 #' @description  A shiny Module.
 #'
@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_dataInput_ui <- function(id, label = "CSV file") {
+mod_dataInput_ui <- function(id, label) {
   # Create a namespace function using the provided id
   ns <- NS(id)
   
@@ -26,9 +26,6 @@ mod_dataInput_ui <- function(id, label = "CSV file") {
                          "text/comma-separated-values,text/plain",
                          ".csv")),
     
-    # Horizontal line ----
-    tags$hr(),
-    
     # Input: Checkbox if file has header ----
     checkboxInput(ns("header"), "Header", TRUE),
     
@@ -36,36 +33,39 @@ mod_dataInput_ui <- function(id, label = "CSV file") {
     radioButtons(ns("sep"), "Separator",
                  choices = c(Comma = ",",
                              Tab = "\t"),
-                 selected = ","))
+                 selected = ","),
+    
+    radioButtons("disp", "Display",
+                 choices = c(Head = "head",
+                             All = "all"),
+                 selected = "head"))
 }
-    
+
 # Module Server
-    
+
 #' @rdname mod_dataInput
 #' @export
 #' @keywords internal
-    
+
 mod_dataInput_server <- function(input, output, session) {
+  
   # The selected file, if any
   userFile <- reactive({
     # If no file is selected, don't do anything
-   req(input$file)
+    req(input$file)
   })    
-  
   
   df <- reactive({
     read.csv(userFile()$datapath,
              header = input$header,
              sep = input$sep)
-    
   })
-#does this need return(df); works with out it
 }
 
-    
+
 ## To be copied in the UI
 # mod_dataInput_ui("dataInput_ui_1")
-    
+
 ## To be copied in the server
 # callModule(mod_dataInput_server, "dataInput_ui_1")
- 
+

@@ -12,6 +12,7 @@ golem::add_module( name = "dataInput") # Name of the module
 ## 2.2 Add dependencies
 
 usethis::use_package( "dplyr" ) # To call each time you need a new package
+usethis::use_package( "ape" )
 
 ## 2.3 Add tests
 

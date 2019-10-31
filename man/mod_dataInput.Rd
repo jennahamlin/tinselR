@@ -5,7 +5,7 @@
 \alias{mod_dataInput_server}
 \title{mod_dataInput_ui and mod_dataInput_server}
 \usage{
-mod_dataInput_ui(id, label = "CSV file")
+mod_dataInput_ui(id, label)
 
 mod_dataInput_server(input, output, session)
 }

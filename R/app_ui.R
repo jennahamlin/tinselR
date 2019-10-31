@@ -37,8 +37,19 @@ app_ui <- function() {
           tableOutput("genecontents")
           
         )
+      ),
+      # Sidebar layout with input and output definitions ----
+      sidebarLayout(
+        
+        # Sidebar panel for inputs ----
+        sidebarPanel(
+          mod_treeInput_ui("treeInput_ui_1")
+        ),
+        
+        mainPanel (
+          plotOutput("tree")
+        )
       )
-      
     )
   )
 }
