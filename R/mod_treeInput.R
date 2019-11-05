@@ -40,6 +40,10 @@ mod_treeInput_server <- function(input, output, session){
     ape::read.tree(userTree()$datapath)
     
   })
+  
+  midTree<- reactive({
+    phytools::midpoint.root(outTree())
+  })
 }
 
 ## To be copied in the UI
