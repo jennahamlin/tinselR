@@ -37,7 +37,7 @@ usethis::use_git()
 ## 1.3 - Add a data-raw folder
 ## 
 ## If you have data in your package
-usethis::use_data_raw( name = "my_dataset", open = FALSE ) # Change "my_dataset"
+#usethis::use_data_raw( name = "my_dataset", open = FALSE ) # Change "my_dataset"
 
 ## 1.4 - Init Tests
 ## 
@@ -47,7 +47,7 @@ golem::use_recommended_tests()
 
 ## 1.5 : Use Recommended Package
 
-golem::use_recommended_deps()
+#golem::use_recommended_deps()
 
 #essentially step 1.5 runs the code use_package("packagename"),
 #which adds the dependencies needed for importing
@@ -59,8 +59,8 @@ golem::remove_favicon()
 golem::use_favicon("~/Desktop/Tinsel/favicon/favicon.ico") # path = "path/to/ico". Can be an online file. 
 
 # Add helper functions 
-golem::use_utils_ui()
-golem::use_utils_server()
+#golem::use_utils_ui()
+#golem::use_utils_server()
 
 # You're now set! 
 # go to dev/02_dev.R

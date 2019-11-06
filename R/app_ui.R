@@ -4,7 +4,13 @@ app_ui <- function() {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
+    navbarPage("Tinsel", id="nav",
+               
+               tabPanel("About",
+                        div(class="outer"))),
+
     fluidPage(
+      
       
       # Sidebar layout with input and output definitions ----
       sidebarLayout(
@@ -49,7 +55,8 @@ app_ui <- function() {
         mainPanel (
           plotOutput("tree")
         )
-      )
+      ),
+      conditionalPanel("input.tsp=='about'", source("/home/jhamlin/Desktop/Tinsel/R/about.R",local=T)$value)
     )
   )
 }
