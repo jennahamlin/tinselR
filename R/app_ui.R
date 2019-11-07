@@ -19,9 +19,9 @@ app_ui <- function() {
                             ),
                             tabPanel("Phylogenetic Tree",
                                      plotOutput("tree"))))),
-               tabPanel("About",
-                        fluidRow(column(6,
-                                        includeMarkdown("about.md")
+               tabPanel("Getting Started",
+                        fluidRow(column(12,
+                                        includeMarkdown("gettingStarted.md")
                         )
                         )
                )
