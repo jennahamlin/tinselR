@@ -6,17 +6,19 @@ app_ui <- function() {
     # List the first level UI elements here 
     navbarPage("Tinsel",
                tabPanel("Load Data",
-                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"),
+                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"), helpText("Test help"),
+                                     # Horizontal line ----
+                                     tags$hr(),
                                      mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)"),
+                                     # Horizontal line ----
+                                     tags$hr(),
                                      mod_treeInput_ui("treeInput_ui_1")),
                         mainPanel(
                           tabsetPanel(
                             tabPanel("Meta Data",
-                                     tableOutput("metacontents")
-                            ),
+                                     tableOutput("metacontents")),
                             tabPanel("Genetic Data",
-                                     tableOutput("genecontents")
-                            ),
+                                     tableOutput("genecontents")),
                             tabPanel("Phylogenetic Tree",
                                      plotOutput("tree"))))),
                tabPanel("Getting Started",
