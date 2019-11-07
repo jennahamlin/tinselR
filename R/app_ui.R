@@ -4,59 +4,27 @@ app_ui <- function() {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
-    navbarPage("Tinsel", id="nav",
-               
+    navbarPage("Tinsel",
+               tabPanel("Load Data",
+                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"),
+                                     mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)"),
+                                     mod_treeInput_ui("treeInput_ui_1")),
+                        mainPanel(
+                          tabsetPanel(
+                            tabPanel("Meta Data",
+                                     tableOutput("metacontents")
+                            ),
+                            tabPanel("Genetic Data",
+                                     tableOutput("genecontents")
+                            ),
+                            tabPanel("Phylogenetic Tree",
+                                     plotOutput("tree"))))),
                tabPanel("About",
-                        div(class="outer"))),
-
-    fluidPage(
-      
-      
-      # Sidebar layout with input and output definitions ----
-      sidebarLayout(
-        
-        # Sidebar panel for inputs ----
-        sidebarPanel(
-          mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)")
-        ),
-        
-        # Main panel for displaying outputs ----
-        mainPanel(
-          
-          # Output: Data file ----
-          tableOutput("metacontents")
-          
-        )
-      ),
-      # Sidebar layout with input and output definitions ----
-      sidebarLayout(
-        
-        # Sidebar panel for inputs ----
-        sidebarPanel(
-          mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)")
-        ),
-        
-        # Main panel for displaying outputs ----
-        mainPanel(
-          
-          # Output: Data file ----
-          tableOutput("genecontents")
-          
-        )
-      ),
-      # Sidebar layout with input and output definitions ----
-      sidebarLayout(
-        
-        # Sidebar panel for inputs ----
-        sidebarPanel(
-          mod_treeInput_ui("treeInput_ui_1")
-        ),
-        
-        mainPanel (
-          plotOutput("tree")
-        )
-      ),
-      conditionalPanel("input.tsp=='about'", source("/home/jhamlin/Desktop/Tinsel/R/about.R",local=T)$value)
+                        fluidRow(column(6,
+                                        includeMarkdown("about.md")
+                        )
+                        )
+               )
     )
   )
 }

@@ -17,7 +17,8 @@ Imports:
     dplyr,
     ape,
     phytools,
-    utils
+    utils,
+    markdown
 RoxygenNote: 6.1.1
 URL: https://github.com/jennahamlin/Tinsel
 BugReports: https://github.com/jennahamlin/Tinsel/issues
