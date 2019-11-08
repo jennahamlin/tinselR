@@ -8,10 +8,10 @@ app_ui <- function() {
                tabPanel("Load Data",
                         sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"), helpText("Test help"),
                                      # Horizontal line ----
-                                     tags$hr(),
+                                     tags$hr(style="border-color: black;"),
                                      mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)"),
                                      # Horizontal line ----
-                                     tags$hr(),
+                                     tags$hr(style="border-color: black;"),
                                      mod_treeInput_ui("treeInput_ui_1")),
                         mainPanel(
                           tabsetPanel(

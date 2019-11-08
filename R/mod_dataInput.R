@@ -56,9 +56,13 @@ mod_dataInput_server <- function(input, output, session) {
   })    
   
   df <- reactive({
-    utils::read.csv(userFile()$datapath,
-             header = input$header,
-             sep = input$sep)
+    utils::read.table(userFile()$datapath,
+                      header = FALSE,
+                      sep = input$sep,
+                      row.names = 1,
+                      skip = 1,
+                      stringsAsFactors = FALSE)
+   
   })
 }
 
