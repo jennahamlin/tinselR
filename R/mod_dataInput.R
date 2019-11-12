@@ -59,7 +59,7 @@ mod_dataInput_server <- function(input, output, session) {
     utils::read.table(userFile()$datapath,
                       header = FALSE,
                       sep = input$sep,
-                      row.names = 1,
+                      row.names = NULL,
                       skip = 1,
                       stringsAsFactors = FALSE)
    
