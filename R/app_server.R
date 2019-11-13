@@ -1,5 +1,5 @@
 #' @import shiny
-app_server <- function(input, output,session) {
+app_server <- function(input, output, session) {
   # List the first level callModules here
   metafile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
   
@@ -11,13 +11,18 @@ app_server <- function(input, output,session) {
       return(metafile())
     }
     
-    
   })
   
   genefile <- callModule(mod_dataInput_server, "dataInput_ui_gene")
   
   output$genecontents <- renderTable({
-    genefile()
+    if(input$disp == "head") {
+      return(head(genefile()))
+    }
+    else {
+      return(genefile())
+    }
+    
   })
   
   treefile <-callModule(mod_treeInput_server, "treeInput_ui_1")

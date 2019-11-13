@@ -25,20 +25,16 @@ mod_dataInput_ui <- function(id, label) {
               accept = c("text/csv",
                          "text/comma-separated-values,text/plain",
                          ".csv")),
-    
-    # Input: Checkbox if file has header ----
-    checkboxInput(ns("header"), "Header", TRUE),
-    
-    # Input: Select separator ----
+
+        # Input: Select separator ----
     radioButtons(ns("sep"), "Separator",
                  choices = c(Comma = ",",
                              Tab = "\t"),
-                 selected = ","),
+                 selected = "\t"),
     
     radioButtons("disp", "Display",
                  choices = c(Head = "head",
-                             All = "all"),
-                 selected = "head"))
+                             All = "all")))
 }
 
 # Module Server
