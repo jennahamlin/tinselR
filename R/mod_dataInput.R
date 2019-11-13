@@ -62,7 +62,7 @@ mod_dataInput_server <- function(input, output, session) {
                       row.names = NULL,
                       skip = 1,
                       stringsAsFactors = FALSE)
-   
+    
   })
 }
 

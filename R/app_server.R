@@ -4,7 +4,14 @@ app_server <- function(input, output,session) {
   metafile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
   
   output$metacontents <- renderTable({
-    metafile()
+    if(input$disp == "head") {
+      return(head(metafile()))
+    }
+    else {
+      return(metafile())
+    }
+    
+    
   })
   
   genefile <- callModule(mod_dataInput_server, "dataInput_ui_gene")
