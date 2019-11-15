@@ -34,7 +34,8 @@ mod_dataInput_ui <- function(id, label) {
     
     radioButtons(ns("disp"), "Display",
                  choices = c(Head = "head",
-                             All = "all")))
+                             All = "all"),
+                 selected = "head"))
 }
 
 # Module Server
