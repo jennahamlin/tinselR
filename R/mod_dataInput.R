@@ -25,14 +25,14 @@ mod_dataInput_ui <- function(id, label) {
               accept = c("text/csv",
                          "text/comma-separated-values,text/plain",
                          ".csv")),
-
-        # Input: Select separator ----
+    
+    # Input: Select separator ----
     radioButtons(ns("sep"), "Separator",
                  choices = c(Comma = ",",
                              Tab = "\t"),
                  selected = "\t"),
     
-    radioButtons("disp", "Display",
+    radioButtons(ns("disp"), "Display",
                  choices = c(Head = "head",
                              All = "all")))
 }
@@ -51,7 +51,7 @@ mod_dataInput_server <- function(input, output, session) {
     req(input$file)
   })    
   
-  df <- reactive({
+  datafile <- reactive({
     utils::read.table(userFile()$datapath,
                       header = FALSE,
                       sep = input$sep,
@@ -60,6 +60,16 @@ mod_dataInput_server <- function(input, output, session) {
                       stringsAsFactors = FALSE)
     
   })
+  
+  headfile <- reactive({
+    if(input$disp == "head") {
+      return(head(datafile()))
+    }
+    else {
+      return(datafile())
+    }
+  })
+  
 }
 
 
