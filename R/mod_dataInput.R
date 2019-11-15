@@ -46,9 +46,10 @@ mod_dataInput_ui <- function(id, label) {
 
 mod_dataInput_server <- function(input, output, session) {
   
-  # The selected file, if any
+  #reactive expression that until a file is uploaded a message is displayed and until a file
+  #is uploaded can not move between the three data imort tabs. 
   userFile <- reactive({
-    # If no file is selected, don't do anything
+    validate(need(input$file !="", "Please import a data file"))
     req(input$file)
   })    
   
