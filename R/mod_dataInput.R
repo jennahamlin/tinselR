@@ -20,11 +20,13 @@ mod_dataInput_ui <- function(id, label) {
   tagList(
     
     # Input: Select a file ----
+    #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
     fileInput(ns("file"), label,
               multiple = FALSE,
-              accept = c("text/csv", #this bypasses the  need to validated, but not a good error message is output
+              accept = c("text/csv", 
                          "text/comma-separated-values,text/plain",
-                         ".csv")),
+                         ".csv",
+                         ".tsv")),
     
     # Input: Select separator ----
     radioButtons(ns("sep"), "Separator",
