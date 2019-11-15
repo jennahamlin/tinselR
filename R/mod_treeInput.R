@@ -32,7 +32,7 @@ mod_treeInput_server <- function(input, output, session){
   ns <- session$ns
   
   userTree <- reactive({
-    # If no file is selected, don't do anything
+    validate(need(input$upload_tree !="", "Please import a tree file"))
     req(input$upload_tree)
   })   
   
