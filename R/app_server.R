@@ -18,7 +18,7 @@ app_server <- function(input, output, session) {
   treefile <-callModule(mod_treeInput_server, "treeInput_ui_1")
   
   output$tree <- renderPlot({
-    ape::plot.phylo(treefile())
+    ape::plot.phylo(treefile(), edge.width = input$edgewidth)
     
   })
   
