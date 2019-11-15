@@ -22,7 +22,7 @@ mod_dataInput_ui <- function(id, label) {
     # Input: Select a file ----
     fileInput(ns("file"), label,
               multiple = FALSE,
-              accept = c("text/csv",
+              accept = c("text/csv", #this bypasses the  need to validated, but not a good error message is output
                          "text/comma-separated-values,text/plain",
                          ".csv")),
     
@@ -46,8 +46,7 @@ mod_dataInput_ui <- function(id, label) {
 
 mod_dataInput_server <- function(input, output, session) {
   
-  #reactive expression that until a file is uploaded a message is displayed and until a file
-  #is uploaded can not move between the three data imort tabs. 
+  #reactive expression that until a file is uploaded, the below message is displayed
   userFile <- reactive({
     validate(need(input$file !="", "Please import a data file"))
     req(input$file)
