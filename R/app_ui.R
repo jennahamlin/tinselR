@@ -20,7 +20,9 @@ app_ui <- function() {
                             tabPanel("Genetic Data",
                                      tableOutput("genecontents")),
                             tabPanel("Phylogenetic Tree",
-                                     plotOutput("tree"))))),
+                                     plotOutput("tree"),
+                                     numericInput("edgewidth", "Edge width", value=1, min=0)
+                            )))),
                tabPanel("Getting Started",
                         fluidRow(column(12,
                                         includeMarkdown("gettingStarted.md")

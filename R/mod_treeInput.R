@@ -37,10 +37,8 @@ mod_treeInput_server <- function(input, output, session){
   })   
   
   outTree <- reactive({
-    #read in newick tree file
     ape::read.tree(userTree()$datapath)
-    
-  })
+      })
   
   midTree<- reactive({
     #midpoint root the tree file
