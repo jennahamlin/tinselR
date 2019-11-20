@@ -51,7 +51,7 @@ mod_dataInput_server <- function(input, output, session) {
   #reactive expression that until a file is uploaded, the below message is displayed
   userFile <- reactive({
     validate(need(input$file !="", "Please import a data file"))
-    req(input$file)
+    input$file
   })    
   
   datafile <- reactive({

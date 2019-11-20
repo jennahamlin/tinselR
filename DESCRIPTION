@@ -19,7 +19,8 @@ Imports:
     phytools,
     utils,
     markdown,
-    assertthat
+    assertthat,
+    xfun
 RoxygenNote: 6.1.1
 URL: https://github.com/jennahamlin/Tinsel
 BugReports: https://github.com/jennahamlin/Tinsel/issues
