@@ -1,12 +1,11 @@
 context("reading in data")
 
 #list files in the folder in which you are working 
-files<-list.files(path = "/home/jhamlin/Desktop/Tinsel", 
-                  pattern='\\.dnd$')
+
+files<-list.files(".", pattern='\\.dnd$')
 
 #does file with .dnd exist -this is what I need to do
-#do i need all of the below code? 
 
 test_that("Does a file with the extension .dnd (newick file) exist",{
-  expect_that(assertthat::assert_that(assertthat::see_if(assertthat::not_empty(files))), throws_error()) })
+  expect_that(assertthat::assert_that(assertthat::see_if(assertthat::not_empty(files))), is_a("logical")) })
 
