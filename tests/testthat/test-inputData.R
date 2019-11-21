@@ -1,8 +1,26 @@
 context("reading in data")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #list files in the folder in which you are working 
 
-files<-list.files(".", pattern='\\.dnd$')
+files<-list.files(".", pattern='\\.R$')
 
 #does file with .dnd exist -this is what I need to do
 
