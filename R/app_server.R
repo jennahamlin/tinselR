@@ -22,6 +22,7 @@ app_server <- function(input, output, session) {
                     align.tip.label = input$aligntiplabels,
                     show.node.label = input$shownodelabels,
                     edge.width = input$edgewidth)
+    if(input$scalebar) ape::add.scale.bar()
     
   })
   

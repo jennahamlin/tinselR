@@ -21,6 +21,7 @@ mod_treeInput_ui <- function(id){
               label = "Select Tree File:"),
     
     checkboxInput(ns("midp"), "Midpoint Root", TRUE)
+    
   )
 }
 

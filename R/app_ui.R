@@ -24,6 +24,7 @@ app_ui <- function() {
                                      plotOutput("tree"),
                                      checkboxInput("aligntiplabels", "Align tip labels", FALSE),
                                      checkboxInput("shownodelabels", "Show node labels", FALSE),
+                                     checkboxInput("scalebar", "Add scale bar", FALSE),
                                      numericInput("edgewidth", "Edge width", value=1, min=1)
                                      
                             )))),
