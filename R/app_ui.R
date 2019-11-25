@@ -6,10 +6,10 @@ app_ui <- function() {
     # List the first level UI elements here 
     navbarPage("Tinsel",
                tabPanel("Load Data",
-                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"), helpText("Can add help text here"),
+                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", tags$div("User META data", tags$br(), "(.csv, .tsv, or .txt file format)")), helpText("Can add help text here"),
                                      # Horizontal line ----
                                      tags$hr(style="border-color: black;"),
-                                     mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)"),
+                                     mod_dataInput_ui("dataInput_ui_gene", tags$div("User GENETIC data", tags$br(), "(.csv, .tsv, or .txt file format)")),
                                      # Horizontal line ----
                                      tags$hr(style="border-color: black;"),
                                      mod_treeInput_ui("treeInput_ui_1")),
