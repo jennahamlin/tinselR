@@ -20,6 +20,7 @@ app_server <- function(input, output, session) {
   output$tree <- renderPlot({
     ape::plot.phylo(treefile(),
                     align.tip.label = input$aligntiplabels,
+                    show.node.label = input$shownodelabels,
                     edge.width = input$edgewidth)
     
   })
