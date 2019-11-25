@@ -20,6 +20,7 @@ app_ui <- function() {
                             tabPanel("Genetic Data",
                                      tableOutput("genecontents")),
                             tabPanel("Phylogenetic Tree",
+                                     #mod_treeInput_ui("treeInput_ui_1"), #another potential option for placement
                                      plotOutput("tree"),
                                      checkboxInput("aligntiplabels", "Align tip labels", FALSE),
                                      checkboxInput("shownodelabels", "Show node labels", FALSE),

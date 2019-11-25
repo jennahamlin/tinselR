@@ -18,8 +18,9 @@ mod_treeInput_ui <- function(id){
   tagList(
     
     fileInput(ns("upload_tree"),
-              label = "Select Tree File:")
+              label = "Select Tree File:"),
     
+    checkboxInput(ns("midp"), "Midpoint Root", TRUE)
   )
 }
 
@@ -41,10 +42,19 @@ mod_treeInput_server <- function(input, output, session){
     ape::read.tree(userTree()$datapath)
   })
   
-  midTree<- reactive({ #I want this function to be based on user input
+  #midTree<- reactive({ #I want this function to be based on user input
   #midpoint root the tree file
-    phytools::midpoint.root(outTree())
+   # phytools::midpoint.root(outTree())
+  #})
+  midTree <- reactive({
+    if(input$midp == TRUE) {
+      return(phytools::midpoint.root(outTree()))
+    }
+    else {
+      return(outTree())
+    }
   })
+  
 }
 
 ## To be copied in the UI
