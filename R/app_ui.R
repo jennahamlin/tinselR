@@ -6,7 +6,7 @@ app_ui <- function() {
     # List the first level UI elements here 
     navbarPage("Tinsel",
                tabPanel("Load Data",
-                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"), helpText("Test help"),
+                        sidebarPanel(mod_dataInput_ui("dataInput_ui_meta", "User META data (.csv, .tsv, .txt format)"), helpText("Can add help text here"),
                                      # Horizontal line ----
                                      tags$hr(style="border-color: black;"),
                                      mod_dataInput_ui("dataInput_ui_gene", "User GENETIC data (.csv, .tsv, .txt format)"),
@@ -21,7 +21,9 @@ app_ui <- function() {
                                      tableOutput("genecontents")),
                             tabPanel("Phylogenetic Tree",
                                      plotOutput("tree"),
-                                     numericInput("edgewidth", "Edge width", value=1, min=0)
+                                     checkboxInput("aligntiplabels", "Align tip labels", FALSE),
+                                     numericInput("edgewidth", "Edge width", value=1, min=1)
+                                     
                             )))),
                tabPanel("Getting Started",
                         fluidRow(column(12,

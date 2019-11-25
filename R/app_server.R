@@ -4,7 +4,7 @@ app_server <- function(input, output, session) {
   metafile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
   
   output$metacontents <- renderTable({
-   metafile()
+    metafile()
     
   })
   
@@ -18,7 +18,9 @@ app_server <- function(input, output, session) {
   treefile <-callModule(mod_treeInput_server, "treeInput_ui_1")
   
   output$tree <- renderPlot({
-    ape::plot.phylo(treefile(), edge.width = input$edgewidth)
+    ape::plot.phylo(treefile(),
+                    align.tip.label = input$aligntiplabels,
+                    edge.width = input$edgewidth)
     
   })
   
