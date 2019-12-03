@@ -26,7 +26,8 @@ app_ui <- function() {
                                      checkboxInput("aligntiplabels", "Align tip labels", FALSE),
                                      checkboxInput("shownodelabels", "Show node labels", FALSE),
                                      checkboxInput("scalebar", "Add scale bar", FALSE),
-                                     numericInput("edgewidth", "Edge width", value=1, min=1)
+                                     numericInput("edgewidth", "Edge width", value=1, min=1),
+                                     downloadButton("download","Download Here")
                                      
                             )))),
                tabPanel("Getting Started",

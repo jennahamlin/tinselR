@@ -26,4 +26,5 @@ app_server <- function(input, output, session) {
     
   })
   
+  callModule(mod_downloadImage_server, "downloadImage_ui_1")
 }
