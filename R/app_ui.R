@@ -10,9 +10,10 @@ app_ui <- function() {
                                      # Horizontal line ----
                                      tags$hr(style="border-color: black;"),
                                      mod_dataInput_ui("dataInput_ui_gene", tags$div("User GENETIC data", tags$br(), "(.csv, .tsv, or .txt file format)")),
-                                     # Horizontal line ----
                                      tags$hr(style="border-color: black;"),
-                                     mod_treeInput_ui("treeInput_ui_1")),
+                                     mod_treeInput_ui("treeInput_ui_1"),
+                                     tags$hr(style="border-color: black;"),
+                                     mod_downloadImage_ui("downloadImage_ui_1")),
                         mainPanel(
                           tabsetPanel(
                             tabPanel("Meta Data",
