@@ -8,6 +8,7 @@
 ## 2.1 Add modules
 ## 
 golem::add_module( name = "dataInput") # Name of the module
+golem::add_module(name = "cladeFindr")
 
 ## 2.2 Add dependencies
 
