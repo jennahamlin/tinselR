@@ -17,7 +17,6 @@ usethis::use_package( "dplyr" ) # To call each time you need a new package
 usethis::use_package( "ape" )
 usethis::use_package("phytools")
 usethis::use_package("assertthat")
-usethis::use_package("RSelenium")
 
 ## 2.3 Add tests
 
