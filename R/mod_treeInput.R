@@ -21,7 +21,11 @@ mod_treeInput_ui <- function(id){
               label = "Select Tree File:"),
     
     checkboxInput(ns("midp"), "Midpoint Root", TRUE),
-    checkboxInput("aligntiplabels", "Align tip labels", FALSE)
+    checkboxInput("aligntiplabels", "Align tip labels", FALSE),
+    checkboxInput("shownodelabels", "Show node labels", FALSE),
+    checkboxInput("scalebar", "Add scale bar", FALSE),
+    numericInput("edgewidth", "Edge width", value=1, min=1)
+    
     
   )
 }
@@ -43,7 +47,7 @@ mod_treeInput_server <- function(input, output, session){
   outTree <- reactive({
     ape::read.tree(userTree()$datapath)
   })
-
+  
   midTree <- reactive({
     if(input$midp == TRUE) {
       return(phytools::midpoint.root(outTree()))
@@ -52,8 +56,6 @@ mod_treeInput_server <- function(input, output, session){
       return(outTree())
     }
   })
-
-  
 }
 
 ## To be copied in the UI

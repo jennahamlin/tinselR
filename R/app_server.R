@@ -25,8 +25,5 @@ app_server <- function(input, output, session) {
     if(input$scalebar) ape::add.scale.bar()
   })
   
-  plotOutput("tree")
-  
-  
-  callModule(mod_downloadImage_server, "downloadImage_ui_1")
+   callModule(mod_downloadImage_server, "downloadImage_ui_1")
 }
