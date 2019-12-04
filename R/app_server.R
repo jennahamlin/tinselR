@@ -23,8 +23,10 @@ app_server <- function(input, output, session) {
                     show.node.label = input$shownodelabels,
                     edge.width = input$edgewidth)
     if(input$scalebar) ape::add.scale.bar()
-    
   })
+  
+  plotOutput("tree")
+  
   
   callModule(mod_downloadImage_server, "downloadImage_ui_1")
 }

@@ -10,10 +10,8 @@ app_ui <- function() {
                                      # Horizontal line ----
                                      tags$hr(style="border-color: black;"),
                                      mod_dataInput_ui("dataInput_ui_gene", tags$div("User GENETIC data", tags$br(), "(.csv, .tsv, or .txt file format)")),
-                                     tags$hr(style="border-color: black;"),
-                                     mod_treeInput_ui("treeInput_ui_1"),
-                                     tags$hr(style="border-color: black;"),
-                                     mod_downloadImage_ui("downloadImage_ui_1")),
+                                     tags$hr(style="border-color: black;")),
+                                     #mod_treeInput_ui("treeInput_ui_1")),
                         mainPanel(
                           tabsetPanel(
                             tabPanel("Meta Data",
@@ -21,12 +19,13 @@ app_ui <- function() {
                             tabPanel("Genetic Data",
                                      tableOutput("genecontents")),
                             tabPanel("Phylogenetic Tree",
-                                     #mod_treeInput_ui("treeInput_ui_1"), #another potential option for placement
+                                     mod_treeInput_ui("treeInput_ui_1"), #another potential option for placement
                                      plotOutput("tree"),
-                                     checkboxInput("aligntiplabels", "Align tip labels", FALSE),
+                                     #checkboxInput("aligntiplabels", "Align tip labels", FALSE),
                                      checkboxInput("shownodelabels", "Show node labels", FALSE),
                                      checkboxInput("scalebar", "Add scale bar", FALSE),
                                      numericInput("edgewidth", "Edge width", value=1, min=1),
+                                     mod_downloadImage_ui("downloadImage_ui_1"),
                                      downloadButton("download","Download Here")
                                      
                             )))),

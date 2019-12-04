@@ -20,7 +20,8 @@ mod_treeInput_ui <- function(id){
     fileInput(ns("upload_tree"),
               label = "Select Tree File:"),
     
-    checkboxInput(ns("midp"), "Midpoint Root", TRUE)
+    checkboxInput(ns("midp"), "Midpoint Root", TRUE),
+    checkboxInput("aligntiplabels", "Align tip labels", FALSE)
     
   )
 }
@@ -51,6 +52,7 @@ mod_treeInput_server <- function(input, output, session){
       return(outTree())
     }
   })
+
   
 }
 

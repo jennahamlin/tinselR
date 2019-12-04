@@ -16,7 +16,7 @@
 mod_downloadImage_ui <- function(id){
   ns <- NS(id)
   tagList(
-    selectInput("format","Choose file format for downloading",
+    selectInput(ns("format"),"Choose file format for downloading",
                 choices = list("pdf","png"))
   )
 }
@@ -31,14 +31,14 @@ mod_downloadImage_server <- function(input, output, session){
   ns <- session$ns
   output$download <- downloadHandler(
     filename = function(){
-      paste(input$upload_tree,Sys.Date,input$format,sep = ".")
+      paste(input$upload_tree,Sys.Date(),input$format,sep = ".")
     },
     content = function(file){
       if(input$format == "png")
         png(file)
       if(input$format == "pdf")
         pdf(file)
-      plot(data())
+      plot(tree())
       dev.off()
     }
   )
