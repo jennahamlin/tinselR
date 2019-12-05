@@ -16,7 +16,8 @@ app_ui <- function() {
                           tabsetPanel(
                             tabPanel("Phylogenetic Tree",
                                      mod_treeInput_ui("treeInput_ui_1"), #another potential option for placement
-                                     plotOutput("tree"),
+                                     mod_treeUpdate_ui("treeUpdate_ui_1"),
+                                     #plotOutput("tree"),
                                      mod_downloadImage_ui("downloadImage_ui_1")),
                             downloadButton("download","Download Here"),
                             tabPanel("Meta Data",
