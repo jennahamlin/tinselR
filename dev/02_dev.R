@@ -9,6 +9,7 @@
 ## 
 golem::add_module( name = "dataInput") # Name of the module
 golem::add_module(name = "treeUpdate")
+golem::add_module(name = "treeAdjust")
 golem::add_module(name = "cladeFindr")
 
 ## 2.2 Add dependencies

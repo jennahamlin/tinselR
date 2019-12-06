@@ -1,5 +1,5 @@
 # Module UI
-  
+
 #' @title   mod_treeUpdate_ui and mod_treeUpdate_server
 #' @description  A shiny Module.
 #'
@@ -17,22 +17,32 @@ mod_treeUpdate_ui <- function(id){
   ns <- NS(id)
   tagList(
     plotOutput("tree")
+    
+    
   )
 }
-    
+
 # Module Server
-    
+
 #' @rdname mod_treeUpdate
 #' @export
 #' @keywords internal
-    
+
 mod_treeUpdate_server <- function(input, output, session){
   ns <- session$ns
+  
+  output$tree <- renderPlot({
+    ape::plot.phylo(callModule(mod_treeInput_server, "treeInput_ui_1")(),
+                    align.tip.label = input$aligntiplabels,
+                    show.node.label = input$shownodelabels,
+                    edge.width = input$edgewidth)
+    if(input$scalebar) ape::add.scale.bar()
+  })
 }
-    
+
 ## To be copied in the UI
 # mod_treeUpdate_ui("treeUpdate_ui_1")
-    
+
 ## To be copied in the server
 # callModule(mod_treeUpdate_server, "treeUpdate_ui_1")
- 
+

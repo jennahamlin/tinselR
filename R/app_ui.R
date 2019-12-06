@@ -11,13 +11,11 @@ app_ui <- function() {
                                      tags$hr(style="border-color: black;"),
                                      mod_dataInput_ui("dataInput_ui_gene", tags$div("User GENETIC data", tags$br(), "(.csv, .tsv, or .txt file format)")),
                                      tags$hr(style="border-color: black;")),
-                        #mod_treeInput_ui("treeInput_ui_1")),
                         mainPanel(
                           tabsetPanel(
                             tabPanel("Phylogenetic Tree",
-                                     mod_treeInput_ui("treeInput_ui_1"), #another potential option for placement
+                                     mod_treeInput_ui("treeInput_ui_1"), 
                                      mod_treeUpdate_ui("treeUpdate_ui_1"),
-                                     #plotOutput("tree"),
                                      mod_downloadImage_ui("downloadImage_ui_1")),
                             downloadButton("download","Download Here"),
                             tabPanel("Meta Data",

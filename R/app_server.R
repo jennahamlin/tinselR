@@ -15,15 +15,11 @@ app_server <- function(input, output, session) {
     
   })
   
-  treefile <-callModule(mod_treeInput_server, "treeInput_ui_1")
   
-  output$tree <- renderPlot({
-    ape::plot.phylo(treefile(),
-                    align.tip.label = input$aligntiplabels,
-                    show.node.label = input$shownodelabels,
-                    edge.width = input$edgewidth)
-    if(input$scalebar) ape::add.scale.bar()
-  })
   
-   callModule(mod_downloadImage_server, "downloadImage_ui_1")
+ 
+  
+  callModule(mod_treeUpdate_server, "treeUpdate_ui_1")
+  
+  callModule(mod_downloadImage_server, "downloadImage_ui_1")
 }
