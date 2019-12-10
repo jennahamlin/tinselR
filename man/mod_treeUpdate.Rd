@@ -7,7 +7,7 @@
 \usage{
 mod_treeUpdate_ui(id)
 
-mod_treeUpdate_server(input, output, session)
+mod_treeUpdate_server(input, output, session, outTree)
 }
 \arguments{
 \item{id}{shiny id}

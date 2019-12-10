@@ -28,16 +28,11 @@ mod_treeUpdate_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_treeUpdate_server <- function(input, output, session){
+mod_treeUpdate_server <- function(input, output, session, outTree){
   ns <- session$ns
   
-  output$tree <- renderPlot({
-    ape::plot.phylo(callModule(mod_treeInput_server, "treeInput_ui_1")(),
-                    align.tip.label = input$aligntiplabels,
-                    show.node.label = input$shownodelabels,
-                    edge.width = input$edgewidth)
-    if(input$scalebar) ape::add.scale.bar()
-  })
+  
+  
 }
 
 ## To be copied in the UI

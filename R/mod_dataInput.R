@@ -21,7 +21,8 @@ mod_dataInput_ui <- function(id, label) {
     
     # Input: Select a file ----
     #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
-    fileInput(ns("file"), label,
+    #label here is specified and is called in the app_ui with the tags$div section 
+    fileInput(ns("id"), label, 
               multiple = FALSE,
               accept = c("text/csv", 
                          "text/comma-separated-values,text/plain",
@@ -37,7 +38,9 @@ mod_dataInput_ui <- function(id, label) {
     radioButtons(ns("disp"), "Display",
                  choices = c(Head = "head",
                              All = "all"),
+    
                  selected = "head"))
+  
 }
 
 # Module Server
@@ -50,8 +53,8 @@ mod_dataInput_server <- function(input, output, session) {
   
   #reactive expression that until a file is uploaded, the below message is displayed
   userFile <- reactive({
-    validate(need(input$file !="", "Please import a data file"))
-    input$file
+    validate(need(input$id !="", "Please import a data file"))
+    input$id
   })    
   
   datafile <- reactive({

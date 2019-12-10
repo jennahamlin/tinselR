@@ -7,10 +7,12 @@
 
 ## 2.1 Add modules
 ## 
-golem::add_module( name = "dataInput") # Name of the module
+golem::add_module(name = "dataInput") # Name of the module
 golem::add_module(name = "treeUpdate")
-golem::add_module(name = "treeAdjust")
+golem::add_module(name="displayTable")
 golem::add_module(name = "cladeFindr")
+
+golem::add_module("importData")
 
 ## 2.2 Add dependencies
 

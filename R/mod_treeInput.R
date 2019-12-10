@@ -45,7 +45,8 @@ mod_treeInput_server <- function(input, output, session){
     ape::read.tree(userTree()$datapath)
   })
   
-  
+  return(outTree)
+
   midTree <- reactive({
     if(input$midp == TRUE) {
       return(phytools::midpoint.root(outTree()))
