@@ -34,7 +34,7 @@ mod_displayTree_server <- function(input, output, session, outTree){
                     #align.tip.label = input$aligntiplabels,
                     #show.node.label = input$shownodelabels,
                     #edge.width = input$edgewidth
-                    if(input$scalebar) ape::add.scale.bar()
+                    #if(input$scalebar) ape::add.scale.bar()
     )
   })
 }
