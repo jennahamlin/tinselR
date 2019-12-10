@@ -15,11 +15,9 @@
 #' @importFrom shiny NS tagList 
 mod_treeUpdate_ui <- function(id){
   ns <- NS(id)
-  tagList(
-    plotOutput("tree")
-    
-    
-  )
+
+    plotOutput(ns("tree"))
+  
 }
 
 # Module Server
@@ -30,6 +28,14 @@ mod_treeUpdate_ui <- function(id){
 
 mod_treeUpdate_server <- function(input, output, session, outTree){
   ns <- session$ns
+  output$tree <- renderPlot({
+    ape::plot.phylo(outTree(),
+                    #align.tip.label = input$aligntiplabels,
+                    #show.node.label = input$shownodelabels,
+                    #edge.width = input$edgewidth
+    if(input$scalebar) ape::add.scale.bar()
+    )
+    })
   
   
   
