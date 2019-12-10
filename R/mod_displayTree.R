@@ -27,10 +27,10 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
     
 mod_displayTree_server <- function(input, output, session, outTree){
-  ns <- session$ns
-  
-  output$tree <- renderPlot({
-    ape::plot.phylo(outTree(),
+ ns <- session$ns
+ 
+   output$tree <- renderPlot({
+    ape::plot.phylo(outTree(), 
                     #align.tip.label = input$aligntiplabels,
                     #show.node.label = input$shownodelabels,
                     #edge.width = input$edgewidth

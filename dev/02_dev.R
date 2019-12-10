@@ -11,6 +11,7 @@ golem::add_module(name = "dataInput") # Name of the module
 golem::add_module(name="displayTable")
 golem::add_module(name="treeInput")
 golem::add_module(name = "displayTree")
+golem::add_module(name = "updateTree")
 golem::add_module(name = "cladeFindr")
 
 golem::add_module("importData")

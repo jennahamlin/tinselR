@@ -12,6 +12,9 @@ app_server <- function(input, output, session) {
   
   treefile <- callModule(mod_treeInput_server, "treeInput_ui_1")
   
-  callModule(mod_displayTree_server, "displayTree_ui_1", treefile)
+  updatetree <- callModule(mod_displayTree_server, "displayTree_ui_1", treefile)
   
+  output$tree2 <- renderPlot({
+    ape::plot.phylo(updatetree(), 
+                    align.tip.label = input$aligntiplabels)})
 }
