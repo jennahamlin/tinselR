@@ -34,7 +34,7 @@ app_ui <- function() {
           tabsetPanel(
             tabPanel("Phylogenetic Tree",
                      mod_treeInput_ui("treeInput_ui_1"),
-                     mod_treeUpdate_ui("treeUpdate_ui_1")),
+                     mod_displayTree_ui("displayTree_ui_1")),
             mod_displayTable_ui("displayTable_ui_1", "Meta Data"),
             mod_displayTable_ui("displayTable_ui_2", "Genetic Data")
             
@@ -51,8 +51,7 @@ app_ui <- function() {
     )
   )
 }
-      
-#' @import shiny
+      #' @import shiny
 golem_add_external_resources <- function(){
   
   addResourcePath(
