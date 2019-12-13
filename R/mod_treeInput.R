@@ -17,13 +17,13 @@ mod_treeInput_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    fileInput(ns("upload_tree"),
+    fileInput(ns("file"),
               label = "Select Tree File:"),
     checkboxInput(ns("midp"), "Midpoint Root", TRUE),
-    checkboxInput("aligntiplabels", "Align tip labels", TRUE),
-    checkboxInput("shownodelabels", "Show node labels", FALSE),
-    checkboxInput("scalebar", "Add scale bar", FALSE),
-    numericInput("edgewidth", "Edge width", value=1, min=1)
+    checkboxInput(ns("alignTipLabels"), "Align tip labels", TRUE),
+    checkboxInput(ns("showNodeLabels"), "Show node labels", FALSE)
+    #checkboxInput("scalebar", "Add scale bar", FALSE),
+    #numericInput("edgewidth", "Edge width", value=1, min=1)
   )
 }
 
@@ -36,28 +36,34 @@ mod_treeInput_ui <- function(id){
 mod_treeInput_server <- function(input, output, session){
   ns <- session$ns
   
-  userTree <- reactive({
-    validate(need(input$upload_tree !="", "Please import a tree file"))
-    req(input$upload_tree)
+  userFile <- reactive({
+    validate(need(input$file !="", "Please import a tree file"))
+    input$file
   })   
   
-  outtree <- reactive({
-    ape::read.tree(userTree()$datapath)
+  datafile <- reactive({
+    ape::read.tree(userFile()$datapath)
   })
   
-  midTree <- reactive({
-    
-    if(input$midp == TRUE) {
-      return(phytools::midpoint.root(outtree()))
+  tips <- FALSE
+  nodes <- FALSE
+  
+  headfile <- reactive({
+    if (input$showNodeLabels == TRUE) {
+      nodes <- TRUE
     }
-    else {
-      
-      return(outtree())
+    if (input$alignTipLabels == TRUE) {
+      tips <- TRUE
     }
-    
-    
-    
+    # if (input$addScaleBar == TRUE) {
+    #   scale <- TRUE
+    # }
+    return(ape::plot.phylo(datafile(),
+                           align.tip.label = tips,
+                           show.node.label = nodes)
+    )
   })
+  
 }
 
 #if(input$scalebar) ape::add.scale.bar()

@@ -1,5 +1,4 @@
 #' @import shiny
-
 app_ui <- function() {
   tagList(
     # Leave this function for adding external resources
@@ -28,31 +27,25 @@ app_ui <- function() {
               tags$br(), 
               "(.csv, .tsv, or .txt file format)"
             )
-          )
+          ),
+          tags$hr(style="border-color: black;"),
+          mod_treeInput_ui("treeInput_ui_1")
         ),
+       
         mainPanel(
           tabsetPanel(
-            tabPanel("Phylogenetic Tree",
-                     mod_treeInput_ui("treeInput_ui_1"),
-                     mod_displayTree_ui("displayTree_ui_1"),
-                     plotOutput("tree2"),
+            mod_treeDisplay_ui("treeDisplay_ui_1", "Phylogenetic Tree"),
             mod_displayTable_ui("displayTable_ui_1", "Meta Data"),
             mod_displayTable_ui("displayTable_ui_2", "Genetic Data")
-            
           )
         )
-      ),
-      tabPanel("Getting Started",
-               
-               fluidRow(column(12,
-                               includeMarkdown("gettingStarted.md")
-               )
-               )
       )
     )
+
   )
-}
-      #' @import shiny
+  }
+
+#' @import shiny
 golem_add_external_resources <- function(){
   
   addResourcePath(
