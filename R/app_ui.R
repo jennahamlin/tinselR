@@ -39,9 +39,15 @@ app_ui <- function() {
             mod_displayTable_ui("displayTable_ui_2", "Genetic Data")
           )
         )
-      )
+      ),
+      tabPanel("Getting Started",
+               
+               fluidRow(column(12,
+                               includeMarkdown("gettingStarted.md")
+               )
+               )
     )
-
+)
   )
   }
 
