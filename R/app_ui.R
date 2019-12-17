@@ -31,7 +31,7 @@ app_ui <- function() {
           tags$hr(style="border-color: black;"),
           mod_treeInput_ui("treeInput_ui_1")
         ),
-       
+        
         mainPanel(
           tabsetPanel(
             mod_treeDisplay_ui("treeDisplay_ui_1", "Phylogenetic Tree"),
@@ -46,10 +46,10 @@ app_ui <- function() {
                                includeMarkdown("gettingStarted.md")
                )
                )
+      )
     )
-)
   )
-  }
+}
 
 #' @import shiny
 golem_add_external_resources <- function(){
