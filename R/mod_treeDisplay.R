@@ -30,10 +30,8 @@ mod_treeDisplay_server <- function(input, output, session, file){
   ns <- session$ns
 
     output$tree<-renderPlot({
-     file()
-  })
-  
-  
+      ape::plot.phylo(file())
+      })
 }
     
 ## To be copied in the UI

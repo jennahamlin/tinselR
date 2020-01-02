@@ -13,17 +13,18 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_treeInput_ui <- function(id){
+mod_treeInput_ui <- function(id, label){
   ns <- NS(id)
   tagList(
     
     fileInput(ns("file"),
-              label = "Select Tree File:"),
-    checkboxInput(ns("midp"), "Midpoint Root", TRUE),
+              label),
+    checkboxInput(ns("midp"), label = "Midpoint Root", TRUE),
     checkboxInput(ns("alignTipLabels"), "Align tip labels", TRUE),
-    checkboxInput(ns("showNodeLabels"), "Show node labels", FALSE)
-    #checkboxInput("scalebar", "Add scale bar", FALSE),
-    #numericInput("edgewidth", "Edge width", value=1, min=1)
+    checkboxInput(ns("showNodeLabels"), "Show node labels", FALSE),
+    #checkboxInput("addScaleBar", label = "Add scale bar", FALSE),
+    #checkboxInput(ns("edgeL"), label = "Use edge length", FALSE)
+    #numericInput("edgeW", "Edge width", value=1, min=1)
   )
 }
 
@@ -45,28 +46,40 @@ mod_treeInput_server <- function(input, output, session){
     ape::read.tree(userFile()$datapath)
   })
   
-  tips <- FALSE
-  nodes <- FALSE
-  
-  headfile <- reactive({
-    if (input$showNodeLabels == TRUE) {
-      nodes <- TRUE
-    }
-    if (input$alignTipLabels == TRUE) {
-      tips <- TRUE
-    }
-    # if (input$addScaleBar == TRUE) {
-    #   scale <- TRUE
-    # }
-    return(ape::plot.phylo(datafile(),
-                           align.tip.label = tips,
-                           show.node.label = nodes)
-    )
-  })
-  
+  # tips <- FALSE
+  # nodes <- FALSE
+  # #edgelength <- FALSE
+  # 
+  # headfile <- reactive({
+  #   
+  #     if (input$showNodeLabels == TRUE) {
+  #     nodes <- TRUE
+  #   }
+  #    if (input$alignTipLabels == TRUE) {
+  #      tips <- TRUE
+  #    }
+  #   #  if (input$midp == TRUE){
+  #   #    return(phytools::midpoint.root(datafile()))
+  #   #  }
+  #    # if(input$edgeL == TRUE){
+  #    #     edgelength <- TRUE
+  #    #   }
+  # #if(input$midp) datafile <- phytools::midpoint.root(datafile())
+  # return(ape::plot.phylo(datafile(),
+  #                       align.tip.label = tips,
+  #                       show.node.label = nodes
+  #                       #use.edge.length = edgelength
+  #   )
+  #   )
+  #  })
+
 }
 
 #if(input$scalebar) ape::add.scale.bar()
+
+#if(input$midp == TRUE) {
+#  return(phytools::midpoint.root(outTree()))
+# }
 
 ## To be copied in the UI
 # mod_treeInput_ui("treeInput_ui_1")

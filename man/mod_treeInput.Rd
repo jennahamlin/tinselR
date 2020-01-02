@@ -5,7 +5,7 @@
 \alias{mod_treeInput_server}
 \title{mod_treeInput_ui and mod_treeInput_server}
 \usage{
-mod_treeInput_ui(id)
+mod_treeInput_ui(id, label)
 
 mod_treeInput_server(input, output, session)
 }

@@ -13,6 +13,6 @@ app_server <- function(input, output, session) {
   treefile <- callModule(mod_treeInput_server, "treeInput_ui_1")
   
   callModule(mod_treeDisplay_server, "treeDisplay_ui_1", treefile)
-}
+    }
   
   

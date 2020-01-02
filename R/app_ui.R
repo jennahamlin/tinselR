@@ -9,6 +9,10 @@ app_ui <- function() {
       tabPanel(
         "Load Data",
         sidebarPanel(
+        mod_treeInput_ui("treeInput_ui_1",
+                          tags$div(
+                           "Import a newick phylogenetic tree") ),
+          tags$hr(style="border-color: black;"),
           mod_dataInput_ui(
             "dataInput_ui_meta", 
             tags$div(
@@ -27,9 +31,7 @@ app_ui <- function() {
               tags$br(), 
               "(.csv, .tsv, or .txt file format)"
             )
-          ),
-          tags$hr(style="border-color: black;"),
-          mod_treeInput_ui("treeInput_ui_1")
+          )
         ),
         
         mainPanel(
