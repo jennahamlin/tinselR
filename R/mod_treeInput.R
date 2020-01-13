@@ -22,7 +22,7 @@ mod_treeInput_ui <- function(id, label){
     checkboxInput(ns("midp"), label = "Midpoint Root", TRUE),
     checkboxInput(ns("alignTipLabels"), "Align tip labels", TRUE),
     checkboxInput(ns("showNodeLabels"), "Show node labels", FALSE),
-    #checkboxInput("addScaleBar", label = "Add scale bar", FALSE),
+    checkboxInput("addScaleBar", label = "Add scale bar", FALSE),
     #checkboxInput(ns("edgeL"), label = "Use edge length", FALSE)
     #numericInput("edgeW", "Edge width", value=1, min=1)
   )
@@ -46,36 +46,40 @@ mod_treeInput_server <- function(input, output, session){
     ape::read.tree(userFile()$datapath)
   })
   
-  # tips <- FALSE
-  # nodes <- FALSE
-  # #edgelength <- FALSE
+  return(datafile)
+  # values <-reactiveValues()
+  # 
+  # values$tips <- FALSE
+  # values$nodes <- FALSE
+  # edgelength <- FALSE
   # 
   # headfile <- reactive({
   #   
   #     if (input$showNodeLabels == TRUE) {
-  #     nodes <- TRUE
+  #     values$nodes <- TRUE
   #   }
   #    if (input$alignTipLabels == TRUE) {
-  #      tips <- TRUE
+  #      values$tips <- TRUE
   #    }
-  #   #  if (input$midp == TRUE){
-  #   #    return(phytools::midpoint.root(datafile()))
-  #   #  }
-  #    # if(input$edgeL == TRUE){
-  #    #     edgelength <- TRUE
-  #    #   }
-  # #if(input$midp) datafile <- phytools::midpoint.root(datafile())
+    #  if (input$midp == TRUE){
+    #    return(phytools::midpoint.root(datafile()))
+    #  }
+     # if(input$edgeL == TRUE){
+     #     edgelength <- TRUE
+     #   }
+# if(input$midp) datafile <- phytools::midpoint.root(datafile())
   # return(ape::plot.phylo(datafile(),
-  #                       align.tip.label = tips,
+  #                       align.tip.label = values$tips,
   #                       show.node.label = nodes
   #                       #use.edge.length = edgelength
   #   )
   #   )
-  #  })
+#  })
 
 }
 
-#if(input$scalebar) ape::add.scale.bar()
+
+# if(input$scalebar) ape::add.scale.bar()
 
 #if(input$midp == TRUE) {
 #  return(phytools::midpoint.root(outTree()))

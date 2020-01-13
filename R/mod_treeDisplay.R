@@ -14,10 +14,11 @@
 #' @export 
 #' @importFrom shiny NS tagList 
 mod_treeDisplay_ui <- function(id, name){
+  # id refers to the module ('treeDisplay_ui_1'); name refers to the name of the tabpanel ('Phylogenetic tree')
   ns <- NS(id)
   tabPanel(
-    name, plotOutput(ns("tree"))
-  )
+    name, plotOutput(ns("tree")) 
+    )                            
 }
     
 # Module Server
@@ -32,6 +33,7 @@ mod_treeDisplay_server <- function(input, output, session, file){
     output$tree<-renderPlot({
       ape::plot.phylo(file())
       })
+    
 }
     
 ## To be copied in the UI

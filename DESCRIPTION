@@ -20,7 +20,8 @@ Imports:
     utils,
     markdown,
     assertthat,
-    xfun
+    xfun,
+    pkgload
 RoxygenNote: 7.0.2
 URL: https://github.com/jennahamlin/Tinsel
 BugReports: https://github.com/jennahamlin/Tinsel/issues
