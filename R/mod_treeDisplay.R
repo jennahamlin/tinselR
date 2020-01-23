@@ -16,7 +16,9 @@
 mod_treeDisplay_ui <- function(id, name){
   ns <- NS(id)
   tabPanel(
-    name, plotOutput(ns("tree"))
+    name, 
+    
+        plotOutput(ns("tree"))
   )
 }
     

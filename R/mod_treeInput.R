@@ -20,8 +20,8 @@ mod_treeInput_ui <- function(id, label){
     fileInput(ns("file"),
               label),
     checkboxInput(ns("midp"), label = "Midpoint Root", TRUE),
-    checkboxInput(ns("alignTipLabels"), "Align tip labels", TRUE),
-    checkboxInput(ns("showNodeLabels"), "Show node labels", FALSE),
+    #checkboxInput(ns("alignTipLabels"), "Align tip labels", TRUE),
+    checkboxInput(ns("showNodeLabels"), "Show node labels", FALSE)
     #checkboxInput("addScaleBar", label = "Add scale bar", FALSE),
     #checkboxInput(ns("edgeL"), label = "Use edge length", FALSE)
     #numericInput("edgeW", "Edge width", value=1, min=1)
@@ -43,37 +43,35 @@ mod_treeInput_server <- function(input, output, session){
   })   
   
   datafile <- reactive({
-    ape::read.tree(userFile()$datapath)
+        ape::read.tree(userFile()$datapath)
   })
   
   # tips <- FALSE
   # nodes <- FALSE
   # #edgelength <- FALSE
   # 
-  # headfile <- reactive({
-  #   
-  #     if (input$showNodeLabels == TRUE) {
-  #     nodes <- TRUE
-  #   }
-  #    if (input$alignTipLabels == TRUE) {
-  #      tips <- TRUE
-  #    }
-  #   #  if (input$midp == TRUE){
-  #   #    return(phytools::midpoint.root(datafile()))
-  #   #  }
-  #    # if(input$edgeL == TRUE){
-  #    #     edgelength <- TRUE
-  #    #   }
-  # #if(input$midp) datafile <- phytools::midpoint.root(datafile())
-  # return(ape::plot.phylo(datafile(),
-  #                       align.tip.label = tips,
-  #                       show.node.label = nodes
-  #                       #use.edge.length = edgelength
-  #   )
-  #   )
-  #  })
-
-}
+#    headfile <- reactive({
+#      
+#        if (input$showNodeLabels == TRUE) {
+#        nodes <- TRUE
+#      }
+#       if (input$alignTipLabels == TRUE) {
+#         tips <- TRUE
+#       }
+#      #  if (input$midp == TRUE){
+#      #    return(phytools::midpoint.root(datafile()))
+#      #  }
+#       # if(input$edgeL == TRUE){
+#       #     edgelength <- TRUE
+#       #   }
+#    return(ape::plot.phylo(datafile(),
+#                          align.tip.label = tips,
+#                          show.node.label = nodes
+#                          #use.edge.length = edgelength
+#      )
+#      )
+#     })
+ }
 
 #if(input$scalebar) ape::add.scale.bar()
 
