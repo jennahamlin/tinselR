@@ -5,7 +5,7 @@ app_ui <- function() {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
-      h1("phylogeny display"),
+      h1("Tinsel"),
       sidebarPanel(
         mod_uploadTree_ui("uploadTree_ui_1"),
         mod_paramsTree_ui("paramsTree_ui_1"),
