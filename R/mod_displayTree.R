@@ -30,6 +30,8 @@ mod_displayTree_ui <- function(id, label = "Display Tree"){
 mod_displayTree_server <- function(input, output, session, treeFile, align, numscale, treeformat, font, node){
   ns <- session$ns
   
+  
+  
   make_tree <- reactive({
     ggtree::ggtree(treeFile(), layout = treeformat())+
       ggtree::geom_tiplab(align = align(), fontface = font()) + 

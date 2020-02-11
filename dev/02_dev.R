@@ -23,8 +23,6 @@ golem::add_module("importData")
 usethis::use_package("utils")
 usethis::use_package("markdown")
 usethis::use_package( "dplyr" ) # To call each time you need a new package
-usethis::use_package( "ape" )
-usethis::use_package("phytools")
 usethis::use_package("assertthat")
 
 ## 2.3 Add tests

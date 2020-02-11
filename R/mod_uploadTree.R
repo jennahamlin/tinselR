@@ -30,12 +30,14 @@ mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
   
   treeFile <- reactive({
+    validate(need(input$treefile !="", "Please import tree file"))
     req(input$treefile)
     treeio::read.newick(input$treefile$datapath)
   })
   
-  return(treeFile)
-}
+  #return(treeFile)
+ 
+ }
 
 ## To be copied in the UI
 # mod_uploadTree_ui("uploadTree_ui_1")
