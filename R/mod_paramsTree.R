@@ -26,8 +26,7 @@ mod_paramsTree_ui <- function(id){
                          "bold" = "bold", "italic" = "italic", 
                          "bold+italic" = "bold.italic"), selected = "bold"),
     numericInput(ns("numScale"), "Size of the scale bar", value = 0.001),
-    numericInput(ns("nodeDisplay"), "Size of the scale bar", value = 50, max = 100),
-    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE)
+    numericInput(ns("nodeDisplay"), "Size of the scale bar", value = 50, max = 100)
     
     
   )
@@ -47,8 +46,7 @@ mod_paramsTree_server <- function(input, output, session){
     treeformat = reactive(input$treeFormat),
     font = reactive(input$fontFormat),
     numscale = reactive(input$numScale),
-    node = reactive(input$nodeDisplay),
-    midpoint = reactive(input$miPoint))
+    node = reactive(input$nodeDisplay))
 }
 
 ## To be copied in the UI

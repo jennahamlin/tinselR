@@ -24,6 +24,8 @@ usethis::use_package("utils")
 usethis::use_package("markdown")
 usethis::use_package( "dplyr" ) # To call each time you need a new package
 usethis::use_package("assertthat")
+usethis::use_package("phytools")
+
 
 ## 2.3 Add tests
 

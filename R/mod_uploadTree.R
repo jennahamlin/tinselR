@@ -17,7 +17,8 @@ mod_uploadTree_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    fileInput(ns("treefile"), label="Upload a newick file, please"))
+    fileInput(ns("treefile"), label="Upload a newick file, please"),
+    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE))
 }
 
 # Module Server
@@ -34,8 +35,16 @@ mod_uploadTree_server <- function(input, output, session){
     req(input$treefile)
     treeio::read.newick(input$treefile$datapath)
   })
+
+  midTree <- reactive({
+    if(input$midPoint == TRUE) {
+      return(phytools::midpoint.root(treeFile()))
+    }
+    else {
+      return(treeFile())
+    }
+  })
   
-  #return(treeFile)
  
  }
 
