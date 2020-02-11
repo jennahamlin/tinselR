@@ -9,6 +9,7 @@ app_ui <- function() {
       sidebarPanel(
         mod_uploadTree_ui("uploadTree_ui_1"),
         mod_paramsTree_ui("paramsTree_ui_1"),
+        mod_downloadImage_ui("downloadImage_ui_1"),
         mod_dataInput_ui("dataInput_ui_meta",
                          tags$div("User META data",
                                   tags$br(),

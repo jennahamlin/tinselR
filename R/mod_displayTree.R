@@ -18,9 +18,8 @@ mod_displayTree_ui <- function(id, label = "Display Tree"){
   tagList(
     label,
     plotOutput(ns("treeDisplay"), brush = "plot_brush"),
-    tableOutput(ns("selectedIndivs"))
-  )
-}
+    verbatimTextOutput(ns("selectedIndivs"))
+    )}
 
 # Module Server
 

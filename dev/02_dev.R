@@ -13,6 +13,7 @@ golem::add_module(name = "DisplayTree")
 
 golem::add_module(name = "dataInput") # Name of the module
 golem::add_module(name="displayTable")
+golem::add_module(name="downloadImage")
 
 golem::add_module(name = "cladeFindr")
 
