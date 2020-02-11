@@ -45,7 +45,6 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   
   output$selectedIndivs <- renderPrint({
     brushedPoints(make_tree()$data, input$plot_brush)
-    
   })
 }
 

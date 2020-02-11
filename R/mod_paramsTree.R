@@ -26,7 +26,7 @@ mod_paramsTree_ui <- function(id){
                          "bold" = "bold", "italic" = "italic", 
                          "bold+italic" = "bold.italic"), selected = "bold"),
     numericInput(ns("numScale"), "Size of the scale bar", value = 0.001),
-    numericInput(ns("nodeDisplay"), "Size of the scale bar", value = 50, max = 100)
+    numericInput(ns("nodeDisplay"), "Minimum value of bootstrap", value = 50, max = 100)
     
     
   )
