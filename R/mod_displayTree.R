@@ -17,7 +17,8 @@ mod_displayTree_ui <- function(id, label = "Display Tree"){
   ns <- NS(id)
   tagList(
     label,
-    plotOutput(ns("treeDisplay"))
+    plotOutput(ns("treeDisplay"), brush = "plot_brush"),
+    tableOutput(ns("selectedIndivs"))
   )
 }
 
@@ -40,6 +41,11 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   
   output$treeDisplay <- renderPlot({
     make_tree()
+  })
+  
+  output$selectedIndivs <- renderPrint({
+    brushedPoints(make_tree()$data, input$plot_brush)
+    
   })
 }
 
