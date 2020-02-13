@@ -5,7 +5,7 @@
 \alias{mod_uploadTree_server}
 \title{mod_uploadTree_ui and mod_uploadTree_server}
 \usage{
-mod_uploadTree_ui(id)
+mod_uploadTree_ui(id, label = "Upload a newick file, please")
 
 mod_uploadTree_server(input, output, session)
 }

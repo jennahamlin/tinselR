@@ -41,6 +41,13 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   output$treeDisplay <- renderPlot({
     make_tree()
   })
+
+  annoated <- reactive({
+    make_tree()
+  })
+  
+  return(annoated)
+  
   
   output$selectedIndivs <- renderPrint({
     brushedPoints(make_tree()$data, input$plot_brush)

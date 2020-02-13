@@ -13,11 +13,11 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_uploadTree_ui <- function(id){
+mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
   ns <- NS(id)
   tagList(
     
-    fileInput(ns("treefile"), label="Upload a newick file, please"),
+    fileInput(ns("treefile"), label),
     checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE))
 }
 
@@ -35,7 +35,7 @@ mod_uploadTree_server <- function(input, output, session){
     req(input$treefile)
     treeio::read.newick(input$treefile$datapath)
   })
-
+  
   midTree <- reactive({
     if(input$midPoint == TRUE) {
       return(phytools::midpoint.root(treeFile()))
@@ -44,9 +44,8 @@ mod_uploadTree_server <- function(input, output, session){
       return(treeFile())
     }
   })
-  
- 
- }
+  return(treeFile)
+}
 
 ## To be copied in the UI
 # mod_uploadTree_ui("uploadTree_ui_1")

@@ -5,9 +5,15 @@
 \alias{mod_downloadImage_server}
 \title{mod_downloadImage_ui and mod_downloadImage_server}
 \usage{
-mod_downloadImage_ui(id)
+mod_downloadImage_ui(id, label = "Download tree Image")
 
-mod_downloadImage_server(input, output, session, plot)
+mod_downloadImage_server(
+  input,
+  output,
+  session,
+  treeFile,
+  filename = paste0("data_", Sys.Date(), ".pdf")
+)
 }
 \arguments{
 \item{id}{shiny id}
