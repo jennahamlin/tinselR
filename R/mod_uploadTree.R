@@ -44,7 +44,6 @@ mod_uploadTree_server <- function(input, output, session){
       return(treeFile())
     }
   })
-  return(treeFile)
 }
 
 ## To be copied in the UI

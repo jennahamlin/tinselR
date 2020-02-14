@@ -17,9 +17,8 @@ mod_displayTree_ui <- function(id, label = "Display Tree"){
   ns <- NS(id)
   tagList(
     label,
-    plotOutput(ns("treeDisplay"), brush = "plot_brush"),
-    verbatimTextOutput(ns("selectedIndivs"))
-    )}
+    plotOutput(ns("treeDisplay"))
+  )}
 
 # Module Server
 
@@ -41,17 +40,12 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   output$treeDisplay <- renderPlot({
     make_tree()
   })
-
+  
   annoated <- reactive({
     make_tree()
   })
   
   return(annoated)
-  
-  
-  output$selectedIndivs <- renderPrint({
-    brushedPoints(make_tree()$data, input$plot_brush)
-  })
 }
 
 ## To be copied in the UI
