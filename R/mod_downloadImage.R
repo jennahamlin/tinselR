@@ -17,6 +17,8 @@ mod_downloadImage_ui <- function(id, label = "Download tree Image"){
   ns <- NS(id)
   tagList(
     selectInput(ns("device"), label = "Type", choices = c("png", "pdf", "tiff")),
+    numericInput(ns("width"), "Width of Image (inches)", value = 6),
+    numericInput(ns("height"), "Height of Images (inches)", value = 8),
     downloadButton(ns("download"), label)
   )
 }
@@ -33,10 +35,10 @@ mod_downloadImage_server <- function(input, output, session, treeFile,
   
   output$download <- downloadHandler(
     filename = function() {
-      paste("data_", Sys.Date())
+      paste("data", Sys.Date(), input$device, sep = ".")
     },
     content = function(file) {
-      ggtree::ggsave(file,treeFile(), device = input$device)
+      ggtree::ggsave(file,treeFile(), device = input$device, width = input$width, height = input$height)
     }
   )
 }
