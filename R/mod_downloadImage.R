@@ -16,7 +16,7 @@
 mod_downloadImage_ui <- function(id, label = "Download tree Image"){
   ns <- NS(id)
   tagList(
-    #selectInput(ns("type"), label = "Type", choices = c("png", "pdf", "tiff", "svg")),
+    selectInput(ns("device"), label = "Type", choices = c("png", "pdf", "tiff")),
     downloadButton(ns("download"), label)
   )
 }
@@ -28,15 +28,15 @@ mod_downloadImage_ui <- function(id, label = "Download tree Image"){
 #' @keywords internal
 
 mod_downloadImage_server <- function(input, output, session, treeFile, 
-                                     filename = paste0("data_", Sys.Date(), ".pdf")){
+                                     filename ){
   ns <- session$ns
   
   output$download <- downloadHandler(
     filename = function() {
-      filename
+      paste("data_", Sys.Date())
     },
     content = function(file) {
-      ggtree::ggsave(file,treeFile(), device = "pdf")
+      ggtree::ggsave(file,treeFile(), device = input$device)
     }
   )
 }

@@ -7,13 +7,7 @@
 \usage{
 mod_downloadImage_ui(id, label = "Download tree Image")
 
-mod_downloadImage_server(
-  input,
-  output,
-  session,
-  treeFile,
-  filename = paste0("data_", Sys.Date(), ".pdf")
-)
+mod_downloadImage_server(input, output, session, treeFile, filename)
 }
 \arguments{
 \item{id}{shiny id}
