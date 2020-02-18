@@ -49,6 +49,7 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   output$selectedIndivs <- renderPrint({
     dataWithSelection()$label
   })
+  return(make_tree)
 }
 
 ## To be copied in the UI
