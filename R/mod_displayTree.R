@@ -47,7 +47,7 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   })
   
   output$selectedIndivs <- renderPrint({
-    dataWithSelection()
+    dataWithSelection()$label
   })
 }
 
