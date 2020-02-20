@@ -62,7 +62,7 @@ mod_dataInput_server <- function(input, output, session) {
   
   
   datafile <- reactive({
-    Filter(function(x)!all(is.na(x)),  utils::read.table(col.names(),
+    Filter(function(x)!all(is.na(x)),  utils::read.table(userFile()$datapath,
                                                          sep = input$sep,
                                                          stringsAsFactors = FALSE,
                                                          row.names = NULL))
