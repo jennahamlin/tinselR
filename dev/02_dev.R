@@ -29,6 +29,7 @@ usethis::use_package("assertthat")
 usethis::use_package("phytools")
 usethis::use_package("purrr")
 usethis::use_package("dplyr")
+usethis::use_package("magrittr")
 
 
 ## 2.3 Add tests

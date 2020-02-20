@@ -38,8 +38,9 @@ mod_dataInput_ui <- function(id, label) {
     radioButtons(ns("disp"), "Display",
                  choices = c(Head = "head",
                              All = "all"),
-    
-                 selected = "head"))
+
+                 selected = "head")
+    )
   
 }
 
@@ -57,32 +58,36 @@ mod_dataInput_server <- function(input, output, session) {
     input$id
   })    
   
+  #reactive expression to get the header names, this is necessary for when reading in a square matrix and the first column is a -, which
+  #makes read.table skip giving that column a column header
   col.names <- reactive({
     scan(text = readLines(userFile()$datapath, 1), what = "", quiet = TRUE)})
   
-  
-  datafile <- reactive({
+  #Filter(function(x)....) is to remove any excess columns at the end of a file. Confirmed with tsv file
+  #The rest is just reading in the file based on the reactive userFile expression. 
+  dataFile <- reactive({
     Filter(function(x)!all(is.na(x)),  utils::read.table(userFile()$datapath,
                                                          sep = input$sep,
                                                          stringsAsFactors = FALSE,
                                                          row.names = NULL))
   })
   
-  bind <- reactive({rbind(col.names(), datafile())})
+  #work around to combine the col.names and datafile reactives. This outputs a dataframe with the column headers repeated. 
+  bind <- reactive({rbind(col.names(), dataFile())})
   
+  #this final step takes the firs row of column names and moves it up and removes the first row. This gives correct column headers without skipping a column. 
   dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% dplyr::slice(-1)})
-  
+
   headfile <- reactive({
     if(input$disp == "head") {
-      return(head(datafile()))
+      return(head(dataFileCleaned()))
     }
     else {
-      return(datafile())
+      return(dataFileCleaned())
     }
   })
   
 }
-
 
 ## To be copied in the UI
 # mod_dataInput_ui("dataInput_ui_1")
