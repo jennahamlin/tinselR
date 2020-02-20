@@ -3,6 +3,8 @@
 #' @title   mod_dataInput_ui and mod_dataInput_server
 #' @description  A shiny Module.
 #'
+#' @importFrom magrittr %>%
+#' @name %>%
 #' @param id shiny id
 #' @param input internal
 #' @param output internal
