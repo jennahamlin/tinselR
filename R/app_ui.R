@@ -20,7 +20,8 @@ app_ui <- function() {
                                   "(.csv, .tsv, or .txt file format)"))),
       mainPanel(mod_displayTree_ui("displayTree_ui_1"),
                 mod_displayTable_ui("displayTable_ui_1", "Meta Data"),
-                mod_displayTable_ui("displayTable_ui_2", "Genetic Data")
+                mod_displayTable_ui("displayTable_ui_2", "Genetic Data"),
+                mod_combineTandG_ui("combineTandG_ui_1")
                 )
     )
   )

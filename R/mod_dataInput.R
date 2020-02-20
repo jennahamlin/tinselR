@@ -57,15 +57,20 @@ mod_dataInput_server <- function(input, output, session) {
     input$id
   })    
   
+  col.names <- reactive({
+    scan(text = readLines(userFile()$datapath, 1), what = "", quiet = TRUE)})
+  
+  
   datafile <- reactive({
-    utils::read.table(userFile()$datapath,
-                      header = FALSE,
-                      sep = input$sep,
-                      row.names = NULL,
-                      skip = 1,
-                      stringsAsFactors = FALSE)
-    
+    Filter(function(x)!all(is.na(x)),  utils::read.table(col.names(),
+                                                         sep = input$sep,
+                                                         stringsAsFactors = FALSE,
+                                                         row.names = NULL))
   })
+  
+  bind <- reactive({rbind(col.names(), datafile())})
+  
+  dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% dplyr::slice(-1)})
   
   headfile <- reactive({
     if(input$disp == "head") {

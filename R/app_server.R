@@ -19,5 +19,7 @@ app_server <- function(input, output,session) {
   
   callModule(mod_displayTable_server, "displayTable_ui_2", genefile)
   
+  callModule(mod_combineTandG_server, "combineTandG_ui_1",  treeDisplay, genefile)
+  
 }
 
