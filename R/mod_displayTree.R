@@ -47,7 +47,9 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
   })
   
   output$selectedIndivs <- renderPrint({
-    dataWithSelection()$label
+    if(dataWithSelection()$isTip==TRUE){
+      dataWithSelection()$label
+    }
   })
   return(make_tree)
 }
