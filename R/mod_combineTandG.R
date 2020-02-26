@@ -39,6 +39,8 @@ mod_combineTandG_server <- function(input, output, session, treeFile, dataFileCl
   
   tibbleTandG<-reactive({dplyr::full_join(treeTibble(), dataFileUpdate(), by = "label")})
   
+  #tibbleTandGSelected <- reactive({filter(tibbleTandG(), dataWithSelection())})
+  
   output$combinedTandG <- renderPrint({
     tibbleTandG()
   })

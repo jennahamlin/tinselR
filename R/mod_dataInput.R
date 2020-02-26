@@ -43,7 +43,6 @@ mod_dataInput_ui <- function(id, label) {
 
                  selected = "head")
     )
-  
 }
 
 # Module Server

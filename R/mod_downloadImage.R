@@ -31,16 +31,15 @@ mod_downloadImage_ui <- function(id, label = "Download tree Image"){
 #' @export
 #' @keywords internal
 
-mod_downloadImage_server <- function(input, output, session, treeFile, 
-                                     filename ){
+mod_downloadImage_server <- function(input, output, session, treeFile){
   ns <- session$ns
   
   output$download <- downloadHandler(
     filename = function() {
       paste("data", Sys.Date(), input$device, sep = ".")
     },
-    content = function(file) {
-      ggtree::ggsave(file,treeFile(), device = input$device, width = input$width, height = input$height)
+    content = function(filename) {
+      ggplot2::ggsave(filename = filename,treeFile(), device = input$device, width = input$width, height = input$height)
     })
   
 }

@@ -16,8 +16,7 @@ mod_displayTree_server(
   numscale,
   treeformat,
   font,
-  node,
-  isTip
+  node
 )
 }
 \arguments{

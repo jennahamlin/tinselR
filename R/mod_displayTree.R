@@ -27,7 +27,7 @@ mod_displayTree_ui <- function(id, label = "Display Tree"){
 #' @export
 #' @keywords internal
 
-mod_displayTree_server <- function(input, output, session, treeFile, align, numscale, treeformat, font, node, isTip){
+mod_displayTree_server <- function(input, output, session, treeFile, align, numscale, treeformat, font, node){
   ns <- session$ns
   
   make_tree <- reactive({
@@ -42,13 +42,15 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
     make_tree()
   })
   
-  dataWithSelection <- reactive({
+
+    dataWithSelection <- reactive({
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   
   output$selectedIndivs <- renderText({ #renderText instead of renderPrint to exclude quotes around output
     ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
   })
+  
   return(make_tree)
 }
 
