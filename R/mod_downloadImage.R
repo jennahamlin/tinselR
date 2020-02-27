@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_downloadImage_ui <- function(id, label = "Download tree Image"){
+mod_downloadImage_ui <- function(id, label){
   ns <- NS(id)
   tagList(
     selectInput(ns("device"), label = "Type", choices = c("png", "pdf", "tiff")),
@@ -36,10 +36,11 @@ mod_downloadImage_server <- function(input, output, session, treeFile){
   
   output$download <- downloadHandler(
     filename = function() {
-      paste("data", Sys.Date(), input$device, sep = ".")
+      paste("data", Sys.Date(), input$device, sep = ".") # with input$device here, the choice of pdf does not generate the correct file name with it removed
+      # the correct file name is generated for all three choices but does not put the .pdf/.png/.tiff at the end of the file. 
     },
-    content = function(filename) {
-      ggplot2::ggsave(filename = filename,treeFile(), device = input$device, width = input$width, height = input$height)
+    content = function(file) { #as coded file is filename so I think this should be the same
+      ggplot2::ggsave(file,treeFile(), device = input$device, width = input$width, height = input$height)
     })
   
 }

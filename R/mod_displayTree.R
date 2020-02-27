@@ -13,14 +13,17 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_displayTree_ui <- function(id, label = "Display Tree"){
+mod_displayTree_ui <- function(id, name){
   ns <- NS(id)
-  tagList(
-    label,
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
-    tableOutput(ns("selectedIndivs"))
-  )}
-
+  tabPanel(
+    name,
+    plotOutput(ns("treeDisplay"))
+    #, brush =ns("plot_brush"))
+    #,
+    #tableOutput(ns("selectedIndivs"))
+  )
+}
+  
 # Module Server
 
 #' @rdname mod_displayTree
@@ -35,7 +38,8 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
       ggtree::geom_tiplab(align = align(), fontface = font()) + 
       ggtree::geom_treescale(width = numscale())+
       ggtree::geom_text2(ggtree::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)+
-      ggtree::theme_tree()
+      ggtree::theme_tree() + 
+      ggtree::xlim(0, 0.011)
   })
   
   output$treeDisplay <- renderPlot({
@@ -51,7 +55,7 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
     ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
   })
   
-  return(make_tree)
+  #return(make_tree)
 }
 
 ## To be copied in the UI

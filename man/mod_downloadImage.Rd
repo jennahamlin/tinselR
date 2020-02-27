@@ -5,7 +5,7 @@
 \alias{mod_downloadImage_server}
 \title{mod_downloadImage_ui and mod_downloadImage_server}
 \usage{
-mod_downloadImage_ui(id, label = "Download tree Image")
+mod_downloadImage_ui(id, label)
 
 mod_downloadImage_server(input, output, session, treeFile)
 }
