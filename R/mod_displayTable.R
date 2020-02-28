@@ -13,10 +13,11 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_displayTable_ui <- function(id, name){
+mod_displayTable_ui <- function(id){
   ns <- NS(id)
-  tabPanel(
-    name,
+  tagList(
+  #tabPanel(
+    #name,
     tableOutput(ns("contents"))
   )
 }

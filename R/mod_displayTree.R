@@ -13,10 +13,10 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_displayTree_ui <- function(id, name){
+mod_displayTree_ui <- function(id){
   ns <- NS(id)
-  tabPanel(
-    name,
+  tagList(
+  #tabPanel(
     plotOutput(ns("treeDisplay"))
     #, brush =ns("plot_brush"))
     #,

@@ -5,7 +5,7 @@
 \alias{mod_displayTree_server}
 \title{mod_displayTree_ui and mod_displayTree_server}
 \usage{
-mod_displayTree_ui(id, name)
+mod_displayTree_ui(id)
 
 mod_displayTree_server(
   input,

@@ -5,7 +5,7 @@
 \alias{mod_displayTable_server}
 \title{mod_displayTable_ui and mod_displayTable_server}
 \usage{
-mod_displayTable_ui(id, name)
+mod_displayTable_ui(id)
 
 mod_displayTable_server(input, output, session, file)
 }
