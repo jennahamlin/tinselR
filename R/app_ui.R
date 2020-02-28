@@ -6,7 +6,7 @@ app_ui <- function() {
     # List the first level UI elements here 
     fluidPage(
       navbarPage("Tinsel - a tree visulization and annotation tool",
-                 tabPanel("Getting Started",fluidRow(column(12, includeMarkdown("gettingStarted.md")))),
+                 tabPanel("ReadMe",fluidRow(column(12, includeMarkdown("gettingStarted.md")))),
                  tabPanel("Phylogenetic Tree",
                           sidebarLayout(
                             sidebarPanel(
@@ -15,7 +15,8 @@ app_ui <- function() {
                               mod_downloadImage_ui("downloadImage_ui_1", "Download Image")
                             ),
                             mainPanel(
-                              mod_displayTree_ui("displayTree_ui_1")))),
+                              mod_displayTree_ui("displayTree_ui_1"),
+                              mod_combineTandG_ui("combineTandG_ui_1")))),
                  tabPanel("Genetic Distance",
                           sidebarLayout(
                             sidebarPanel(

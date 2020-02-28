@@ -42,7 +42,6 @@ mod_downloadImage_server <- function(input, output, session, treeFile){
     content = function(file) { #as coded file is filename so I think this should be the same
       ggplot2::ggsave(file,treeFile(), device = input$device, width = input$width, height = input$height)
     })
-  
 }
 
 ## To be copied in the UI

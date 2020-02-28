@@ -17,10 +17,9 @@ mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
   #tabPanel(
-    plotOutput(ns("treeDisplay"))
-    #, brush =ns("plot_brush"))
-    #,
-    #tableOutput(ns("selectedIndivs"))
+    plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
+    ,
+    tableOutput(ns("selectedIndivs"))
   )
 }
   
@@ -46,7 +45,6 @@ mod_displayTree_server <- function(input, output, session, treeFile, align, nums
     make_tree()
   })
   
-
     dataWithSelection <- reactive({
     brushedPoints(make_tree()$data, input$plot_brush)
   })
