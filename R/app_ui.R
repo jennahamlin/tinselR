@@ -1,84 +1,42 @@
 #' @import shiny
 app_ui <- function() {
-  navbarPage("Tinsel - App Title",
-             tabPanel("Getting Started",fluidRow(column(12, includeMarkdown("gettingStarted.md")))),
-             tabPanel("Load Data"),
-             tabsetPanel(
-               tabPanel("PhylogeneticTree",
-                        sidebarLayout(
-                          sidebarPanel(
-                            mod_uploadTree_ui("uploadTree_ui_1"),
-                            mod_paramsTree_ui("paramsTree_ui_1"),
-                            mod_downloadImage_ui("downloadImage_ui_1", "Download Image")
-                          ),
-                          mainPanel(
-                            mod_displayTree_ui("displayTree_ui_1")))),
-               tabPanel("Genetic Distance",
-                        sidebarLayout(
-                          sidebarPanel(
-                            mod_dataInput_ui("dataInput_ui_gene",
-                                             tags$div("User GENETIC data",
-                                                      tags$br(),
-                                                      "(.csv, .tsv, or .txt file format)"))),
-                          mainPanel(
-                            mod_displayTable_ui("displayTable_ui_2")))),
-               tabPanel("Metadata",
-                        sidebarLayout(
-                          sidebarPanel(
-                            mod_dataInput_ui("dataInput_ui_meta",
-                                             tags$div("User META data",
-                                                      tags$br(),
-                                                      "(.csv, .tsv, or .txt file format)"))),
-                          mainPanel(
-                            mod_displayTable_ui("displayTable_ui_1")))))
-           
+  tagList(
+    # Leave this function for adding external resources
+    golem_add_external_resources(),
+    # List the first level UI elements here 
+    fluidPage(
+      navbarPage("Tinsel - a tree visulization and annotation tool",
+                 tabPanel("Getting Started",fluidRow(column(12, includeMarkdown("gettingStarted.md")))),
+                 tabPanel("Phylogenetic Tree",
+                          sidebarLayout(
+                            sidebarPanel(
+                              mod_uploadTree_ui("uploadTree_ui_1"),
+                              mod_paramsTree_ui("paramsTree_ui_1"),
+                              mod_downloadImage_ui("downloadImage_ui_1", "Download Image")
+                            ),
+                            mainPanel(
+                              mod_displayTree_ui("displayTree_ui_1")))),
+                 tabPanel("Genetic Distance",
+                          sidebarLayout(
+                            sidebarPanel(
+                              mod_dataInput_ui("dataInput_ui_gene",
+                                               tags$div("User GENETIC data",
+                                                        tags$br(),
+                                                        "(.csv, .tsv, or .txt file format)"))),
+                            mainPanel(
+                              mod_displayTable_ui("displayTable_ui_2")))),
+                 tabPanel("Metadata",
+                          sidebarLayout(
+                            sidebarPanel(
+                              mod_dataInput_ui("dataInput_ui_meta",
+                                               tags$div("User META data",
+                                                        tags$br(),
+                                                        "(.csv, .tsv, or .txt file format)"))),
+                            mainPanel(
+                              mod_displayTable_ui("displayTable_ui_1")))))
+    )
   )
 }
-
-
-
-
-#   tagList(
-#     # Leave this function for adding external resources
-#     golem_add_external_resources(),
-#     # List the first level UI elements here 
-#     fluidPage(
-#       navbarPage("Tinsel",
-#                  tabPanel(
-#                    "Load Data",
-#                    sidebarPanel(
-#                      mod_uploadTree_ui("uploadTree_ui_1"),
-#                      mod_paramsTree_ui("paramsTree_ui_1"),
-#                      mod_downloadImage_ui("downloadImage_ui_1", "Download Image"),
-#                      mod_dataInput_ui("dataInput_ui_meta",
-#                                       tags$div("User META data",
-#                                                tags$br(),
-#                                                "(.csv, .tsv, or .txt file format)")),
-#                      mod_dataInput_ui("dataInput_ui_gene",
-#                                       tags$div("User GENETIC data",
-#                                                tags$br(),
-#                                                "(.csv, .tsv, or .txt file format)")),
-#                    ),
-#                    mainPanel(
-#                      tabsetPanel(
-#                        
-#                        mod_displayTree_ui("displayTree_ui_1", "PhylogeneticTree"), 
-#                                  mod_displayTable_ui("displayTable_ui_1", "Meta Data"),
-#                                  mod_displayTable_ui("displayTable_ui_2", "Genetic Data"),
-#                                  mod_combineTandG_ui("combineTandG_ui_1")
-#                      )
-#                    )
-#                  ),
-#                  tabPanel("Getting Started",
-#                           fluidRow(column(12, includeMarkdown("gettingStarted.md")
-#                           )
-#                           )
-#                  )
-#       )
-#     )
-#   )
-# }
-
 
 #' @import shiny
 golem_add_external_resources <- function(){
