@@ -17,10 +17,11 @@ mod_downloadImage_ui <- function(id, label){
   ns <- NS(id)
   tagList(
     selectInput(ns("device"), label = "Type", choices = c("png", "pdf", "tiff")),
-    numericInput(ns("width"), "Width of Image (inches)", value = 6),
-    numericInput(ns("height"), "Height of Images (inches)", value = 8),
-    downloadButton(ns("download"), label),
-    tableOutput(ns("selectedIndivs"))
+    #numericInput(ns("width"), "Width of Image (inches)", value = 6),
+    #numericInput(ns("height"), "Height of Images (inches)", value = 8),
+    downloadButton(ns("download"))
+    #,
+    #tableOutput(ns("selectedIndivs"))
     
   )
 }
@@ -36,12 +37,11 @@ mod_downloadImage_server <- function(input, output, session, treeFile){
   
   output$download <- downloadHandler(
     filename = function() {
-      paste("data", Sys.Date(), input$device, sep = ".") # with input$device here, the choice of pdf does not generate the correct file name with it removed
-      # the correct file name is generated for all three choices but does not put the .pdf/.png/.tiff at the end of the file. 
-    },
-    content = function(file) { #as coded file is filename so I think this should be the same
-      ggplot2::ggsave(file,treeFile(), device = input$device, width = input$width, height = input$height)
-    })
+      paste("treePlot", Sys.Date(), sep = ".")},
+    
+    content = function(file) {
+      ggplot2::ggsave(file, treeFile(), device = input$device)}
+  )
 }
 
 ## To be copied in the UI

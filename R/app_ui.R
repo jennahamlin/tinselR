@@ -12,11 +12,12 @@ app_ui <- function() {
                             sidebarPanel(
                               mod_uploadTree_ui("uploadTree_ui_1"),
                               mod_paramsTree_ui("paramsTree_ui_1"),
-                              mod_downloadImage_ui("downloadImage_ui_1", "Download Image")
+                              mod_downloadImage_ui("downloadImage_ui_1")
                             ),
                             mainPanel(
                               mod_displayTree_ui("displayTree_ui_1"),
-                              mod_combineTandG_ui("combineTandG_ui_1")))),
+                              mod_combineTandG_ui("combineTandG_ui_1"))
+                          )),
                  tabPanel("Genetic Distance",
                           sidebarLayout(
                             sidebarPanel(

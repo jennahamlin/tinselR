@@ -12,10 +12,10 @@ mod_displayTree_server(
   output,
   session,
   treeFile,
-  align,
-  numscale,
   treeformat,
+  align,
   font,
+  numscale,
   node
 )
 }
