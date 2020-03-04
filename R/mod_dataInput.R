@@ -24,6 +24,7 @@ mod_dataInput_ui <- function(id, label) {
     # Input: Select a file ----
     #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
     #label here is specified and is called in the app_ui with the tags$div section 
+    #does not all multiple files to be uploaded
     fileInput(ns("id"), label, 
               multiple = FALSE,
               accept = c("text/csv", 
@@ -36,7 +37,8 @@ mod_dataInput_ui <- function(id, label) {
                  choices = c(Comma = ",",
                              Tab = "\t"),
                  selected = "\t"),
-    
+
+    # Input: Display top 10 rows of file or all ----
     radioButtons(ns("disp"), "Display",
                  choices = c(Head = "head",
                              All = "all"),
@@ -77,7 +79,8 @@ mod_dataInput_server <- function(input, output, session) {
   bind <- reactive({rbind(col.names(), dataFile())})
   
   #this final step takes the firs row of column names and moves it up and removes the first row. This gives correct column headers without skipping a column. 
-  dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% dplyr::slice(-1)})
+  #as of today this does not work with the meta data file; need to fix this
+  dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% dplyr::distinct()})
 
   headfile <- reactive({
     if(input$disp == "head") {
