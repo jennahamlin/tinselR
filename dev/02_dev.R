@@ -30,6 +30,7 @@ usethis::use_package("phytools")
 usethis::use_package("purrr")
 usethis::use_package("dplyr")
 usethis::use_package("magrittr")
+usethis::use_package("ggtree")
 
 
 ## 2.3 Add tests
