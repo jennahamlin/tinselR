@@ -61,6 +61,8 @@ mod_dataInput_server <- function(input, output, session) {
     input$id
   })    
   
+  ##the below reactive expression allow one to use the full_join method to combine a tree and genetic distance matrix
+  ##can this be more elegently written?
   #reactive expression to get the header names, this is necessary for when reading in a square matrix and the first column is a -, which
   #makes read.table skip giving that column a column header
   col.names <- reactive({
@@ -71,6 +73,7 @@ mod_dataInput_server <- function(input, output, session) {
   dataFile <- reactive({
     Filter(function(x)!all(is.na(x)),  utils::read.table(userFile()$datapath,
                                                          sep = input$sep,
+                                                         header = T,
                                                          stringsAsFactors = FALSE,
                                                          row.names = NULL))
   })

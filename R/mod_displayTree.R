@@ -16,13 +16,12 @@
 mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-  #tabPanel(
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
-    ,
-    tableOutput(ns("selectedIndivs"))
+    , #this displays the tree and allows one to brush tips
+    tableOutput(ns("selectedIndivs")) #this displays the brushed tips
   )
 }
-  
+
 # Module Server
 
 #' @rdname mod_displayTree
@@ -34,18 +33,18 @@ mod_displayTree_server <- function(input, output, session, treeFile, treeformat,
   
   make_tree <- reactive({
     ggtree::ggtree(treeFile(), layout = treeformat())+
-       ggtree::geom_tiplab(align = align(), fontface = font(), family="Arial") + 
-       ggtree::geom_treescale(width = numscale())+
-       ggtree::geom_text2(ggtree::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)+
+      ggtree::geom_tiplab(align = align(), fontface = font(), family="Arial") + 
+      ggtree::geom_treescale(width = numscale())+
+      ggtree::geom_text2(ggtree::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)+
       # ggtree::theme_tree() + 
-       ggtree::xlim(0, 0.011)
+      ggtree::xlim(0, 0.011)
   })
   
   output$treeDisplay <- renderPlot({
     make_tree()
   })
   
-    dataWithSelection <- reactive({
+  dataWithSelection <- reactive({
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   

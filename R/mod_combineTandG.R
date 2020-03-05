@@ -31,9 +31,9 @@ mod_combineTandG_ui <- function(id){
 mod_combineTandG_server <- function(input, output, session, treeFile, dataFileCleaned){
   ns <- session$ns
   
-  treeObject<-reactive({treeio::as.treedata(treeFile())})
+  treeObject<-reactive({treeio::as.treedata(treeFile())}) #this is an S4 object
   
-  treeTibble <- reactive({tibble::as_tibble(treeObject())})
+  treeTibble <- reactive({tibble::as_tibble(treeObject())}) #convert to tibble to access 
   
   dataFileUpdate <- reactive({dplyr::rename(dataFileCleaned(), label = 1)}) #change column header to label in order to use full_join
   
