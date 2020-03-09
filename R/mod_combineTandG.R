@@ -39,12 +39,23 @@ mod_combineTandG_server <- function(input, output, session, treeFile, dataFileCl
   
   tibbleTandG<-reactive({dplyr::full_join(treeTibble(), dataFileUpdate(), by = "label")})
   
-  #tibbleTandGSelected <- reactive({filter(tibbleTandG(), dataWithUpdate())})
+  tibbleTandG2 <-reactive({tibbleTandG()[complete.cases(tibbleTandG()),]})
+  
+  tibbleTandG3 <-reactive({replace(tibbleTandG2(), tibbleTandG2()=="-",0) })
+  
+  tibbleTandG4 <- reactive({
+    tibbleTandG3() %>% 
+      dplyr::select(-c(parent, node, branch.length))%>% 
+      tidyr::pivot_longer(-label)
+    
+  })
   
   output$combinedTandG <- renderPrint({
-    tibbleTandG()
+    tibbleTandG4()
   })
-}
+  
+  #tibbleTandGSelected <- reactive({dplyr::filter(tibbleTandG(), unlist(dataWithSelection()$tip.label))})
+  }
 
 ## To be copied in the UI
 # mod_combineTandG_ui("combineTandG_ui_1")
