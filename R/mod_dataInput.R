@@ -79,12 +79,13 @@ mod_dataInput_server <- function(input, output, session) {
   })
   
   #work around to combine the col.names and datafile reactives. This outputs a dataframe with the column headers repeated. 
-  dataFileCleaned<- reactive({rbind(col.names(), dataFile())})
+ bind<- reactive({rbind(col.names(), dataFile())})
   
-  #this final step takes the firs row of column names and moves it up and removes the first row. This gives correct column headers without skipping a column. 
-  #as of today this does not work with the meta data file; need to fix this
-  #dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% 
-  #    dplyr::distinct()})
+  #this final step takes the first row of column names and moves it up 
+  dataFileCleaned <- reactive({bind() %>% rlang::set_names(bind()[1,])%>%
+      setNames(make.unique(names(.)))%>%  # this makes reading a csv file look correct. not sure why
+      dplyr::slice(-1) #removes the first row
+    })
 
   headfile <- reactive({
     if(input$disp == "head") {
