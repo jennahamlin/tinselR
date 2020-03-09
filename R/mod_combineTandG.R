@@ -31,31 +31,28 @@ mod_combineTandG_ui <- function(id){
 mod_combineTandG_server <- function(input, output, session, treeFile, dataFileCleaned){
   ns <- session$ns
   
-  treeObject<-reactive({treeio::as.treedata(treeFile())}) #this is an S4 object
+  treeObject<-reactive({treeio::as.treedata(treeFile())%>% #as.treedata is an S4 object
+      tibble::as_tibble() #convert to tibble to access and join
+  }) 
   
-  treeTibble <- reactive({tibble::as_tibble(treeObject())}) #convert to tibble to access 
+  dataFileUpdate <- reactive({dplyr::rename(dataFileCleaned(), label = 1) %>% #change column header to label in order to use full_join
+      dplyr::full_join(treeObject(), dataFileUpdate(), by = "label") %>%
+      replace(., .=="-", 0)
+  }) 
   
-  dataFileUpdate <- reactive({dplyr::rename(dataFileCleaned(), label = 1)}) #change column header to label in order to use full_join
-  
-  tibbleTandG<-reactive({dplyr::full_join(treeTibble(), dataFileUpdate(), by = "label")})
-  
-  tibbleTandG2 <-reactive({tibbleTandG()[complete.cases(tibbleTandG()),]})
-  
-  tibbleTandG3 <-reactive({replace(tibbleTandG2(), tibbleTandG2()=="-",0) })
-  
-  tibbleTandG4 <- reactive({
-    tibbleTandG3() %>% 
+  tibbleTandG <- reactive({
+    dataFileUpdate() %>% 
+      na.omit()%>%
       dplyr::select(-c(parent, node, branch.length))%>% 
       tidyr::pivot_longer(-label)
     
   })
   
   output$combinedTandG <- renderPrint({
-    tibbleTandG4()
+    tibbleTandG()
   })
   
-  #tibbleTandGSelected <- reactive({dplyr::filter(tibbleTandG(), unlist(dataWithSelection()$tip.label))})
-  }
+}
 
 ## To be copied in the UI
 # mod_combineTandG_ui("combineTandG_ui_1")

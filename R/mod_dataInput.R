@@ -63,8 +63,8 @@ mod_dataInput_server <- function(input, output, session) {
   
   ##the below reactive expression allow one to use the full_join method to combine a tree and genetic distance matrix
   ##can this be more elegently written?
-  #reactive expression to get the header names, this is necessary for when reading in a square matrix and the first column is a -, which
-  #makes read.table skip giving that column a column header
+  #reactive expression to get the header names, this is necessary for when reading in a square matrix and the 
+  #first column is a -, which
   col.names <- reactive({
     scan(text = readLines(userFile()$datapath, 1), what = "", quiet = TRUE)})
   
@@ -79,11 +79,12 @@ mod_dataInput_server <- function(input, output, session) {
   })
   
   #work around to combine the col.names and datafile reactives. This outputs a dataframe with the column headers repeated. 
-  bind <- reactive({rbind(col.names(), dataFile())})
+  dataFileCleaned<- reactive({rbind(col.names(), dataFile())})
   
   #this final step takes the firs row of column names and moves it up and removes the first row. This gives correct column headers without skipping a column. 
   #as of today this does not work with the meta data file; need to fix this
-  dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% dplyr::distinct()})
+  #dataFileCleaned <- reactive({bind() %>% purrr::set_names(bind()[1,])%>% 
+  #    dplyr::distinct()})
 
   headfile <- reactive({
     if(input$disp == "head") {
