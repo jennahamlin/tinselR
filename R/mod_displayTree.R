@@ -28,7 +28,8 @@ mod_displayTree_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_displayTree_server <- function(input, output, session, treeFile, treeformat, align, font, numscale, node){
+mod_displayTree_server <- function(input, output, session, 
+                                   treeFile, treeformat, align, font, numscale, node){
   ns <- session$ns
   
   make_tree <- reactive({
@@ -47,8 +48,7 @@ mod_displayTree_server <- function(input, output, session, treeFile, treeformat,
   })
   
   output$selectedIndivs <- renderText({ #renderText instead of renderPrint to exclude quotes around output
-    #dataWithSelection()$label
-    ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
+    ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
   })
   
   return(make_tree)

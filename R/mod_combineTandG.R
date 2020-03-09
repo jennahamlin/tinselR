@@ -36,7 +36,7 @@ mod_combineTandG_server <- function(input, output, session, treeFile, dataFileCl
   }) 
   
   dataFileUpdate <- reactive({dplyr::rename(dataFileCleaned(), label = 1) %>% #change column header to label in order to use full_join
-      dplyr::full_join(treeObject(), dataFileUpdate(), by = "label") %>%
+      dplyr::full_join(treeObject(), dataFileUpdate(), by = "label") %>% 
       replace(., .=="-", 0)
   }) 
   
