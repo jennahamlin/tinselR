@@ -35,8 +35,9 @@ mod_displayTree_server <- function(input, output, session,
   make_tree <- reactive({
     ggtree::ggtree(treeFile(), layout = treeformat())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Arial") + 
-      ggtree::geom_treescale(width = numscale())+
-      ggtree::geom_text2(aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
+      ggtree::geom_treescale(width = numscale())
+    #+
+      #ggtree::geom_text2(aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
   })
   
   output$treeDisplay <- renderPlot({
