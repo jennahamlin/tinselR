@@ -66,8 +66,8 @@ mod_dataInput_server <- function(input, output, session) {
   ##the below reactive expression allow one to use the full_join method to combine a tree and genetic distance matrix
   #reactive expression to get the header names, this is necessary for when reading in a square matrix and the 
   #first column is a -, which
-  col.names <- reactive({
-    scan(text = readLines(userFile()$datapath, 1), what = "", quiet = TRUE)})
+  #col.names <- reactive({
+  #  scan(text = readLines(userFile()$datapath, 1), what = "", quiet = TRUE)})
   
   #Filter(function(x)....) is to remove any excess columns at the end of a file. Confirmed with tsv file
   #The rest is just reading in the file based on the reactive userFile expression. 
@@ -80,13 +80,13 @@ mod_dataInput_server <- function(input, output, session) {
   })
   
   #work around to combine the col.names and datafile reactives. This outputs a dataframe with the column headers repeated. 
-  bind<- reactive({rbind(col.names(), dataFile())})
+  #bind<- reactive({rbind(col.names(), dataFile())})
   
   #this final step takes the first row of column names and moves it up 
-  dataFileCleaned <- reactive({bind() %>% rlang::set_names(bind()[1,])%>%
-      setNames(make.unique(names(.)))%>%  # this makes reading a csv file look correct. not sure why
-      dplyr::slice(-1) #removes the first row
-  })
+  #dataFileCleaned <- reactive({bind() %>% rlang::set_names(bind()[1,])%>%
+  #    setNames(make.unique(names(.)))%>%  # this makes reading a csv file look correct. not sure why
+  #    dplyr::slice(-1) #removes the first row
+  #})
   
   headfile <- reactive({
     if(input$disp == "head") {

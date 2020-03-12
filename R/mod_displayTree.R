@@ -29,14 +29,14 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFile,dataFileCleaned , treeformat, align, font, numscale, node){
+                                   treeFile,dataFile, treeformat, align, font, numscale, node){
   ns <- session$ns
   
    treeObject<-reactive({
        tibble::as_tibble(treeFile()) #convert to tibble to access and join
    }) 
    
-   combTandG <- reactive({dplyr::rename(dataFileCleaned(), label = 1)%>%
+   combTandG <- reactive({dplyr::rename(dataFile(), label = 1)%>%
        replace(., .=="-", 0)
    })
    
