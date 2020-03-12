@@ -76,7 +76,8 @@ mod_dataInput_server <- function(input, output, session) {
                                                          sep = input$sep,
                                                          header = T,
                                                          stringsAsFactors = FALSE,
-                                                         row.names = NULL))
+                                                         row.names = NULL,
+                                                         check.names = FALSE))
   })
   
   #work around to combine the col.names and datafile reactives. This outputs a dataframe with the column headers repeated. 

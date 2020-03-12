@@ -45,6 +45,8 @@ mod_displayTree_server <- function(input, output, session,
        treeio::as.treedata()
    })
    
+   
+   
   make_tree <- reactive({
     ggtree::ggtree(gandTS4(), layout = treeformat())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
