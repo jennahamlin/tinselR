@@ -45,8 +45,6 @@ mod_displayTree_server <- function(input, output, session,
        treeio::as.treedata()
    })
    
-   
-   
   make_tree <- reactive({
     ggtree::ggtree(gandTS4(), layout = treeformat())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
@@ -62,7 +60,15 @@ mod_displayTree_server <- function(input, output, session,
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   
+  gandT <-reactive({
+    dataWithSelection %>%
+      na.omit() %>%
+      dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
+      tidyr::pivot_longer(-label)
+  })
+  
   output$selectedIndivs <- renderText({ #renderText instead of renderPrint to exclude quotes around output
+    
     #dataWithSelection()$label
     ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
   })
