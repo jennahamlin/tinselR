@@ -32,18 +32,21 @@ mod_displayTree_server <- function(input, output, session,
                                    treeFile,dataFile, treeformat, align, font, numscale, node){
   ns <- session$ns
   
-  treeObject<-reactive({treeio::as.treedata(treeFile())%>% #as.treedata is an S4 object
-      tibble::as_tibble() #convert to tibble to access and join
-  }) 
-  
-  combTandG <- reactive({dplyr::rename(dataFile(), label = 1)%>%
-      replace(., .=="-", 0)%>%
-      dplyr::full_join(treeObject, combTandG(), by = "label")
-    
-  })
-  
+   treeObject<-reactive({
+       tibble::as_tibble(treeFile()) #convert to tibble to access and join
+   }) 
+   
+   combTandG <- reactive({dplyr::rename(dataFile(), label = 1)%>%
+       replace(., .=="-", 0)
+   })
+   
+   gandTS4 <- reactive({
+     dplyr::full_join(treeObject(), combTandG(), by = "label")%>%
+       treeio::as.treedata()
+   })
+   
   make_tree <- reactive({
-    ggtree::ggtree(combTandG(), layout = treeformat())+
+    ggtree::ggtree(gandTS4(), layout = treeformat())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
       ggtree::geom_treescale(width = numscale())+
       ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
@@ -58,6 +61,7 @@ mod_displayTree_server <- function(input, output, session,
   })
   
   output$selectedIndivs <- renderText({ #renderText instead of renderPrint to exclude quotes around output
+    #dataWithSelection()$label
     ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
   })
   
