@@ -33,16 +33,16 @@ mod_displayTree_server <- function(input, output, session,
   ns <- session$ns
   
    treeObject<-reactive({
-       tibble::as_tibble(treeFile()) #convert to tibble to access and join
+       tibble::as_tibble(treeFile()) #convert to tibble to access and join tree and genetic distance matrix
    }) 
    
-   combTandG <- reactive({dplyr::rename(dataFile(), label = 1)%>%
-       replace(., .=="-", 0)
+   combTandG <- reactive({dplyr::rename(dataFile(), label = 1)%>%  #change column1, row1 to the id of label 
+       replace(., .=="-", 0) #replace - with a 0 within the file
    })
    
    gandTS4 <- reactive({
-     dplyr::full_join(treeObject(), combTandG(), by = "label")%>%
-       treeio::as.treedata()
+     dplyr::full_join(treeObject(), combTandG(), by = "label")%>% #join the treeobjectt and updated genetic distance file by label
+       treeio::as.treedata() #convert to s4 object
    })
    
   make_tree <- reactive({
@@ -61,16 +61,17 @@ mod_displayTree_server <- function(input, output, session,
   })
   
   gandT <-reactive({
-    dataWithSelection %>%
+    make_tree()$data %>%
+      dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
       na.omit() %>%
       dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
       tidyr::pivot_longer(-label)
   })
   
-  output$selectedIndivs <- renderText({ #renderText instead of renderPrint to exclude quotes around output
-    
+  output$selectedIndivs <- renderTable({ #renderText instead of renderPrint to exclude quotes around output
+    gandT()
     #dataWithSelection()$label
-    ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
+    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
   })
   
   return(make_tree)
