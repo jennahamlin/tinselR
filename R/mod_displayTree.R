@@ -36,7 +36,8 @@ mod_displayTree_server <- function(input, output, session,
        tibble::as_tibble(treeFile()) #convert to tibble to access and join tree and genetic distance matrix
    }) 
    
-   combTandG <- reactive({dplyr::rename(dataFile(), label = 1)%>%  #change column1, row1 to the id of label 
+   combTandG <- reactive({
+     dplyr::rename(dataFile(), label = 1)%>%  #change column1, row1 to the id of label 
        replace(., .=="-", 0) #replace - with a 0 within the file
    })
    
@@ -46,7 +47,7 @@ mod_displayTree_server <- function(input, output, session,
    })
    
   make_tree <- reactive({
-    ggtree::ggtree(gandTS4(), layout = treeformat())+
+    ggtree::ggtree(gandTS4(), layout = treeformat())+ #major plotting reactive
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
       ggtree::geom_treescale(width = numscale())+
       ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
@@ -56,23 +57,21 @@ mod_displayTree_server <- function(input, output, session,
     make_tree()
   })
   
-  dataWithSelection <- reactive({
-    brushedPoints(make_tree()$data, input$plot_brush)
+   dataWithSelection <- reactive({
+     brushedPoints(make_tree()$data, input$plot_brush)
+   })
+  
+  output$selectedIndivs <- renderTable({ #renderTable makes a table of values - can this be accessed 
+    ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
   })
   
-  gandT <-reactive({
-    make_tree()$data %>%
-      dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
-      na.omit() %>%
-      dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
-      tidyr::pivot_longer(-label)
-  })
-  
-  output$selectedIndivs <- renderTable({ #renderText instead of renderPrint to exclude quotes around output
-    gandT()
-    #dataWithSelection()$label
-    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
-  })
+  # gandT <-reactive({
+  #   make_tree()$data %>%
+  #     dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
+  #     na.omit() %>%
+  #     dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
+  #     tidyr::pivot_longer(-label)
+  # })
   
   return(make_tree)
 }
