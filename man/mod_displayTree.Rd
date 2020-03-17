@@ -12,7 +12,7 @@ mod_displayTree_server(
   output,
   session,
   treeFile,
-  dataFile,
+  dataFileCleaned,
   treeformat,
   align,
   font,
