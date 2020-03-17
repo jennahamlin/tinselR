@@ -16,11 +16,11 @@
 mod_paramsTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-    checkboxInput(ns("alignTips"), "Align tip labels", TRUE),
+    checkboxInput(ns("alignTips"), "Align tip labels", FALSE),
     checkboxGroupInput(ns("treeFormat"), "What tree layout?", 
                        choices = list(
                          "rectangular" = "rectangular", "slanted" = "slanted", 
-                         "circular" = "circular", "fan" = "fan"), selected = "slanted"),
+                         "circular" = "circular", "fan" = "fan"), selected = "rectangular"),
     checkboxGroupInput(ns("fontFormat"), "What font format for tip labels?", 
                        choices = list(
                          "bold" = "bold", "italic" = "italic", 

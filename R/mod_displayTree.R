@@ -29,7 +29,7 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFile,dataFileCleaned, treeformat, align, font, numscale, node){
+                                   treeFile,dataFile, treeformat, align, font, numscale, node){
   ns <- session$ns
   
   #convert phylogenetic tree to tibble to join tree and genetic distance matrix
@@ -39,7 +39,7 @@ mod_displayTree_server <- function(input, output, session,
   
   #change column1, row1 to the id of label and replace - with a 0 within the file
   combTandG <- reactive({
-    dplyr::rename(dataFileCleaned(), label = 1)%>%  
+    dplyr::rename(dataFile(), label = 1)%>%  
       replace(., .=="-", 0) 
   })
   
