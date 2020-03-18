@@ -22,12 +22,10 @@ mod_dataInput_ui <- function(id, label) {
   tagList(
     
     # Input: Select a file ----
-    #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
-    #label here is specified and is called in the app_ui with the tags$div section 
-    #does not all multiple files to be uploaded
-    fileInput(ns("id"), label, 
-              multiple = FALSE,
-              accept = c("text/csv", 
+    fileInput(ns("id"), 
+              label,     #label here is specified and is called in the app_ui with the tags$div section 
+              multiple = FALSE,     #does not all multiple files to be uploaded
+              accept = c("text/csv",     #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
                          "text/comma-separated-values,text/plain",
                          ".csv",
                          ".tsv")),
@@ -61,6 +59,7 @@ mod_dataInput_server <- function(input, output, session) {
     input$id
   })    
   
+  #now uses readr package and read_delim function; as this makes it easier to work with. 
   dataFile <- reactive({
     readr::read_delim(userFile()$datapath,
                       delim = input$sep,

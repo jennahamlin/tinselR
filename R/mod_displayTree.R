@@ -16,9 +16,9 @@
 mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
-    , #this displays the tree and allows one to brush tips
-    tableOutput(ns("selectedIndivs")) #this displays the brushed tips
+#    plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
+    #, #this displays the tree and allows one to brush tips
+    #tableOutput(ns("selectedIndivs")) #this displays the brushed tips
   )
 }
 
@@ -29,7 +29,7 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFile,dataFile, treeformat, align, font, numscale, node){
+                                   treeFile, dataFile, treeformat, align, font, numscale, node){
   ns <- session$ns
   
   #convert phylogenetic tree to tibble to join tree and genetic distance matrix
@@ -49,7 +49,7 @@ mod_displayTree_server <- function(input, output, session,
       treeio::as.treedata() 
   })
   
-  #major plotting reactive using an S4 object
+  #major plotting reactive using an S4 object called above (gandTS4)
   make_tree <- reactive({
     ggtree::ggtree(gandTS4(), layout = treeformat())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
@@ -57,28 +57,29 @@ mod_displayTree_server <- function(input, output, session,
       ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
   })
   
-  output$treeDisplay <- renderPlot({
-    make_tree()
-  })
-  
-  dataWithSelection <- reactive({
-    brushedPoints(make_tree()$data, input$plot_brush)
-  })
-  
-  gandT <-reactive({
-    dataWithSelection()%>%
-      dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
-      na.omit() %>%
-      dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
-      tidyr::pivot_longer(-label)
-  })
-  
-  output$selectedIndivs <- renderTable({ #renderTable makes a table of values - can this be accessed 
-    gandT()
-    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
-  })
-  
+  # output$treeDisplay <- renderPlot({
+  #   make_tree()
+  # })
+  # 
+  # dataWithSelection <- reactive({
+  #   brushedPoints(make_tree()$data, input$plot_brush)
+  # })
+  # 
+  # gandT <-reactive({
+  #   dataWithSelection()%>%
+  #     dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
+  #     na.omit() %>%
+  #     dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
+  #     tidyr::pivot_longer(-label)
+  # })
+
+  # output$selectedIndivs <- renderTable({ #renderTable makes a table of values - can this be accessed 
+  #   gandT()
+  #   #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
+  # })
   return(make_tree)
+  #return(gandT)
+  
 }
 
 ## To be copied in the UI

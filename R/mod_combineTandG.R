@@ -18,7 +18,11 @@
 mod_combineTandG_ui <- function(id){
   ns <- NS(id)
   tagList(
-    verbatimTextOutput(ns("combinedTandG"))
+    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
+    
+    tableOutput(ns("selectedIndivs")) #this displays the brushed tips
+    
+    #verbatimTextOutput(ns("combinedTandG"))
   )
 }
 
@@ -28,30 +32,52 @@ mod_combineTandG_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_combineTandG_server <- function(input, output, session, treeFile, dataFileCleaned){
+mod_combineTandG_server <- function(input, output, session, make_tree){
   ns <- session$ns
   
-  treeObject<-reactive({treeio::as.treedata(treeFile())%>% #as.treedata is an S4 object
-      tibble::as_tibble() #convert to tibble to access and join
-  }) 
+  output$treeDisplay <- renderPlot({
+    make_tree()
+  })
   
-  dataFileUpdate <- reactive({dplyr::rename(dataFileCleaned(), label = 1) %>% #change column header to label in order to use full_join
-      dplyr::full_join(treeObject(), dataFileUpdate(), by = "label") %>% 
-      replace(., .=="-", 0)
-  }) 
+  dataWithSelection <- reactive({
+    brushedPoints(make_tree()$data, input$plot_brush)
+  })
   
-  tibbleTandG <- reactive({
-    dataFileUpdate() %>% 
-      na.omit()%>%
-      dplyr::select(-c(parent, node, branch.length))%>% 
+  gandT <-reactive({
+    dataWithSelection()%>%
+      dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
+      na.omit() %>%
+      dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
       tidyr::pivot_longer(-label)
-    
   })
   
-  output$combinedTandG <- renderPrint({
-    tibbleTandG()
+  output$selectedIndivs <- renderTable({ #renderTable makes a table of values - can this be accessed 
+    gandT()
+    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
   })
   
+  
+  # treeObject<-reactive({treeio::as.treedata(treeFile())%>% #as.treedata is an S4 object
+  #     tibble::as_tibble() #convert to tibble to access and join
+  # }) 
+  # 
+  # dataFileUpdate <- reactive({dplyr::rename(dataFileCleaned(), label = 1) %>% #change column header to label in order to use full_join
+  #     dplyr::full_join(treeObject(), dataFileUpdate(), by = "label") %>% 
+  #     replace(., .=="-", 0)
+  # }) 
+  # 
+  # tibbleTandG <- reactive({
+  #   dataFileUpdate() %>% 
+  #     na.omit()%>%
+  #     dplyr::select(-c(parent, node, branch.length))%>% 
+  #     tidyr::pivot_longer(-label)
+  #   
+  # })
+  # 
+  # output$combinedTandG <- renderPrint({
+  #   tibbleTandG()
+  # })
+  # 
 }
 
 ## To be copied in the UI

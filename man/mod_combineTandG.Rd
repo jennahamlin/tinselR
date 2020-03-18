@@ -8,7 +8,7 @@
 \usage{
 mod_combineTandG_ui(id)
 
-mod_combineTandG_server(input, output, session, treeFile, dataFileCleaned)
+mod_combineTandG_server(input, output, session, make_tree)
 }
 \arguments{
 \item{id}{shiny id}
