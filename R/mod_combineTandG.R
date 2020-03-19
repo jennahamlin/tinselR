@@ -45,12 +45,15 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   })
   
   #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
-  output$selected<-renderTable(dataWithSelection())
+  output$selected<-renderTable(
+    dataWithSelection()$label
+    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
+    )
   
   #converts the brushed points data into a long data table - displays all possible combinations 
   gandT <-reactive({
     dataWithSelection()%>%
-      dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
+      #dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
       na.omit() %>%
       dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
       tidyr::pivot_longer(-label)
@@ -58,14 +61,13 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   
   gandTreduced <- reactive({
     gandT()%>%
-      dplyr::filter(label[1] & name[2])
+      dplyr::filter(label == dataWithSelection()$label[1] & name == dataWithSelection()$label[2])%>%
+      dplyr::pull(value)
   })
-
-
+  
   output$selectedIndivs <- renderTable({ #renderTable makes a table of values - can this be accessed 
-    gandT()
-    #gandTreduced()
-    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "") 
+    #gandT()
+    gandTreduced()
   })
   
 }

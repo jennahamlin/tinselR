@@ -20,6 +20,6 @@ mod_dataInput_server(input, output, session)
 \item{session}{internal}
 }
 \description{
-A shiny Module.
+A shiny Module. This modules allows one to upload csv/tsv/txt files and is combined with the displayTable module.
 }
 \keyword{internal}

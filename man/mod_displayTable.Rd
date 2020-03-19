@@ -19,6 +19,6 @@ mod_displayTable_server(input, output, session, file)
 \item{session}{internal}
 }
 \description{
-A shiny Module.
+A shiny Module. This modules allows one to display csv/tsv/txt files in their respective upload tabs and is combined with dataInput module.
 }
 \keyword{internal}
