@@ -19,6 +19,6 @@ mod_uploadTree_server(input, output, session)
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module will upload a newick tree and is read in by treeio package with the function read.newick
+A shiny Module. This module will upload a newick tree and is read in by treeio package with the function read.newick and allows one to midpoint root the tree
 }
 \keyword{internal}

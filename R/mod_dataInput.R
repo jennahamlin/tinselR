@@ -1,7 +1,7 @@
 # Module UI
 
 #' @title   mod_dataInput_ui and mod_dataInput_server
-#' @description  A shiny Module.
+#' @description  A shiny Module. This modules allows one to upload csv/tsv/txt files and is combined with the displayTable module. 
 #'
 #' @importFrom magrittr %>%
 #' @name %>%

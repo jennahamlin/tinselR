@@ -1,7 +1,7 @@
 # Module UI
 
 #' @title   mod_uploadTree_ui and mod_uploadTree_server
-#' @description  A shiny Module. This module will upload a newick tree and is read in by treeio package with the function read.newick
+#' @description  A shiny Module. This module will upload a newick tree and is read in by treeio package with the function read.newick and allows one to midpoint root the tree
 #'
 #' @param id shiny id
 #' @param input internal

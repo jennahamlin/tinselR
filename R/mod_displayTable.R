@@ -1,7 +1,7 @@
 # Module UI
   
 #' @title   mod_displayTable_ui and mod_displayTable_server
-#' @description  A shiny Module.
+#' @description  A shiny Module. This modules allows one to display csv/tsv/txt files in their respective upload tabs and is combined with dataInput module. 
 #'
 #' @param id shiny id
 #' @param input internal
@@ -16,8 +16,6 @@
 mod_displayTable_ui <- function(id){
   ns <- NS(id)
   tagList(
-  #tabPanel(
-    #name,
     tableOutput(ns("contents"))
   )
 }

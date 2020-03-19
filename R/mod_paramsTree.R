@@ -1,7 +1,7 @@
 # Module UI
 
 #' @title   mod_paramsTree_ui and mod_paramsTree_server
-#' @description  A shiny Module.
+#' @description  A shiny Module. This module holds all of the parameters that can be adjusted for the visualization of a phylogenetic tree.
 #'
 #' @param id shiny id
 #' @param input internal
