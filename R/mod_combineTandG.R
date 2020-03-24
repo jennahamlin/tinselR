@@ -53,7 +53,6 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   #converts the brushed points data into a long data table - displays all possible combinations 
   gandT <-reactive({
     dataWithSelection()%>%
-      #dplyr::mutate_if(is.numeric,as.character, is.factor, as.character) %>%
       na.omit() %>%
       dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
       tidyr::pivot_longer(-label)
@@ -69,6 +68,8 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     #gandT()
     gandTreduced()
   })
+  
+  return(dataWithSelection)
   
 }
 
