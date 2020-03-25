@@ -20,7 +20,8 @@ mod_combineTandG_ui <- function(id){
   tagList(
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
     tableOutput(ns("selected")),
-    tableOutput(ns("selectedIndivs")) #this displays the brushed tips
+    tableOutput(ns("selectedIndivs")), #this displays the brushed tips
+    actionButton(ns("add_annotation"),"Add clade annotation")
     
   )
 }
@@ -37,6 +38,16 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   #makes the tree plot, uses output from the displayTree module 
   output$treeDisplay <- renderPlot({
     make_tree()
+  })
+  
+  layer <- eventReactive(input$add_annotation,{
+    # add new layer
+   ggtree::geom_cladelabel(node=28, label = "a clade") 
+  })
+  
+  observe({
+    #print("render")
+    output$treeDisplay <- renderPlot({make_tree() + layer()})
   })
   
   #reactive that holds the brushed points on a plot

@@ -10,9 +10,7 @@
 mod_cladeAnnotator_ui <- function(id){
   ns <- NS(id)
   tagList(
-    plotOutput("plot"),
-    
-    actionButton("add_annotation","Add clade annotation")
+    actionButton(ns("add_annotation"),"Add clade annotation")
     
   )
 }
@@ -23,18 +21,15 @@ mod_cladeAnnotator_ui <- function(id){
 mod_cladeAnnotator_server <- function(input, output, session, make_tree){
   ns <- session$ns
   
-  observe({
-    print("render")
-    output$plot <- renderPlot({ make_tree() + plot.dat$layer1 })
-  })
-  
-  
   observeEvent(input$add_annotation,{
-    # Calculate standard deviation
-    plot.dat$layer1 <- geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd))
+    # add new layer
+    plot.dat$layer1 <<- ggtree::geom_cladelabel(node=28, label = "a clade") 
   })
   
-  
+  observe({
+    #print("render")
+    output$plot <- renderPlot({make_tree() + plot.dat$layer1})
+  })
   
   
   # tip.lab <- reactive({
