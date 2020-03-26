@@ -22,7 +22,9 @@ mod_combineTandG_ui <- function(id){
     tableOutput(ns("selected")),
     tableOutput(ns("selectedIndivs")), #this displays the brushed tips
     actionButton(ns("add_tree"),"Visualize tree"),
-    actionButton(ns("add_annotation"),"Add clade annotation")
+    actionButton(ns("add_annotation"),"Add clade annotation"), 
+    actionButton(ns("exclude_reset"), "Reset")
+    
     
   )
 }
@@ -37,31 +39,41 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   ns <- session$ns
   
   observeEvent(input$add_tree, {
-  #makes the tree plot, uses output from the displayTree module 
-  output$treeDisplay <- renderPlot({
-    make_tree()
-  })})
-  
-  layer <- reactive({
-    # add new layer
-   ggtree::geom_cladelabel(node=28, label = "a clade") 
-  })
-  
-  observeEvent(input$add_annotation, {
-    #print("render")
-    output$treeDisplay <- renderPlot({make_tree() + layer()})
-  })
+    #makes the tree plot, uses output from the displayTree module 
+    output$treeDisplay <- renderPlot({
+      make_tree()
+    })
+  }
+  )
   
   #reactive that holds the brushed points on a plot
   dataWithSelection <- reactive({
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   
+  layer <- reactive({
+    # add new layer
+    ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), c("2015C-3777_fastx5", "2015C-3506_fastx5")) , label = "Clade") 
+  })
+  #unlist(dataWithSelection()==TRUE)
+  
+  #
+  observeEvent(input$add_annotation, {
+    output$treeDisplay <- renderPlot({make_tree() + layer()})
+  })
+  
+  
+  # Remove and reset all annotations
+  observeEvent(input$exclude_reset, {
+    output$treeDisplay <- renderPlot({
+      make_tree()})
+  })
+  
   #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
   output$selected<-renderTable(
     dataWithSelection()$label
     #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
-    )
+  )
   
   #converts the brushed points data into a long data table - displays all possible combinations 
   gandT <-reactive({
@@ -77,7 +89,7 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
       dplyr::pull(value)
   })
   
-  output$selectedIndivs <- renderTable({ #renderTable makes a table of values - can this be accessed 
+  output$selectedIndivs <- renderTable({ #renderTable makes a table of values
     #gandT()
     gandTreduced()
   })
