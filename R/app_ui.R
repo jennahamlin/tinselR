@@ -12,8 +12,8 @@ app_ui <- function() {
                             sidebarPanel(
                               mod_uploadTree_ui("uploadTree_ui_1"),
                               mod_paramsTree_ui("paramsTree_ui_1"),
-                              mod_downloadImage_ui("downloadImage_ui_1")
-                            ),
+                              mod_downloadImage_ui("downloadImage_ui_1"),
+                              width = 3),
                             mainPanel(
                               mod_displayTree_ui("displayTree_ui_1"),
                               mod_combineTandG_ui("combineTandG_ui_1")
@@ -27,7 +27,7 @@ app_ui <- function() {
                               mod_dataInput_ui("dataInput_ui_gene",
                                                tags$div("User GENETIC data",
                                                         tags$br(),
-                                                        "(.csv, .tsv, or .txt file format)"))),
+                                                        "(.csv, .tsv, or .txt file format)")),width = 3),
                             mainPanel(
                               mod_displayTable_ui("displayTable_ui_2")))),
                  tabPanel("Metadata",
@@ -36,7 +36,7 @@ app_ui <- function() {
                               mod_dataInput_ui("dataInput_ui_meta",
                                                tags$div("User META data",
                                                         tags$br(),
-                                                        "(.csv, .tsv, or .txt file format)"))),
+                                                        "(.csv, .tsv, or .txt file format)")),width = 3),
                             mainPanel(
                               mod_displayTable_ui("displayTable_ui_1")))))
     )
