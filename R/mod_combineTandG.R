@@ -18,14 +18,12 @@
 mod_combineTandG_ui <- function(id){
   ns <- NS(id)
   tagList(
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
-    tableOutput(ns("selected")),
-    tableOutput(ns("selectedIndivs")), #this displays the brushed tips
     actionButton(ns("add_tree"),"Visualize tree"),
     actionButton(ns("add_annotation"),"Add clade annotation"), 
-    actionButton(ns("exclude_reset"), "Reset")
-    
-    
+    actionButton(ns("exclude_reset"), "Reset"),
+    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
+    tableOutput(ns("selectedIndivs")),
+    tableOutput(ns("selectedIndivsSNPs")) #this displays the brushed tips
   )
 }
 
@@ -38,8 +36,8 @@ mod_combineTandG_ui <- function(id){
 mod_combineTandG_server <- function(input, output, session, make_tree){
   ns <- session$ns
   
+  #makes the tree plot, uses output from the displayTree module - note to self: do i want this in this module or in the displayTree module
   observeEvent(input$add_tree, {
-    #makes the tree plot, uses output from the displayTree module 
     output$treeDisplay <- renderPlot({
       make_tree()
     })
@@ -51,28 +49,40 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   
+  dataWithSelection2 <- reactive({
+    my_vector = c()
+    for(i in 1:length(dataWithSelection())){my_vector=c(my_vector,i)}
+    return(my_vector)
+})
+  
+  # add new layer using this reactive
   layer <- reactive({
-    # add new layer
-    ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), c("2015C-3777_fastx5", "2015C-3506_fastx5")) , label = "Clade") 
+    
+    ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), dataWithSelection2()), label = "Clade")
+    
+    
+    #for (i in length(dataWithSelection())){ 
+    #ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), c("2015C-3777_fastx5", "2015C-3506_fastx5")) , label = "Clade")
+    #}
   })
   #unlist(dataWithSelection()==TRUE)
   
-  #
+  #add that layer onto the displayed tree
   observeEvent(input$add_annotation, {
     output$treeDisplay <- renderPlot({make_tree() + layer()})
   })
   
-  
-  # Remove and reset all annotations
+  # Remove and reset all annotations - give user the base tree 
   observeEvent(input$exclude_reset, {
     output$treeDisplay <- renderPlot({
       make_tree()})
   })
   
   #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
-  output$selected<-renderTable(
-    dataWithSelection()$label
-    #ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
+  output$selectedIndivs<-renderTable(
+    ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
+    #,
+    #caption="Above are the individuals that you selected. Would you like to annotate?"
   )
   
   #converts the brushed points data into a long data table - displays all possible combinations 
@@ -89,14 +99,13 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
       dplyr::pull(value)
   })
   
-  output$selectedIndivs <- renderTable({ #renderTable makes a table of values
-    #gandT()
+  output$selectedIndivsSNPs <- renderTable({ #renderTable makes a table of values
     gandTreduced()
   })
   
   return(dataWithSelection)
   
-}
+  }
 
 ## To be copied in the UI
 # mod_combineTandG_ui("combineTandG_ui_1")

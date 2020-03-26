@@ -17,6 +17,7 @@ mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
   )
+  
 }
 
 # Module Server
@@ -55,6 +56,13 @@ mod_displayTree_server <- function(input, output, session,
   })
   
   return(make_tree)
+  
+  observeEvent(input$add_tree, {
+    output$treeDisplay <- renderPlot({
+      make_tree()
+    })
+  }
+  )
   
 }
 
