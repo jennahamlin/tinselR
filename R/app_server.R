@@ -19,7 +19,7 @@ app_server <- function(input, output,session) {
   
   callModule(mod_displayTable_server, "displayTable_ui_2", geneFile)
   
-  callModule(mod_combineTandG_server, "combineTandG_ui_1", plot)
+  plot2 <- callModule(mod_combineTandG_server, "combineTandG_ui_1", plot)
   
   #callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1", plot)
 }

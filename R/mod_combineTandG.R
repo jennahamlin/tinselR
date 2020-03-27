@@ -51,21 +51,17 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   
   dataWithSelection2 <- reactive({
     my_vector = c()
-    for(i in 1:length(dataWithSelection())){my_vector=c(my_vector,i)}
+    for(i in 1:length(dataWithSelection()$label))
+      #if (dataWithSelection()$isTip == TRUE){
+        {my_vector=c(my_vector,i)}
+      #}
     return(my_vector)
-})
+  })
   
   # add new layer using this reactive
   layer <- reactive({
-    
     ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), dataWithSelection2()), label = "Clade")
-    
-    
-    #for (i in length(dataWithSelection())){ 
-    #ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), c("2015C-3777_fastx5", "2015C-3506_fastx5")) , label = "Clade")
-    #}
   })
-  #unlist(dataWithSelection()==TRUE)
   
   #add that layer onto the displayed tree
   observeEvent(input$add_annotation, {
@@ -104,8 +100,9 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   })
   
   return(dataWithSelection)
+  return(make_tree)
   
-  }
+}
 
 ## To be copied in the UI
 # mod_combineTandG_ui("combineTandG_ui_1")
