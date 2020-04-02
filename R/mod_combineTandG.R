@@ -49,15 +49,28 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   
-  dataWithSelection2 <- reactive({
-    my_vector = c()
-    for(i in 1:length(dataWithSelection()$label))
-      #if (dataWithSelection()$isTip == TRUE){
-        {my_vector=c(my_vector,i)}
-      #}
-    return(my_vector)
-  })
   
+  z <- NULL 
+  for (i in 1:10) if (i %% 2 == 0) z <- c(z,i)
+  z
+ 
+  dataWithSelection2 <- reactive({
+    z <- c()
+    for (i in 1:length(dataWithSelection()$label)){ if(dataWithSelection()$isTip[i] == TRUE) z <- c(z,dataWithSelection()$label[i])}
+    return(z)
+  })
+   
+  
+#   dataWithSelection2 <- reactive({
+#     my_vector = c()
+# #    if (dataWithSelection()$isTip == TRUE){
+#       for(i in 1:length(dataWithSelection()$label))
+#         ifelse(dataWithSelection()$isTip == TRUE, my_vector=c(my_vector,i),my_vector=c(my_vector) )
+#         #my_vector=c(my_vector,i)
+# #      }
+#     return(my_vector)
+#   })
+#   
   # add new layer using this reactive
   layer <- reactive({
     ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), dataWithSelection2()), label = "Clade")
@@ -100,7 +113,7 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   })
   
   return(dataWithSelection)
-  return(make_tree)
+  #return(make_tree)
   
 }
 
