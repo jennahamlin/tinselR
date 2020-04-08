@@ -49,7 +49,6 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     brushedPoints(make_tree()$data, input$plot_brush)
   })
   
-  
   dataWithSelection2 <- reactive({
     tipVector <- c()
     for (i in 1:length(dataWithSelection()$label)){ if(dataWithSelection()$isTip[i] == TRUE) tipVector <- c(tipVector,dataWithSelection()$label[i])}

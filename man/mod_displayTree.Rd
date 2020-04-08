@@ -14,6 +14,7 @@ mod_displayTree_server(
   treeFile,
   dataFile,
   treeformat,
+  lim,
   align,
   font,
   numscale,

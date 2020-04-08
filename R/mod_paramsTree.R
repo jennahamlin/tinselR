@@ -26,8 +26,8 @@ mod_paramsTree_ui <- function(id){
                          "bold" = "bold", "italic" = "italic", 
                          "bold+italic" = "bold.italic"), selected = "bold"),
     numericInput(ns("numScale"), "Size of the scale bar", value = 0.001),
-    numericInput(ns("nodeDisplay"), "Minimum value of bootstrap", value = 50, max = 100)
-    
+    numericInput(ns("nodeDisplay"), "Minimum value of bootstrap", value = 50, max = 100),
+    numericInput(ns("tipLim"), 'add spacing to plot', value = 0, max = 1)
     
   )
 }
@@ -46,7 +46,8 @@ mod_paramsTree_server <- function(input, output, session){
     treeformat = reactive(input$treeFormat),
     font = reactive(input$fontFormat),
     numscale = reactive(input$numScale),
-    node = reactive(input$nodeDisplay))
+    node = reactive(input$nodeDisplay),
+    lim = reactive(input$tipLim))
 }
 
 ## To be copied in the UI

@@ -27,7 +27,7 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFile, dataFile, treeformat, align, font, numscale, node){
+                                   treeFile, dataFile, treeformat, lim, align, font, numscale, node){
   ns <- session$ns
   
   #convert phylogenetic tree to tibble to join tree and genetic distance matrix
@@ -50,6 +50,7 @@ mod_displayTree_server <- function(input, output, session,
   #major plotting reactive using an S4 object called above (gandTS4)
   make_tree <- reactive({
     ggtree::ggtree(gandTS4(), layout = treeformat())+
+      ggplot2::xlim(NA, lim())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
       ggtree::geom_treescale(width = numscale())+
       ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)

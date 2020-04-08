@@ -7,7 +7,7 @@ app_server <- function(input, output,session) {
   
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_1")
   
-  plot <-callModule(mod_displayTree_server, "displayTree_ui_1", treeDisplay, geneFile, params$treeformat, params$align, params$font, params$numscale, params$node)
+  plot <-callModule(mod_displayTree_server, "displayTree_ui_1", treeDisplay, geneFile, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node)
   
   callModule(mod_downloadImage_server, "downloadImage_ui_1", plot)
   
