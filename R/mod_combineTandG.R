@@ -43,16 +43,17 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     })
   }
   )
-  
+
   #reactive that holds the brushed points on a plot
   dataWithSelection <- reactive({
-    brushedPoints(make_tree()$data, input$plot_brush)
+    rv$selected_tips<-cbind(isolate(rv$selected_tips), brushedPoints(make_tree()$data, input$plot_brush))
+    rv$selected_tips<- isolate(
+      rv$selected_tips[!(duplicated(rv$selected_tips) | 
+                             duplicated(rv$selected_tips, fromLast = TRUE)), ])
   })
-  
-  dataWithSelection2 <- reactive({
-    tipVector <- c()
-    for (i in 1:length(dataWithSelection()$label)){ if(dataWithSelection()$isTip[i] == TRUE) tipVector <- c(tipVector,dataWithSelection()$label[i])}
-    return(tipVector)
+
+  dataWithSelection <- reactive({
+    brushedPoints(make_tree()$data, input$plot_brush)
   })
    
   # add new layer using this reactive
