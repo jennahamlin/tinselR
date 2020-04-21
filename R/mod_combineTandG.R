@@ -39,13 +39,11 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   ns <- session$ns
 
   #makes the tree plot, uses output from the displayTree module - note to self: do i want this in this module or in the displayTree module
-  #observeEvent(input$add_tree, {
     output$treeDisplay <- renderPlot({
       make_tree()
-   # })
   })
   
-  # initialize reactiveValues
+  # initialize reactiveValues to hold brushed tip labels
   rv <- reactiveValues()
   
   observeEvent(input$select_tips,{
@@ -61,7 +59,7 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     str(rv$selected_points)
   })
   
-  #add to label to vector if isTip == True for the brushed tips
+  #add label to vector if isTip == True for the brushed tips, this creates a list to run the findMRCA function 
   dataWithSelection2 <- reactive({
     tipVector <- c()
     for (i in 1:length(rv$selected_points$label)){ if(rv$selected_points$isTip[i] == TRUE) tipVector <- c(tipVector, rv$selected_points$label[i])}
@@ -69,15 +67,26 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   })
   
   # incorporate the tipVector information for adding layer
-  layer <-eventReactive(input$add_annotation,{
+  annotation <-eventReactive(input$add_annotation,{
     ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), dataWithSelection2()), label = "Clade", color = "red")
   })
   
   observeEvent(input$update_tree,{
     output$treeDisplay <- renderPlot({isolate(make_tree() +
-                                                layer())
+                                                annotation())
     })
   })
+  
+  #this reactive value call holds the layers
+  rvLayers <- reactiveValues()
+  
+  observeEvent(input$select_tips, {
+    rvLayers$selected <-rbind(isolate(rvLayers$selected),
+                              a = make_tree()$layers)
+    str(rvLayers$selected)
+  })
+  
+  
 #   #reactive that holds the brushed points on a plot
 #   dataWithSelection <- reactive({
 #     brushedPoints(make_tree()$data, input$plot_brush)
@@ -112,14 +121,14 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
 
   #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
   output$selectedIndivs<-renderTable(
-    ifelse(dataWithSelection()$isTip == TRUE, dataWithSelection()$label, "")
+    ifelse(dataWithSelection2()$isTip == TRUE, dataWithSelection2()$label, "")
     #,
     #caption="Above are the individuals that you selected. Would you like to annotate?"
   )
 
   #converts the brushed points data into a long data table - displays all possible combinations
   gandT <-reactive({
-    dataWithSelection()%>%
+    dataWithSelection2()%>%
       na.omit() %>%
       dplyr::select(-c(parent, node, branch.length, isTip, x, y, branch, angle))%>%
       tidyr::pivot_longer(-label)
@@ -127,7 +136,7 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
 
   gandTreduced <- reactive({
     gandT()%>%
-      dplyr::filter(label == dataWithSelection()$label[1] & name == dataWithSelection()$label[2])%>%
+      dplyr::filter(label == dataWithSelection2()$label[1] & name == dataWithSelection2()$label[2])%>%
       dplyr::pull(value)
   })
 
