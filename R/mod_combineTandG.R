@@ -21,6 +21,8 @@ mod_combineTandG_ui <- function(id){
     #actionButton(ns("add_tree"),"Visualize tree"),
     actionButton(ns("select_tips"),"Select tips"),
     actionButton(ns("add_annotation"),"Add clade annotation"),
+    actionButton(ns("update_tree"),"update tree"),
+    
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
     tableOutput(ns("selectedIndivs")),
     tableOutput(ns("selectedIndivsSNPs")) #this displays the brushed tips
@@ -56,7 +58,6 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     rv$selected_points <- isolate(
       rv$selected_points[!(duplicated(rv$selected_points) | 
                              duplicated(rv$selected_points, fromLast = TRUE)), ])
-    str(make_tree)
     str(rv$selected_points)
   })
   
@@ -68,10 +69,15 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   })
   
   # incorporate the tipVector information for adding layer
-  layer <- reactive({
+  layer <-eventReactive(input$add_annotation,{
     ggtree::geom_cladelabel(node=phytools::findMRCA(ape::as.phylo(make_tree()), dataWithSelection2()), label = "Clade", color = "red")
   })
   
+  observeEvent(input$update_tree,{
+    output$treeDisplay <- renderPlot({isolate(make_tree() +
+                                                layer())
+    })
+  })
 #   #reactive that holds the brushed points on a plot
 #   dataWithSelection <- reactive({
 #     brushedPoints(make_tree()$data, input$plot_brush)
@@ -94,15 +100,15 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
 #   })
 #   
    #add that layer onto the displayed tree
-   observeEvent(input$add_annotation, {
-     output$treeDisplay <- renderPlot({make_tree() + layer()})
-   })
+   #observeEvent(input$add_annotation, {
+  #   output$treeDisplay <- renderPlot({make_tree() + layer()})
+  # })
 
   # Remove and reset all annotations - give user the base tree
-  observeEvent(input$exclude_reset, {
-    output$treeDisplay <- renderPlot({
-      make_tree()})
-  })
+  #observeEvent(input$exclude_reset, {
+  #  output$treeDisplay <- renderPlot({
+  #    make_tree()})
+  #})
 
   #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
   output$selectedIndivs<-renderTable(
