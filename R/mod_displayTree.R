@@ -58,12 +58,12 @@ mod_displayTree_server <- function(input, output, session,
   
   return(make_tree)
   
-  observeEvent(input$add_tree, {
-    output$treeDisplay <- renderPlot({
-      make_tree()
-    })
-  }
-  )
+  # observeEvent(input$add_tree, {
+  #   output$treeDisplay <- renderPlot({
+  #     make_tree()
+  #   })
+  # }
+  # )
   
 }
 
