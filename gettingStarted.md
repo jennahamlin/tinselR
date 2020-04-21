@@ -3,9 +3,9 @@
 **2** files are required (phylogenetic tree and genetic distance) and **1** is optional (metadata).
 
 Along the navigation pane (above), are three tabs for uploading data: 
-* Phylogenetic Tree - required; a newick generate tree 
-* Genetic Distance data - required; a tsv/txt/csv file
-* Metadata - optional; a tsv/txt/csv file 
+* **Phylogenetic Tree** - required; a newick generate tree 
+* **Genetic Distance data** - required; a tsv/txt/csv file
+* **Metadata** - optional; a tsv/txt/csv file 
 
 
 <u>Please navigate to each tab to upload your data.</u>   
