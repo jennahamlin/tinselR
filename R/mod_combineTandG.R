@@ -76,25 +76,24 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   #add one layer
   p <-reactive({make_tree() + annotation()})
   
+  
   #grab layer info
   rvLayers <- reactiveValues()
   
   observeEvent(input$add_annotation, {
-    rvLayers$selected <-p()$layers
+    rvLayers$selected <- rbind(isolate(rvLayers$selected),
+                               p()$layers)
     print(rvLayers$selected)
   })
   
   q <-reactive({
-    p() + annotation()
+    p() + (rvLayers$selected)
   })
   
-  r <-reactive({
-    q() + (rvLayers$selected)
+  observeEvent(input$update_tree, {
+    output$treeDisplay <- renderPlot({q()})
   })
   
-  observeEvent(input$update_tree,{
-    output$treeDisplay <- renderPlot({r()})
-  })
   
   #   #reactive that holds the brushed points on a plot
   #   dataWithSelection <- reactive({
