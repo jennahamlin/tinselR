@@ -20,7 +20,7 @@ mod_combineTandG_ui <- function(id){
   tagList(
     actionButton(ns("add_tree"),"Visualize tree"),
     actionButton(ns("select_tips"),"Select tips"),
-    actionButton(ns("update_tree"),"Update tree"),
+    #actionButton(ns("update_tree"),"Update tree"),
     
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
     tableOutput(ns("selectedIndivs")),
@@ -74,18 +74,16 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   #add one layer
   p <-reactive({make_tree() + annotation()})
   
-  
   #grab layer info
   rvLayers <- reactiveValues()
   
-  observeEvent(input$update_tree, {
-    rvLayers$selected <- rbind(isolate(rvLayers$selected),
-                               p()$layers)
+  test <- eventReactive(input$select_tips, {
+    rvLayers$selected <- (rbind(isolate(rvLayers$selected), p()$layers))
     print(rvLayers$selected)
   })
   
-  observeEvent(input$update_tree, {
-    output$treeDisplay <- renderPlot({p() + (rvLayers$selected)})
+  observeEvent(input$select_tips, {
+    output$treeDisplay <- renderPlot({p() + test()[, -c(1,3)]})
   })
   
   
