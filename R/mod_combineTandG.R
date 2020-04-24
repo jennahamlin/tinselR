@@ -20,8 +20,7 @@ mod_combineTandG_ui <- function(id){
   tagList(
     actionButton(ns("add_tree"),"Visualize tree"),
     actionButton(ns("select_tips"),"Select tips"),
-    actionButton(ns("add_annotation"),"Add clade annotation"),
-    actionButton(ns("update_tree"),"update tree"),
+    actionButton(ns("update_tree"),"Update tree"),
     
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
     tableOutput(ns("selectedIndivs")),
@@ -40,8 +39,7 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   
   #makes the tree plot, uses output from the displayTree module - note to self: do i want this in this module or in the displayTree module
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
-    make_tree()
-  })
+    make_tree()})
   })
   
   # initialize reactiveValues to hold brushed tips 
@@ -80,18 +78,14 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   #grab layer info
   rvLayers <- reactiveValues()
   
-  observeEvent(input$add_annotation, {
+  observeEvent(input$update_tree, {
     rvLayers$selected <- rbind(isolate(rvLayers$selected),
                                p()$layers)
     print(rvLayers$selected)
   })
   
-  q <-reactive({
-    p() + (rvLayers$selected)
-  })
-  
   observeEvent(input$update_tree, {
-    output$treeDisplay <- renderPlot({q()})
+    output$treeDisplay <- renderPlot({p() + (rvLayers$selected)})
   })
   
   
