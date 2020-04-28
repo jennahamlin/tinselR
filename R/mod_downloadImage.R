@@ -32,7 +32,7 @@ mod_downloadImage_ui <- function(id, label){
 #' @export
 #' @keywords internal
 
-mod_downloadImage_server <- function(input, output, session, treeFile){
+mod_downloadImage_server <- function(input, output, session, plt){
   ns <- session$ns
   
   output$download <- downloadHandler(
@@ -40,7 +40,7 @@ mod_downloadImage_server <- function(input, output, session, treeFile){
       paste("treePlot", '.', Sys.Date(), '.', input$device, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
     
     content = function(file) {
-      ggplot2::ggsave(file, treeFile(), width = input$width, height = input$height)}
+      ggplot2::ggsave(file, plt(), width = input$width, height = input$height)}
   )
 }
 

@@ -20,6 +20,7 @@ mod_combineTandG_ui <- function(id){
   tagList(
     actionButton(ns("add_tree"),"Visualize tree"),
     actionButton(ns("select_tips"),"Select tips"),
+    actionButton(ns("update_tree"),"Update tree"),
     actionButton(ns("add_annotation"),"Add clade annotation"),
     
     
@@ -52,20 +53,20 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   n_annotations <- reactiveVal(0)
   annotations <- reactiveValues()
 
-  #brush and select by pushing the select tips button; this will add brushed tips to rv$selected_points
-  observeEvent(input$select_tips,{
-    rv$selected_points <- NULL
-    # add clicked
-    rv$selected_points <- rbind(isolate(rv$selected_points),
-                                brushedPoints(make_tree()$data, input$plot_brush))
-    str(rv$selected_points)
+  #reactive that holds the brushed points on a plot
+  dataWithSelection <- reactive({
+    brushedPoints(make_tree()$data, input$plot_brush)
   })
-
-  #add tip label to reactive vector if isTip == True for the brushed tips
-  dataWithSelection2 <- reactive({
+  
+  #add to label to vector if isTip == True
+  dataWithSelection2 <- eventReactive(input$plot_brush, {
     tipVector <- c()
-    for (i in 1:length(rv$selected_points$label)){ if(rv$selected_points$isTip[i] == TRUE) tipVector <- c(tipVector, rv$selected_points$label[i])}
-    return(tipVector)
+    for (i in 1:length(dataWithSelection()$label)) {
+      if (dataWithSelection()$isTip[i] == TRUE)
+        tipVector <- c(tipVector, dataWithSelection()$label[i])
+    }
+    
+    tipVector
   })
 
   make_layer <- function(tree, tips, label, color) {
@@ -98,6 +99,11 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   
   output$treeDisplay2 <- renderPlot({
     anno_plot()
+  })
+  
+  observeEvent(input$update_tree, {
+    output$treeDisplay2 <- renderPlot({make_tree()
+    })
   })
   
   # # incorporate the tipVector information for adding layer placed where dataWithSelection2 is as
