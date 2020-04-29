@@ -47,8 +47,6 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
     make_tree()})
   })
 
-  # initialize reactiveValues to hold brushed tips
-  rv <- reactiveValues()
   # Initialize a reactive value and set to zero
   n_annotations <- reactiveVal(0)
   annotations <- reactiveValues()
