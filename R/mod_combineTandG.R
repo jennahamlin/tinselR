@@ -43,13 +43,8 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
     make_tree()})
   })
-<<<<<<< HEAD
-  
-  # Initialize a reactive values and set to zero one for counting and one for adding the annotation
-=======
 
   # Initialize a reactive value and set to zero
->>>>>>> 13d0bd1d1bbae398d0b41cb91af7f1338170f51f
   n_annotations <- reactiveVal(0)
   annotations <- reactiveValues()
   
