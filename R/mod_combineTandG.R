@@ -21,12 +21,6 @@ mod_combineTandG_ui <- function(id){
     actionButton(ns("add_tree"),"Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
     actionButton(ns("tree_reset"),"Remove All Annotations on Tree"),
-    selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
-    numericInput(ns("width"), "Width of Image (inches)", value = 6),
-    numericInput(ns("height"), "Height of Images (inches)", value = 8),
-    downloadButton(ns("download")),
-    
-    
     
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
     
@@ -114,14 +108,7 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   
   treeWLayers <- reactive ({make_tree() + anno_plot()})
   
-  output$download <- downloadHandler(
-    filename = function() {
-      paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
-    
-    content = function(file) {
-      ggplot2::ggsave(file, treeWLayers(), width = input$width, height = input$height)}
-  )
-  
+ 
   # #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
   # output$selectedIndivs<-renderTable(
   #   ifelse(dataWithSelection2()$isTip == TRUE, dataWithSelection2()$label, "")

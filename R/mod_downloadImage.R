@@ -29,10 +29,10 @@ mod_downloadImage_ui <- function(id, label){
 #' @export
 #' @keywords internal
 
-mod_downloadImage_server <- function(input, output, session, make_tree, plt){
+mod_downloadImage_server <- function(input, output, session, treeWLayers){
   ns <- session$ns
   
-  treeWLayers <- reactive ({make_tree() + anno_plot()})
+  #treeWLayers <- reactive ({make_tree() + anno_plot()})
   
   output$download <- downloadHandler(
     filename = function() {

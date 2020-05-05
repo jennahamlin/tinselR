@@ -17,9 +17,9 @@ app_server <- function(input, output,session) {
   
   callModule(mod_displayTable_server, "displayTable_ui_2", geneFile)
   
-  callModule(mod_combineTandG_server, "combineTandG_ui_1", plot)
+  treeWLayers <- callModule(mod_combineTandG_server, "combineTandG_ui_1", plot)
   
-  #callModule(mod_downloadImage_server, "downloadImage_ui_1", plot)
+  callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
   
   
 }
