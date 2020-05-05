@@ -16,13 +16,10 @@
 mod_downloadImage_ui <- function(id, label){
   ns <- NS(id)
   tagList(
-    selectInput(ns("device"), label = "Type", choices = c("png", "pdf", "tiff")),
+    selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
     numericInput(ns("width"), "Width of Image (inches)", value = 6),
     numericInput(ns("height"), "Height of Images (inches)", value = 8),
     downloadButton(ns("download"))
-    #,
-    #tableOutput(ns("selectedIndivs"))
-    
   )
 }
 
@@ -32,15 +29,17 @@ mod_downloadImage_ui <- function(id, label){
 #' @export
 #' @keywords internal
 
-mod_downloadImage_server <- function(input, output, session, plt){
+mod_downloadImage_server <- function(input, output, session, make_tree, plt){
   ns <- session$ns
+  
+  treeWLayers <- reactive ({make_tree() + anno_plot()})
   
   output$download <- downloadHandler(
     filename = function() {
-      paste("treePlot", '.', Sys.Date(), '.', input$device, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
+      paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
     
     content = function(file) {
-      ggplot2::ggsave(file, plt(), width = input$width, height = input$height)}
+      ggplot2::ggsave(file, treeWLayers(), width = input$width, height = input$height)}
   )
 }
 

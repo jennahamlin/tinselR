@@ -9,8 +9,6 @@ app_server <- function(input, output,session) {
   
   plot <-callModule(mod_displayTree_server, "displayTree_ui_1", treeDisplay, geneFile, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node)
   
-  callModule(mod_downloadImage_server, "downloadImage_ui_1", plot)
-  
   metafile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
   
   callModule(mod_displayTable_server, "displayTable_ui_1", metafile)
@@ -20,6 +18,9 @@ app_server <- function(input, output,session) {
   callModule(mod_displayTable_server, "displayTable_ui_2", geneFile)
   
   callModule(mod_combineTandG_server, "combineTandG_ui_1", plot)
+  
+  #callModule(mod_downloadImage_server, "downloadImage_ui_1", plot)
+  
   
 }
 

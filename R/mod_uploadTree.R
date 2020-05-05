@@ -41,7 +41,7 @@ mod_uploadTree_server <- function(input, output, session){
       return(phytools::midpoint.root(treeFile()))
     }
     else {
-      return(treeFile())
+      return(treeFile)
     }
   })
 }
