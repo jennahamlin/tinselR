@@ -20,7 +20,7 @@ mod_combineTandG_ui <- function(id){
   tagList(
     actionButton(ns("add_tree"),"Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
-    actionButton(ns("tree_reset"),"Reset to Base Tree"),
+    actionButton(ns("tree_reset"),"Remove All Annotations on Tree"),
     
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
     
@@ -64,11 +64,12 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
   })
   
   #function which is the layer
-  make_layer <- function(tree, tips, label, color) {
+  make_layer <- function(tree, tips, label, color, offset ) {
     ggtree::geom_cladelabel(
       node = phytools::findMRCA(ape::as.phylo(tree), tips),
       label = label,
-      color = color
+      color = color, 
+      offset = min(tree_plot$data$x) + 0.04
     )
   }
   
@@ -86,7 +87,8 @@ mod_combineTandG_server <- function(input, output, session, make_tree){
           make_tree(),
           tips = annotations[[paste0("ann", i)]],
           label = paste("Clade", "\nSNP Differences"),
-          color = "red"
+          color = "red", 
+          offset = tip_vector[[make_layer]]
         ))
     return(plt)
   })
