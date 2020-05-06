@@ -17,7 +17,6 @@ golem::add_module(name="displayTable")
 golem::add_module(name="combineTandG")
 
 golem::add_module(name="downloadImage")
-golem::add_module(name = "cladeFindr")
 golem::add_module(name = "cladeAnnotator")
 
 

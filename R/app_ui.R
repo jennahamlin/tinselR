@@ -16,9 +16,7 @@ app_ui <- function() {
                               width = 3),
                             mainPanel(
                               mod_displayTree_ui("displayTree_ui_1"),
-                              mod_combineTandG_ui("combineTandG_ui_1")
-                              #,
-                              #mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
                               )
                           )),
                  tabPanel("Genetic Distance",

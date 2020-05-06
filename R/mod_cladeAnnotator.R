@@ -1,0 +1,107 @@
+#' cladeAnnotator UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd 
+#'
+#' @importFrom shiny NS tagList 
+mod_cladeAnnotator_ui <- function(id){
+  ns <- NS(id)
+  tagList(
+    actionButton(ns("add_tree"),"Visualize Tree"),
+    actionButton(ns("add_annotation"),"Add Annotation to Tree"),
+    actionButton(ns("tree_reset"),"Remove All Annotations on Tree"),
+    
+    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
+    
+    tableOutput(ns("selectedIndivs")),
+    tableOutput(ns("selectedIndivsSNPs")) #this displays the brushed tips
+  )
+}
+    
+#' cladeAnnotator Server Function
+#'
+#' @noRd 
+mod_cladeAnnotator_server <- function(input, output, session, make_tree){
+  ns <- session$ns
+ 
+  #displays the tree plot, uses output from the displayTree module 
+  observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
+    make_tree()})
+  })
+  
+  # Initialize a reactive value and set to zero for annotations
+  n_annotations <- reactiveVal(0)
+  annotations <- reactiveValues()
+  
+  #reactive that holds the brushed points on a plot
+  dataWithSelection <- reactive({
+    brushedPoints(make_tree()$data, input$plot_brush)
+  })
+  
+  #add to label to vector if isTip == True this is necessary to exclude the NA in the tip vector
+  dataWithSelection2 <- eventReactive(input$plot_brush, {
+    tipVector <- c()
+    for (i in 1:length(dataWithSelection()$label)) {
+      if (dataWithSelection()$isTip[i] == TRUE)
+        tipVector <- c(tipVector, dataWithSelection()$label[i])
+    }
+    return(tipVector)
+  })
+  
+  #function which makes the annotation layer(s)
+  make_layer <- function(tree, tips, label, color, offset ) {
+    ggtree::geom_cladelabel(
+      node = phytools::findMRCA(ape::as.phylo(tree), tips),
+      label = label,
+      color = color, 
+      offset = max(tree_plot$data$x) - 0.002
+    )
+  }
+  
+  #display that layer onto the tree
+  anno_plot <- eventReactive(input$add_annotation, {
+    # update the reactive value as a count
+    new <- n_annotations() + 1
+    n_annotations(new)
+    #add the tip vector (aka label) to the annotation reactive value
+    annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+    
+    #list apply over the make_layer function to add the annotation
+    plt <-
+      lapply(1:n_annotations(), function(i)
+        make_layer(
+          make_tree(),
+          tips = annotations[[paste0("ann", i)]],
+          label = paste("Clade", "\nSNP Differences"),
+          color = "red", 
+          offset = tip_vector[[i]] #can be make_layer
+        ))
+    return(plt)
+  })
+  
+  #add the annotations when selection is brushed
+  observeEvent(input$add_annotation,{
+    output$treeDisplay <- renderPlot({
+      make_tree() + anno_plot()
+    })
+  })
+  
+  #Remove and reset all annotations - give user the base tree
+  observeEvent(input$tree_reset, {
+    output$treeDisplay <- renderPlot({
+      make_tree()})
+  })
+  
+  #reactive to send to downloadImage module 
+  treeWLayers <- reactive ({make_tree() + anno_plot()})
+}
+    
+## To be copied in the UI
+# mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
+    
+## To be copied in the server
+# callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1")
+ 

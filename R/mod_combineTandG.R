@@ -18,12 +18,6 @@
 mod_combineTandG_ui <- function(id){
   ns <- NS(id)
   tagList(
-    actionButton(ns("add_tree"),"Visualize Tree"),
-    actionButton(ns("add_annotation"),"Add Annotation to Tree"),
-    actionButton(ns("tree_reset"),"Remove All Annotations on Tree"),
-    
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
-    
     tableOutput(ns("selectedIndivs")),
     tableOutput(ns("selectedIndivsSNPs")) #this displays the brushed tips
   )
@@ -35,79 +29,8 @@ mod_combineTandG_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_combineTandG_server <- function(input, output, session, make_tree){
+mod_combineTandG_server <- function(input, output, session){
   ns <- session$ns
-  
-  
-  #makes the tree plot, uses output from the displayTree module - note to self: do i want this in this module or in the displayTree module
-  observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
-    make_tree()})
-  })
-
-  # Initialize a reactive value and set to zero
-  n_annotations <- reactiveVal(0)
-  annotations <- reactiveValues()
-  
-  #reactive that holds the brushed points on a plot
-  dataWithSelection <- reactive({
-    brushedPoints(make_tree()$data, input$plot_brush)
-  })
-  
-  #add to label to vector if isTip == True this is necessary to exclude the NA in the tip vector
-  dataWithSelection2 <- eventReactive(input$plot_brush, {
-    tipVector <- c()
-    for (i in 1:length(dataWithSelection()$label)) {
-      if (dataWithSelection()$isTip[i] == TRUE)
-        tipVector <- c(tipVector, dataWithSelection()$label[i])
-    }
-    return(tipVector)
-  })
-  
-  #function which is the layer
-  make_layer <- function(tree, tips, label, color, offset ) {
-    ggtree::geom_cladelabel(
-      node = phytools::findMRCA(ape::as.phylo(tree), tips),
-      label = label,
-      color = color, 
-      offset = max(tree_plot$data$x) - 0.002
-    )
-  }
-  
-  #display that layer onto the tree
-  anno_plot <- eventReactive(input$add_annotation, {
-    # update the reactive value
-    new <- n_annotations() + 1
-    n_annotations(new)
-    annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-    
-    plt <-
-      #make_tree() +
-      lapply(1:n_annotations(), function(i)
-        make_layer(
-          make_tree(),
-          tips = annotations[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP Differences"),
-          color = "red", 
-          offset = tip_vector[[make_layer]]
-        ))
-    return(plt)
-  })
-  
-  observeEvent(input$add_annotation,{
-    output$treeDisplay <- renderPlot({
-      make_tree() + anno_plot()
-    })
-  })
-  
-  #Remove and reset all annotations - give user the base tree
-  observeEvent(input$tree_reset, {
-    output$treeDisplay <- renderPlot({
-      make_tree()})
-  })
-  
-  
-  treeWLayers <- reactive ({make_tree() + anno_plot()})
-  
  
   # #displays the output from brushed points - makeplot is of class "ggtree" "gg" and "ggplot"
   # output$selectedIndivs<-renderTable(
