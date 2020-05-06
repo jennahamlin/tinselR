@@ -14,10 +14,7 @@ mod_cladeAnnotator_ui <- function(id){
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
     actionButton(ns("tree_reset"),"Remove All Annotations on Tree"),
     
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
-    
-    tableOutput(ns("selectedIndivs")),
-    tableOutput(ns("selectedIndivsSNPs")) #this displays the brushed tips
+    plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
   )
 }
     
@@ -57,7 +54,7 @@ mod_cladeAnnotator_server <- function(input, output, session, make_tree){
       node = phytools::findMRCA(ape::as.phylo(tree), tips),
       label = label,
       color = color, 
-      offset = max(tree_plot$data$x) - 0.002
+      offset = max(make_tree()$data$x) - 0.002
     )
   }
   
