@@ -10,6 +10,7 @@
 mod_cladeAnnotator_ui <- function(id){
   ns <- NS(id)
   tagList(
+    shinyjs::useShinyjs(),
     actionButton(ns("add_tree"),"Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
     actionButton(ns("tree_reset"),"Remove All Annotations on Tree"),
@@ -89,10 +90,11 @@ mod_cladeAnnotator_server <- function(input, output, session, make_tree){
   #Remove and reset all annotations - give user the base tree
   observeEvent(input$tree_reset, {
     output$treeDisplay <- renderPlot({
+      shinyjs::reset("add_annotation")
       make_tree()})
   })
   
-  #reactive to send to downloadImage module 
+  #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_tree() + anno_plot()})
 }
     

@@ -30,6 +30,15 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
 mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
   
+  # Create your own reactive values that you can modify because input is read only 
+  rv <- reactiveValues() 
+  
+  # Do something when input$file1 changes 
+  # * set rv$file1, remove rv$file2
+  observeEvent(input$treefile, {
+    rv$treefile=input$treefile
+  })
+  
   treeFile <- reactive({
     validate(need(input$treefile !="", "Please import tree file"))
     req(input$treefile)
@@ -44,6 +53,9 @@ mod_uploadTree_server <- function(input, output, session){
       return(treeFile)
     }
   })
+  
+ 
+  
 }
 
 ## To be copied in the UI

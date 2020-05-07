@@ -7,31 +7,34 @@
 
 ## 2.1 Add modules
 ## 
+#trees
 golem::add_module(name="uploadTree")
 golem::add_module(name = "paramsTree")
 golem::add_module(name = "DisplayTree")
+golem::add_module(name = "cladeAnnotator")
 
+#meta and genetic data
 golem::add_module(name = "dataInput") # Name of the module
 golem::add_module(name="displayTable")
 
-golem::add_module(name="combineTandG")
-
+#donwload image
 golem::add_module(name="downloadImage")
-golem::add_module(name = "cladeAnnotator")
+
+
+golem::add_module(name="combineTandG")
 
 
 ## 2.2 Add dependencies
 
 usethis::use_package("utils")
-usethis::use_package("markdown")
-usethis::use_package( "dplyr" ) # To call each time you need a new package
+usethis::use_package("markdown") # for the documentation page
+usethis::use_package( "dplyr" ) # for manipulating input files 
 usethis::use_package("assertthat")
-usethis::use_package("phytools")
-usethis::use_package("purrr")
-usethis::use_package("dplyr")
-usethis::use_package("magrittr")
-usethis::use_package("ggtree")
-usethis::use_package("readr")
+usethis::use_package("phytools") # for the find MRCA function
+usethis::use_package("magrittr") # for %>% essentially a pipe
+usethis::use_package("ggtree") # for tree viz
+usethis::use_package("readr") # for reading in files
+usethis::use_package("shinyjs") 
 
 ## 2.3 Add tests
 
