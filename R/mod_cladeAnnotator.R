@@ -88,13 +88,15 @@ mod_cladeAnnotator_server <- function(input, output, session, make_tree){
   })
   
   
-  #display that layer onto the tree
+  #remove a reactive annotation one by one
+  #note to self - must have something be brushed 
   anno_plot_undo <- eventReactive(input$tree_reset, {
-    # update the reactive value as a count
+    # update the reactive value as a count of - 1
+    
     new <- n_annotations() - 1
     n_annotations(new)
     #add the tip vector (aka label) to the annotation reactive value
-    annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+    #annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
     #list apply over the make_layer function to add the annotation
     plt <-
@@ -110,7 +112,7 @@ mod_cladeAnnotator_server <- function(input, output, session, make_tree){
   })
   
   
-  #add the annotations when selection is brushed
+  #remove the annotations 
   observeEvent(input$tree_reset,{
     output$treeDisplay <- renderPlot({
       make_tree() + anno_plot_undo()
