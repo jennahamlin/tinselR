@@ -55,7 +55,7 @@ mod_cladeAnnotator_server <- function(input, output, session, make_tree){
       node = phytools::findMRCA(ape::as.phylo(tree), tips),
       label = label,
       color = color, 
-      offset = max(make_tree()$data$x) - 0.002
+      offset = max(make_tree()$data$x)
     )
   }
   
@@ -87,12 +87,43 @@ mod_cladeAnnotator_server <- function(input, output, session, make_tree){
     })
   })
   
-  #Remove and reset all annotations - give user the base tree
-  observeEvent(input$tree_reset, {
-    output$treeDisplay <- renderPlot({
-      shinyjs::reset("add_annotation")
-      make_tree()})
+  
+  #display that layer onto the tree
+  anno_plot_undo <- eventReactive(input$tree_reset, {
+    # update the reactive value as a count
+    new <- n_annotations() - 1
+    n_annotations(new)
+    #add the tip vector (aka label) to the annotation reactive value
+    annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+    
+    #list apply over the make_layer function to add the annotation
+    plt <-
+      lapply(1:n_annotations(), function(i)
+        make_layer(
+          make_tree(),
+          tips = annotations[[paste0("ann", i)]],
+          label = paste("Clade", "\nSNP Differences"),
+          color = "red", 
+          offset = tip_vector[[i]] #can be make_layer
+        ))
+    return(plt)
   })
+  
+  
+  #add the annotations when selection is brushed
+  observeEvent(input$tree_reset,{
+    output$treeDisplay <- renderPlot({
+      make_tree() + anno_plot_undo()
+    })
+  })
+  
+  # #Remove and reset all annotations - give user the base tree
+  # observeEvent(input$tree_reset, {
+  #   output$treeDisplay <- renderPlot({
+  #     #shinyjs::reset("add_annotation")
+  #     make_tree() 
+  #     })
+  # })
   
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_tree() + anno_plot()})
