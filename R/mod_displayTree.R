@@ -66,9 +66,8 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
   
-  #return(make_tree)
-  
-  
+
+  #return these reactive objects to be used in cladeAnnotator module 
   return(
     list(
       geneObjectOut = reactive(geneObject()),

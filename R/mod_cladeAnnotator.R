@@ -27,13 +27,14 @@ mod_cladeAnnotator_server <- function(input, output, session, make_treeOut, gene
   ns <- session$ns
  
 
-  # #convert to long data frame - three columns
+  # #convert to long data frame - three columns. This takes as input the genetic distance object from display tree module 
    geneFile <-  reactive({
      geneObjectOut()%>%
      na.omit()%>%
      tidyr::pivot_longer(-label)
    })
    
+   #remove self comparisons for this table - necessary for snp mean/median calculation. 
    geneFileCheck <- reactive({
      geneFile()[which(geneFile()$label != geneFile()$name),]
    })
