@@ -35,15 +35,16 @@ mod_displayTree_server <- function(input, output, session,
     tibble::as_tibble(treeFile()) 
   }) 
   
+  
   #change column1, row1 to the id of label and replace - with a 0 within the file
-  combTandG <- reactive({
+  geneObject <- reactive({
     dplyr::rename(dataFile(), label = 1)%>%  
       replace(., .=="-", 0) 
   })
   
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
-    dplyr::full_join(treeObject(), combTandG(), by = "label")%>% 
+    dplyr::full_join(treeObject(), geneObject(), by = "label")%>% 
       treeio::as.treedata() 
   })
   
@@ -65,7 +66,15 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
   
-  return(make_tree)
+  #return(make_tree)
+  
+  
+  return(
+    list(
+      geneObjectOut = reactive(geneObject()),
+      make_treeOut = reactive(make_tree())
+      ))
+  
 }
 
 ## To be copied in the UI
