@@ -10,7 +10,6 @@
 mod_cladeAnnotator_ui <- function(id){
   ns <- NS(id)
   tagList(
-    shinyjs::useShinyjs(),
     actionButton(ns("add_tree"),"Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
     actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
@@ -92,39 +91,31 @@ mod_cladeAnnotator_server <- function(input, output, session, make_treeOut, gene
     }
     return(as.numeric(snpVector))
   }
-
-    snpMean <- eventReactive(input$add_annotation, {
-                             lapply(1:n_annotations(), function(i)
+  
+  snpMean <- eventReactive(input$add_annotation, {
+    lapply(1:n_annotations(), function(i)
       snp_anno(geneFile = geneFileSNP(),
                tips = dataWithSelection2()[[i]]))
-                 #annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()))
 
-    })
-   
+  })
+  
   #display that layer onto the tree
   anno_plot <- eventReactive(input$add_annotation, {
+    
     # update the reactive value as a count
     new <- n_annotations() + 1
     n_annotations(new)
+    
     #add the tip vector (aka label) to the annotation reactive value
     annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-    #str(annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2())
     
-
-    # snpMean <-
-    #   lapply(1:n_annotations(), function(i)
-    #     snp_anno(geneFile = geneFileSNP(),
-    #              tips =  dataWithSelection2()[[i]]
-    #                #annotations[[paste0("ann", i)]]
-    #                ))
-
     #list apply over the make_layer function to add the annotation
     plt <-
       lapply(1:n_annotations(), function(i)
         make_layer(
           make_treeOut(),
           tips = annotations[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP Differences", lapply(snpMean()[i], mean)),
+          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
           color = "red", 
           offset = tipVector[[i]] #can be make_layer
         ))
