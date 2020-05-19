@@ -59,24 +59,23 @@ mod_dataInput_server <- function(input, output, session) {
     input$id
   })    
   
-  #now uses readr package and read_delim function; as this makes it easier to work with. 
-  dataFile <- reactive({
-    readr::read_delim(userFile()$datapath,
-                      delim = input$sep,
-                      trim_ws = T, 
-                      skip_empty_rows = T,
-                      col_names = T)
-  })
   
-  headfile <- reactive({
-    if(input$disp == "head") {
-      return(head(dataFile()))
-    }
-    else {
-      return(dataFile())
-    }
-  })
+  dataFile <- reactive({readr::read_delim(userFile()$datapath,
+                                          delim = input$sep,
+                                          trim_ws = T,
+                                          skip_empty_rows = T,
+                                          col_names = T)})
+  return(dataFile)
   
+  # headfile <- reactive({
+  #   if(input$disp == "head") {
+  #     return(head(dataFile()))
+  #   }
+  #   else {
+  #     return(dataFile())
+  #   }
+  # })
+  # 
 }
 
 ## To be copied in the UI

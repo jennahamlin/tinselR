@@ -35,7 +35,6 @@ mod_displayTree_server <- function(input, output, session,
     tibble::as_tibble(treeFile()) 
   }) 
   
-  
   #change column1, row1 to the id of label and replace - with a 0 within the file
   geneObject <- reactive({
     dplyr::rename(dataFile(), label = 1)%>%  
