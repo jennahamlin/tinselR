@@ -12,10 +12,11 @@ mod_cladeAnnotator_ui <- function(id){
   tagList(
     actionButton(ns("add_tree"),"Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
-    #actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
+    actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
     
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush")),
-    tableOutput(ns("contents"))
+    plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
+    #,
+    #tableOutput(ns("contents"))
   )
 }
 
@@ -25,15 +26,9 @@ mod_cladeAnnotator_ui <- function(id){
 mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, make_treeOut){
   ns <- session$ns
   
-  # #change column1, row1 to the id of label and replace - with a 0 within the file
-  # geneObject <- reactive({
-  #   dplyr::rename(geneObjectOut(), label = 1)%>%  
-  #     replace(., .=="-", 0) 
-  # })
-  
-  output$contents <- renderTable({
-    class(geneObjectOut())
-  })
+  # output$contents <- renderTable({
+  #   class(geneObjectOut())
+  #})
   
   # #convert to long data frame - three columns. This takes as input the genetic distance object from display tree module
   geneFile <-reactive({ 
@@ -121,7 +116,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         make_layer(
           make_treeOut(),
           tips = annotations[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
+          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),  
           color = "red"
         ))
     return(plt)
@@ -133,42 +128,33 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       make_treeOut() + anno_plot()
     })
   })
-  # 
-  # #remove a reactive annotation one by one
-  # #note to self - must have something be brushed 
-  # anno_plot_undo <- eventReactive(input$tree_reset, {
-  #   # update the reactive value as a count of - 1
-  #   
-  #   new <- n_annotations() - 1
-  #   n_annotations(new)
-  #   
-  #   #list apply over the make_layer function to add the annotation
-  #   plt <-
-  #     lapply(1:n_annotations(), function(i)
-  #       make_layer(
-  #         make_treeOut(),
-  #         tips = annotations[[paste0("ann", i)]],
-  #         label = paste("Clade", "\nSNP Differences"),
-  #         color = "red", 
-  #         offset = tip_vector[[i]] #can be make_layer
-  #       ))
-  #   return(plt)
-  # })
-  # 
-  # #remove the annotations 
-  # observeEvent(input$tree_reset,{
-  #   output$treeDisplay <- renderPlot({
-  #     make_treeOut() + anno_plot_undo()
-  #   })
-  # })
-  # 
-  # #Remove and reset all annotations - give user the base tree
-  # observeEvent(input$tree_reset, {
-  #   output$treeDisplay <- renderPlot({
-  #     #shinyjs::reset("add_annotation")
-  #     make_treeOut() 
-  #     })
-  # })
+   
+  #remove a reactive annotation one by one
+  #note to self - must have something be brushed
+  anno_plot_undo <- eventReactive(input$tree_reset, {
+    # update the reactive value as a count of - 1
+
+    new <- n_annotations() - 1
+    n_annotations(new)
+
+    #list apply over the make_layer function to add the annotation
+    plt <-
+      lapply(1:n_annotations(), function(i)
+        make_layer(
+          make_treeOut(),
+          tips = annotations[[paste0("ann", i)]],
+          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
+          color = "red"
+        ))
+    return(plt)
+  })
+
+  #remove the annotations
+  observeEvent(input$tree_reset,{
+    output$treeDisplay <- renderPlot({
+      make_treeOut() + anno_plot_undo()
+    })
+  })
   
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_treeOut() + anno_plot()})
