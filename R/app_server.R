@@ -10,11 +10,11 @@ app_server <- function(input, output,session) {
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_1")
   
   #displays the tree and uses the params as input to change tree viz
-  plot <-callModule(mod_displayTree_server, "displayTree_ui_1", treeDisplay, geneFile, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node)
+  plot <-callModule(mod_displayTree_server, "displayTree_ui_1", metaFile, treeDisplay, geneFile, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node)
   
-  metafile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
+  metaFile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
   
-  callModule(mod_displayTable_server, "displayTable_ui_1", metafile)
+  callModule(mod_displayTable_server, "displayTable_ui_1", metaFile)
   
   geneFile <- callModule(mod_dataInput_server, "dataInput_ui_gene")
   

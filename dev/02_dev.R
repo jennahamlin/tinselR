@@ -34,7 +34,7 @@ usethis::use_package("phytools") # for the find MRCA function
 usethis::use_package("magrittr") # for %>% essentially a pipe
 usethis::use_package("ggtree") # for tree viz
 usethis::use_package("readr") # for reading in files
-usethis::use_package("shinyjs") 
+usethis::use_package("phylotools")
 
 ## 2.3 Add tests
 

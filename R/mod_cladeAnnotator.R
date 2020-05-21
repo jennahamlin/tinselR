@@ -90,10 +90,9 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       offset = max(make_treeOut()$data$x)
     )
   }
-
+  
   snpMean <- eventReactive(input$add_annotation, {
-    str(annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2())
-    
+
     lapply(1:n_annotations(), function(i)
       snp_anno(geneFile = geneFileSNP(),
                tips = annotations[[paste0("ann", i)]]
@@ -128,10 +127,10 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       make_treeOut() + anno_plot()
     })
   })
-   
-  #remove a reactive annotation one by one
-  #note to self - must have something be brushed
-  anno_plot_undo <- eventReactive(input$tree_reset, {
+  
+  # #remove a reactive annotation one by one
+  # #note to self - must have something be brushed
+  anno_plot_undo<- eventReactive(input$tree_reset, {
     # update the reactive value as a count of - 1
 
     new <- n_annotations() - 1
@@ -149,15 +148,15 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(plt)
   })
 
-  #remove the annotations
-  observeEvent(input$tree_reset,{
-    output$treeDisplay <- renderPlot({
-      make_treeOut() + anno_plot_undo()
-    })
-  })
+  # #remove the annotations
+  # observeEvent(input$tree_reset,{
+  #   output$treeDisplay <- renderPlot({
+  #     make_treeOut() + anno_plot_undo()
+  #   })
+  # })
   
   #reactive to send tree with annoations to downloadImage module 
-  treeWLayers <- reactive ({make_treeOut() + anno_plot()})
+  treeWLayers <- reactive ({make_treeOut() +  anno_plot()})
 }
 
 ## To be copied in the UI

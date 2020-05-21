@@ -27,12 +27,21 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFile, dataFile, treeformat, lim, align, font, numscale, node){
+                                   dataFile2, treeFile, dataFile, treeformat, lim, align, font, numscale, node){
   ns <- session$ns
+  
+  
+  getFileOrDeFault <- reactive ({
+    if(file.exists(metaFile())){
+      phylotools::sub.taxa.label(treeFile(), as.data.frame(metaFile()))}
+    else {
+      treeFile()
+    }
+  })
   
   #convert phylogenetic tree to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
-    tibble::as_tibble(treeFile()) 
+    tibble::as_tibble(getFileOrDeFault()) 
   }) 
   
   #change column1, row1 to the id of label and replace - with a 0 within the file

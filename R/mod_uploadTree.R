@@ -17,8 +17,22 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
   ns <- NS(id)
   tagList(
     
-    fileInput(ns("treefile"), label),
-    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE))
+    fileInput(ns("treeFile"), label),
+    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
+    # Input: Select a file ----
+    fileInput(ns("metaFile"), 
+              label= "Upload a meta data file",     #label here is specified and is called in the app_ui with the tags$div section 
+              multiple = FALSE,     #does not all multiple files to be uploaded
+              accept = c("text/csv",     #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
+                         "text/comma-separated-values,text/plain",
+                         ".csv",
+                         ".tsv")),
+    
+    # Input: Select separator ----
+    radioButtons(ns("sep"), "Separator",
+                 choices = c(Comma = ",",
+                             Tab = "\t"),
+                 selected = "\t"))
 }
 
 # Module Server
@@ -30,19 +44,34 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
 mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
   
-  # Create your own reactive values that you can modify because input is read only 
-  rv <- reactiveValues() 
-  
-  # Do something when input$file1 changes 
+  # Create your own reactive values that you can modify because input is read only
+  rv <- reactiveValues()
+
+  # Do something when input$file1 changes
   # * set rv$file1, remove rv$file2
-  observeEvent(input$treefile, {
-    rv$treefile=input$treefile
+  observeEvent(input$treeFile, {
+    rv$treeFile=input$treeFile
   })
-  
+
   treeFile <- reactive({
-    validate(need(input$treefile !="", "Please import tree file"))
-    req(input$treefile)
-    treeio::read.newick(input$treefile$datapath)
+    
+    validate(need(input$treeFile !="", "Please import tree file"))
+    req(input$treeFile)
+    #treeio::read.newick(input$treefile$datapath)
+    
+    if (is.null(input$metaFile$datapath)) {
+      treeio::read.newick(input$treeFile$datapath)
+    } else {
+      
+      dataFile <- readr::read_delim(input$metaFile$datapath,
+                                    delim = ",",
+                                    trim_ws = T,
+                                    skip_empty_rows = T,
+                                    col_names = T)
+      
+      treeio::read.newick(input$treeFile$datapath)%>%
+        phylotools::sub.taxa.label(., as.data.frame(dataFile))
+    }
   })
   
   midTree <- reactive({
@@ -54,7 +83,7 @@ mod_uploadTree_server <- function(input, output, session){
     }
   })
   
- 
+  
   
 }
 
