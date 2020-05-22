@@ -7,6 +7,8 @@
 
 ## 2.1 Add modules
 ## 
+golem::add_module(name="uploadData")
+
 #trees
 golem::add_module(name="uploadTree")
 golem::add_module(name = "paramsTree")
