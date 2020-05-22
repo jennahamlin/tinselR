@@ -27,21 +27,13 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFile, dataFile, treeformat, lim, align, font, numscale, node){
+                                   treeFileOut, dataFile, treeformat, lim, align, font, numscale, node){
   ns <- session$ns
   
   
-  # getFileOrDeFault <- reactive ({
-  #   if(file.exists(metaFile())){
-  #     phylotools::sub.taxa.label(treeFile(), as.data.frame(metaFile()))}
-  #   else {
-  #     treeFile()
-  #   }
-  # })
-  
   #convert phylogenetic tree to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
-    tibble::as_tibble(treeFile()) 
+    tibble::as_tibble(treeFileOut()) 
   }) 
   
   #change column1, row1 to the id of label and replace - with a 0 within the file
@@ -59,7 +51,7 @@ mod_displayTree_server <- function(input, output, session,
   #major plotting reactive using an S4 object called above (gandTS4)
   make_tree <- reactive({
     if(is.null(input$id))
-    {ggtree::ggtree(treeFile(), layout = treeformat())+
+    {ggtree::ggtree(treeFileOut(), layout = treeformat())+
         ggplot2::xlim(NA, lim())+
         ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
         ggtree::geom_treescale(width = numscale())+

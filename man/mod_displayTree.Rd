@@ -11,7 +11,7 @@ mod_displayTree_server(
   input,
   output,
   session,
-  treeFile,
+  treeFileOut,
   dataFile,
   treeformat,
   lim,
