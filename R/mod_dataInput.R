@@ -22,7 +22,7 @@ mod_dataInput_ui <- function(id, label) {
   tagList(
     
     # Input: Select a file ----
-    fileInput(ns("id"), 
+    fileInput(ns("geneFile"), 
               label,     #label here is specified and is called in the app_ui with the tags$div section 
               multiple = FALSE,     #does not all multiple files to be uploaded
               accept = c("text/csv",     #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
@@ -31,17 +31,22 @@ mod_dataInput_ui <- function(id, label) {
                          ".tsv")),
     
     # Input: Select separator ----
-    radioButtons(ns("sep"), "Separator",
+    radioButtons(ns("geneSep"), "Separator for genetic data",
                  choices = c(Comma = ",",
                              Tab = "\t"),
                  selected = "\t"),
     
-    # Input: Display top 10 rows of file or all ----
-    radioButtons(ns("disp"), "Display",
-                 choices = c(Head = "head",
-                             All = "all"),
-                 
-                 selected = "head")
+    fileInput(ns("metaFile2"), "Choose meta File",
+              multiple = FALSE,
+              accept = c("text/csv",
+                         "text/comma-separated-values,text/plain",
+                         ".csv")),
+    
+    # Input: Select separator ----
+    radioButtons(ns("metaSep2"), "Separator meta data",
+                 choices = c(Comma = ",",
+                             Tab = "\t"),
+                 selected = "\t")
   )
 }
 
@@ -55,27 +60,57 @@ mod_dataInput_server <- function(input, output, session) {
   
   #reactive expression that until a file is uploaded, the below message is displayed
   userFile <- reactive({
-    validate(need(input$id !="", "Please import a data file"))
-    input$id
+    validate(need(input$geneFile !="", "Please import a data file"))
+    input$geneFile
   })    
   
+   dataFile <- reactive({ 
+     if (is.null(input$metaFile2$datapath)) {
+       geneFileUncorrected <- readr::read_delim(userFile()$datapath,
+                                 delim = input$geneSep,
+                                 trim_ws = T,
+                                 skip_empty_rows = T,
+                                 col_names = T)
+
+      #return(geneFileUncorrected)
+    } 
+    else {
+    
+      metaFile3 <- readr::read_delim(input$metaFile2$datapath,
+                        delim = input$metaSep2,
+                        trim_ws = T,
+                        skip_empty_rows = T,
+                        col_names = T)
+      
+       geneFileCorrected <-  readr::read_delim(userFile()$datapath,
+                                               delim = input$geneSep,
+                                               trim_ws = T,
+                                               skip_empty_rows = T,
+                                               col_names = T)
+      
+       
+      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFile3$Display.labels[which(metaFile3$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
+       
+       geneFileCorrected$. = metaFile3$Display.labels[which(metaFile3$Tip.labels %in% geneFileCorrected$.)]
+       
+       return(geneFileCorrected)
+    }
+  })
   
-  dataFile <- reactive({readr::read_delim(userFile()$datapath,
-                                          delim = input$sep,
-                                          trim_ws = T,
-                                          skip_empty_rows = T,
-                                          col_names = T)})
+  
+  
+  # 
+  # dataFile <- reactive({
+  # readr::read_delim(userFile()$datapath,
+  #                                         delim = input$geneSep,
+  #                                         trim_ws = T,
+  #                                         skip_empty_rows = T,
+  #                                         col_names = T)
+  #   })
+  
   return(dataFile)
   
-  # headfile <- reactive({
-  #   if(input$disp == "head") {
-  #     return(head(dataFile()))
-  #   }
-  #   else {
-  #     return(dataFile())
-  #   }
-  # })
-  # 
+  
 }
 
 ## To be copied in the UI

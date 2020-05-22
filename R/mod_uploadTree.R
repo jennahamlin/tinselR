@@ -18,7 +18,9 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
   tagList(
     
     fileInput(ns("treeFile"), label),
+    
     checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
+    
     # Input: Select a file ----
     fileInput(ns("metaFile"), 
               label= "Upload a meta data file",     #label here is specified and is called in the app_ui with the tags$div section 
@@ -44,15 +46,6 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
 mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
   
-  # Create your own reactive values that you can modify because input is read only
-  rv <- reactiveValues()
-
-  # Do something when input$file1 changes
-  # * set rv$file1, remove rv$file2
-  observeEvent(input$treeFile, {
-    rv$treeFile=input$treeFile
-  })
-
   treeFile <- reactive({
     
     validate(need(input$treeFile !="", "Please import tree file"))
@@ -64,7 +57,7 @@ mod_uploadTree_server <- function(input, output, session){
     } else {
       
       dataFile <- readr::read_delim(input$metaFile$datapath,
-                                    delim = ",",
+                                    delim = input$sep,
                                     trim_ws = T,
                                     skip_empty_rows = T,
                                     col_names = T)
