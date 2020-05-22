@@ -61,9 +61,18 @@ mod_uploadTree_ui <- function(id, label){
 mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
   
+ #function to read data in either genetic distance matrix or meta data file 
+  readData<-function(filepath, delim)
+   {readr::read_delim(filepath,
+                    delim,
+                    trim_ws = T,
+                    skip_empty_rows = T,
+                    col_names = T)}
+  
+  
   #reactive expression that until a file is uploaded, the below message is displayed
   geneFileUp <- reactive({
-    validate(need(input$geneFile !="", "Please import a data file"))
+    validate(need(input$geneFile !="", "Please import a genetic distance file to use the clade annotator"))
     input$geneFile
   }) 
   
@@ -82,11 +91,8 @@ mod_uploadTree_server <- function(input, output, session){
       treeio::read.newick(input$treeFile$datapath)
     } else {
       
-      dataFile <- readr::read_delim(metaFileUp()$datapath,
-                                    delim = input$metaSep,
-                                    trim_ws = T,
-                                    skip_empty_rows = T,
-                                    col_names = T)
+      dataFile <- readData(filepath =metaFileUp()$datapath,
+                           delim =  input$metaSep)
       
       treeio::read.newick(input$treeFile$datapath)%>%
         phylotools::sub.taxa.label(., as.data.frame(dataFile))
@@ -96,26 +102,17 @@ mod_uploadTree_server <- function(input, output, session){
   #
   geneFileCorOrUn <- reactive({ 
     if (is.null(metaFileUp()$datapath)) {
-      geneFileUncorrected <- readr::read_delim(geneFileUp()$datapath,
-                                               delim = input$geneSep,
-                                               trim_ws = T,
-                                               skip_empty_rows = T,
-                                               col_names = T)
       
+      geneFileUncorrected <- readData(filepath = geneFileUp()$datapath,
+                                      delim =  input$geneSep)
     } 
     else {
       
-      metaFileComb <- readr::read_delim(metaFileUp()$datapath,
-                                        delim = input$metaSep,
-                                        trim_ws = T,
-                                        skip_empty_rows = T,
-                                        col_names = T)
-      
-      geneFileCorrected <-  readr::read_delim(geneFileUp()$datapath,
-                                              delim = input$geneSep,
-                                              trim_ws = T,
-                                              skip_empty_rows = T,
-                                              col_names = T)
+      metaFileComb <- readData(filepath =metaFileUp()$datapath,
+                                delim =  input$metaSep)
+        
+      geneFileCorrected <- readData(filepath = geneFileUp()$datapath,
+                                      delim =  input$geneSep)
       
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
       
@@ -124,13 +121,6 @@ mod_uploadTree_server <- function(input, output, session){
       return(geneFileCorrected)
     }
   })
-  
-  #return(geneFileCorOrUn)
-  
-  
-  
-  
-  
   
   #return these reactive objects to be used in tree display module 
   return(
