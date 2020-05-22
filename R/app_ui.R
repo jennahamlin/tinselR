@@ -17,7 +17,7 @@ app_ui <- function() {
                             mainPanel(
                               mod_displayTree_ui("displayTree_ui_1"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
-                              )
+                            )
                           )),
                  tabPanel("Genetic Distance",
                           sidebarLayout(
@@ -27,16 +27,18 @@ app_ui <- function() {
                                                         tags$br(),
                                                         "(.csv, .tsv, or .txt file format)")),width = 3),
                             mainPanel(
-                              mod_displayTable_ui("displayTable_ui_2")))),
-                 tabPanel("Metadata",
-                          sidebarLayout(
-                            sidebarPanel(
-                              mod_dataInput_ui("dataInput_ui_meta",
-                                               tags$div("User META data",
-                                                        tags$br(),
-                                                        "(.csv, .tsv, or .txt file format)")),width = 3),
-                            mainPanel(
-                              mod_displayTable_ui("displayTable_ui_1")))))
+                              mod_displayTable_ui("displayTable_ui_2"))))
+      )
+      # ,
+      # tabPanel("Metadata",
+      #          sidebarLayout(
+      #            sidebarPanel(
+      #              mod_dataInput_ui("dataInput_ui_meta",
+      #                               tags$div("User META data",
+      #                                        tags$br(),
+      #                                        "(.csv, .tsv, or .txt file format)")),width = 3),
+      #            mainPanel(
+      #              mod_displayTable_ui("displayTable_ui_1")))))
     )
   )
 }

@@ -8,7 +8,7 @@
 \usage{
 mod_dataInput_ui(id, label)
 
-mod_dataInput_server(input, output, session)
+mod_dataInput_server(input, output, session, metaFileOut, metaSepOut)
 }
 \arguments{
 \item{id}{shiny id}

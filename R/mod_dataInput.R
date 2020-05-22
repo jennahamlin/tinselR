@@ -34,19 +34,20 @@ mod_dataInput_ui <- function(id, label) {
     radioButtons(ns("geneSep"), "Separator for genetic data",
                  choices = c(Comma = ",",
                              Tab = "\t"),
-                 selected = "\t"),
-    
-    fileInput(ns("metaFile2"), "Choose meta File",
-              multiple = FALSE,
-              accept = c("text/csv",
-                         "text/comma-separated-values,text/plain",
-                         ".csv")),
-    
-    # Input: Select separator ----
-    radioButtons(ns("metaSep2"), "Separator meta data",
-                 choices = c(Comma = ",",
-                             Tab = "\t"),
                  selected = "\t")
+    #,
+    
+    # fileInput(ns("metaFile2"), "Choose meta File",
+    #           multiple = FALSE,
+    #           accept = c("text/csv",
+    #                      "text/comma-separated-values,text/plain",
+    #                      ".csv")),
+    # 
+    # # Input: Select separator ----
+    # radioButtons(ns("metaSep2"), "Separator meta data",
+    #              choices = c(Comma = ",",
+    #                          Tab = "\t"),
+    #              selected = "\t")
   )
 }
 
@@ -56,7 +57,7 @@ mod_dataInput_ui <- function(id, label) {
 #' @export
 #' @keywords internal
 
-mod_dataInput_server <- function(input, output, session) {
+mod_dataInput_server <- function(input, output, session, metaFileOut, metaSepOut) {
   
   #reactive expression that until a file is uploaded, the below message is displayed
   userFile <- reactive({
@@ -65,19 +66,18 @@ mod_dataInput_server <- function(input, output, session) {
   })    
   
    dataFile <- reactive({ 
-     if (is.null(input$metaFile2$datapath)) {
+     if (is.null(metaFileOut()$datapath)) {
        geneFileUncorrected <- readr::read_delim(userFile()$datapath,
                                  delim = input$geneSep,
                                  trim_ws = T,
                                  skip_empty_rows = T,
                                  col_names = T)
 
-      #return(geneFileUncorrected)
     } 
     else {
     
-      metaFile3 <- readr::read_delim(input$metaFile2$datapath,
-                        delim = input$metaSep2,
+      metaFileComb <- readr::read_delim(metaFileOut()$datapath,
+                        delim = metaSepOut(),
                         trim_ws = T,
                         skip_empty_rows = T,
                         col_names = T)
@@ -88,25 +88,13 @@ mod_dataInput_server <- function(input, output, session) {
                                                skip_empty_rows = T,
                                                col_names = T)
       
+      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
        
-      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFile3$Display.labels[which(metaFile3$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
-       
-       geneFileCorrected$. = metaFile3$Display.labels[which(metaFile3$Tip.labels %in% geneFileCorrected$.)]
+       geneFileCorrected$. = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$.)]
        
        return(geneFileCorrected)
     }
   })
-  
-  
-  
-  # 
-  # dataFile <- reactive({
-  # readr::read_delim(userFile()$datapath,
-  #                                         delim = input$geneSep,
-  #                                         trim_ws = T,
-  #                                         skip_empty_rows = T,
-  #                                         col_names = T)
-  #   })
   
   return(dataFile)
   

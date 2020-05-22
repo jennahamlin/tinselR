@@ -19,8 +19,23 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
     
     fileInput(ns("treeFile"), label),
     
-    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
+   # checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
     
+   # # Input: Select a file ----
+   # fileInput(ns("geneFile"), 
+   #           label = "Upload a genetic distance file",     #label here is specified and is called in the app_ui with the tags$div section 
+   #           multiple = FALSE,     #does not all multiple files to be uploaded
+   #           accept = c("text/csv",     #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
+   #                      "text/comma-separated-values,text/plain",
+   #                      ".csv",
+   #                      ".tsv")),
+   # 
+   # # Input: Select separator ----
+   # radioButtons(ns("geneSep"), "Separator for genetic data",
+   #              choices = c(Comma = ",",
+   #                          Tab = "\t"),
+   #              selected = "\t"),
+   # 
     # Input: Select a file ----
     fileInput(ns("metaFile"), 
               label= "Upload a meta data file",     #label here is specified and is called in the app_ui with the tags$div section 
@@ -31,7 +46,7 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
                          ".tsv")),
     
     # Input: Select separator ----
-    radioButtons(ns("sep"), "Separator",
+    radioButtons(ns("metaSep"), "Separator for meta data",
                  choices = c(Comma = ",",
                              Tab = "\t"),
                  selected = "\t"))
@@ -46,18 +61,29 @@ mod_uploadTree_ui <- function(id, label ="Upload a newick file, please"){
 mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
   
-  treeFile <- reactive({
+  #reactive expression that holds the genetic distance matrix - displays the message that this is a required file
+  geneFileUP <- reactive({
+    validate(need(input$geneFile !="", "Please import a genetic distance file"))
+    input$geneFile
+  })    
+  
+  #reactive expression that holds the meta data file 
+  metaFileUp <- reactive({
+    input$metaFile
+  })
+  
+  #reactive expression that upload the newick tree and allows the optional upload of meta data to correct tree tip labels 
+  treeFileUp <- reactive({
     
-    validate(need(input$treeFile !="", "Please import tree file"))
+    validate(need(input$treeFile !="", "Please import newick tree file"))
     req(input$treeFile)
-    #treeio::read.newick(input$treefile$datapath)
-    
-    if (is.null(input$metaFile$datapath)) {
+
+    if (is.null(metaFileUp()$datapath)) {
       treeio::read.newick(input$treeFile$datapath)
     } else {
       
-      dataFile <- readr::read_delim(input$metaFile$datapath,
-                                    delim = input$sep,
+      dataFile <- readr::read_delim(metaFileUp()$datapath,
+                                    delim = input$metaSep,
                                     trim_ws = T,
                                     skip_empty_rows = T,
                                     col_names = T)
@@ -67,15 +93,33 @@ mod_uploadTree_server <- function(input, output, session){
     }
   })
   
-  midTree <- reactive({
-    if(input$midPoint == TRUE) {
-      return(phytools::midpoint.root(treeFile()))
-    }
-    else {
-      return(treeFile)
-    }
-  })
+  #return these reactive objects to be used in tree display module 
+  return(
+    list(
+      treeFileOut = reactive(treeFileUp()),
+      metaFileOut = reactive(metaFileUp()),
+      metaSepOut = reactive(input$metaSep)
+    ))
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  # midTree <- reactive({
+  #   if(input$midPoint == TRUE) {
+  #     return(phytools::midpoint.root(treeFile()))
+  #   }
+  #   else {
+  #     return(treeFile)
+  #   }
+  # })
+  # 
   
   
 }
