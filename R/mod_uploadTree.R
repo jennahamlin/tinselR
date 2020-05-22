@@ -17,15 +17,30 @@ mod_uploadTree_ui <- function(id, label){
   ns <- NS(id)
   tagList(
     
-    fileInput(ns("treeFile"), label ="Upload a newick file, please"),
+    fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
     
     # checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
     
     # Input: Select a file ----
+    fileInput(ns("geneFile"), 
+              label = "2. Upload a genetic distance file ",     #label here is specified and is called in the app_ui with the tags$div section 
+              multiple = FALSE,                                 #does not all multiple files to be uploaded
+              accept = c("text/csv",                            #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
+                         "text/comma-separated-values,text/plain",
+                         ".csv",
+                         ".tsv")),
+    
+    # Input: Select separator ----
+    radioButtons(ns("geneSep"), "Separator for genetic data",
+                 choices = c(Comma = ",",
+                             Tab = "\t"),
+                 selected = "\t"),
+    
+    # Input: Select a file ----
     fileInput(ns("metaFile"), 
-              label= "Upload an optional meta data file",     #label here is specified and is called in the app_ui with the tags$div section 
-              multiple = FALSE,                     #does not all multiple files to be uploaded
-              accept = c("text/csv",                #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
+              label= "3. Upload an optional meta data file",     #label here is specified and is called in the app_ui with the tags$div section 
+              multiple = FALSE,                                  #does not all multiple files to be uploaded
+              accept = c("text/csv",                             #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
                          "text/comma-separated-values,text/plain",
                          ".csv",
                          ".tsv")),
@@ -45,6 +60,12 @@ mod_uploadTree_ui <- function(id, label){
 
 mod_uploadTree_server <- function(input, output, session){
   ns <- session$ns
+  
+  #reactive expression that until a file is uploaded, the below message is displayed
+  geneFileUp <- reactive({
+    validate(need(input$geneFile !="", "Please import a data file"))
+    input$geneFile
+  }) 
   
   #reactive expression that holds the meta data file 
   metaFileUp <- reactive({
@@ -72,12 +93,52 @@ mod_uploadTree_server <- function(input, output, session){
     }
   })
   
+  #
+  geneFileCorOrUn <- reactive({ 
+    if (is.null(metaFileUp()$datapath)) {
+      geneFileUncorrected <- readr::read_delim(geneFileUp()$datapath,
+                                               delim = input$geneSep,
+                                               trim_ws = T,
+                                               skip_empty_rows = T,
+                                               col_names = T)
+      
+    } 
+    else {
+      
+      metaFileComb <- readr::read_delim(metaFileUp()$datapath,
+                                        delim = input$metaSep,
+                                        trim_ws = T,
+                                        skip_empty_rows = T,
+                                        col_names = T)
+      
+      geneFileCorrected <-  readr::read_delim(geneFileUp()$datapath,
+                                              delim = input$geneSep,
+                                              trim_ws = T,
+                                              skip_empty_rows = T,
+                                              col_names = T)
+      
+      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
+      
+      geneFileCorrected$. = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$.)]
+      
+      return(geneFileCorrected)
+    }
+  })
+  
+  #return(geneFileCorOrUn)
+  
+  
+  
+  
+  
+  
   #return these reactive objects to be used in tree display module 
   return(
     list(
       treeFileOut = reactive(treeFileUp()),
-      metaFileOut = reactive(metaFileUp()),
-      metaSepOut = reactive(input$metaSep)
+      geneFileCorOrUnOut = reactive(geneFileCorOrUn())
+      #metaFileOut = reactive(metaFileUp()),
+      #metaSepOut = reactive(input$metaSep)
     ))
 
   # midTree <- reactive({

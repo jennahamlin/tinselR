@@ -34,8 +34,7 @@ mod_dataInput_ui <- function(id, label) {
     radioButtons(ns("geneSep"), "Separator for genetic data",
                  choices = c(Comma = ",",
                              Tab = "\t"),
-                 selected = "\t")
-    #,
+                 selected = "\t"),
     
     # fileInput(ns("metaFile2"), "Choose meta File",
     #           multiple = FALSE,

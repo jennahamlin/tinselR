@@ -27,7 +27,7 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFileOut, dataFile, treeformat, lim, align, font, numscale, node){
+                                   treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node){
   ns <- session$ns
   
   
@@ -38,7 +38,7 @@ mod_displayTree_server <- function(input, output, session,
   
   #change column1, row1 to the id of label and replace - with a 0 within the file
   geneObject <- reactive({
-    dplyr::rename(dataFile(), label = 1)%>%  
+    dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%  
       replace(., .=="-", 0) 
   })
   
@@ -48,7 +48,7 @@ mod_displayTree_server <- function(input, output, session,
       treeio::as.treedata() 
   })
   
-  #major plotting reactive using an S4 object called above (gandTS4)
+  #major plotting reactive using an S4 object called above (gandTS4) or the base treeFileOut made in Upload tree 
   make_tree <- reactive({
     if(is.null(input$id))
     {ggtree::ggtree(treeFileOut(), layout = treeformat())+
