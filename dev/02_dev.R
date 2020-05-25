@@ -38,6 +38,7 @@ usethis::use_package("ggtree") # for tree viz
 usethis::use_package("readr") # for reading in files
 usethis::use_package("tidyr")
 usethis::use_package("phylotools")
+usethis::use_package("tibble")
 
 ## 2.3 Add tests
 
