@@ -15,8 +15,6 @@ mod_cladeAnnotator_ui <- function(id){
     actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
     
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
-    #,
-    #tableOutput(ns("contents"))
   )
 }
 
@@ -25,10 +23,6 @@ mod_cladeAnnotator_ui <- function(id){
 #' @noRd 
 mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, make_treeOut){
   ns <- session$ns
-  
-  # output$contents <- renderTable({
-  #   class(geneObjectOut())
-  #})
   
   # #convert to long data frame - three columns. This takes as input the genetic distance object from display tree module
   geneFile <-reactive({ 
@@ -148,13 +142,19 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(plt)
   })
 
-  # #remove the annotations
-  # observeEvent(input$tree_reset,{
-  #   output$treeDisplay <- renderPlot({
-  #     make_treeOut() + anno_plot_undo()
-  #   })
-  # })
-  
+  #remove the annotations
+  observeEvent(input$tree_reset,{
+    output$treeDisplay <- renderPlot({
+      if(n_annotations() <= 1){
+        
+        make_treeOut()
+      }
+      else{
+      make_treeOut() + anno_plot_undo()
+      }
+    })
+  })
+
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_treeOut() +  anno_plot()})
 }

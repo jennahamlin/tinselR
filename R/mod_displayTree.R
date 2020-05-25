@@ -46,7 +46,6 @@ mod_displayTree_server <- function(input, output, session,
     tibble::as_tibble(midTree()) 
   }) 
   
-  
   #change column1, row1 to the id of label and replace - with a 0 within the file
   geneObject <- reactive({
     dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%  
@@ -59,12 +58,8 @@ mod_displayTree_server <- function(input, output, session,
       treeio::as.treedata() 
   })
   
-  
-  
-  #major plotting reactive using an S4 object called above (gandTS4) or the base treeFileOut made in Upload tree 
+  #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   make_tree <- reactive({
-    
-    #treeFileOut2 <- phytools::midpoint.root(treeFileOut())
     
     if(is.null(input$id)) # this disconnects the need for genetic distance file to be uploaded.
     {ggtree::ggtree(midTree(), layout = treeformat())+
