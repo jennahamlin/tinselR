@@ -12,7 +12,9 @@ mod_cladeAnnotator_ui <- function(id){
   tagList(
     actionButton(ns("add_tree"),"Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree"),
-    actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
+    actionButton(ns("tree_reset"),"Reset"),
+    actionButton(ns("reload"),"Reload"),
+    
     
     plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
   )
@@ -115,6 +117,11 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(plt)
   })
   
+  #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+  observeEvent(input$reload,{
+      session$reload()
+    })
+  
   #add the annotations when selection is brushed
   observeEvent(input$add_annotation,{
     output$treeDisplay <- renderPlot({
@@ -122,38 +129,38 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     })
   })
   
-  # #remove a reactive annotation one by one
-  # #note to self - must have something be brushed
-  anno_plot_undo<- eventReactive(input$tree_reset, {
-    # update the reactive value as a count of - 1
-
-    new <- n_annotations() - 1
-    n_annotations(new)
-
-    #list apply over the make_layer function to add the annotation
-    plt <-
-      lapply(1:n_annotations(), function(i)
-        make_layer(
-          make_treeOut(),
-          tips = annotations[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
-          color = "red"
-        ))
-    return(plt)
-  })
-
-  #remove the annotations
-  observeEvent(input$tree_reset,{
-    output$treeDisplay <- renderPlot({
-      if(n_annotations() <= 1){
-        
-        make_treeOut()
-      }
-      else{
-      make_treeOut() + anno_plot_undo()
-      }
-    })
-  })
+  # # #remove a reactive annotation one by one
+  # # #note to self - must have something be brushed
+  # anno_plot_undo<- eventReactive(input$tree_reset, {
+  #   # update the reactive value as a count of - 1
+  # 
+  #   new <- n_annotations() - 1
+  #   n_annotations(new)
+  # 
+  #   #list apply over the make_layer function to add the annotation
+  #   plt <-
+  #     lapply(1:n_annotations(), function(i)
+  #       make_layer(
+  #         make_treeOut(),
+  #         tips = annotations[[paste0("ann", i)]],
+  #         label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
+  #         color = "red"
+  #       ))
+  #   return(plt)
+  # })
+  # 
+  # #remove the annotations
+  # observeEvent(input$tree_reset,{
+  #   output$treeDisplay <- renderPlot({
+  #     if(n_annotations() == 1){
+  #       
+  #       make_treeOut()
+  #     }
+  #     else{
+  #     make_treeOut() + anno_plot_undo()
+  #     }
+  #   })
+  # })
 
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_treeOut() +  anno_plot()})
