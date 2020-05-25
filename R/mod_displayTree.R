@@ -16,6 +16,8 @@
 mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
+    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE)
+    
   )
   
 }
@@ -30,11 +32,20 @@ mod_displayTree_server <- function(input, output, session,
                                    treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node){
   ns <- session$ns
   
+  midTree <- reactive({
+    if(input$midPoint == TRUE) {
+      return(phytools::midpoint.root(treeFileOut()))
+    }
+    else {
+      return(treeFileOut())
+    }
+  })
   
   #convert phylogenetic tree to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
-    tibble::as_tibble(treeFileOut()) 
+    tibble::as_tibble(midTree()) 
   }) 
+  
   
   #change column1, row1 to the id of label and replace - with a 0 within the file
   geneObject <- reactive({
@@ -48,31 +59,35 @@ mod_displayTree_server <- function(input, output, session,
       treeio::as.treedata() 
   })
   
+  
+  
   #major plotting reactive using an S4 object called above (gandTS4) or the base treeFileOut made in Upload tree 
   make_tree <- reactive({
-    if(is.null(input$id))
-    {ggtree::ggtree(treeFileOut(), layout = treeformat())+
+    
+    #treeFileOut2 <- phytools::midpoint.root(treeFileOut())
+    
+    if(is.null(input$id)) # this disconnects the need for genetic distance file to be uploaded.
+    {ggtree::ggtree(midTree(), layout = treeformat())+
         ggplot2::xlim(NA, lim())+
         ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
         ggtree::geom_treescale(width = numscale())+
         ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
     }
-     else{
-       ggtree::ggtree(gandTS4(), layout = treeformat())+
+    else{
+      ggtree::ggtree(gandTS4(), layout = treeformat())+
         ggplot2::xlim(NA, lim())+
-        ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") + 
+        ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
         ggtree::geom_treescale(width = numscale())+
         ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
     }
   })
   
-
   #return these reactive objects to be used in cladeAnnotator module 
   return(
     list(
       geneObjectOut = reactive(geneObject()),
       make_treeOut = reactive(make_tree())
-      ))
+    ))
   
 }
 

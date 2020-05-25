@@ -11,7 +11,6 @@ Imports:
     golem,
     processx,
     attempt,
-    DT,
     glue,
     htmltools,
     dplyr,
@@ -23,7 +22,6 @@ Imports:
     phytools,
     purrr,
     magrittr,
-    shinyjs,
     phylotools,
     tidyr
 RoxygenNote: 7.1.0

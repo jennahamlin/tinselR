@@ -13,8 +13,6 @@ mod_uploadData_ui <- function(id){
     
     fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
     
-    # checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
-    
     # Input: Select a file ----
     fileInput(ns("geneFile"), 
               label = "2. Upload a genetic distance file ",     #label here is specified and is called in the app_ui with the tags$div section 
@@ -47,7 +45,7 @@ mod_uploadData_ui <- function(id){
 }
 
     
-#' uploadData Server Functionp;;;;;;;;;
+#' uploadData Server Function
 #'
 #' @noRd 
 mod_uploadData_server <- function(input, output, session){
@@ -73,7 +71,7 @@ mod_uploadData_server <- function(input, output, session){
     input$metaFile
   })
   
-  #reactive expression that upload the newick tree and allows the optional upload of meta data to correct tree tip labels 
+  #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels 
   treeFileUp <- reactive({
     
     validate(need(input$treeFile !="", "Please import newick tree file"))
@@ -120,17 +118,6 @@ mod_uploadData_server <- function(input, output, session){
       treeFileOut = reactive(treeFileUp()),
       geneFileCorOrUnOut = reactive(geneFileCorOrUn())
     ))
-  
-  # midTree <- reactive({
-  #   if(input$midPoint == TRUE) {
-  #     return(phytools::midpoint.root(treeFile()))
-  #   }
-  #   else {
-  #     return(treeFile)
-  #   }
-  # })
-  # 
- 
 }
     
 ## To be copied in the UI
