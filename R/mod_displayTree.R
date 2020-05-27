@@ -41,7 +41,7 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
   
-  #convert phylogenetic tree to tibble to join tree and genetic distance matrix
+  #convert phylogenetic tree (midpoint or not) to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
     tibble::as_tibble(midTree()) 
   }) 

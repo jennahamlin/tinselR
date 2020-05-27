@@ -15,7 +15,8 @@ mod_cladeAnnotator_ui <- function(id){
     actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
     actionButton(ns("reload"), "Reload the Shiny application session"), 
     
-    plotOutput(ns("treeDisplay"), brush =ns("plot_brush"))
+    plotOutput(ns("treeDisplay"), brush = ns("plot_brush")),
+    plotOutput(ns("content"))
   )
 }
 
@@ -37,6 +38,8 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     geneFile()[which(geneFile()$label != geneFile()$name),]
   })
   
+  
+  
   #displays the tree plot, uses output from the displayTree module 
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
     make_treeOut()})
@@ -53,7 +56,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   tipVector <- c()
   
-  #add to label to vector if isTip == True
+  #add label to vector if isTip == True
   dataWithSelection2 <- eventReactive(input$plot_brush, {
     for (i in 1:length(dataWithSelection()$label)) {
       if (dataWithSelection()$isTip[i] == TRUE)
@@ -61,6 +64,11 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     }
     return(tipVector)
   })
+  
+  output$content<- renderTable({
+    dataWithSelection2()
+  })
+  
   
   snpVector <- c()
   
@@ -87,7 +95,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   }
   
   snpMean <- eventReactive(input$add_annotation, {
-
+    
     lapply(1:n_annotations(), function(i)
       snp_anno(geneFile = geneFileSNP(),
                tips = annotations[[paste0("ann", i)]]
@@ -123,14 +131,19 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     })
   })
   
+  #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+  observeEvent(input$reload,{
+    session$reload()
+  })
+  
   # #remove a reactive annotation one by one
   # #note to self - must have something be brushed
   anno_plot_undo<- eventReactive(input$tree_reset, {
     # update the reactive value as a count of - 1
-
+    
     new <- n_annotations() - 1
     n_annotations(new)
-
+    
     #list apply over the make_layer function to add the annotation
     plt <-
       lapply(1:n_annotations(), function(i)
@@ -142,29 +155,25 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         ))
     return(plt)
   })
-
+  
   #remove the annotations
   observeEvent(input$tree_reset,{
+    
     output$treeDisplay <- renderPlot({
-      if(n_annotations() == 1){
-        
+      if(n_annotations() <= 1){
         make_treeOut()
       }
       else{
-      make_treeOut() + anno_plot_undo()
+        make_treeOut() + anno_plot_undo()
       }
     })
   })
-
+  
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_treeOut() +  anno_plot()})
 }
 
 
-#this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
-observeEvent(input$reload,{
-  session$reload()
-})
 
 ## To be copied in the UI
 # mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
