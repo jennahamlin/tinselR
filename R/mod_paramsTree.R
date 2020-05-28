@@ -27,7 +27,9 @@ mod_paramsTree_ui <- function(id){
                          "bold+italic" = "bold.italic"), selected = "bold"),
     numericInput(ns("numScale"), "Size of the scale bar", value = 0.001),
     numericInput(ns("nodeDisplay"), "Minimum value of bootstrap", value = 50, max = 100),
-    numericInput(ns("tipLim"), 'add spacing to plot', value = 0.01, max = 1 )
+    numericInput(ns("tipLim"), 'add spacing to plot', value = 0.01, max = 1 ),
+    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE)
+    
     
   )
 }
@@ -47,7 +49,8 @@ mod_paramsTree_server <- function(input, output, session){
     font = reactive(input$fontFormat),
     numscale = reactive(input$numScale),
     node = reactive(input$nodeDisplay),
-    lim = reactive(input$tipLim))
+    lim = reactive(input$tipLim),
+    midP = reactive(input$midPoint))
 }
 
 ## To be copied in the UI

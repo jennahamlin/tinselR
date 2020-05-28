@@ -16,7 +16,6 @@
 mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE)
     
   )
   
@@ -29,11 +28,11 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node){
+                                   treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node, midP){
   ns <- session$ns
   
   midTree <- reactive({
-    if(input$midPoint == TRUE) {
+    if(midP() == TRUE) {
       return(phytools::midpoint.root(treeFileOut()))
     }
     else {

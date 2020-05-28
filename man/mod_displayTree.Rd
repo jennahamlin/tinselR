@@ -18,7 +18,8 @@ mod_displayTree_server(
   align,
   font,
   numscale,
-  node
+  node,
+  midP
 )
 }
 \arguments{
