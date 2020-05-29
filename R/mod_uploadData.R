@@ -188,94 +188,70 @@ mod_uploadData_server <- function(input, output, session){
   
   geneFileCorOrUn <- reactive({ 
     if (is.null(metaFileUp()$datapath)) {
-    
-      myLines <- readLines(con = geneFileUp()$datapath, #can I extract this to a function?
-                           n = 3)
+      myLines <- readLines(con = geneFileUp()$datapath, n = 3)
+      
+      #this checks for delimitor if only genetic distance file is upload
       errchk <- validate(
         need(
           length(strsplit(myLines[2], geneFileType())[[1]]) == length(strsplit(myLines[3], geneFileType())[[1]]),
-          "Error: the delimiter chosen does not match the file type uploaded."
-        ),
+          "Error: the delimiter chosen does not match the file type uploaded."),
         need(
           length(strsplit(myLines[2], geneFileType())[[1]]) > 1,
-          "Error: the delimiter chosen does not match the file type uploaded."
-        )
+          "Error: the delimiter chosen does not match the file type uploaded.")
       )
+      
       if (is.null(errchk) == TRUE) {
-        
-        geneFileUncorrected <- readData(filepath = geneFileUp()$datapath,
-                                        sep =  input$geneSep)
+        geneFileUncorrected <- readData(filepath = geneFileUp()$datapath, sep =  input$geneSep)
       }
-      else{
+      else {
         return(errchk)
       }
-      
-      
-      
     } 
+    
     else {
+      myLines <- readLines(con = metaFileUp()$datapath, n = 3)
       
-      myLines <- readLines(con = metaFileUp()$datapath, #can I extract this to a function?
-                           n = 3)
+      #this checks for delimitor for meta data file is uploaded 
       errchk <- validate(
         need(
           length(strsplit(myLines[2], metaFileType())[[1]]) == length(strsplit(myLines[3], metaFileType())[[1]]),
-          "Error: the delimiter chosen does not match the file type uploaded."
-        ),
+          "Error: the delimiter chosen does not match the file type uploaded."),
         need(
           length(strsplit(myLines[2], metaFileType())[[1]]) > 1,
-          "Error: the delimiter chosen does not match the file type uploaded."
-        )
+          "Error: the delimiter chosen does not match the file type uploaded.")
       )
+      
       if (is.null(errchk) == TRUE) {
-        
-        
-        metaFileComb <- readData(filepath = metaFileUp()$datapath,
-                                 sep =  input$metaSep)      }
+        metaFileComb <- readData(filepath = metaFileUp()$datapath, sep =  input$metaSep)
+        }
       else{
         return(errchk)
-      }
+        }
+
+      myLines <- readLines(con = geneFileUp()$datapath, n = 3)
       
-      
-      metaFileComb <- readData(filepath = metaFileUp()$datapath,
-                               sep =  input$metaSep)
-      
-      
-      myLines <- readLines(con = geneFileUp()$datapath, #can I extract this to a function?
-                           n = 3)
+      #this checks for genetic distance file uploaded 
       errchk <- validate(
         need(
           length(strsplit(myLines[2], geneFileType())[[1]]) == length(strsplit(myLines[3], geneFileType())[[1]]),
-          "Error: the delimiter chosen does not match the file type uploaded."
-        ),
+          "Error: the delimiter chosen does not match the file type uploaded."),
         need(
           length(strsplit(myLines[2], geneFileType())[[1]]) > 1,
-          "Error: the delimiter chosen does not match the file type uploaded."
-        )
+          "Error: the delimiter chosen does not match the file type uploaded.")
       )
       if (is.null(errchk) == TRUE) {
-        
-        geneFileCorrected <- readData(filepath = geneFileUp()$datapath,
-                                      sep =  input$geneSep)
+        geneFileCorrected <- readData(filepath = geneFileUp()$datapath, sep = input$geneSep)
         
         colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
         
         geneFileCorrected$. = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$.)]
         
         return(geneFileCorrected)
-        
-          }
+      }
+      
       else{
         return(errchk)
       }
-      
-      
-      
-      
-      
-      
-      
-      
     }
   })
   
