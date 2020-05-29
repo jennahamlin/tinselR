@@ -10,10 +10,11 @@ app_ui <- function() {
                  tabPanel("Phylogenetic Tree",
                           sidebarLayout(
                             sidebarPanel(
+                              #mod_errorCheck_ui("errorCheck_ui_1"),
                               mod_uploadData_ui("uploadData_ui_1"),
                               mod_paramsTree_ui("paramsTree_ui_1"),
                               mod_downloadImage_ui("downloadImage_ui_1"),
-                              width = 3),
+                              width = 4),
                             mainPanel(
                               mod_displayTree_ui("displayTree_ui_1"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_1")

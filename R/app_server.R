@@ -3,20 +3,22 @@
 app_server <- function(input, output,session) {
   # List the first level callModules here
   
-  #uplodad the tree and call that module treeDisplay
-  treeDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
+  #errorCheck <- callModule(mod_errorCheck_server, "errorCheck_ui_1")
+  
+  #uplodad the tree and call that module dataDisplay
+  dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
   #module which holds the tree viz parameters
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_1")
   
   #displays the tree and uses the params as input to change tree viz
-  plot <-callModule(mod_displayTree_server, "displayTree_ui_1", treeDisplay$treeFileOut, treeDisplay$geneFileCorOrUnOut, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
+  plot <-callModule(mod_displayTree_server, "displayTree_ui_1", dataDisplay$treeFileOut, dataDisplay$geneFileCorOrUnOut, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
   
   #metaFile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
   
   #callModule(mod_displayTable_server, "displayTable_ui_1", metaFile)
   
-  #geneFile <- callModule(mod_dataInput_server, "dataInput_ui_gene", treeDisplay$metaFileOut, treeDisplay$metaSepOut)
+  #geneFile <- callModule(mod_dataInput_server, "dataInput_ui_gene", dataDisplay$metaFileOut, dataDisplay$metaSepOut)
   
   #callModule(mod_displayTable_server, "displayTable_ui_2", geneFile)
   
