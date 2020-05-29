@@ -7,23 +7,20 @@
 
 ## 2.1 Add modules
 ## 
+
+#upload data - tree, genetic, meta
 golem::add_module(name="uploadData")
 
-#trees
-golem::add_module(name="uploadTree")
+#tree parameters and display
 golem::add_module(name = "paramsTree")
 golem::add_module(name = "DisplayTree")
-golem::add_module(name = "cladeAnnotator")
 
-#meta and genetic data
-golem::add_module(name = "dataInput") # Name of the module
-golem::add_module(name="displayTable")
+#annotation module
+golem::add_module(name = "cladeAnnotator")
 
 #donwload image
 golem::add_module(name="downloadImage")
 
-
-golem::add_module(name="combineTandG")
 
 
 ## 2.2 Add dependencies

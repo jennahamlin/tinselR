@@ -12,7 +12,7 @@ mod_uploadData_ui <- function(id){
   tagList(
     
     fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
-
+    
     # Input: Select a file ----
     fileInput(ns("geneFile"),
               label = "2. Upload a genetic distance file ",     #label here is specified and is called in the app_ui with the tags$div section
@@ -21,13 +21,13 @@ mod_uploadData_ui <- function(id){
                          "text/comma-separated-values,text/plain",
                          ".csv",
                          ".tsv")),
-
+    
     # Input: Select separator ----
     radioButtons(ns("geneSep"), "Separator for genetic data",
                  choices = c(Comma = ",",
                              Tab = "\t"),
                  selected = "\t"),
-
+    
     # Input: Select a file ----
     fileInput(ns("metaFile"),
               label= "3. Upload an optional meta data file",     #label here is specified and is called in the app_ui with the tags$div section
@@ -36,7 +36,7 @@ mod_uploadData_ui <- function(id){
                          "text/comma-separated-values,text/plain",
                          ".csv",
                          ".tsv")),
-
+    
     # Input: Select separator ----
     radioButtons(ns("metaSep"), "Separator for meta data",
                  choices = c(Comma = ",",
@@ -52,23 +52,6 @@ mod_uploadData_ui <- function(id){
 mod_uploadData_server <- function(input, output, session){
   ns <- session$ns
   
-  # #function to read data in either genetic distance matrix or meta data file 
-  readData<-function(filepath, sep)
-  {readr::read_delim(filepath,
-                     sep,
-                     trim_ws = T,
-                     skip_empty_rows = T,
-                     col_names = T,
-                     col_types = readr::cols(.default = readr::col_character())
-  )
-  }
-  
-
-  
-  
-  
-  
-  # 
   # readData <- function(filepath, sep){
   #   read.delim(filepath,
   #              sep,
@@ -78,34 +61,12 @@ mod_uploadData_server <- function(input, output, session){
   #              stringsAsFactors = F)
   # }
   
-  # #reactive expression that until a file is uploaded, the below message is displayed
-  # geneFileUp <- reactive({
-  #   validate(need(input$geneFile !="", "Please import a genetic distance file to use the clade annotator"))
-  #   input$geneFile
-  # })
-
+  
   # geneFileUpRename <- reactive({
   #  g <-geneFileUp()
   #  names(g)<-g[1,]
   # })
   # 
-  #reactive expression that holds the meta data file
-  metaFileUp <- reactive({
-    input$metaFile
-  })
-
-  metaFileType <- eventReactive(input$metaSep, {
-    if(input$metaSep == "\t")
-    {
-      return("\t")
-    }
-    else (input$metaSep == ",")
-    {
-      return(",")
-    }
-  })
-
-  
   # 
   # metaFileUpRename <-reactive({
   #   m <- metaFileUp()
@@ -126,9 +87,70 @@ mod_uploadData_server <- function(input, output, session){
   # })
   #  
   
+  # #function to read data in either genetic distance matrix or meta data file 
+  readData<-function(filepath, sep)
+  {readr::read_delim(filepath,
+                     sep,
+                     trim_ws = T,
+                     skip_empty_rows = T,
+                     col_names = T,
+                     col_types = readr::cols(.default = readr::col_character())
+  )
+  }
   
+  #reactive expression that until a file is uploaded, the below message is displayed
+  geneFileUp <- reactive({
+    validate(need(input$geneFile !="", "Please import a genetic distance file to use the clade annotator"))
+    input$geneFile
+  })
   
-  #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels 
+  #reactive which holds the input selected for delimiter for gene file - this will check for correctly selected delimitor
+  geneFileType <- eventReactive(input$geneSep, {
+    if(input$geneSep == "\t")
+    {
+      return("\t")
+    }
+    else (input$geneSep == ",")
+    {
+      return(",")
+    }
+  })
+  
+  #reactive expression that holds the meta data file
+  metaFileUp <- reactive({
+    input$metaFile
+  })
+  
+  #reactive which holds the input selected for delimiter for meta file
+  metaFileType <- eventReactive(input$metaSep, {
+    if(input$metaSep == "\t")
+    {
+      return("\t")
+    }
+    else (input$metaSep == ",")
+    {
+      return(",")
+    }
+  })
+  
+  #function but was getting an error message - I should come back to this
+  # errChk<- function(FileUp, FileType){
+  #   myLines <- readLines(con = FileUp()$datapath,
+  #                        n = 3)
+  #   errchk <- validate(
+  #     need(
+  #       length(strsplit(myLines[2], FileType())[[1]]) == length(strsplit(myLines[3], FileType())[[1]]),
+  #       "Error: the delimiter chosen does not match the file type uploaded."
+  #     ),
+  #     need(
+  #       length(strsplit(myLines[2], FileType())[[1]]) > 1,
+  #       "Error: the delimiter chosen does not match the file type uploaded."
+  #     )
+  #   )
+  # }
+  
+  #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels
+  #this also performs a check to see if the correct delimitor is selected before reading in the file. 
   treeFileUp <- reactive({
     
     validate(need(input$treeFile !="", "Please import newick tree file"))
@@ -136,9 +158,9 @@ mod_uploadData_server <- function(input, output, session){
     
     if (is.null(metaFileUp()$datapath)) {
       treeio::read.newick(input$treeFile$datapath)
-    } else {
-      
-      myLines <- readLines(con = metaFileUp()$datapath,
+    } 
+    else {
+      myLines <- readLines(con = metaFileUp()$datapath, #can I extract this to a function?
                            n = 3)
       errchk <- validate(
         need(
@@ -151,13 +173,13 @@ mod_uploadData_server <- function(input, output, session){
         )
       )
       if (is.null(errchk) == TRUE) {
-       
+        
         dataFile <- readData(filepath=metaFileUp()$datapath,
                              sep =  input$metaSep)
         
         treeio::read.newick(input$treeFile$datapath)%>%
           phylotools::sub.taxa.label(., as.data.frame(dataFile))
-        }
+      }
       else{
         return(errchk)
       }
@@ -166,23 +188,94 @@ mod_uploadData_server <- function(input, output, session){
   
   geneFileCorOrUn <- reactive({ 
     if (is.null(metaFileUp()$datapath)) {
+    
+      myLines <- readLines(con = geneFileUp()$datapath, #can I extract this to a function?
+                           n = 3)
+      errchk <- validate(
+        need(
+          length(strsplit(myLines[2], geneFileType())[[1]]) == length(strsplit(myLines[3], geneFileType())[[1]]),
+          "Error: the delimiter chosen does not match the file type uploaded."
+        ),
+        need(
+          length(strsplit(myLines[2], geneFileType())[[1]]) > 1,
+          "Error: the delimiter chosen does not match the file type uploaded."
+        )
+      )
+      if (is.null(errchk) == TRUE) {
+        
+        geneFileUncorrected <- readData(filepath = geneFileUp()$datapath,
+                                        sep =  input$geneSep)
+      }
+      else{
+        return(errchk)
+      }
       
-      geneFileUncorrected <- readData(filepath = geneFileUp()$datapath,
-                                      sep =  input$geneSep)
+      
+      
     } 
     else {
+      
+      myLines <- readLines(con = metaFileUp()$datapath, #can I extract this to a function?
+                           n = 3)
+      errchk <- validate(
+        need(
+          length(strsplit(myLines[2], metaFileType())[[1]]) == length(strsplit(myLines[3], metaFileType())[[1]]),
+          "Error: the delimiter chosen does not match the file type uploaded."
+        ),
+        need(
+          length(strsplit(myLines[2], metaFileType())[[1]]) > 1,
+          "Error: the delimiter chosen does not match the file type uploaded."
+        )
+      )
+      if (is.null(errchk) == TRUE) {
+        
+        
+        metaFileComb <- readData(filepath = metaFileUp()$datapath,
+                                 sep =  input$metaSep)      }
+      else{
+        return(errchk)
+      }
+      
       
       metaFileComb <- readData(filepath = metaFileUp()$datapath,
                                sep =  input$metaSep)
       
-      geneFileCorrected <- readData(filepath = geneFileUp()$datapath,
-                                    sep =  input$geneSep)
       
-      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
+      myLines <- readLines(con = geneFileUp()$datapath, #can I extract this to a function?
+                           n = 3)
+      errchk <- validate(
+        need(
+          length(strsplit(myLines[2], geneFileType())[[1]]) == length(strsplit(myLines[3], geneFileType())[[1]]),
+          "Error: the delimiter chosen does not match the file type uploaded."
+        ),
+        need(
+          length(strsplit(myLines[2], geneFileType())[[1]]) > 1,
+          "Error: the delimiter chosen does not match the file type uploaded."
+        )
+      )
+      if (is.null(errchk) == TRUE) {
+        
+        geneFileCorrected <- readData(filepath = geneFileUp()$datapath,
+                                      sep =  input$geneSep)
+        
+        colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
+        
+        geneFileCorrected$. = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$.)]
+        
+        return(geneFileCorrected)
+        
+          }
+      else{
+        return(errchk)
+      }
       
-      geneFileCorrected$. = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$.)]
       
-      return(geneFileCorrected)
+      
+      
+      
+      
+      
+      
     }
   })
   
