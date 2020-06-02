@@ -31,21 +31,12 @@ mod_displayTree_server <- function(input, output, session,
                                    treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node, midP){
   ns <- session$ns
   
-  adjustBoot <- reactive ({
-    bs <- ifelse((nchar(treeFileOut()$node.label)!=2 &!is.na(as.numeric(treeFileOut()$node.label))) ,paste0("0",treeFileOut()$node.label),treeFileOut()$node.label)
-  })
-  
-  adjustTreeBoot <- reactive({
-    purrr::list_modify(treeFileOut(), node.label = adjustBoot())
-  })
-  
-  
   midTree <- reactive({
     if(midP() == TRUE) {
-      return(phytools::midpoint.root(adjustTreeBoot()))
+      return(phytools::midpoint.root(treeFileOut()))
     }
     else {
-      return(adjustTreeBoot())
+      return(treeFileOut())
     }
   })
   
@@ -67,24 +58,25 @@ mod_displayTree_server <- function(input, output, session,
   })
   
   
-  
-  
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   make_tree <- reactive({
-    
+
     if(is.null(input$id)) # this disconnects the need for genetic distance file to be uploaded.
     {ggtree::ggtree(midTree(), layout = treeformat())+
         ggplot2::xlim(NA, lim())+
         ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
         ggtree::geom_treescale(width = numscale())+
-        ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
+        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = 0.00025)
+        #ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
     }
     else{
       ggtree::ggtree(gandTS4(), layout = treeformat())+
         ggplot2::xlim(NA, lim())+
         ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
         ggtree::geom_treescale(width = numscale())+
-        ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
+        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()))
+      
+        #ggtree::geom_text2(ggplot2::aes(label=label, subset=!is.na(as.numeric(label)) & label >node()), nudge_x = 0.0002)
     }
   })
   

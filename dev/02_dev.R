@@ -36,7 +36,6 @@ usethis::use_package("readr") # for reading in files
 usethis::use_package("tidyr")
 usethis::use_package("phylotools")
 usethis::use_package("tibble")
-usethis::use_package("purrr")
 
 ## 2.3 Add tests
 
