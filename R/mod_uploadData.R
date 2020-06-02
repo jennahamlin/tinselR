@@ -133,7 +133,8 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
-  #function but was getting an error message - I should come back to this
+  #function to confirm the type of file uploaded matches the selected type 
+  # this uses the fille uploaded (FileUp), the type of file selected (FileType - either a csv or tsv), and the file seperate from input$sep
   errChk<- function(FileUp, FileType, FileSep){
     myLines <- readLines(con = FileUp$datapath,
                          n = 3)
@@ -148,7 +149,7 @@ mod_uploadData_server <- function(input, output, session){
     )
     if (is.null(errchk) == TRUE) {
       FileName <- readData(filepath = FileUp$datapath, sep = FileSep)
-      return(FileName)
+      #return(FileName)
     }
     else {
       return(errchk)

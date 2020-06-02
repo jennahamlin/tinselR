@@ -45,6 +45,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     make_treeOut()})
   })
   
+
   # Initialize a reactive value and set to zero
   n_annotations <- reactiveVal(0)
   annotations <- reactiveValues()
@@ -156,12 +157,18 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(plt)
   })
   
+  
+
   #remove the annotations
   observeEvent(input$tree_reset,{
     
     output$treeDisplay <- renderPlot({
       if(n_annotations() <= 1){
-        make_treeOut()
+        return(
+          #n_annotations <- reactiveVal(0),
+               annotations <- reactiveValues()
+        )
+        #make_treeOut()
       }
       else{
         make_treeOut() + anno_plot_undo()

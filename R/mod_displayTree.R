@@ -31,12 +31,21 @@ mod_displayTree_server <- function(input, output, session,
                                    treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node, midP){
   ns <- session$ns
   
+  adjustBoot <- reactive ({
+    bs <- ifelse((nchar(treeFileOut()$node.label)!=2 &!is.na(as.numeric(treeFileOut()$node.label))) ,paste0("0",treeFileOut()$node.label),treeFileOut()$node.label)
+  })
+  
+  adjustTreeBoot <- reactive({
+    purrr::list_modify(treeFileOut(), node.label = adjustBoot())
+  })
+  
+  
   midTree <- reactive({
     if(midP() == TRUE) {
-      return(phytools::midpoint.root(treeFileOut()))
+      return(phytools::midpoint.root(adjustTreeBoot()))
     }
     else {
-      return(treeFileOut())
+      return(adjustTreeBoot())
     }
   })
   
@@ -56,6 +65,9 @@ mod_displayTree_server <- function(input, output, session,
     dplyr::full_join(treeObject(), geneObject(), by = "label")%>% 
       treeio::as.treedata() 
   })
+  
+  
+  
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   make_tree <- reactive({
