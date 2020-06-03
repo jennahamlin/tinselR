@@ -21,8 +21,6 @@ golem::add_module(name = "cladeAnnotator")
 #donwload image
 golem::add_module(name="downloadImage")
 
-
-
 ## 2.2 Add dependencies
 
 usethis::use_package("utils")
@@ -36,6 +34,7 @@ usethis::use_package("readr") # for reading in files
 usethis::use_package("tidyr")
 usethis::use_package("phylotools")
 usethis::use_package("tibble")
+usethis::use_package("shinythemes")
 
 ## 2.3 Add tests
 
@@ -49,7 +48,10 @@ golem::browser_button()
 
 golem::add_js_file( "script" )
 golem::add_js_handler( "handlers" )
-golem::add_css_file( "custom" )
+golem::add_css_file( "bootstrap.css" )
+
+golem::use_external_css_file(url = "https://github.com/jennahamlin/bootswatch/blob/master/dist/litera/bootstrap.css", name = "bootswatch.litera")
+
 
 # 3. Documentation
 

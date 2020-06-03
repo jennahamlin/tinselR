@@ -163,10 +163,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   observeEvent(input$tree_reset,{
     
     output$treeDisplay <- renderPlot({
-      if(n_annotations() <= 1){
+      if(n_annotations() == 1){
         return(
+          
+          #n_annotations<<-reactiveVal(0)
           #n_annotations <- reactiveVal(0),
-               annotations <- reactiveValues()
+               #annotations <- reactiveValues()
         )
         #make_treeOut()
       }
