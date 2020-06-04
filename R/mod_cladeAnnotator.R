@@ -11,8 +11,10 @@ mod_cladeAnnotator_ui <- function(id){
   ns <- NS(id)
   tagList(
     actionButton(ns("add_tree"),"Visualize Tree"),
-    actionButton(ns("add_annotation"),"Add Annotation to Tree"),
-    actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree"),
+    actionButton(ns("add_annotation"),"Add Annotation to Tree", icon("refresh"),
+                 class = "btn btn-primary"),
+    actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree", icon("refresh"),
+                 class = "btn btn-primary"),
     actionButton(ns("reload"), "Reload the Shiny application session"), 
     
     plotOutput(ns("treeDisplay"), brush = ns("plot_brush")),
@@ -48,7 +50,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
 
   # Initialize a reactive value and set to zero
   n_annotations <- reactiveVal(0)
-  annotations <- reactiveValues()
+  annotations <- reactiveValues(data = NULL)
   
   #reactive that holds the brushed points on a plot
   dataWithSelection <- reactive({
@@ -99,7 +101,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     
     lapply(1:n_annotations(), function(i)
       snp_anno(geneFile = geneFileSNP(),
-               tips = annotations[[paste0("ann", i)]]
+               tips = annotations$data[[paste0("ann", i)]]
       ))
   })
   
@@ -111,14 +113,14 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     n_annotations(new)
     
     #add the tip vector (aka label) to the annotation reactive value
-    annotations[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+    annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
     #list apply over the make_layer function to add the annotation
     plt <-
       lapply(1:n_annotations(), function(i)
         make_layer(
           make_treeOut(),
-          tips = annotations[[paste0("ann", i)]],
+          tips = annotations$data[[paste0("ann", i)]],
           label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),  
           color = "red"
         ))
@@ -150,7 +152,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       lapply(1:n_annotations(), function(i)
         make_layer(
           make_treeOut(),
-          tips = annotations[[paste0("ann", i)]],
+          tips = annotations$data[[paste0("ann", i)]],
           label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
           color = "red"
         ))
@@ -164,12 +166,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     
     output$treeDisplay <- renderPlot({
       if(n_annotations() == 1){
-        return(
-          
+        return()
+        #return(annotations$data <<- NULL
           #n_annotations<<-reactiveVal(0)
           #n_annotations <- reactiveVal(0),
                #annotations <- reactiveValues()
-        )
+        #)
         #make_treeOut()
       }
       else{

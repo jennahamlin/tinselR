@@ -35,6 +35,13 @@ usethis::use_package("tidyr")
 usethis::use_package("phylotools")
 usethis::use_package("tibble")
 usethis::use_package("shinythemes")
+usethis::use_package("colorspace")
+usethis::use_package("phangorn")
+usethis::use_package("glue")
+usethis::use_package("gtools")
+
+
+
 
 ## 2.3 Add tests
 
