@@ -49,6 +49,32 @@ fileCheck<- function(FileUp, FileType, FileSep){
   }
 }
 
+## cladeAnnotator server functions
+
+#function which gets the snps for two tips and puts them into the snpVector
+snpVector <- c()
+
+snp_anno <- function(geneFile, tips){
+  for (i in 1:length(tips)){
+    for (j in 1:length(tips)){
+      if(tips[i] == tips[j]) next #https://stackoverflow.com/questions/36329183/exclude-one-fixed-variable-in-for-loop
+      snpVector[i]<- geneFile%>%
+        dplyr::filter(label == tips[i] & name == tips[j]) %>%
+        dplyr::pull(value)
+    }
+  }
+  return(as.numeric(snpVector))
+}
+
+#function which makes the annotation layer(s)
+make_layer <- function(tree, tips, label, color, offset) {
+  ggtree::geom_cladelabel(
+    node = phytools::findMRCA(ape::as.phylo(tree), tips),
+    label = label,
+    color = color,
+    offset 
+  )
+}
 
 
 

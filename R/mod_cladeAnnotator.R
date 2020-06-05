@@ -40,17 +40,14 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     geneFile()[which(geneFile()$label != geneFile()$name),]
   })
   
-  
-  
   #displays the tree plot, uses output from the displayTree module 
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
     make_treeOut()})
   })
-  
 
   # Initialize a reactive value and set to zero
   n_annotations <- reactiveVal(0)
-  annotations <- reactiveValues(data = NULL)
+  annotations <- reactiveValues()
   
   #reactive that holds the brushed points on a plot
   dataWithSelection <- reactive({
@@ -59,7 +56,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   tipVector <- c()
   
-  #add label to vector if isTip == True
+  #add label to tipVector if isTip == True
   dataWithSelection2 <- eventReactive(input$plot_brush, {
     for (i in 1:length(dataWithSelection()$label)) {
       if (dataWithSelection()$isTip[i] == TRUE)
@@ -68,37 +65,9 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(tipVector)
   })
   
-  output$content<- renderTable({
-    dataWithSelection2()
-  })
   
-  
-  snpVector <- c()
-  
-  snp_anno <- function(geneFile, tips){
-    for (i in 1:length(tips)){
-      for (j in 1:length(tips)){
-        if(tips[i] == tips[j]) next #https://stackoverflow.com/questions/36329183/exclude-one-fixed-variable-in-for-loop
-        snpVector[i]<- geneFile%>%
-          dplyr::filter(label == tips[i] & name == tips[j]) %>%
-          dplyr::pull(value)
-      }
-    }
-    return(as.numeric(snpVector))
-  }
-  
-  #function which makes the annotation layer(s)
-  make_layer <- function(tree, tips, label, color) {
-    ggtree::geom_cladelabel(
-      node = phytools::findMRCA(ape::as.phylo(tree), tips),
-      label = label,
-      color = color,
-      offset = max(make_treeOut()$data$x)
-    )
-  }
-  
+  #use snp_anno function to get the snps differences between compared tips
   snpMean <- eventReactive(input$add_annotation, {
-    
     lapply(1:n_annotations(), function(i)
       snp_anno(geneFile = geneFileSNP(),
                tips = annotations$data[[paste0("ann", i)]]
@@ -122,7 +91,8 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
           make_treeOut(),
           tips = annotations$data[[paste0("ann", i)]],
           label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),  
-          color = "red"
+          color = "red",
+          offset = max(make_treeOut()$data$x)
         ))
     return(plt)
   })
@@ -158,8 +128,6 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         ))
     return(plt)
   })
-  
-  
 
   #remove the annotations
   observeEvent(input$tree_reset,{
