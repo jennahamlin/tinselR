@@ -49,6 +49,7 @@ fileCheck<- function(FileUp, FileType, FileSep){
   }
 }
 
+
 ## cladeAnnotator server functions
 
 #function which gets the snps for two tips and puts them into the snpVector
