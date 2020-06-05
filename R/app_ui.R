@@ -8,7 +8,7 @@ app_ui <- function() {
     fluidPage(theme = shinythemes::shinytheme('paper'),
       navbarPage("Tinsel - a tree visulization and annotation tool",
                  tabPanel("ReadMe",fluidRow(column(12, wellPanel( includeMarkdown("gettingStarted.md"))))), # wellPanel adds a gray box
-                 tabPanel("Phylogenetic Tree",
+                 tabPanel("Data Upload",
                           sidebarLayout(
                             sidebarPanel(
                               #mod_errorCheck_ui("errorCheck_ui_1"),

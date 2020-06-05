@@ -1,14 +1,18 @@
 ### Getting started with Tinsel
 
-**2** files are required (phylogenetic tree and genetic distance) and **1** is optional (metadata).
+Tinsel at its' most basic level is a graphical viewer of newick phylogenetic trees and as a program for producing publication-ready figures.  
+The power of Tinsel comes with combining a genetic distance matrix for annotating a tree for outbreak analyses.  
 
-Along the navigation pane (above), are three tabs for uploading data: 
-* **Phylogenetic Tree** - required; a newick generate tree 
-* **Genetic Distance data** - required; a tsv/txt/csv file
-* **Metadata** - optional; a tsv/txt/csv file 
+##### Please click on the 'Data Upload' pane, where you will be able to upload your files. 
 
+* **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
+* **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file
+* **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file 
 
-<u>Please navigate to each tab to upload your data.</u>   
-*Once the phylogenetic tree and the genetic distance file is uploaded you can -*
-* alter the visual representation of the tree. 
+<u>Once the phylogenetic tree is uploaded you can -</u>
+* Alter additional visualization parameters in the sidebar panel on the left. 
+
+<u>Once the genetic distance file is uploaded you can -</u>
 * add annotation to the visual representation of the tree.
+
+
