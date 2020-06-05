@@ -11,31 +11,58 @@ mod_uploadData_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
     
-    # Input: Select a file ----
-    fileInput(ns("geneFile"),
-              label = "2. Upload a genetic distance file ",     #label here is specified and is called in the app_ui with the tags$div section
-              multiple = FALSE,                                 #does not all multiple files to be uploaded
+    #this function does not work yet, error is "as.character: cannot coerce type 'closure' to vector of type 'character'
+    fileUpload<-function(id, label){
+      fileInput(ns(id),
+                label = label,
+               multiple = FALSE,                                 #does not all multiple files to be uploaded
               accept = c("text/csv",                            #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
-                         "text/comma-separated-values,text/plain",
-                         ".csv",
-                         ".tsv")),
+                        "text/comma-separated-values,text/plain",
+                       ".csv",
+                      ".tsv"))
+    },
     
-    # Input: Select separator ----
+    
+    fileUpload(id = "geneFile", label = "label"),
+
+
+    
+    fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
+
+    # # Input: Select a file ----
+    # fileInput(ns("geneFile"),
+    #           label = "2. Upload a genetic distance file ",     #label here is specified and is called in the app_ui with the tags$div section
+    #           multiple = FALSE,                                 #does not all multiple files to be uploaded
+    #           accept = c("text/csv",                            #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
+    #                      "text/comma-separated-values,text/plain",
+    #                      ".csv",
+    #                      ".tsv")),
+    
+    # inputSeparator <- function(id, label){
+    #   radioButtons(ns(id), 
+    #                label,  
+    #                choices = c(Comma = ",",
+    #                            Tab = "\t"),
+    #                selected = "\t")
+    # },
+    # 
+    # inputSeparator("geneSep", label = "Separator for genetic distance file"),
+    
+   # Input: Select separator ----
     radioButtons(ns("geneSep"), "Separator for genetic data",
                  choices = c(Comma = ",",
                              Tab = "\t"),
                  selected = "\t"),
-    
-    # Input: Select a file ----
-    fileInput(ns("metaFile"),
-              label= "3. Upload an optional meta data file",     #label here is specified and is called in the app_ui with the tags$div section
-              multiple = FALSE,                                  #does not all multiple files to be uploaded
-              accept = c("text/csv",                             #accept - this bypasses theneed to do validation as in the web brower only the files with these extensions are selectable
-                         "text/comma-separated-values,text/plain",
-                         ".csv",
-                         ".tsv")),
+
+   # Input: Select a file ----
+   fileInput(ns("metaFile"),
+             label= "3. Upload an optional meta data file",     #label here is specified and is called in the app_ui with the tags$div section
+             multiple = FALSE,                                  #does not all multiple files to be uploaded
+             accept = c("text/csv",                             #accept - this bypasses theneed to do validation as in the web brower only the files with these extensions are selectable
+                        "text/comma-separated-values,text/plain",
+                        ".csv",
+                        ".tsv")),
     
     # Input: Select separator ----
     radioButtons(ns("metaSep"), "Separator for meta data",
