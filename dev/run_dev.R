@@ -11,3 +11,5 @@ golem::document_and_reload()
 # Run the application
 Tinsel::run_app()
 
+#The downloaded source packages are in
+#‘C:\Users\ptx4\AppData\Local\Temp\1\RtmpIvq1X5\downloaded_packages’

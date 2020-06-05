@@ -16,9 +16,9 @@
 mod_paramsTree_ui <- function(id){
   ns <- NS(id)
   tagList(
+    
     checkboxInput(ns("alignTips"), "Align tip labels", FALSE),
     numericInput(ns("tipLim"), 'add spacing to plot', value = 0.01, max = 1 ),
-    
     checkboxGroupInput(ns("treeFormat"), "What tree layout?", 
                        choices = list(
                          "rectangular" = "rectangular", "slanted" = "slanted", 
