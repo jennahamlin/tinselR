@@ -1,6 +1,6 @@
 ###functions
 
-##uploadData module functions
+##uploadData server functions
 
 #function to read in the data using readr::read_delim
 readData<-function(filepath, sep)
@@ -12,6 +12,19 @@ readData<-function(filepath, sep)
                    col_types = readr::cols(.default = readr::col_character())
 )
 }
+
+#function which maps the type of file uploaded based on user selection. For example, inVAr could be input$genesep
+fileType <- function(inVar){
+  if(inVar == "\t")
+  {
+    return("\t")
+  }
+  else (inVar == ",")
+  {
+    return(",")
+  }
+}
+
 
 #function to confirm the type of file uploaded matches the selected type 
 # this uses the fille uploaded (FileUp), the type of file selected (FileType - either a csv or tsv), and the file seperate from input$sep
@@ -35,6 +48,10 @@ fileCheck<- function(FileUp, FileType, FileSep){
     return(filechk)
   }
 }
+
+
+
+
 
 # # Inverted versions of in, is.null and is.na
 # `%not_in%` <- Negate(`%in%`)

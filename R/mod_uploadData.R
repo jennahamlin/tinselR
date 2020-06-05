@@ -11,63 +11,18 @@ mod_uploadData_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    
-    #this function does not work yet, error is "as.character: cannot coerce type 'closure' to vector of type 'character'
-    # fileUpload<-function(id, label)
-    #   {fileInput(ns(id),
-    #             label = label,
-    #             multiple = FALSE,                                 #does not all multiple files to be uploaded
-    #             accept = c("text/csv",                            #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
-    #                        "text/comma-separated-values,text/plain",
-    #                        ".csv",
-    #                        ".tsv"))},
-    # 
-    # 
-    # fileUpload(id = "geneFile", label = "label"),
-    
-    
-    
+    #upload tree file 
     fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
     
-    #Input: Select a file ----
-    fileInput(ns("geneFile"),
-              label = "2. Upload a genetic distance file ",     #label here is specified and is called in the app_ui with the tags$div section
-              multiple = FALSE,                                 #does not all multiple files to be uploaded
-              accept = c("text/csv",                            #accept - this bypasses the  need to do validation as in the web brower only the files with these extensions are selectable
-                         "text/comma-separated-values,text/plain",
-                         ".csv",
-                         ".tsv")),
-
-    # inputSeparator <- function(id, label){
-    #   radioButtons(ns(id), 
-    #                label,  
-    #                choices = c(Comma = ",",
-    #                            Tab = "\t"),
-    #                selected = "\t")
-    # },
-    # 
-    # inputSeparator("geneSep", label = "Separator for genetic distance file"),
+    #upload genetic distance file using a function 
+    fileUpload(ns("geneFile"), fileLabel = "2. Upload a genetic distance file, please"),
     
-    # Input: Select separator ----
-    radioButtons(ns("geneSep"), "Separator for genetic data",
-                 choices = c(Comma = ",",
-                             Tab = "\t"),
-                 selected = "\t"),
+    #specify the type of separator for the genetic distance file uploaded
+    inputSeparator(ns("geneSep"), fileLabel = "Separator for genetic distance file"),
+  
+    fileUpload(ns("metaFile"), fileLabel = "3. Upload an optional meta data file"),
     
-    # Input: Select a file ----
-    fileInput(ns("metaFile"),
-              label= "3. Upload an optional meta data file",     #label here is specified and is called in the app_ui with the tags$div section
-              multiple = FALSE,                                  #does not all multiple files to be uploaded
-              accept = c("text/csv",                             #accept - this bypasses theneed to do validation as in the web brower only the files with these extensions are selectable
-                         "text/comma-separated-values,text/plain",
-                         ".csv",
-                         ".tsv")),
-    
-    # Input: Select separator ----
-    radioButtons(ns("metaSep"), "Separator for meta data",
-                 choices = c(Comma = ",",
-                             Tab = "\t"),
-                 selected = "\t")
+    inputSeparator(ns("metaSep"), fileLabel = "Separator for optional meta data file")
   )
 }
 
@@ -84,16 +39,9 @@ mod_uploadData_server <- function(input, output, session){
     input$geneFile
   })
   
-  #reactive which holds the input selected for delimiter for gene file - this will check for correctly selected delimitor
+  #reactive which holds the input selected for delimiter for gene file using fileType function - this will check for correctly selected delimitor
   geneFileType <- eventReactive(input$geneSep, {
-    if(input$geneSep == "\t")
-    {
-      return("\t")
-    }
-    else (input$geneSep == ",")
-    {
-      return(",")
-    }
+    fileType(input$geneSep)
   })
   
   #reactive expression that holds the meta data file, as this is optional not necessary to validate with informative text display
@@ -103,14 +51,7 @@ mod_uploadData_server <- function(input, output, session){
   
   #reactive which holds the input selected for delimiter for meta file
   metaFileType <- eventReactive(input$metaSep, {
-    if(input$metaSep == "\t")
-    {
-      return("\t")
-    }
-    else (input$metaSep == ",")
-    {
-      return(",")
-    }
+    fileType(input$metaSep)
   })
   
   #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels
@@ -128,7 +69,7 @@ mod_uploadData_server <- function(input, output, session){
       metaFileSeperate <- fileCheck(FileUp = metaFileUp(), FileType = metaFileType(), FileSep = input$metaSep) 
       
       treeio::read.newick(input$treeFile$datapath)%>%
-        phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate))
+        phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate)) #this line converts tip labels to pretty labels based on user upload of meta data file
     }
   })
   

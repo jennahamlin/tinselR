@@ -1,3 +1,41 @@
+###functions
+
+##uploadData ui functions
+
+#function to upload a file 
+fileUpload <- function(fileId, fileLabel){
+  fileInput(fileId,
+            fileLabel,
+            multiple = F,
+            accept = c("text/csv",                           
+                       "text/comma-separated-values,text/plain",
+                       ".csv",
+                       ".tsv"))
+  }
+
+inputSeparator <- function(fileId, fileLabel){
+  radioButtons(fileId,
+               fileLabel,
+               choices = c(Comma = ",",
+                           Tab = "\t"),
+               selected = "\t")
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Turn an R list into an HTML list
 #
 # @param list An R list
@@ -15,7 +53,7 @@ list_to_li <- function(list, class = NULL){
     res <- lapply(res, function(x) tagAppendAttributes(x, class = class))
     tagList(res)
   }
-
+  
 }
 
 #' @importFrom htmltools tags tagAppendAttributes tagList
@@ -27,7 +65,7 @@ list_to_p <- function(list, class = NULL){
     res <- lapply(res, function(x) tagAppendAttributes(x, class = class))
     tagList(res)
   }
-
+  
 }
 
 #' @importFrom glue glue
