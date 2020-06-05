@@ -78,43 +78,6 @@ mod_uploadData_ui <- function(id){
 #' @noRd 
 mod_uploadData_server <- function(input, output, session){
   ns <- session$ns
-
-  
-  # geneFileUpRename <- reactive({
-  #  g <-geneFileUp()
-  #  names(g)<-g[1,]
-  # })
-  # 
-  # 
-  # metaFileUpRename <-reactive({
-  #   m <- metaFileUp()
-  #   names(m)<-m[1,]
-  #   return(m)
-  #   })
-  # 
-  # metaFileUpRename2 <- reactive({
-  #   m2 <-metaFileUpRename()
-  #   m2 <- m2 %>% dplyr::slice(-1)
-  #   return(m2)
-  # })
-  
-  # metaFileUpRename2<-reactive({
-  #   m2<-metaFileUpRename()
-  #   m3 <-dplyr::slice(m2, -1)
-  #   return(m3)
-  # })
-  #  
-  
-  # #function to read data in either genetic distance matrix or meta data file 
-  # readData<-function(filepath, sep)
-  # {readr::read_delim(filepath,
-  #                    sep,
-  #                    trim_ws = T,
-  #                    skip_empty_rows = T,
-  #                    col_names = T,
-  #                    col_types = readr::cols(.default = readr::col_character())
-  # )
-  # }
   
   #reactive expression that until a file is uploaded, the below message is displayed if attempting to use the clade annotator button
   geneFileUp <- reactive({
