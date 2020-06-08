@@ -65,8 +65,8 @@ mod_uploadData_server <- function(input, output, session){
       treeio::read.newick(input$treeFile$datapath)
     } 
     else { #if metafile do an error check and then correct tip labels using phylotools sub.taxa.label function
-      
-      metaFileSeperate <- fileCheck(FileUp = metaFileUp(), FileType = metaFileType(), FileSep = input$metaSep) 
+    
+      metaFileSeperate <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
       
       treeio::read.newick(input$treeFile$datapath)%>%
         phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate)) #this line converts tip labels to pretty labels based on user upload of meta data file
@@ -79,12 +79,12 @@ mod_uploadData_server <- function(input, output, session){
   geneFileCorOrUn <- reactive({ 
     if (is.null(metaFileUp()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
       
-      geneFileUncorrected <- fileCheck(FileUp = geneFileUp(), FileType = geneFileType(), FileSep = input$geneSep)
+      geneFileUncorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep)
     } 
     
     else { #if meta file uploaded do an error check, then do an error check for genetic distance and then correct the distance file to match meta file tip labels
       
-      metaFileComb <- fileCheck(FileUp = metaFileUp(), FileType = metaFileType(), FileSep = input$metaSep) 
+      metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
       
       geneFileCorrected <- fileCheck(FileUp = geneFileUp(), FileType = geneFileType(), FileSep = input$geneSep)
       

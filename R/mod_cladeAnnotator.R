@@ -69,7 +69,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   #use snp_anno function to get the snps differences between compared tips
   snpMean <- eventReactive(input$add_annotation, {
     lapply(1:n_annotations(), function(i)
-      snp_anno(geneFile = geneFileSNP(),
+      snpAnno(geneFile = geneFileSNP(),
                tips = annotations$data[[paste0("ann", i)]]
       ))
   })
@@ -87,12 +87,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     #list apply over the make_layer function to add the annotation
     plt <-
       lapply(1:n_annotations(), function(i)
-        make_layer(
+        makeLayer(
           make_treeOut(),
           tips = annotations$data[[paste0("ann", i)]],
           label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),  
           color = "red",
-          offset = max(make_treeOut()$data$x)
+          offSet = max(make_treeOut()$data$x)
         ))
     return(plt)
   })
@@ -120,11 +120,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     #list apply over the make_layer function to add the annotation
     plt <-
       lapply(1:n_annotations(), function(i)
-        make_layer(
+        makeLayer(
           make_treeOut(),
           tips = annotations$data[[paste0("ann", i)]],
           label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
-          color = "red"
+          color = "red",
+          offSet = max(make_treeOut()$data$x)
         ))
     return(plt)
   })

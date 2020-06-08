@@ -3,8 +3,8 @@
 ##uploadData server functions
 
 #function to read in the data using readr::read_delim
-readData<-function(filepath, sep)
-{readr::read_delim(filepath,
+readData<-function(filePath, sep)
+{readr::read_delim(filePath,
                    sep,
                    trim_ws = T,
                    skip_empty_rows = T,
@@ -27,25 +27,25 @@ fileType <- function(inVar){
 
 
 #function to confirm the type of file uploaded matches the selected type 
-# this uses the fille uploaded (FileUp), the type of file selected (FileType - either a csv or tsv), and the file seperate from input$sep
-fileCheck<- function(FileUp, FileType, FileSep){
-  myLines <- readLines(con = FileUp$datapath,
+# this uses the fille uploaded (fileUp), the type of file selected (fileType - either a csv or tsv), and the file seperate from input$sep
+fileCheck<- function(fileUp, fileType, fileSep){
+  myLines <- readLines(con = fileUp$datapath,
                        n = 3)
-  filechk <- validate(
+  fileChk <- validate(
     need(
-      length(strsplit(myLines[2], FileType)[[1]]) == length(strsplit(myLines[3], FileType)[[1]]),
+      length(strsplit(myLines[2], fileType)[[1]]) == length(strsplit(myLines[3], fileType)[[1]]),
       "Error: the delimiter chosen does not match the file type uploaded."
     ),
     need(
-      length(strsplit(myLines[2], FileType)[[1]]) > 1,
+      length(strsplit(myLines[2], fileType)[[1]]) > 1,
       "Error: the delimiter chosen does not match the file type uploaded.")
   )
-  if (is.null(filechk) == TRUE) {
-    FileName <- readData(filepath = FileUp$datapath, sep = FileSep)
+  if (is.null(fileChk) == TRUE) {
+    FileName <- readData(filePath = fileUp$datapath, sep = fileSep)
     #return(FileName)
   }
   else {
-    return(filechk)
+    return(fileChk)
   }
 }
 
@@ -55,7 +55,7 @@ fileCheck<- function(FileUp, FileType, FileSep){
 #function which gets the snps for two tips and puts them into the snpVector
 snpVector <- c()
 
-snp_anno <- function(geneFile, tips){
+snpAnno <- function(geneFile, tips){
   for (i in 1:length(tips)){
     for (j in 1:length(tips)){
       if(tips[i] == tips[j]) next #https://stackoverflow.com/questions/36329183/exclude-one-fixed-variable-in-for-loop
@@ -68,12 +68,12 @@ snp_anno <- function(geneFile, tips){
 }
 
 #function which makes the annotation layer(s)
-make_layer <- function(tree, tips, label, color, offset) {
+makeLayer <- function(tree, tips, label, color, offSet) {
   ggtree::geom_cladelabel(
     node = phytools::findMRCA(ape::as.phylo(tree), tips),
     label = label,
     color = color,
-    offset 
+    offSet 
   )
 }
 
