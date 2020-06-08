@@ -90,7 +90,7 @@ mod_uploadData_server <- function(input, output, session){
       
       metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
       
-      geneFileCorrected <- fileCheck(FileUp = geneFileUp(), FileType = geneFileType(), FileSep = input$geneSep)
+      geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep)
       
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
       
