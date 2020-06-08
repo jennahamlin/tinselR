@@ -12,17 +12,21 @@ mod_uploadData_ui <- function(id){
   tagList(
     
     #upload tree file 
-    fileInput(ns("treeFile"), label ="1. Upload a newick file, please"),
+    fileInput(ns("treeFile"), label ="1. Upload a newick file"),
     
     #upload genetic distance file using a function 
-    fileUpload(ns("geneFile"), fileLabel = "2. Upload a genetic distance file, please"),
+    fileUpload(ns("geneFile"), fileLabel = "2. Upload a genetic distance file"),
     
+    div(style = "margin-top:-2em", #this decreases the distance between the two buttons (fileupload and inputseparator)
     #specify the type of separator for the genetic distance file uploaded
-    inputSeparator(ns("geneSep"), fileLabel = "Separator for genetic distance file"),
-  
+    inputSeparator(ns("geneSep"), fileLabel = "Separator for genetic distance file")),
+    
     fileUpload(ns("metaFile"), fileLabel = "3. Upload an optional meta data file"),
     
-    inputSeparator(ns("metaSep"), fileLabel = "Separator for optional meta data file")
+    div(style = "margin-top:-2em", 
+    inputSeparator(ns("metaSep"), fileLabel = "Separator for optional meta data file")),
+    tags$hr(style="border-color: black;")
+    
   )
 }
 

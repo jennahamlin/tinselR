@@ -1,17 +1,17 @@
 #' @import shiny
 app_ui <- function() {
   tagList(
-    #shinythemes::themeSelector(),  # <--- Add this somewhere in the UI
+    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
-    fluidPage(theme = shinythemes::shinytheme('paper'),
+    fluidPage(
+      theme = shinythemes::shinytheme('yeti'),
       navbarPage("Tinsel - a tree visulization and annotation tool",
                  tabPanel("ReadMe",fluidRow(column(12, wellPanel( includeMarkdown("gettingStarted.md"))))), # wellPanel adds a gray box
                  tabPanel("Data Upload",
                           sidebarLayout(
                             sidebarPanel(
-                              #mod_errorCheck_ui("errorCheck_ui_1"),
                               mod_uploadData_ui("uploadData_ui_1"),
                               mod_paramsTree_ui("paramsTree_ui_1"),
                               mod_downloadImage_ui("downloadImage_ui_1"),
@@ -21,7 +21,7 @@ app_ui <- function() {
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
                             )
                           )))
-                 #,
+      #,
       #            tabPanel("Genetic Distance",
       #                     sidebarLayout(
       #                       sidebarPanel(

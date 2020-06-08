@@ -25,7 +25,6 @@ fileType <- function(inVar){
   }
 }
 
-
 #function to confirm the type of file uploaded matches the selected type 
 # this uses the fille uploaded (fileUp), the type of file selected (fileType - either a csv or tsv), and the file seperate from input$sep
 fileCheck<- function(fileUp, fileType, fileSep){
@@ -35,10 +34,11 @@ fileCheck<- function(fileUp, fileType, fileSep){
     need(
       length(strsplit(myLines[2], fileType)[[1]]) == length(strsplit(myLines[3], fileType)[[1]]),
       "Error: the delimiter chosen does not match the file type uploaded."
-    ),
+    ), 
     need(
       length(strsplit(myLines[2], fileType)[[1]]) > 1,
-      "Error: the delimiter chosen does not match the file type uploaded.")
+      "Error: the delimiter chosen does not match the file type uploaded."), 
+    errorClass = "myClass"
   )
   if (is.null(fileChk) == TRUE) {
     FileName <- readData(filePath = fileUp$datapath, sep = fileSep)

@@ -18,7 +18,11 @@ mod_paramsTree_ui <- function(id){
   tagList(
     
     checkboxInput(ns("alignTips"), "Align tip labels", FALSE),
-    numericInput(ns("tipLim"), 'add spacing to plot', value = 0.01, max = 1 ),
+    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
+    
+    numericInput(ns("tipLim"), 'Add spacing to plot - ', value = 0.01, max = 1 ),
+    numericInput(ns("numScale"), "Size of the scale bar - ", value = 0.001),
+    numericInput(ns("nodeDisplay"), "Minimum value of bootstrap -", value = 50, max = 100),
     checkboxGroupInput(ns("treeFormat"), "What tree layout?", 
                        choices = list(
                          "rectangular" = "rectangular", "slanted" = "slanted", 
@@ -26,10 +30,7 @@ mod_paramsTree_ui <- function(id){
     checkboxGroupInput(ns("fontFormat"), "What font format for tip labels?", 
                        choices = list(
                          "bold" = "bold", "italic" = "italic", 
-                         "bold+italic" = "bold.italic"), selected = "bold"),
-    numericInput(ns("numScale"), "Size of the scale bar", value = 0.001),
-    numericInput(ns("nodeDisplay"), "Minimum value of bootstrap", value = 50, max = 100),
-    checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE)
+                         "bold+italic" = "bold.italic"), selected = "bold")
     
     
   )
