@@ -10,4 +10,4 @@ $run_dev.*
 ^README\.Rmd$
 ^/home/jennahamlin/Desktop/Tinsel/Dockerfile$
 ^app\.R$
-^rsconnect$
+^appveyor\.yml$
