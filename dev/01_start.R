@@ -47,7 +47,7 @@ golem::use_recommended_tests()
 
 ## 1.5 : Use Recommended Package
 
-#golem::use_recommended_deps()
+golem::use_recommended_deps()
 
 #essentially step 1.5 runs the code use_package("packagename"),
 #which adds the dependencies needed for importing

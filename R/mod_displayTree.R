@@ -67,7 +67,6 @@ mod_displayTree_server <- function(input, output, session,
     
   }
   
-  
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   make_tree <- reactive({
     

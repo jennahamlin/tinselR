@@ -21,6 +21,7 @@ golem::add_module(name = "cladeAnnotator")
 #donwload image
 golem::add_module(name="downloadImage")
 
+
 ## 2.2 Add dependencies
 
 usethis::use_package("utils")
@@ -39,7 +40,7 @@ usethis::use_package("colorspace")
 usethis::use_package("phangorn")
 usethis::use_package("glue")
 usethis::use_package("gtools")
-
+usethis::use_pipe() 
 
 
 
