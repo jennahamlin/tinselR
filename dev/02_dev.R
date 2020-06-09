@@ -70,7 +70,11 @@ devtools::build_vignettes()
 ## 3.2 Code coverage
 ## You'll need GitHub there
 usethis::use_github()
+
 usethis::use_travis()
+
+
+
 usethis::use_appveyor()
 
 # You're now set! 
