@@ -1,16 +1,25 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
+sudo: false
 cache: packages
 
+r_github_packages:
+  - ThinkR-open/golem  # pre-install to avoid vignette package errors
+
+# build matrix; turn on vdiffr only on r release
 matrix:
   include:
-  - r: release
-  - r: devel
   - r: oldrel
+  - r: 3.4
   - r: 3.5
 
-
+before_install:
+  - Rscript -e 'update.packages(ask = FALSE)'
+  
+after_success:
+  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'pkgdown::build_site()'
+  
 addons:
   apt:
     update: true
