@@ -3,6 +3,14 @@
 language: R
 cache: packages
 
+matrix:
+  include:
+  - r: release
+  - r: devel
+  - r: oldrel
+  - r: 3.5
+
+
 addons:
   apt:
     update: true
