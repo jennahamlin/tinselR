@@ -9,9 +9,7 @@ r_github_packages:
 # build matrix; turn on vdiffr only on r release
 matrix:
   include:
-  - r: oldrel
-  - r: 3.4
-  - r: 3.5
+  - r: 3.5.1
 
 before_install:
   - Rscript -e 'update.packages(ask = FALSE)'
