@@ -3,21 +3,45 @@ language: R
 sudo: false
 cache: packages
 
-r_github_packages:
-  - ThinkR-open/golem  # pre-install to avoid vignette package errors
-
+os:
+  - linux
+  - osx
+  
 # build matrix; turn on vdiffr only on r release
 matrix:
   include:
-  - r: 3.5.1
+  - r: 3.5
+  - r: 3.4
+  
+r_github_packages:
+  - ThinkR-open/golem  # pre-install to avoid vignette package errors
 
-before_install:
-  - Rscript -e 'update.packages(ask = FALSE)'
-  
+apt_packages:
+  - libfftw3-dev
+
+r_packages:
+  - covr
+  - ape
+  - ggplot2
+  - tidyr
+  - abind
+  - tiff
+
+env:
+  global:
+    - _R_CHECK_FORCE_SUGGESTS_=False
+    - R_LIBS="http://cran.rstudio.com"
+
+
+after_failure:
+  - ./travis-tool.sh dump_logs
+
+## r_github_packages:
+##   - jimhester/covr
+
 after_success:
-  - Rscript -e 'covr::codecov()'
-  - Rscript -e 'pkgdown::build_site()'
-  
+- Rscript -e 'library(covr); codecov()'
+
 addons:
   apt:
     update: true
