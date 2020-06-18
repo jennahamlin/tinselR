@@ -31,3 +31,18 @@ after_failure:
 
 after_success:
 - Rscript -e 'library(covr); codecov()'
+
+addons:
+  apt:
+    update: true
+    packages:
+      - libmagick++-dev
+      - librsvg2-dev
+      - libwebp-dev
+      - libpoppler-cpp-dev
+      - libtesseract-dev
+      - libleptonica-dev
+      - tesseract-ocr-eng
+      - libfftw3-dev
+      - cargo
+      - gsfonts
