@@ -23,7 +23,7 @@ golem::add_module(name="downloadImage")
 
 
 ## 2.2 Add dependencies
-
+usethis::use_package("config")
 usethis::use_package("utils")
 usethis::use_package("markdown") # for the documentation page
 usethis::use_package( "dplyr" ) # for manipulating input files 
