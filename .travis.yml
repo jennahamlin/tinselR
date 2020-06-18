@@ -5,7 +5,7 @@ sudo: false
 cache: packages
 bioc_packages:
   - ggtree
-  - treio
+  - treeio
   
 os:
   - linux
