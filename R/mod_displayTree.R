@@ -47,6 +47,7 @@ mod_displayTree_server <- function(input, output, session,
   
   #change column1, row1 to the id of label and replace - with a 0 within the file
   geneObject <- reactive({
+    label <- . <- NULL
     dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%  
       replace(., .=="-", 0) 
   })

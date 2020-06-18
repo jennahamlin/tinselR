@@ -30,13 +30,15 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   # #convert to long data frame - three columns. This takes as input the genetic distance object from display tree module
   geneFile <-reactive({ 
+    label <- NULL
     geneObjectOut()%>%
-      na.omit()%>%
+      stats::na.omit()%>%
       tidyr::pivot_longer(-label)
   })
   
   #remove self comparisons for this table - necessary for snp mean/median calculation. 
   geneFileSNP <-reactive({
+    label <- NULL
     geneFile()[which(geneFile()$label != geneFile()$name),]
   })
   
@@ -58,6 +60,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   #add label to tipVector if isTip == True
   dataWithSelection2 <- eventReactive(input$plot_brush, {
+    label <- NULL
     for (i in 1:length(dataWithSelection()$label)) {
       if (dataWithSelection()$isTip[i] == TRUE)
         tipVector <- c(tipVector, dataWithSelection()$label[i])

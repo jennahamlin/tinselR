@@ -40,6 +40,13 @@ usethis::use_package("colorspace")
 usethis::use_package("phangorn")
 usethis::use_package("glue")
 usethis::use_package("gtools")
+usethis::use_package("ape")
+usethis::use_package("ggplot2")
+usethis::use_package("treeio")
+usethis::use_package("stats")
+
+
+
 usethis::use_pipe() 
 
 
