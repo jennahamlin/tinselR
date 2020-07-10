@@ -139,10 +139,10 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     output$treeDisplay <- renderPlot({
       if(n_annotations() == 1){
         return()
-        #return(annotations$data <<- NULL
-          #n_annotations<<-reactiveVal(0)
+        #annotations$data <<- NULL
+          n_annotations<<-(NULL)
           #n_annotations <- reactiveVal(0),
-               #annotations <- reactiveValues()
+               #annotations <- reacti
         #)
         #make_treeOut()
       }
@@ -163,4 +163,3 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
 
 ## To be copied in the server
 # callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1")
-
