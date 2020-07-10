@@ -133,24 +133,38 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(plt)
   })
 
-  #remove the annotations
-  observeEvent(input$tree_reset,{
+  # remove the annotations
+  observeEvent(input$tree_reset, {
     
     output$treeDisplay <- renderPlot({
-      if(n_annotations() == 1){
-        return()
-        #annotations$data <<- NULL
-          n_annotations<<-(NULL)
-          #n_annotations <- reactiveVal(0),
-               #annotations <- reacti
-        #)
-        #make_treeOut()
-      }
-      else{
+      if (n_annotations() == 1) {
+        #return()
+        #return(annotations$data <<- NULL)
+        n_annotations<<-reactiveVal(0)
+        
+        #n_annotations <- reactiveVal(0)
+        #annotations <- reactiveValues() ) make_treeOut() )
+      } else {
         make_treeOut() + anno_plot_undo()
       }
     })
   })
+  
+    # #remove the annotations
+  # observeEvent(input$tree_reset,{
+  #   
+  #   output$treeDisplay <- renderPlot({
+  #     if(n_annotations() == 1){
+  #         #n_annotations<<-reactiveVal()
+  #         annotations<<-(NULL)
+  #         
+  #       make_treeOut()
+  #         }
+  #     else{
+  #       make_treeOut() + anno_plot_undo()
+  #     }
+  #   })
+  # })
   
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({make_treeOut() +  anno_plot()})
