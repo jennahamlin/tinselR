@@ -1,4 +1,6 @@
 #' Run the Shiny Application
+#' 
+#' @param ... other arguments 
 #'
 #' @export
 #' @importFrom shiny shinyApp
