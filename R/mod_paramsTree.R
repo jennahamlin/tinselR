@@ -23,11 +23,11 @@ mod_paramsTree_ui <- function(id){
     numericInput(ns("tipLim"), 'Add spacing to plot - ', value = 0.01, max = 1 ),
     numericInput(ns("numScale"), "Size of the scale bar - ", value = 0.001),
     numericInput(ns("nodeDisplay"), "Minimum value of bootstrap -", value = 50, max = 100),
-    checkboxGroupInput(ns("treeFormat"), "What tree layout?", 
+    radioButtons(ns("treeFormat"), "What tree layout?", 
                        choices = list(
                          "rectangular" = "rectangular", "slanted" = "slanted", 
                          "circular" = "circular", "fan" = "fan"), selected = "rectangular"),
-    checkboxGroupInput(ns("fontFormat"), "What font format for tip labels?", 
+    radioButtons(ns("fontFormat"), "What font format for tip labels?", 
                        choices = list(
                          "bold" = "bold", "italic" = "italic", 
                          "bold+italic" = "bold.italic"), selected = "bold")
