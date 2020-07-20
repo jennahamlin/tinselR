@@ -93,7 +93,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         makeLayer(
           make_treeOut(),
           tips = annotations$data[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),  
+          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})),  
           color = "red",
           offSet = max(make_treeOut()$data$x)
         ))
@@ -126,7 +126,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         makeLayer(
           make_treeOut(),
           tips = annotations$data[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], mean)),
+          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})),
           color = "red",
           offSet = max(make_treeOut()$data$x)
         ))
