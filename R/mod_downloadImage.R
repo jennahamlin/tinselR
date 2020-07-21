@@ -34,22 +34,20 @@ mod_downloadImage_server <- function(input, output, session, treeWLayers){
 
   observe({input$download
     
-           #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")
-  
-    ggplot2::ggsave(filename = "plot.png", path = tempdir(), plot = treeWLayers(), width = 34, height = 28, device = "png")
+      ggplot2::ggsave(filename = "plot.png", path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
     
     
-    zip::zipr(zipfile = paste(tempdir(), "/", "my_plots.zip", sep = ""),
+    zip::zipr(zipfile = paste(tempdir(), "/", "my_plot.zip", sep = ""),
          files = paste(tempdir(), "/", "plot.png", sep = ""))
   })
     
   output$download <- downloadHandler(
     
-    filename = "my_plots.zip",
+    filename = "my_plot.zip",
     
     content = function(file){
       
-      file.copy(paste(tempdir(), "/", "my_plots.zip", sep = ""), file)
+      file.copy(paste(tempdir(), "/", "my_plot.zip", sep = ""), file)
       
     }
     
