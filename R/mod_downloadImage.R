@@ -31,16 +31,38 @@ mod_downloadImage_ui <- function(id, label){
 
 mod_downloadImage_server <- function(input, output, session, treeWLayers){
   ns <- session$ns
-  
-  #treeWLayers <- reactive ({make_tree() + anno_plot()})
-  
-  output$download <- downloadHandler(
-    filename = function() {
-      paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
+
+  observe({input$download
     
-    content = function(file) {
-      ggplot2::ggsave(file, treeWLayers(), width = input$width, height = input$height)}
-  )
+           #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")
+  
+    ggplot2::ggsave(filename = "plot.png", path = tempdir(), plot = treeWLayers(), width = 34, height = 28, device = "png")
+    
+    
+    zip::zipr(zipfile = paste(tempdir(), "/", "my_plots.zip", sep = ""),
+         files = paste(tempdir(), "/", "plot.png", sep = ""))
+  })
+    
+  output$download <- downloadHandler(
+    
+    filename = "my_plots.zip",
+    
+    content = function(file){
+      
+      file.copy(paste(tempdir(), "/", "my_plots.zip", sep = ""), file)
+      
+    }
+    
+  )     
+  
+    
+  # output$download <- downloadHandler(
+  #   filename = function() {
+  #     paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
+  #   
+  #   content = function(file) {
+  #     ggplot2::ggsave(file, treeWLayers(), path = tempdir(), width = input$width, height = input$height)}
+  # )
 }
 
 ## To be copied in the UI

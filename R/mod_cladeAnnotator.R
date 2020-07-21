@@ -16,9 +16,7 @@ mod_cladeAnnotator_ui <- function(id){
     actionButton(ns("tree_reset"),"Remove Previous Annotation(s) on Tree", icon("refresh"),
                  class = "btn btn-primary"),
     actionButton(ns("reload"), "Reload the Shiny application session"), 
-    
-    plotOutput(ns("treeDisplay"), brush = ns("plot_brush")),
-    plotOutput(ns("content"))
+    plotOutput(ns("treeDisplay"), brush = ns("plot_brush"))
   )
 }
 
@@ -107,6 +105,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     })
   })
   
+  
   #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
   observeEvent(input$reload,{
     session$reload()
@@ -149,7 +148,14 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   
   #reactive to send tree with annoations to downloadImage module 
-  treeWLayers <- reactive ({make_treeOut() +  anno_plot()})
+  treeWLayers <- reactive ({
+    make_treeOut() +  anno_plot()
+        # if (!is.null(anno_plot_undo()) ){
+    #    make_treeOut() + anno_plot_undo()
+    #  } else {
+    #    make_treeOut() +  anno_plot()
+    #  }
+     })
 }
 
 

@@ -20,7 +20,7 @@ If you have any problems, please file an *issue* [here](https://github.com/jenna
 
 <!-- badges: start -->
   [![Travis build status](https://travis-ci.org/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.org/jennahamlin/Tinsel)
-  <!-- badges: end -->
+<!-- badges: end -->
 <hr>
 
 **Known issues as June 8, 2020**
