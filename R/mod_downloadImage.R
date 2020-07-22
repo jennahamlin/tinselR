@@ -32,25 +32,53 @@ mod_downloadImage_ui <- function(id, label){
 mod_downloadImage_server <- function(input, output, session, treeWLayers){
   ns <- session$ns
 
+  # observe({input$download
+  #   
+  #     ggplot2::ggsave(filename = "treePlot",path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
+  # })
+  #   
+  # output$download <- downloadHandler(
+  #   
+  #   filename = function(){
+  #         paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')} ,
+  # 
+  #   content = function(file){
+  #     file.copy(paste(tempdir(), "/", filename= 
+  #                       paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''), sep = ""), file)
+  #     
+  #   }
+  #   
+  # )     
+  
+  
   observe({input$download
-    
-      ggplot2::ggsave(filename = "treePlot",path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
+
+    #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")
+
+    ggplot2::ggsave(filename = paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''),
+                                      path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
+
+
+    zip::zipr(zipfile = paste(tempdir(), "/", "treePlot.zip", sep = ""),
+              files = paste(tempdir(), "/", "treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''))
+                
+                #paste(tempdir(), "/", "treePlot", sep = ""))
   })
-    
+
   output$download <- downloadHandler(
-    
-    filename = function(){
-          paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')} ,
+
+    filename = "treePlot.zip",
 
     content = function(file){
-      file.copy(paste(tempdir(), "/", filename= 
-                        paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''), sep = ""), file)
-      
+
+      file.copy(paste(tempdir(), "/", "treePlot.zip", sep = ""), file)
+
     }
-    
-  )     
+
+  )
   
-    
+  
+  
   # output$download <- downloadHandler(
   #   filename = function() {
   #     paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')}, #as is this does not include end of file designation (i.e. .pdf, when)
