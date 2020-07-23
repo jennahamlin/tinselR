@@ -19,7 +19,10 @@ mod_downloadImage_ui <- function(id, label){
     selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
     numericInput(ns("width"), "Width of Image (inches)", value = 6),
     numericInput(ns("height"), "Height of Images (inches)", value = 8),
-    downloadButton(ns("download"))
+    shinyjs::useShinyjs(),
+    textInput(ns("text"), "User Id", "", placeholder = "please enter your user id to download"),
+    shinyjs::hidden(downloadButton(ns("download")))
+    
   )
 }
 
@@ -77,7 +80,16 @@ mod_downloadImage_server <- function(input, output, session, treeWLayers){
 
   )
   
-  
+  observeEvent(input$text, {
+    if (input$text == "") 
+      shinyjs::hide("download")
+    else
+      shinyjs::show("download")
+    write.table(input$text, file = "tinselUsers.txt", append = T)
+    
+  })
+
+
   
   # output$download <- downloadHandler(
   #   filename = function() {
