@@ -101,6 +101,8 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   #add the annotations when selection is brushed
   observeEvent(input$add_annotation,{
     output$treeDisplay <- renderPlot({
+      validate(need(input$plot_brush !="", "Please import a genetic distance file to use the clade annotator"))
+      
       make_treeOut() + anno_plot()
     })
   })

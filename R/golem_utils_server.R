@@ -33,13 +33,12 @@ fileCheck<- function(fileUp, fileType, fileSep){
   fileChk <- validate(
     need(
       length(strsplit(myLines[2], fileType)[[1]]) == length(strsplit(myLines[3], fileType)[[1]]),
-      "Error: the delimiter chosen does not match the file type uploaded."
+      #paste(fileUp[1])
+      paste("Error: the delimiter chosen does not match the file type uploaded: ", fileUp[1], sep = "")
     ), 
     need(
       length(strsplit(myLines[2], fileType)[[1]]) > 1,
-      "Error: the delimiter chosen does not match the file type uploaded."), 
-    errorClass = "myClass"
-  )
+      paste("Error: the delimiter chosen does not match the file type uploaded: ", fileUp[1], sep = "")))
   if (is.null(fileChk) == TRUE) {
     FileName <- readData(filePath = fileUp$datapath, sep = fileSep)
     #return(FileName)
