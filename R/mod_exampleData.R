@@ -14,7 +14,7 @@ mod_exampleData_ui <- function(id){
       
       #upload tree file 
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
-                choices = c( "1504MLEXH-1.dnd", "1509MNJJP-1_RAxML_bipartitions")), 
+                choices = c(Tinsel::"tree1504MLEXH-1.rda", "1509MNJJP-1_RAxML_bipartitions")), 
       
       #upload genetic distance file using a function 
       selectInput(ns("exGeneFile"), label = "2. Selected assocaited genetic distance file", 
