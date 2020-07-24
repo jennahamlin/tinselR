@@ -20,7 +20,22 @@ app_ui <- function() {
                               mod_displayTree_ui("displayTree_ui_1"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
                             )
-                          )))
+                          )),
+                 tabPanel("Explore Tinsel with example data",
+                          sidebarLayout(
+                            sidebarPanel(
+                              mod_uploadData_ui("uploadData_ui_1"),
+                              mod_paramsTree_ui("paramsTree_ui_1"),
+                              mod_downloadImage_ui("downloadImage_ui_1"),
+                              width = 3),
+                            mainPanel(
+                              mod_displayTree_ui("displayTree_ui_1"),
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
+                            )
+                          ))
+                 
+                 
+                 )
       #,
       #            tabPanel("Genetic Distance",
       #                     sidebarLayout(
