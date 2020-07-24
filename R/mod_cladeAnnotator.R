@@ -151,12 +151,11 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({
-    make_treeOut() +  anno_plot()
-        # if (!is.null(anno_plot_undo()) ){
-    #    make_treeOut() + anno_plot_undo()
-    #  } else {
-    #    make_treeOut() +  anno_plot()
-    #  }
+         if (!is.null(make_treeOut() + anno_plot_undo()) ){
+        make_treeOut() + anno_plot_undo()
+      } else {
+        make_treeOut() +  anno_plot()
+      }
      })
 }
 
