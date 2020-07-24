@@ -25,9 +25,12 @@ app_ui <- function() {
                  tabPanel("Tinsel pratice with example data",
                           sidebarLayout(
                             sidebarPanel(
-                              mod_exampleData_ui("exampleData_ui_1")),
+                              mod_exampleData_ui("exampleData_ui_1"),
+                              mod_paramsTree_ui("paramsTree_ui_1_exmaple"), 
+                              width = 3),
                             mainPanel(
-                              mod_displayTree_ui("displayTree_ui_1"))))
+                              mod_displayTree_ui("displayTree_ui_1_example"),
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_1_example"))))
                  )
       )
     )

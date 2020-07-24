@@ -12,7 +12,6 @@ mod_exampleData_ui <- function(id){
   tagList(
     tagList(
       
-      here::here("Tinsel", "inst", "extdata"),
       #upload tree file 
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
                 choices = c( "1504MLEXH-1.dnd", "1509MNJJP-1_RAxML_bipartitions")), 
@@ -110,8 +109,8 @@ mod_exampleData_server <- function(input, output, session){
   #return these reactive objects to be used in tree display module 
   return(
     list(
-      exTreeFileOut = reactive(exTreeFileUp()),
-      exGeneFileCorOrUnOut = reactive(exGeneFileCorOrUn())
+      treeFileOut = reactive(exTreeFileUp()),
+      geneFileCorOrUnOut = reactive(exGeneFileCorOrUn())
     ))
   
 }
