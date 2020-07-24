@@ -3,8 +3,6 @@
 app_server <- function(input, output,session) {
   # List the first level callModules here
   
-  #errorCheck <- callModule(mod_errorCheck_server, "errorCheck_ui_1")
-  
   #uplodad the tree and call that module dataDisplay
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
@@ -27,5 +25,9 @@ app_server <- function(input, output,session) {
   
   #allows tree with annotation and viz parameters to be changed to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
+  
+  ##repeated for preloaded data 
+  #uplodad the tree and call that module dataDisplay
+  exampleDisplay <- callModule(mod_exampleData_server, "exampleData_ui_1")
 }
 

@@ -10,6 +10,7 @@
 
 #upload data - tree, genetic, meta
 golem::add_module(name="uploadData")
+golem::add_module(name="exampleData")
 
 #tree parameters and display
 golem::add_module(name = "paramsTree")
@@ -46,6 +47,7 @@ usethis::use_package("treeio")
 usethis::use_package("stats")
 usethis::use_package("zip")
 usethis::use_package("shinyjs")
+usethis::use_package("here")
 usethis::use_pipe() 
 
 

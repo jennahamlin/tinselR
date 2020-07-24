@@ -21,44 +21,16 @@ app_ui <- function() {
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
                             )
                           )),
-                 tabPanel("Explore Tinsel with example data",
+                 
+                 tabPanel("Tinsel pratice with example data",
                           sidebarLayout(
                             sidebarPanel(
-                              mod_uploadData_ui("uploadData_ui_1"),
-                              mod_paramsTree_ui("paramsTree_ui_1"),
-                              mod_downloadImage_ui("downloadImage_ui_1"),
-                              width = 3),
+                              mod_exampleData_ui("exampleData_ui_1")),
                             mainPanel(
-                              mod_displayTree_ui("displayTree_ui_1"),
-                              mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
-                            )
-                          ))
-                 
-                 
+                              mod_displayTree_ui("displayTree_ui_1"))))
                  )
-      #,
-      #            tabPanel("Genetic Distance",
-      #                     sidebarLayout(
-      #                       sidebarPanel(
-      #                         mod_dataInput_ui("dataInput_ui_gene",
-      #                                          tags$div("User GENETIC data",
-      #                                                   tags$br(),
-      #                                                   "(.csv, .tsv, or .txt file format)")),width = 3),
-      #                       mainPanel(
-      #                         mod_displayTable_ui("displayTable_ui_2"))))
-      # )
-      # ,
-      # tabPanel("Metadata",
-      #          sidebarLayout(
-      #            sidebarPanel(
-      #              mod_dataInput_ui("dataInput_ui_meta",
-      #                               tags$div("User META data",
-      #                                        tags$br(),
-      #                                        "(.csv, .tsv, or .txt file format)")),width = 3),
-      #            mainPanel(
-      #              mod_displayTable_ui("displayTable_ui_1")))))
+      )
     )
-  )
 }
 
 #' @import shiny
