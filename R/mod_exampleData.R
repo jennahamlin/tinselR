@@ -12,7 +12,7 @@ mod_exampleData_ui <- function(id){
   tagList(
     tagList(
       
-      here::here("inst", "extdata"), 
+      here::here("Tinsel", "inst", "extdata"),
       #upload tree file 
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
                 choices = c( "1504MLEXH-1.dnd", "1509MNJJP-1_RAxML_bipartitions")), 
