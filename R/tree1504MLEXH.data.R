@@ -4,10 +4,10 @@
 #'
 #' @docType data
 #'
-#' @usage data(tree1504MLEXH-1)
+#' @usage data(tree1504MLEXH_1)
 #'
-#' @format An object of class `"cross"`
+#' @format An object of class 
 #'
 #' @keywords datasets
 #'
-#'"tree1504MLEXH-1"
+"tree1504MLEXH_1"
