@@ -14,7 +14,7 @@ mod_exampleData_ui <- function(id){
       
       #upload tree file 
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
-                choices = c(Tinsel::"tree1504MLEXH-1.rda", "1509MNJJP-1_RAxML_bipartitions")), 
+                choices = c( system.file("extdata", "1504MLEXH-1.dnd", package = "Tinsel"), "1509MNJJP-1_RAxML_bipartitions")), 
       
       #upload genetic distance file using a function 
       selectInput(ns("exGeneFile"), label = "2. Selected assocaited genetic distance file", 
@@ -41,6 +41,7 @@ mod_exampleData_ui <- function(id){
 mod_exampleData_server <- function(input, output, session){
   ns <- session$ns
  
+
   #reactive expression that until a file is uploaded, the below message is displayed if attempting to use the clade annotator button
   exGeneFileUp <- reactive({
     validate(need(input$exGeneFile !="", "Please import a genetic distance file to use the clade annotator"))
