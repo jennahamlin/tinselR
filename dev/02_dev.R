@@ -48,6 +48,7 @@ usethis::use_package("stats")
 usethis::use_package("zip")
 usethis::use_package("shinyjs")
 usethis::use_package("here")
+usethis::use_package("DescTools")
 usethis::use_pipe() 
 
 

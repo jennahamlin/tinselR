@@ -68,12 +68,12 @@ snpAnno <- function(geneFile, tips){
 }
 
 #function which makes the annotation layer(s)
-makeLayer <- function(tree, tips, label, color, offSet) {
+makeLayer <- function(tree, tips, label, color, offset) {
   ggtree::geom_cladelabel(
     node = phytools::findMRCA(ape::as.phylo(tree), tips),
     label = label,
     color = color,
-    offSet 
+    offset = offset 
   )
 }
 

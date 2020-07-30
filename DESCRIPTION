@@ -39,7 +39,8 @@ Imports:
     stats,
     zip,
     shinyjs,
-    here
+    here,
+    DescTools
 RoxygenNote: 7.1.0
 URL: https://github.com/jennahamlin/Tinsel
 BugReports: https://github.com/jennahamlin/Tinsel/issues

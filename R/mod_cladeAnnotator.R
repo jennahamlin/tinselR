@@ -75,37 +75,150 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       ))
   })
   
+  check_overlap <- function(previous_plot, incoming_tips) {
+    pre_g <- ggplot2::ggplot_build(previous_plot)
+    
+    tip_labels <- pre_g$data[[3]]
+    incoming_y_coords <-
+      tip_labels[tip_labels$label %in% incoming_tips, "y"]
+    
+    if (length(pre_g$data) < 4) {
+      any_overlap <- FALSE
+    } else {
+      clade_segments <- pre_g$data[[4]]
+      overlaps <- sapply(1:nrow(clade_segments), function(i) {
+        X <- DescTools::Overlap(
+          x = c(clade_segments[i, "y"], clade_segments[i, "yend"]), 
+          y = incoming_y_coords)
+        Y <- X > 0
+        return(Y)
+      })
+      any_overlap <- any(overlaps)
+    }
+    return(any_overlap)
+  }
+  
+  add_annotations <- function(tree_plot, tip_vector) {
+    g <- tree_plot
+    for (i in seq_along(tip_vector)) {
+      any_overlap <- check_overlap(previous_plot = g, incoming_tips = tip_vector[[i]])
+      current_offset <- ifelse(any_overlap, 0.011, 0.008)
+      
+      print(any_overlap)
+      print(current_offset)
+      
+      g <- g +
+        makeLayer(
+          tree_plot,
+          tips = tip_vector[[i]],
+          label = paste("Clade", i),
+          color = rev(colors())[i],
+          offset = current_offset
+        )
+    }
+    return(g)
+  }
+  
+  
   #display that layer onto the tree
   anno_plot <- eventReactive(input$add_annotation, {
-    
+
     # update the reactive value as a count
     new <- n_annotations() + 1
     n_annotations(new)
-    
+
     #add the tip vector (aka label) to the annotation reactive value
     annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-    
+
     #list apply over the make_layer function to add the annotation
     plt <-
       lapply(1:n_annotations(), function(i)
-        makeLayer(
-          make_treeOut(),
-          tips = annotations$data[[paste0("ann", i)]],
-          label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})),  
-          color = "red",
-          offSet = max(make_treeOut()$data$x)
-        ))
+        add_annotations(tree_plot = make_treeOut(), tip_vector = annotations$data[[paste0("ann", i)]]))
     return(plt)
+
   })
   
   #add the annotations when selection is brushed
   observeEvent(input$add_annotation,{
     output$treeDisplay <- renderPlot({
       validate(need(input$plot_brush !="", "Please import a genetic distance file to use the clade annotator"))
-      
-      make_treeOut() + anno_plot()
+      anno_plot()
     })
   })
+  
+  
+  
+  
+observeEvent(input$add_annotation,{
+  output$treeDisplay <- renderPlot({
+    add_annotations(tree_plot = make_treeOut(), tip_vector = dataWithSelection2())
+  })
+})
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  # #display that layer onto the tree
+  # anno_plot <- eventReactive(input$add_annotation, {
+  # 
+  #   # update the reactive value as a count
+  #   new <- n_annotations() + 1
+  #   n_annotations(new)
+  # 
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  #   
+  #   #list apply over the make_layer function to add the annotation
+  #   plt <-
+  #     lapply(1:n_annotations(), function(i)
+  #       makeLayer(
+  #         make_treeOut(),
+  #         tips = annotations$data[[paste0("ann", i)]],
+  #         label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})),
+  #         color = "red",
+  #         offSet = max(make_treeOut()$data$x)
+  #       ))
+  #   return(plt)
+  # 
+  # })
+
+  # #add the annotations when selection is brushed
+  # observeEvent(input$add_annotation,{
+  #   output$treeDisplay <- renderPlot({
+  #     validate(need(input$plot_brush !="", "Please import a genetic distance file to use the clade annotator"))
+  #     
+  #     make_treeOut() + anno_plot()
+  #   })
+  # })
   
   
   #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
