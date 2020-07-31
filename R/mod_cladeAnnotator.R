@@ -119,9 +119,8 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(g)
   }
   
-  
   #display that layer onto the tree
-  anno_plot <- eventReactive(input$add_annotation, {
+  observeEvent(input$add_annotation, {
 
     # update the reactive value as a count
     new <- n_annotations() + 1
@@ -129,32 +128,27 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
 
     #add the tip vector (aka label) to the annotation reactive value
     annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-
-    #list apply over the make_layer function to add the annotation
-    plt <-
-      lapply(1:n_annotations(), function(i)
-        add_annotations(tree_plot = make_treeOut(), tip_vector = annotations$data[[paste0("ann", i)]]))
-    return(plt)
-
-  })
-  
-  #add the annotations when selection is brushed
-  observeEvent(input$add_annotation,{
+    
     output$treeDisplay <- renderPlot({
-      validate(need(input$plot_brush !="", "Please import a genetic distance file to use the clade annotator"))
-      anno_plot()
-    })
-  })
+    add_annotations(tree_plot = make_treeOut(), tip_vector =  lapply(1:n_annotations(), function(i)
+      annotations$data[[paste0("ann", i)]]))
+    
+    })})
+  
+  # #add the annotations when selection is brushed
+  # observeEvent(input$add_annotation,{
+  #   output$treeDisplay <- renderPlot({
+  #     validate(need(input$plot_brush !="", "Please import a genetic distance file to use the clade annotator"))
+  #     
+  #     make_treeOut() + anno_plot()
+  #   })
+  # })
+ 
   
   
   
   
-observeEvent(input$add_annotation,{
-  output$treeDisplay <- renderPlot({
-    add_annotations(tree_plot = make_treeOut(), tip_vector = dataWithSelection2())
-  })
-})
-  
+
   
   
   
