@@ -6,7 +6,6 @@
 dev_history.R
 ^dev$
 $run_dev.*
-^LICENSE\.md$
 ^/home/jennahamlin/Desktop/Tinsel/Dockerfile$
 ^app\.R$
 ^\.travis\.yml$
