@@ -8,7 +8,7 @@ app_ui <- function() {
     fluidPage(
       theme = shinythemes::shinytheme('yeti'),
       navbarPage("Tinsel - a tree visulization and annotation tool",
-                 tabPanel("ReadMe",fluidRow(column(12, wellPanel( includeMarkdown("README.md"))))), # wellPanel adds a gray box
+                 tabPanel("ReadMe",fluidRow(column(12, wellPanel( includeMarkdown("FAQ.for.Tinsel.md"))))), # wellPanel adds a gray box
                  tabPanel("Data Upload",
                           sidebarLayout(
                             sidebarPanel(
