@@ -44,7 +44,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
     make_treeOut()})
   })
-
+  
   # Initialize a reactive value and set to zero
   n_annotations <- reactiveVal(0)
   annotations <- reactiveValues()
@@ -71,7 +71,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   snpMean <- eventReactive(input$add_annotation, {
     lapply(1:n_annotations(), function(i)
       snpAnno(geneFile = geneFileSNP(),
-               tips = annotations$data[[paste0("ann", i)]]
+              tips = annotations$data[[paste0("ann", i)]]
       ))
   })
   
@@ -98,57 +98,86 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(any_overlap)
   }
   
-  add_annotations <- function(tree_plot, tip_vector) {
-    g <- tree_plot
-    for (i in seq_along(tip_vector)) {
-      any_overlap <- check_overlap(previous_plot = g, incoming_tips = tip_vector[[i]])
-      current_offset <- ifelse(any_overlap, 0.011, 0.008)
-      
-      print(any_overlap)
-      print(current_offset)
-      
-      g <- g +
+  #  add_annotations <- function(tree_plot, tip_vector) {
+  # g <- tree_plot
+  # for (i in seq_along(tip_vector)) {
+  #   any_overlap <- check_overlap(previous_plot = g, incoming_tips = tip_vector[[i]])
+  #   current_offset <- ifelse(any_overlap, 0.011, 0.008)
+  #   
+  #   print(any_overlap)
+  #   print(current_offset)
+  #   
+  #   g <- g +
+  #     makeLayer(
+  #       tree_plot,
+  #       tips = tip_vector[[i]],
+  #       label = paste("Clade", i),
+  #       color = rev(colors())[i],
+  #       offset = current_offset
+  #     )
+  # }
+  # return(g)
+  # }
+  
+  #display that layer onto the tree
+  observeEvent(input$add_annotation, {
+    
+    # update the reactive value as a count
+    new <- n_annotations() + 1
+    n_annotations(new)
+    
+    #add the tip vector (aka label) to the annotation reactive value
+    annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+    
+    tips <- lapply(1:n_annotations(), function(i)
+      annotations$data[[paste0("ann", i)]])
+    
+    g <- make_treeOut()
+    
+    
+    g <- g +
+      for (i in seq_along(tips)) {
+        any_overlap <- check_overlap(previous_plot = g, incoming_tips = tips[[i]])
+        current_offset <- ifelse(any_overlap, 0.011, 0.008)
+        
         makeLayer(
-          tree_plot,
-          tips = tip_vector[[i]],
+          make_treeOut(),
+          tips = annotations$data[[paste0("ann", i)]],
           label = paste("Clade", i),
           color = rev(colors())[i],
           offset = current_offset
         )
-    }
+      }
     return(g)
-  }
-  
-  #display that layer onto the tree
-  observeEvent(input$add_annotation, {
-
-    # update the reactive value as a count
-    new <- n_annotations() + 1
-    n_annotations(new)
-
-    #add the tip vector (aka label) to the annotation reactive value
-    annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
+    print(any_overlap)
+    print(current_offset)
+    
+    print(tips)
+    
+    # tree <- add_annotations(tree_plot = make_treeOut(), tip_vector =  tips)
+    #                   
+    # 
     output$treeDisplay <- renderPlot({
-    add_annotations(tree_plot = make_treeOut(), tip_vector =  lapply(1:n_annotations(), function(i)
-      annotations$data[[paste0("ann", i)]]))
+      g
+    })
     
-    })})
+  })
   
   # #add the annotations when selection is brushed
   # observeEvent(input$add_annotation,{
   #   output$treeDisplay <- renderPlot({
   #     validate(need(input$plot_brush !="", "Please import a genetic distance file to use the clade annotator"))
-  #     
+  # 
   #     make_treeOut() + anno_plot()
   #   })
   # })
- 
   
   
   
   
-
+  
+  
   
   
   
@@ -204,7 +233,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   #   return(plt)
   # 
   # })
-
+  
   # #add the annotations when selection is brushed
   # observeEvent(input$add_annotation,{
   #   output$treeDisplay <- renderPlot({
@@ -240,7 +269,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         ))
     return(plt)
   })
-
+  
   # remove the annotations
   observeEvent(input$tree_reset, {
     
@@ -258,12 +287,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   #reactive to send tree with annoations to downloadImage module 
   treeWLayers <- reactive ({
-         if (!is.null(make_treeOut() + anno_plot_undo()) ){
-        make_treeOut() + anno_plot_undo()
-      } else {
-        make_treeOut() +  anno_plot()
-      }
-     })
+    if (!is.null(make_treeOut() + anno_plot_undo()) ){
+      make_treeOut() + anno_plot_undo()
+    } else {
+      make_treeOut() +  anno_plot()
+    }
+  })
 }
 
 
