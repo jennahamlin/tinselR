@@ -29,6 +29,8 @@ mod_about_ui <- function(id){
     br(), 
     strong("Once the genetic distance file is uploaded you can -"), 
     "add annotation to the visual representation of the tree",
+    br(), 
+    HTML("https://travis-ci.org/jennahamlin/Tinsel.svg?branch=master")
     )))
   )
 }
