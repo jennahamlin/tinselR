@@ -83,8 +83,6 @@ usethis::use_github()
 
 usethis::use_travis()
 
-
-
 usethis::use_appveyor()
 
 # You're now set! 

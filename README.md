@@ -19,7 +19,7 @@ A genetic distance matrix contains the number of snp differences for all pairwis
 If you have any problems, please file an *issue* [here](https://github.com/jennahamlin/Tinsel/issues).
 
 <!-- badges: start -->
-  [![Travis build status](https://travis-ci.org/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.org/jennahamlin/Tinsel)
+[![Travis build status](https://travis-ci.com/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.com/jennahamlin/Tinsel)
 <!-- badges: end -->
 <hr>
 
