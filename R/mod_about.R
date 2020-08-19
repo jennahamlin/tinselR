@@ -25,12 +25,16 @@ mod_about_ui <- function(id){
     tags$li(em("Meta Data"), "- optional for easy correction of tip labels  ; a tsv/txt/csv file of SNP differences"),
     br(), 
     strong("Once the phylogenetic tree is uploaded you can -"), 
+    br(),
     "Alter additional visualization parameters", 
     br(), 
     strong("Once the genetic distance file is uploaded you can -"), 
+    br(),
     "add annotation to the visual representation of the tree",
-    br(), 
-    HTML("https://travis-ci.org/jennahamlin/Tinsel.svg?branch=master")
+    br(),
+    br(),
+    "If you have any problems, please file an", a("issue", href = "https://github.com/jennahamlin/Tinsel/issues")
+    
     )))
   )
 }

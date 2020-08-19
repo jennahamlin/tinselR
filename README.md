@@ -23,11 +23,10 @@ If you have any problems, please file an *issue* [here](https://github.com/jenna
 <!-- badges: end -->
 <hr>
 
-**Known issues as June 8, 2020**
+**Known issues as August 18, 2020**
 
 - Unable to remove the very first placed annotation. As is, a user can place annotations and then step them back one by one. However, when only two annotations are visible both will be removed. Then when the user 'visulizaes the tree' again and attempts to add annotations, the first placed annotation remains. 
 
 - Need to develop a check for overlap annotations and when they are the same locaiton, move the newest out by X distance
 
-- Unable to download file from CDC server
 
