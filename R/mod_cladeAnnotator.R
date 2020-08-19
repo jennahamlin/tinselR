@@ -76,7 +76,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       ))
   })
 
-  addAnnotations <- function(tree_plot, tip_vector, label ) {
+  addAnnotations <- function(tree_plot, tip_vector ) {
     g <- tree_plot
     for (i in seq_along(tip_vector)) {
       
@@ -87,19 +87,17 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         makeLayer(
           tree_plot,
           tips = tip_vector[[i]],
-          #label = label,  
-          label = paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})),
+          label = paste("Clade","\nrange of SNP(s) -", lapply(snpMean()[i], function(x){round(range(x),0)})),
           color = rev(colors())[i],
           offset = currentOffset
         )
       print(any_overlap)
-      print(currentOffset)
+      #print(currentOffset)
       
     }
     return(g)
   }
   
- 
   #display that layer onto the tree
   observeEvent(input$add_annotation, {
     
@@ -110,21 +108,49 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     #add the tip vector (aka label) to the annotation reactive value
     annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
-
+    
     tips <- lapply(1:n_annotations(), function(i)
       annotations$data[[paste0("ann", i)]])
-    
+    # 
     # for (i in 1:length(tipVector))
-    #   tipVector <- c(tipVector, tips[i])
-      
+    #   tipVector <- c(tipVector, tips)
+    
     
     output$treeDisplay <- renderPlot({
-    addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
-                   #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
+      addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
+      #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
     })
     
-  })
+  })    
   
+  
+  
+    # #display that layer onto the tree
+  # observeEvent(input$add_annotation, {
+  #   
+  #   # update the reactive value as a count
+  #   new <- n_annotations() + 1
+  #   n_annotations(new)
+  #   
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  #   
+  #   
+  #   tips <- lapply(1:n_annotations(), function(i)
+  #     annotations$data[[paste0("ann", i)]])
+  #    # 
+  #    # for (i in 1:length(tipVector))
+  #    #   tipVector <- c(tipVector, tips)
+  # 
+  #   
+  #   output$treeDisplay <- renderPlot({
+  #   addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
+  #                  #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
+  #   })
+  #   
+  # })
+  
+ 
   
   
   # #add the annotations when selection is brushed
