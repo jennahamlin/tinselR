@@ -109,6 +109,11 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
     
+    output$treeDisplay <- renderPlot({
+      addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
+      #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
+    })
+    
     tips <- lapply(1:n_annotations(), function(i)
       annotations$data[[paste0("ann", i)]])
     # 
@@ -116,10 +121,6 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     #   tipVector <- c(tipVector, tips)
     
     
-    output$treeDisplay <- renderPlot({
-      addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
-      #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
-    })
     
   })    
   
