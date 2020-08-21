@@ -14,7 +14,7 @@ app_ui <- function() {
                           sidebarLayout(
                             sidebarPanel(
                               mod_uploadData_ui("uploadData_ui_1"),
-                              mod_paramsTree_ui("paramsTree_ui_1"),
+                              mod_paramsTree_ui("paramsTree_ui_data", "data"),
                               mod_downloadImage_ui("downloadImage_ui_1"),
                               width = 3),
                             mainPanel(
@@ -26,8 +26,9 @@ app_ui <- function() {
                  tabPanel("Tinsel pratice with example data",
                           sidebarLayout(
                             sidebarPanel(
-                              mod_exampleData_ui("exampleData_ui_1")), 
-                            
+                              mod_exampleData_ui("exampleData_ui_1"), 
+                              mod_paramsTree_ui("paramsTree_ui_example", "example"), 
+                              width = 3), 
                             mainPanel(mod_exampleDisplay_ui("exampleDisplay_ui_1"))
                               #,
                               #mod_paramsTree_ui("paramsTree_ui_1_exmaple"), 
