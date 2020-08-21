@@ -14,25 +14,19 @@ mod_exampleData_ui <- function(id){
       
       #upload tree file 
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
-                  choices = c("example Tree 1", "example Tree 2"))
+                  choices = c("example Tree 1", "example Tree 2")),
       
-     
-      
-      
-      # selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
-      #           choices = c( system.file("extdata", "1504MLEXH-1.dnd", package = "Tinsel"), "1509MNJJP-1_RAxML_bipartitions")), 
-       
-      # #upload genetic distance file using a function 
-      # selectInput(ns("exGeneFile"), label = "2. Selected assocaited genetic distance file", 
-      #             choices =c("1504MLEXH-1_geneticMatrix.tsv", "1509MNJJP-1_geneticMatrix.tsv")),
-      # 
+      #upload genetic distance file using a function
+      selectInput(ns("exGeneFile"), label = "2. Selected assocaited genetic distance file",
+                  choices =c("", "example Genetic Distance 1", "example Genetic Distance 2")),
+
       # div(style = "margin-top:-1em", #this decreases the distance between the two buttons (fileupload and inputseparator)
       #     #specify the type of separator for the genetic distance file uploaded
       #     inputSeparator(ns("exGeneSep"), fileLabel = "Separator for genetic distance file")),
       # 
-      # selectInput(ns("exMetaFile"), label = "3. Select associated (optional) meta data file",
-      #             choices = c("1504MLEXH-1_metaData.csv", "1509MNJJP-1_metaData.tsv")),
-      # 
+       selectInput(ns("exMetaFile"), label = "3. Select associated (optional) meta data file",
+                   choices = c("",  "example Meta Data 1", "example Meta Data 2")),
+       
       # div(style = "margin-top:-1em", 
       #     inputSeparator(ns("exMetaSep"), fileLabel = "Separator for optional meta data file")),
       # tags$hr(style="border-color: black;")
@@ -47,40 +41,36 @@ mod_exampleData_ui <- function(id){
 mod_exampleData_server <- function(input, output, session){
   ns <- session$ns
   
+  #reactive expression that until a file is uploaded, the below message is displayed if attempting to use the clade annotator button
+  exGeneFileUp <- reactive({
+    if(input$exGeneFile == "example Genetic Distance 1"){
+      Tinsel::gene1}
+    else if (input$exGeneFile == "example Genetic Distance 2") {
+      Tinsel::gene2}
+  })
+
+  exMetaFileUp <- eventReactive(input$exMetaFile, {
+    if(input$exMetaFile == "example Meta Data 1"){
+      Tinsel::meta1}
+    else if (input$exMetaFile == "example Meta Data 2") {
+      Tinsel::meta2}
+  })
+  
+  
   ##############
   ### TREES ###
   ##############
   
-  ## read in tree based on selected example tree
-  
-  #here::set_here()
-  
+  ## load in tree based on selected example tree
   exTreeFileUp <- eventReactive(input$exTreeFile, {
     if(input$exTreeFile == "example Tree 1"){
       Tinsel::tree1
     }
     else if (input$exTreeFile == "example Tree 2") {
-      Tinsel::tree2}
-     }
+      Tinsel::tree2}}
   )
   
-  return(
-       list(
-         extreeFileOut = reactive(exTreeFileUp())))
-  
-  
-  
-  
-  
-  
-  
 
-  # #reactive expression that until a file is uploaded, the below message is displayed if attempting to use the clade annotator button
-  # exGeneFileUp <- reactive({
-  #   validate(need(input$exGeneFile !="", "Please import a genetic distance file to use the clade annotator"))
-  #   input$exGeneFile
-  # })
-  # 
   # #reactive which holds the input selected for delimiter for gene file using fileType function - this will check for correctly selected delimitor
   # exGeneFileType <- eventReactive(input$exGeneSep, {
   #   fileType(input$exGeneSep)
@@ -96,25 +86,31 @@ mod_exampleData_server <- function(input, output, session){
   #   fileType(input$exMetaSep)
   # })
   # 
-  # # #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels
-  # # #this also performs a check to see if the correct delimitor is selected before reading in the file and provides users with error output
-  # # exTreeFileUp <- reactive({
-  # #   
-  # #   validate(need(input$exTreeFile !="", "Please import newick tree file"))
-  # #   req(input$exTreeFile)
-  # #   
-  # #   if (is.null(exMetaFileUp()$datapath)) { #if no meta file still upload the tree
-  # #     treeio::read.newick(input$exTreeFile$datapath)
-  # #   } 
-  # #   else { #if metafile do an error check and then correct tip labels using phylotools sub.taxa.label function
-  # #     
-  # #     exMetaFileSeperate <- fileCheck(fileUp = exMetaFileUp(), fileType = exMetaFileType(), fileSep = input$exMetaSep) 
-  # #     
-  # #     treeio::read.newick(input$exTreeFile$datapath)%>%
-  # #       phylotools::sub.taxa.label(., as.data.frame(exMetaFileSeperate)) #this line converts tip labels to pretty labels based on user upload of meta data file
-  # #   }
-  # # })
-  # 
+  #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels
+  #this also performs a check to see if the correct delimitor is selected before reading in the file and provides users with error output
+  exTreeFileUp2 <- reactive({
+
+    #validate(need(input$exTreeFile !="", "Please import newick tree file"))
+    #req(input$exTreeFile)
+
+    if (is.null(exMetaFileUp())) { #if no meta file still upload the tree
+      exTreeFileUp()
+      #treeio::read.newick(input$exTreeFile$datapath)
+    }
+    else { #if metafile do an error check and then correct tip labels using phylotools sub.taxa.label function
+
+      #exMetaFileSeperate <- fileCheck(fileUp = exMetaFileUp(), fileType = exMetaFileType(), fileSep = input$exMetaSep)
+
+      #treeio::read.newick(input$exTreeFile$datapath)%>%
+      exTreeFileUp()%>% 
+        phylotools::sub.taxa.label(., as.data.frame(exMetaFileUp())) #this line converts tip labels to pretty labels based on user upload of meta data file
+    }
+  })
+  
+  return(
+    list(
+      extreeFileOut = reactive(exTreeFileUp2())))
+  
   # #reactive expression that uploads the genetic distance file and allows the optional upload of meta data to correct tree tip labels
   # #this also performs a check to see if the correct delimitor is selected before reading in the files and provides users with error output
   # 
