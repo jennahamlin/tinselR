@@ -4,14 +4,20 @@ Tinsel at its' most basic level is a graphical viewer of newick phylogenetic tre
 
 ### Quick Start 
 
-**1). Install dependencies** 
+**1). Install devtools package** 
 
-`install.packages("shiny", dep=T)`
+`install.packages("devtools", dep=T)`
 
-**2). Open the Tinsel shiny application**
+**2). Launcning the Tinsel shiny application**
 
-Run this code in your R console -   
-`shiny::runGitHub("Tinsel", "jennahamlin")`
+Run this code in your R console -     
+
+```
+devtools::install_github("jennhamlin/Tinsel")
+Library(Tinsel)
+run_app()
+```  
+
 
 **3). Load your data or use the example data**  
 
