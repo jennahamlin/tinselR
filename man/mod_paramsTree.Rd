@@ -5,7 +5,7 @@
 \alias{mod_paramsTree_server}
 \title{mod_paramsTree_ui and mod_paramsTree_server}
 \usage{
-mod_paramsTree_ui(id)
+mod_paramsTree_ui(id, name)
 
 mod_paramsTree_server(input, output, session)
 }

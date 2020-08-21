@@ -7,7 +7,7 @@ app_server <- function(input, output,session) {
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
   #module which holds the tree viz parameters
-  params <- callModule(mod_paramsTree_server, "paramsTree_ui_1")
+  params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
   plot <-callModule(mod_displayTree_server, "displayTree_ui_1", dataDisplay$treeFileOut, dataDisplay$geneFileCorOrUnOut, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
@@ -30,10 +30,11 @@ app_server <- function(input, output,session) {
   #uplodad the tree and call that module dataDisplay
   exampleTree <- callModule(mod_exampleData_server, "exampleData_ui_1")
   
-  callModule(mod_exampleDisplay_server, "exampleDisplay_ui_1", exampleTree$extreeFileOut)
+  exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
   
-  # exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_1_example")
-  # 
+  callModule(mod_exampleDisplay_server, "exampleDisplay_ui_1", exampleTree$extreeFileOut,  exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
+  
+     # 
   # #displays the tree and uses the params as input to change tree viz
   # examplePlot <-callModule(mod_displayTree_server, "displayTree_ui_1_example", exampleDisplay$treeFileOut, exampleDisplay$geneFileCorOrUnOut, exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
   # 
