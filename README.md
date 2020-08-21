@@ -8,13 +8,14 @@ Tinsel at its' most basic level is a graphical viewer of newick phylogenetic tre
 
 `install.packages("shiny", dep=T)`
 
-**2). Open the Tinsel shiny application **
+**2). Open the Tinsel shiny application**
 
-Run this code in your R console - 
+Run this code in your R console -   
 `shiny::runGitHub("Tinsel", "jennahamlin")`
 
+**3). Load your data or use the example data**  
 
-#### Please click on the 'Data Upload' pane, where you will be able to upload your files. 
+*Please click on the 'Data Upload' pane, where you will be able to upload your files.* 
 
 * **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 * **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file
