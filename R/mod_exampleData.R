@@ -53,6 +53,8 @@ mod_exampleData_server <- function(input, output, session){
   
   ## read in tree based on selected example tree
   
+  here::set_here()
+  
   exTreeFileUp <- eventReactive(input$exTreeFile, {
     if(input$exTreeFile == "example Tree 1"){
       exTreeFileUp <-  treeio::read.newick(here::here("inst/extdata", "1504MLEXH-1.dnd"))
