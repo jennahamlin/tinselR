@@ -57,13 +57,10 @@ mod_exampleData_server <- function(input, output, session){
   
   exTreeFileUp <- eventReactive(input$exTreeFile, {
     if(input$exTreeFile == "example Tree 1"){
-      Tinsel::tree
-      #load("data-raw/treeSet1.rda")
-      #exTreeFileUp <-  treeio::read.newick(
-        #here::here("inst", "extdata", "1504MLEXH-1.dnd"))
+      Tinsel::tree1
     }
-    # else if (input$exTreeFile == "example Tree 2") {
-    #   exTreeFileUp <-  treeio::read.newick(here::here("inst", "extdata", "1509MNJJP-1_RAxML_bipartitions"))}
+    else if (input$exTreeFile == "example Tree 2") {
+      Tinsel::tree2}
      }
   )
   
@@ -77,16 +74,7 @@ mod_exampleData_server <- function(input, output, session){
   
   
   
-  # exTreeFileUp <- eventReactive(input$exTreeFile == "example Tree 1", {
-  #     exTreeFileUp <-  treeio::read.newick(here("extdata", "inst/extdata/1509MNJJP-1_RAxML_bipartitions"))
-  #   })
-  #   
-    # else if (input$exTreeFile == "example Tree 2") {
-    #   exTreeFileUp <-  treeio::read.newick(here("extdata", "inst/extdata/1504MLEXH-1.dnd"))  }})
 
-  
-  
-  
   # #reactive expression that until a file is uploaded, the below message is displayed if attempting to use the clade annotator button
   # exGeneFileUp <- reactive({
   #   validate(need(input$exGeneFile !="", "Please import a genetic distance file to use the clade annotator"))
