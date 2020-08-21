@@ -1,10 +1,20 @@
-### Getting started with Tinsel
+### What is Tinsel?
 
-Tinsel at its' most basic level is a graphical viewer of newick phylogenetic trees and as a program for producing publication-ready figures.  
-The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemological outbreak analyses.
-A genetic distance matrix contains the number of snp differences for all pairwise comparisons. 
+Tinsel at its' most basic level is a graphical viewer of newick phylogenetic trees and as a program for producing publication-ready figures.The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemological outbreak analyses. A genetic distance matrix contains the number of snp differences for all pairwise comparisons. 
 
-##### Please click on the 'Data Upload' pane, where you will be able to upload your files. 
+### Quick Start 
+
+**1). Install dependencies** 
+
+`install.packages("shiny", dep=T)`
+
+**2). Open the Tinsel shiny application **
+
+Run this code in your R console - 
+`shiny::runGitHub("Tinsel", "jennahamlin")`
+
+
+#### Please click on the 'Data Upload' pane, where you will be able to upload your files. 
 
 * **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 * **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file
@@ -22,6 +32,9 @@ If you have any problems, please file an *issue* [here](https://github.com/jenna
 [![Travis build status](https://travis-ci.com/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.com/jennahamlin/Tinsel)
 <!-- badges: end -->
 <hr>
+
+
+
 
 **Known issues as August 18, 2020**
 
