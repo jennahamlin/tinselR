@@ -14,9 +14,9 @@ mod_exampleData_ui <- function(id){
       
       #upload tree file 
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
-                  choices = c("example Tree 1", "example Tree 2")),
+                  choices = c("example Tree 1", "example Tree 2"))
       
-      actionButton(ns("add_tree"),"Visualize Tree")
+     
       
       
       # selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
@@ -53,7 +53,7 @@ mod_exampleData_server <- function(input, output, session){
   
   ## read in tree based on selected example tree
   
-  exTreeFileUp <- eventReactive(input$add_tree, {
+  exTreeFileUp <- eventReactive(input$exTreeFile, {
     if(input$exTreeFile == "example Tree 1"){
       exTreeFileUp <-  treeio::read.newick(here::here("inst/extdata", "/1504MLEXH-1.dnd"))
     }
@@ -64,7 +64,7 @@ mod_exampleData_server <- function(input, output, session){
   
   return(
        list(
-         treeFileOut = reactive(exTreeFileUp())))
+         extreeFileOut = reactive(exTreeFileUp())))
   
   
   

@@ -28,12 +28,15 @@ app_server <- function(input, output,session) {
   
   ##repeated for preloaded data 
   #uplodad the tree and call that module dataDisplay
-  exampleDisplay <- callModule(mod_exampleData_server, "exampleData_ui_1")
-  exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_1_example")
+  exampleTree <- callModule(mod_exampleData_server, "exampleData_ui_1")
   
-  #displays the tree and uses the params as input to change tree viz
-  examplePlot <-callModule(mod_displayTree_server, "displayTree_ui_1_example", exampleDisplay$treeFileOut, exampleDisplay$geneFileCorOrUnOut, exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
+  callModule(mod_exampleDisplay_server, "exampleDisplay_ui_1", exampleTree$extreeFileOut)
   
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1_example", examplePlot$geneObjectOut, examplePlot$make_treeOut)
+  # exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_1_example")
+  # 
+  # #displays the tree and uses the params as input to change tree viz
+  # examplePlot <-callModule(mod_displayTree_server, "displayTree_ui_1_example", exampleDisplay$treeFileOut, exampleDisplay$geneFileCorOrUnOut, exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
+  # 
+  # callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1_example", examplePlot$geneObjectOut, examplePlot$make_treeOut)
 }
 

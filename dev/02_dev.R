@@ -16,6 +16,7 @@ golem::add_module(name="exampleData")
 #tree parameters and display
 golem::add_module(name = "paramsTree")
 golem::add_module(name = "DisplayTree")
+golem::add_module(name = "exampleDisplay")
 
 #annotation module
 golem::add_module(name = "cladeAnnotator")
