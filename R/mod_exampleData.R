@@ -53,7 +53,7 @@ mod_exampleData_server <- function(input, output, session){
   
   ## read in tree based on selected example tree
   
-  here::set_here()
+  #here::set_here()
   
   exTreeFileUp <- eventReactive(input$exTreeFile, {
     if(input$exTreeFile == "example Tree 1"){
