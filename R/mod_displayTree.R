@@ -39,23 +39,23 @@ mod_displayTree_server <- function(input, output, session,
       return(treeFileOut())
     }
   })
-  
+
   #convert phylogenetic tree (midpoint or not) to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
-    tibble::as_tibble(midTree()) 
-  }) 
-  
+    tibble::as_tibble(midTree())
+  })
+
   #change column1, row1 to the id of label and replace - with a 0 within the file
   geneObject <- reactive({
     label <- . <- NULL
-    dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%  
-      replace(., .=="-", 0) 
+    dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%
+      replace(., .=="-", 0)
   })
-  
+
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
-    dplyr::full_join(treeObject(), geneObject(), by = "label")%>% 
-      treeio::as.treedata() 
+    dplyr::full_join(treeObject(), geneObject(), by = "label")%>%
+      treeio::as.treedata()
   })
   
   ## displayTree server functions
@@ -66,7 +66,6 @@ mod_displayTree_server <- function(input, output, session,
     #+
     #  ggtree::geom_treescale(width = numscale())+
     #  ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = 0.00025)
-    
   }
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
