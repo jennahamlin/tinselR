@@ -7,7 +7,7 @@ app_server <- function(input, output,session) {
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
   #module which holds the tree viz parameters
-  params <- callModule(mod_paramsTree_server, "paramsTree_ui_1")
+  params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
   plot <-callModule(mod_displayTree_server, "displayTree_ui_1", dataDisplay$treeFileOut, dataDisplay$geneFileCorOrUnOut, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
