@@ -26,21 +26,6 @@ mod_cladeAnnotator_ui <- function(id){
 mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, make_treeOut){
   ns <- session$ns
   
-  # #convert to long data frame - three columns.
-  #This takes as input the genetic distance object from display tree module
-  geneFile <-reactive({ 
-    label <- NULL
-    geneObjectOut()%>%
-      stats::na.omit()%>%
-      tidyr::pivot_longer(-label)
-  })
-  
-  #remove self comparisons for this table - necessary for snp mean/median calculation. 
-  geneFileSNP <-reactive({
-    label <- NULL
-    geneFile()[which(geneFile()$label != geneFile()$name),]
-  })
-  
   #displays the tree plot, uses output from the displayTree module 
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
     make_treeOut()})
@@ -67,33 +52,57 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(tipVector)
   })
   
+  output$textDisplay <-renderText(dataWithSelection2())
   
-  #use snp_anno function to get the snps differences between compared tips
-  snpMean <- eventReactive(input$add_annotation, {
-    lapply(1:n_annotations(), function(i)
-      snpAnno(geneFile = geneFileSNP(),
-              tips = annotations$data[[paste0("ann", i)]]
-      ))
-  })
-
-  addAnnotations <- function(tree_plot, tip_vector ) {
-    g <- tree_plot
-    for (i in seq_along(tip_vector)) {
+  make_layer <- function(tree, tips, label, color, offset) {
+    ggtree::geom_cladelabel(
+      node = phytools::findMRCA(ape::as.phylo(tree), tips),
+      label = label,
+      color = color,
+      angle = 0,
+      offset = offset
+    )
+  }
+  
+  check_overlap <- function(previous_plot, incoming_tips) {
+    pre_g <- ggplot2::ggplot_build(previous_plot)
+    
+    tip_labels <- pre_g$data[[3]]
+    
+    incoming_y_coords <-
+      tip_labels[tip_labels$label %in% incoming_tips, "y"]
+    
+    if (length(pre_g$data) < 4) {
+      any_overlap <- FALSE
+    } else {
+      clade_segments <- pre_g$data[[4]]
       
-      any_overlap <- checkOverlap(previous_plot = g, incoming_tips = tip_vector[[i]])
-      currentOffset <- ifelse(any_overlap, 0.011, 0.008)
+      overlaps <- sapply(1:nrow(clade_segments), function(i) {
+        X <- DescTools::Overlap(
+          x = c(clade_segments[i, "y"], clade_segments[i, "yend"]), 
+          y = incoming_y_coords)
+        Y <- X > 0})
+    }
+  }
+  
+  addAnnotations <- function(tree_plot, tip_vector) {
+    g <- tree_plot
+    
+    for (i in seq_along(tip_vector)) {
+      any_overlap <- check_overlap(previous_plot = g, incoming_tips = tip_vector[[i]])
+      print(tip_vector[[i]])
+      
+      print(any_overlap)                                                                           
+      #print(current_offset)
       
       g <- g +
-        makeLayer(
+        make_layer(
           tree_plot,
           tips = tip_vector[[i]],
-          label = paste("Clade","\nrange of SNP(s) -", lapply(snpMean()[i], function(x){round(range(x),0)})),
+          label = paste("Clade", i),
           color = rev(colors())[i],
-          offset = currentOffset
+          offset = current_offset <- ifelse(any_overlap, 0.011, 0.008)
         )
-      print(any_overlap)
-      #print(currentOffset)
-      
     }
     return(g)
   }
@@ -108,22 +117,189 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     #add the tip vector (aka label) to the annotation reactive value
     annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
-    
-    output$treeDisplay <- renderPlot({
-      addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
-      #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
-    })
-    
     tips <- lapply(1:n_annotations(), function(i)
       annotations$data[[paste0("ann", i)]])
-    # 
-    # for (i in 1:length(tipVector))
-    #   tipVector <- c(tipVector, tips)
+    
+    output$treeDisplay <- renderPlot({
+      addAnnotations(tree_plot = make_treeOut() , tip_vector =  tips)
+    })
     
     
-    
-  })    
+  })
   
+  
+  
+  
+  # #convert to long data frame - three columns.
+  #This takes as input the genetic distance object from display tree module
+  # geneFile <-reactive({ 
+  #   label <- NULL
+  #   geneObjectOut()%>%
+  #     stats::na.omit()%>%
+  #     tidyr::pivot_longer(-label)
+  # })
+  # 
+  # #remove self comparisons for this table - necessary for snp mean/median calculation. 
+  # geneFileSNP <-reactive({
+  #   label <- NULL
+  #   geneFile()[which(geneFile()$label != geneFile()$name),]
+  # })
+  # 
+  # #displays the tree plot, uses output from the displayTree module 
+  # observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
+  #   make_treeOut()})
+  # })
+  # 
+  # # Initialize a reactive value and set to zero
+  # n_annotations <- reactiveVal(0)
+  # annotations <- reactiveValues()
+  # 
+  # #reactive that holds the brushed points on a plot
+  # dataWithSelection <- reactive({
+  #   brushedPoints(make_treeOut()$data, input$plot_brush)
+  # })
+  # 
+  # tipVector <- c()
+  # 
+  # #add label to tipVector if isTip == True
+  # dataWithSelection2 <- eventReactive(input$plot_brush, {
+  #   label <- NULL
+  #   for (i in 1:length(dataWithSelection()$label)) {
+  #     if (dataWithSelection()$isTip[i] == TRUE)
+  #       tipVector <- c(tipVector, dataWithSelection()$label[i])
+  #   }
+  #   return(tipVector)
+  # })
+  # 
+  # makeLayer <- function(tree, tips, label, color, offset) {
+  #   ggtree::geom_cladelabel(
+  #     node = phytools::findMRCA(ape::as.phylo(tree), tips),
+  #     label = label,
+  #     color = color,
+  #     offset = offset 
+  #   )
+  # }
+  
+  #use snp_anno function to get the snps differences between compared tips
+  # snpMean <- eventReactive(input$add_annotation, {
+  #   lapply(1:n_annotations(), function(i)
+  #     snpAnno(geneFile = geneFileSNP(),
+  #             tips = annotations$data[[paste0("ann", i)]]
+  #     ))
+  # })
+  
+  # check_overlap <- function(previous_plot, incoming_tips) {
+  #   pre_g <- ggplot2::ggplot_build(previous_plot)
+  #   
+  #   tip_labels <- pre_g$data[[3]]
+  #   
+  #   incoming_y_coords <-
+  #     tip_labels[tip_labels$label %in% incoming_tips, "y"]
+  #   
+  #   if (length(pre_g$data) < 4) {
+  #     any_overlap <- FALSE
+  #   } else {
+  #     clade_segments <- pre_g$data[[4]]
+  #     
+  #     overlaps <- sapply(1:nrow(clade_segments), function(i) {
+  #       X <- DescTools::Overlap(
+  #         x = c(clade_segments[i, "y"], clade_segments[i, "yend"]), 
+  #         y = incoming_y_coords)
+  #       Y <- X > 0})
+  #   }
+  # }
+  # 
+  # addAnnotations <- function(tree_plot, tip_vector) {
+  #   g <- tree_plot
+  #   
+  #   for (i in seq_along(tip_vector)) {
+  #     any_overlap <- check_overlap(previous_plot = g, incoming_tips = tip_vector[[i]])
+  #     print(tip_vector[[i]])
+  #     
+  #     print(any_overlap)                                                                           
+  #     #print(current_offset)
+  #     
+  #     g <- g +
+  #       makeLayer(
+  #         tree_plot,
+  #         tips = tip_vector[[i]],
+  #         label = paste("Clade", i),
+  #         color = rev(colors())[i],
+  #         offset = current_offset <- ifelse(any_overlap, 0.011, 0.008)
+  #       )
+  #   }
+  #   return(g)
+  # }  
+  # 
+  # #display that layer onto the tree
+  # observeEvent(input$add_annotation, {
+  #   
+  #   # update the reactive value as a count
+  #   new <- n_annotations() + 1
+  #   n_annotations(new)
+  #   
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  #   
+  #   tips <- lapply(1:n_annotations(), function(i)
+  #     annotations$data[[paste0("ann", i)]])
+  #   
+  #   output$treeDisplay <- renderPlot({
+  #     addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
+  #   })
+  #   
+  #   
+  # })
+  
+  
+  # addAnnotations <- function(tree_plot, tip_vector ) {
+  #   g <- tree_plot
+  #   for (i in seq_along(tip_vector)) {
+  #     
+  #     any_overlap <- checkOverlap(previous_plot = g, incoming_tips = tip_vector[[i]])
+  #     currentOffset <- ifelse(any_overlap, 0.011, 0.008)
+  #     
+  #     g <- g +
+  #       makeLayer(
+  #         tree_plot,
+  #         tips = tip_vector[[i]],
+  #         label = paste("Clade","\nrange of SNP(s) -", lapply(snpMean()[i], function(x){round(range(x),0)})),
+  #         color = rev(colors())[i],
+  #         offset = currentOffset
+  #       )
+  #     print(any_overlap)
+  #     #print(currentOffset)
+  #     
+  #   }
+  #   return(g)
+  # }
+  
+  # #display that layer onto the tree
+  # observeEvent(input$add_annotation, {
+  #   
+  #   # update the reactive value as a count
+  #   new <- n_annotations() + 1
+  #   n_annotations(new)
+  #   
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  #   
+  #   
+  #   output$treeDisplay <- renderPlot({
+  #     addAnnotations(tree_plot = make_treeOut(), tip_vector =  tips)
+  #     #, label= paste("Clade","\nSNP(s) -", lapply(snpMean()[i], function(x){round(mean(x),0)})) )
+  #   })
+  #   
+  #   tips <- lapply(1:n_annotations(), function(i)
+  #     annotations$data[[paste0("ann", i)]])
+  #   # 
+  #   # for (i in 1:length(tipVector))
+  #   #   tipVector <- c(tipVector, tips)
+  #   
+  #   
+  #   
+  # })    
+  # 
   
   
     # #display that layer onto the tree

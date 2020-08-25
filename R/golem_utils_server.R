@@ -67,40 +67,40 @@ snpAnno <- function(geneFile, tips){
   return(as.numeric(snpVector))
 }
 
-checkOverlap <- function(previous_plot, incoming_tips) {
-  preG <- ggplot2::ggplot_build(previous_plot)
-  
-  tip_labels <- preG$data[[3]]
-  incoming_y_coords <-
-    tip_labels[tip_labels$label %in% incoming_tips, "y"]
-  
-  if (length(preG$data) < 4) {
-    any_overlap <- FALSE
-  } else {
-    cladeSegments <- preG$data[[4]]
-    overlaps <- sapply(1:nrow(cladeSegments), function(i) {
-      X <- DescTools::Overlap(
-        x = c(cladeSegments[i, "y"], cladeSegments[i, "yend"]), 
-        y = incoming_y_coords)
-      Y <- X > 0
-      #return(Y)
-    })
-    #print(cladeSegments)
-    #any_overlap <- any(overlaps)
-  }
-  #return(any_overlap)
-}
+# checkOverlap <- function(previous_plot, incoming_tips) {
+#   preG <- ggplot2::ggplot_build(previous_plot)
+#   
+#   tip_labels <- preG$data[[3]]
+#   incoming_y_coords <-
+#     tip_labels[tip_labels$label %in% incoming_tips, "y"]
+#   
+#   if (length(preG$data) < 4) {
+#     any_overlap <- FALSE
+#   } else {
+#     cladeSegments <- preG$data[[4]]
+#     overlaps <- sapply(1:nrow(cladeSegments), function(i) {
+#       X <- DescTools::Overlap(
+#         x = c(cladeSegments[i, "y"], cladeSegments[i, "yend"]), 
+#         y = incoming_y_coords)
+#       Y <- X > 0
+#       #return(Y)
+#     })
+#     #print(cladeSegments)
+#     #any_overlap <- any(overlaps)
+#   }
+#   #return(any_overlap)
+# }
 
 
 #function which makes the annotation layer(s)
-makeLayer <- function(tree, tips, label, color, offset) {
-  ggtree::geom_cladelabel(
-    node = phytools::findMRCA(ape::as.phylo(tree), tips),
-    label = label,
-    color = color,
-    offset = offset 
-  )
-}
+# makeLayer <- function(tree, tips, label, color, offset) {
+#   ggtree::geom_cladelabel(
+#     node = phytools::findMRCA(ape::as.phylo(tree), tips),
+#     label = label,
+#     color = color,
+#     offset = offset 
+#   )
+# }
 
 
 
