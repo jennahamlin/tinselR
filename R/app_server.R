@@ -14,7 +14,6 @@ app_server <- function(input, output,session) {
   
   #annotates tree with incorporated tree viz parameters
   #treeWLayers <- 
-    
     callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$geneObjectOut, plot$make_treeOut)
   
   #allows tree with annotation and viz parameters to be changed to be donwloaded

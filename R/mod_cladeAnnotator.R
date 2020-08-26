@@ -189,6 +189,10 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     })
   })
   
+  #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+  observeEvent(input$reload,{
+    session$reload()
+  })
   
   
   
@@ -273,10 +277,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   # })
   
   
-  #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
-  observeEvent(input$reload,{
-    session$reload()
-  })
+  
   
   # #remove a reactive annotation one by one
   # #note to self - must have something be brushed
