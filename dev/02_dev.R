@@ -69,7 +69,7 @@ golem::add_js_file( "script" )
 golem::add_js_handler( "handlers" )
 golem::add_css_file( "bootstrap.css" )
 
-golem::use_external_css_file(url = "https://github.com/jennahamlin/bootswatch/blob/master/dist/litera/bootstrap.css", name = "bootswatch.litera")
+golem::use_external_css_file(url = "where", name = "filename")
 
 
 # 3. Documentation
