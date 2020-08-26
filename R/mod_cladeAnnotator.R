@@ -40,7 +40,6 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     label <- NULL
     geneFile()[which(geneFile()$label != geneFile()$name),]
   })
-
   
   #displays the tree plot, uses output from the displayTree module 
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
@@ -131,10 +130,9 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(g)
   }
   
-  #display that layer onto the tree
-  observeEvent(input$add_annotation, {
+  anno_plot<- eventReactive(input$add_annotation, {
+    # update the reactive value as a count of - 1
     
-    # update the reactive value as a count
     new <- n_annotations() + 1
     n_annotations(new)
     
@@ -144,30 +142,103 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     tips <- lapply(1:n_annotations(), function(i)
       annotations$data[[paste0("ann", i)]])
     
-    output$treeDisplay <- renderPlot({
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  tips)
-      })
-    })
+    return(tips)
+   
+  })
   
   #display that layer onto the tree
-  observeEvent(input$tree_reset, {
+  observeEvent(input$add_annotation, {
+    output$treeDisplay <- renderPlot({
+      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
+      })
+    })
+
+  anno_plot_undo<- eventReactive(input$tree_reset, {
+    # update the reactive value as a count of - 1
     
-    # update the reactive value as a count
     new <- n_annotations() - 1
     n_annotations(new)
     
     #add the tip vector (aka label) to the annotation reactive value
-    annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+    #annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
     
     tips <- lapply(1:n_annotations(), function(i)
       annotations$data[[paste0("ann", i)]])
     
+    return(tips)
+  })
+  
+  #display that layer onto the tree
+  observeEvent(input$tree_reset, {
     output$treeDisplay <- renderPlot({
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  tips)
+      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo() )
+    })
+  })
+  
+  # remove the annotations
+  observeEvent(input$tree_reset, {
+
+    output$treeDisplay <- renderPlot({
+      if (n_annotations() == 1) {
+        n_annotations<<-reactiveVal(0)
+        return(make_treeOut())
+
+      } else {
+        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo())
+      }
     })
   })
   
   
+  
+  
+  
+  
+  
+  
+  
+  # #display that layer onto the tree
+  # observeEvent(input$add_annotation, {
+  #   
+  #   # update the reactive value as a count
+  #   new <- n_annotations() + 1
+  #   n_annotations(new)
+  #   
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  # 
+  #   tips <- lapply(1:n_annotations(), function(i)
+  #     annotations$data[[paste0("ann", i)]])
+  # 
+  #   output$treeDisplay <- renderPlot({
+  #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  tips)
+  #     })
+  #   })
+  # 
+  # #remove layer(s) on the tree
+  # observeEvent(input$tree_reset, {
+  #   
+  #   # update the reactive value as a count
+  #   new <- n_annotations() - 1
+  #   n_annotations(new)
+  #   
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  #   
+  #   tips <- lapply(1:n_annotations(), function(i)
+  #     annotations$data[[paste0("ann", i)]])
+  #   
+  #   output$treeDisplay <- renderPlot({
+  #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  tips)
+  #   })
+  # })
+  # 
+  
+  
+  
+  
+  
+  # 
   # #display that layer onto the tree
   # anno_plot <- eventReactive(input$add_annotation, {
   # 
@@ -177,7 +248,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   # 
   #   #add the tip vector (aka label) to the annotation reactive value
   #   annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-  #   
+  # 
   #   #list apply over the makeLayer function to add the annotation
   #   plt <-
   #     lapply(1:n_annotations(), function(i)
@@ -211,10 +282,10 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   # #note to self - must have something be brushed
   # anno_plot_undo<- eventReactive(input$tree_reset, {
   #   # update the reactive value as a count of - 1
-  #   
+  # 
   #   new <- n_annotations() - 1
   #   n_annotations(new)
-  #   
+  # 
   #   #list apply over the makeLayer function to add the annotation
   #   plt <-
   #     lapply(1:n_annotations(), function(i)
@@ -230,12 +301,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   # 
   # # remove the annotations
   # observeEvent(input$tree_reset, {
-  #   
+  # 
   #   output$treeDisplay <- renderPlot({
   #     if (n_annotations() == 1) {
   #       n_annotations<<-reactiveVal(0)
   #       return(make_treeOut())
-  #       
+  # 
   #     } else {
   #       make_treeOut() + anno_plot_undo()
   #     }

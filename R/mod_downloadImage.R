@@ -85,7 +85,7 @@ mod_downloadImage_server <- function(input, output, session, treeWLayers){
       shinyjs::hide("download")
     else
       shinyjs::show("download")
-    write.table(input$text, file = "tinselUsers.txt", append = T)
+    utils::write.table(input$text, file = "tinselUsers.txt", append = T)
     
   })
 
