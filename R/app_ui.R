@@ -18,27 +18,19 @@ app_ui <- function() {
                               mod_downloadImage_ui("downloadImage_ui_1"),
                               width = 3),
                             mainPanel(
-                              mod_displayTree_ui("displayTree_ui_1"),
-                              mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
-                            )
-                          )),
-                 
-                 tabPanel("Tinsel pratice with example data",
+                              mod_displayTree_ui("displayTree_ui_data"),
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_data")
+                            ))),
+                 tabPanel("Example Data",
                           sidebarLayout(
                             sidebarPanel(
                               mod_exampleData_ui("exampleData_ui_1"), 
                               mod_paramsTree_ui("paramsTree_ui_example"), 
                               width = 3), 
-                            mainPanel(mod_exampleDisplay_ui("exampleDisplay_ui_1"))
-                              #,
-                              #mod_paramsTree_ui("paramsTree_ui_1_exmaple"), 
-                              #width = 3),
-                            #mainPanel(
-                             # mod_displayTree_ui("displayTree_ui_1_example"),
-                            #  mod_cladeAnnotator_ui("cladeAnnotator_ui_1_example"))))
-                 )
+                            mainPanel(
+                              mod_displayTree_ui("displayTree_ui_example"),
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example"))))
       )
-    )
     )
   )
 }

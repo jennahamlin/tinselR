@@ -16,7 +16,6 @@
 mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-    
   )
   
 }
@@ -40,12 +39,12 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
 
-  #convert phylogenetic tree (midpoint or not) to tibble to join tree and genetic distance matrix
+  #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
     tibble::as_tibble(midTree())
   })
 
-  #change column1, row1 to the id of label and replace - with a 0 within the file
+  #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
   geneObject <- reactive({
     label <- . <- NULL
     dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%
@@ -63,6 +62,7 @@ mod_displayTree_server <- function(input, output, session,
     ggtree::ggtree(inputFile, layout = treeformat())+
       ggplot2::xlim(NA, lim())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") 
+    #inclusion of the next two lines, breaks the check_overlap function and will not move overlaps - this is needs to be fixed 
     #+
     #  ggtree::geom_treescale(width = numscale())+
     #  ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = 0.00025)
@@ -71,7 +71,7 @@ mod_displayTree_server <- function(input, output, session,
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   make_tree <- reactive({
     
-    if(is.null(input$id)){ # this disconnects the need for genetic distance file to be uploaded.
+    if(is.null(input$id)){ # this disconnects the need for genetic distance file to be uploaded. #not sure why I use input$id here 
       treePlot(midTree())
     } 
     else{
@@ -85,7 +85,6 @@ mod_displayTree_server <- function(input, output, session,
       geneObjectOut = reactive(geneObject()),
       make_treeOut = reactive(make_tree())
     ))
-  
 }
 
 ## To be copied in the UI

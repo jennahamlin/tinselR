@@ -30,8 +30,6 @@ mod_paramsTree_ui <- function(id){
                        choices = list(
                          "bold" = "bold", "italic" = "italic", 
                          "bold+italic" = "bold.italic"), selected = "bold")
-    
-    
   )
 }
 
