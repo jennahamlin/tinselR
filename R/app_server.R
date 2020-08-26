@@ -3,22 +3,14 @@
 app_server <- function(input, output,session) {
   # List the first level callModules here
   
-  #uplodad the tree and call that module dataDisplay
+  #uplodad the data (tree, genetic distance and meta data) and call that module output by dataDisplay$
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
-  #module which holds the tree viz parameters
+  #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
   plot <-callModule(mod_displayTree_server, "displayTree_ui_1", dataDisplay$treeFileOut, dataDisplay$geneFileCorOrUnOut, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
-  
-  #metaFile <- callModule(mod_dataInput_server, "dataInput_ui_meta")
-  
-  #callModule(mod_displayTable_server, "displayTable_ui_1", metaFile)
-  
-  #geneFile <- callModule(mod_dataInput_server, "dataInput_ui_gene", dataDisplay$metaFileOut, dataDisplay$metaSepOut)
-  
-  #callModule(mod_displayTable_server, "displayTable_ui_2", geneFile)
   
   #annotates tree with incorporated tree viz parameters
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1", plot$geneObjectOut, plot$make_treeOut)

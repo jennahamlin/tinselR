@@ -13,10 +13,9 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_paramsTree_ui <- function(id, name){
+mod_paramsTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-    name, 
     checkboxInput(ns("alignTips"), "Align tip labels", FALSE),
     checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
     

@@ -12,7 +12,7 @@ mod_exampleData_ui <- function(id){
   tagList(
     tagList(
       
-      #select tree file using the UI function in app_ui.R file
+      #select tree file that is sourced using the UI function in app_ui.R file
       selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
                   choices = c("", "example Tree 1", "example Tree 2")),
       
@@ -52,7 +52,7 @@ mod_exampleData_server <- function(input, output, session){
   ### GENETIC ###
   ###############
   
-  exGeneFileUp <- reactive({
+  exGeneFileIn <- reactive({
     if(input$exGeneFile == "example Genetic Distance 1"){
       Tinsel::gene1}
     else if (input$exGeneFile == "example Genetic Distance 2") {
@@ -63,7 +63,7 @@ mod_exampleData_server <- function(input, output, session){
   ### META ###
   ############
   
-  exMetaFileUp <- eventReactive(input$exMetaFile, {
+  exMetaFileIn <- eventReactive(input$exMetaFile, {
     if(input$exMetaFile == "example Meta Data 1"){
       Tinsel::meta1}
     else if (input$exMetaFile == "example Meta Data 2") {
@@ -87,52 +87,38 @@ mod_exampleData_server <- function(input, output, session){
     validate(need(input$exTreeFile !="", "Please import newick tree file"))
     req(exTreeFileIn())
 
-    if (is.null(exMetaFileUp())) { #if no meta file still upload the tree
+    if (is.null(exMetaFileIn())) { #if no meta file still upload the tree
       exTreeFileIn()
     }
     else { #if metafile correct tip labels using phylotools sub.taxa.label function
 
       exTreeFileIn()%>% 
-        phylotools::sub.taxa.label(., as.data.frame(exMetaFileUp())) #this line converts tip labels to pretty labels based on user upload of meta data file
+        phylotools::sub.taxa.label(., as.data.frame(exMetaFileIn())) #this line converts tip labels to pretty labels based on user upload of meta data file
     }
   })
   
+  #reactive expression that uploads the genetic distance file and allows the optional upload of meta data to correct tree tip labels
+  exGeneFileCorOrUn <- reactive({
+    if (is.null(exMetaFileIn()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
+      exGeneFileIn()
+    }
+
+    else { #if meta file uploaded correct the distance file to match meta file tip labels
+      . <- NULL
+      exMetaFileComb <- exMetaFileIn()
+      exGeneFileCorrected <- exGeneFileIn
+      colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
+      exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
+      return(exGeneFileCorrected)
+    }
+  })
+
+  #return these reactive objects to be used in tree display module
   return(
     list(
-      extreeFileOut = reactive(exTreeFileUp())))
-  
-  # #reactive expression that uploads the genetic distance file and allows the optional upload of meta data to correct tree tip labels
-  # #this also performs a check to see if the correct delimitor is selected before reading in the files and provides users with error output
-  # 
-  # exGeneFileCorOrUn <- reactive({ 
-  #   if (is.null(exMetaFileUp()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
-  #     
-  #     exGeneFileUncorrected <- fileCheck(fileUp = exGeneFileUp(), fileType = exGeneFileType(), fileSep = input$exGeneSep)
-  #   } 
-  #   
-  #   else { #if meta file uploaded do an error check, then do an error check for genetic distance and then correct the distance file to match meta file tip labels
-  #     
-  #     . <- NULL
-  #     
-  #     exMetaFileComb <- fileCheck(fileUp = exMetaFileUp(), fileType = exMetaFileType(), fileSep = input$exMetaSep) 
-  #     
-  #     exGeneFileCorrected <- fileCheck(fileUp = exGeneFileUp(), fileType = exGeneFileType(), fileSep = input$exGeneSep)
-  #     
-  #     colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
-  #     
-  #     exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
-  #     
-  #     return(exGeneFileCorrected)
-  #   }
-  # })
-  # 
-  # #return these reactive objects to be used in tree display module 
-  # return(
-  #   list(
-  #     treeFileOut = reactive(exTreeFileUp()),
-  #     geneFileCorOrUnOut = reactive(exGeneFileCorOrUn())
-  #   ))
-  
+      extreeFileOut = reactive(exTreeFileUp()),
+      exgeneFileCorOrUnOut = reactive(exGeneFileCorOrUn())
+    ))
 }
 
 ## To be copied in the UI
