@@ -10,3 +10,5 @@ $run_dev.*
 ^app\.R$
 ^\.travis\.yml$
 ^favicon$
+^LICENSE.md$
+^tinselUsers.txt$
