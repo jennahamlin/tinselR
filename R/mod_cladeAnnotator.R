@@ -26,6 +26,22 @@ mod_cladeAnnotator_ui <- function(id){
 mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, make_treeOut){
   ns <- session$ns
   
+  #convert to long data frame - three columns.
+  #This takes as input the genetic distance object from display tree module
+  geneFile <-reactive({
+    label <- NULL
+    geneObjectOut()%>%
+      stats::na.omit()%>%
+      tidyr::pivot_longer(-label)
+  })
+
+  #remove self comparisons for this table - necessary for snp mean/median calculation.
+  geneFileSNP <-reactive({
+    label <- NULL
+    geneFile()[which(geneFile()$label != geneFile()$name),]
+  })
+
+  
   #displays the tree plot, uses output from the displayTree module 
   observeEvent(input$add_tree, {output$treeDisplay <- renderPlot({
     make_treeOut()})
@@ -52,7 +68,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     return(tipVector)
   })
   
-  output$textDisplay <-renderText(dataWithSelection2())
+  #output$textDisplay <-renderText(dataWithSelection2())
   
   make_layer <- function(tree, tips, label, color, offset) {
     ggtree::geom_cladelabel(
@@ -63,6 +79,14 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
       offset = offset
     )
   }
+  
+  #use snp_anno function to get the snps differences between compared tips
+  snpMean <- eventReactive(input$add_annotation, {
+    lapply(1:n_annotations(), function(i)
+      snpAnno(geneFile = geneFileSNP(),
+              tips = annotations$data[[paste0("ann", i)]]
+      ))
+  })
   
   check_overlap <- function(previous_plot, incoming_tips) {
     pre_g <- ggplot2::ggplot_build(previous_plot)
@@ -99,7 +123,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
         make_layer(
           tree_plot,
           tips = tip_vector[[i]],
-          label = paste("Clade", i),
+          label = paste("Clade","\nrange of SNP(s) -", lapply(snpMean()[i], function(x){round(range(x),0)})),
           color = rev(colors())[i],
           offset = current_offset <- ifelse(any_overlap, 0.011, 0.008)
         )
@@ -131,7 +155,7 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   
   
   # #convert to long data frame - three columns.
-  #This takes as input the genetic distance object from display tree module
+  # #This takes as input the genetic distance object from display tree module
   # geneFile <-reactive({ 
   #   label <- NULL
   #   geneObjectOut()%>%
