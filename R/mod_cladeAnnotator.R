@@ -153,12 +153,12 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
     })
   })
   
-  treePlotOut <- reactive({
+  treePlotOutAnn <- reactive({
     addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
   })
   
   
-  return(treePlotOut)
+  return(treePlotOutAnn)
   
   
   # anno_plot_undo<- eventReactive(input$tree_reset, {
