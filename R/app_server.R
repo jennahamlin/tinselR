@@ -13,11 +13,10 @@ app_server <- function(input, output,session) {
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$geneFileCorOrUnOut, params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
   
   #annotates tree with incorporated tree viz parameters
-  #treeWLayers <- 
-    callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$geneObjectOut, plot$make_treeOut)
+  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$geneObjectOut, plot$make_treeOut)
   
   #allows tree with annotation and viz parameters to be changed to be donwloaded
-  #callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
+  callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
   
   ##repeated for preloaded data 
   #uplodad the tree and call that module dataDisplay

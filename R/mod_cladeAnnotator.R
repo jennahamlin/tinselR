@@ -150,50 +150,67 @@ mod_cladeAnnotator_server <- function(input, output, session, geneObjectOut, mak
   observeEvent(input$add_annotation, {
     output$treeDisplay <- renderPlot({
       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
-      })
-    })
-
-  anno_plot_undo<- eventReactive(input$tree_reset, {
-    # update the reactive value as a count of - 1
-    
-    new <- n_annotations() - 1
-    n_annotations(new)
-    
-    #add the tip vector (aka label) to the annotation reactive value
-    #annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-    
-    tips <- lapply(1:n_annotations(), function(i)
-      annotations$data[[paste0("ann", i)]])
-    
-    return(tips)
-  })
-  
-  #display that layer onto the tree
-  observeEvent(input$tree_reset, {
-    output$treeDisplay <- renderPlot({
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo() )
     })
   })
   
-  # remove the annotations
-  observeEvent(input$tree_reset, {
-
-    output$treeDisplay <- renderPlot({
-      if (n_annotations() == 1) {
-        n_annotations<<-reactiveVal(0)
-        return(make_treeOut())
-
-      } else {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo())
-      }
-    })
+  treePlotOut <- reactive({
+    addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
   })
   
-  #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
-  observeEvent(input$reload,{
-    session$reload()
-  })
   
+  return(treePlotOut)
+  
+  
+  # anno_plot_undo<- eventReactive(input$tree_reset, {
+  #   # update the reactive value as a count of - 1
+  #   
+  #   new <- n_annotations() - 1
+  #   n_annotations(new)
+  #   
+  #   #add the tip vector (aka label) to the annotation reactive value
+  #   #annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
+  #   
+  #   tips <- lapply(1:n_annotations(), function(i)
+  #     annotations$data[[paste0("ann", i)]])
+  #   
+  #   return(tips)
+  # })
+  
+  # #display that layer onto the tree
+  # observeEvent(input$tree_reset, {
+  #   output$treeDisplay <- renderPlot({
+  #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo() )
+  #   })
+  # })
+  # 
+  # # remove the annotations
+  # observeEvent(input$tree_reset, {
+  # 
+  #   output$treeDisplay <- renderPlot({
+  #     if (n_annotations() == 1) {
+  #       n_annotations<<-reactiveVal(0)
+  #       return(make_treeOut())
+  # 
+  #     } else {
+  #       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo())
+  #     }
+  #   })
+  # })
+  # 
+  # #reactive to send tree with annoations to downloadImage module
+  # treeWLayers <- reactive ({
+  #   if (!is.null(anno_plot_undo())){
+  #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot_undo())
+  #   } else {
+  #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot())
+  #   }
+  # })
+  # 
+  # #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+  # observeEvent(input$reload,{
+  #   session$reload()
+  # })
+  # 
   
   
   

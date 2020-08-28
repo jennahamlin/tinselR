@@ -5,9 +5,9 @@
 \alias{mod_downloadImage_server}
 \title{mod_downloadImage_ui and mod_downloadImage_server}
 \usage{
-mod_downloadImage_ui(id, label)
+mod_downloadImage_ui(id)
 
-mod_downloadImage_server(input, output, session, treeWLayers)
+mod_downloadImage_server(input, output, session, treePlotOut)
 }
 \arguments{
 \item{id}{shiny id}
