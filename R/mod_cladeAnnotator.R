@@ -46,176 +46,123 @@ mod_cladeAnnotator_server <-
       })
     })
     
-    # Initialize a reactive value and set to zero
-    n_annotations <- reactiveVal(0)
-    annotations <- reactiveValues()
-    
-    #reactive that holds the brushed points on a plot
-    dataWithSelection <- reactive({
-      brushedPoints(make_treeOut()$data, input$plot_brush)
+    # Initialize reactive Values
+    Values <- reactiveValues()
+    observe({
+      Values[["phy"]] <- make_treeOut()
+      Values[["n"]]   <- 0
+      Values[["tip_vec"]] <- list()
     })
     
-    tipVector <- c()
-    
-    #add label to tipVector if isTip == True
-    dataWithSelection2 <- eventReactive(input$plot_brush, {
-      label <- NULL
-      # browser()
-      for (i in 1:length(dataWithSelection()$label)) {
-        if (dataWithSelection()$isTip[i] == TRUE)
-          tipVector <- c(tipVector, dataWithSelection()$label[i])
-      }
-      return(tipVector)
-    })
-    
-    output$textDisplay <- renderText(dataWithSelection2())
-    
-    make_layer <- function(tree, tips, label, color, offset) {
-      ggtree::geom_cladelabel(
-        node = phytools::findMRCA(ape::as.phylo(tree), tips),
-        label = label,
-        color = color,
-        angle = 0,
-        offset = offset
-      )
-    }
-    
-    check_overlap <- function(previous_plot, incoming_tips) {
-      pre_g <- ggplot2::ggplot_build(previous_plot)
-      
-      tip_labels <- pre_g$data[[3]]
-      
-      incoming_y_coords <-
-        tip_labels[tip_labels$label %in% incoming_tips, "y"]
-      
-      # if (length(pre_g$data) < 5) {
-      #   any_overlap <- FALSE
-      # } else {
-      
-      # adding this here because I am not sure if the order of elements 
-      # in the `data` slot of the pre-built ggplot is always the same
-      # so trying to detect the last data frame in `$data` that contains
-      # segments by searching for a column named yend. 
-      # The first two such elements of `$data` will have this, because the 
-      # branches of the trees are drawn as segments, so we're extracting the
-      # last objects. 
-      
-      # Note, this procedure might fail if future additions to the app
-      # adorn the tree with other segments
-      
-        segments_index <- lapply(pre_g$data, colnames) %>% 
-          sapply(., function(x) any(x == "yend")) %>% 
-          data.frame(cs = ., nm = 1:length(.)) %>% 
-          dplyr::filter(cs == TRUE) %>% 
-          dplyr::slice_max(order_by = nm, n=1) %>% 
-          dplyr::pull(nm)
-        
-        clade_segments <- pre_g$data[segments_index][[1]]
-        # browser()
-        overlaps <- sapply(1:nrow(clade_segments), function(i) {
-          X <- DescTools::Overlap(x = c(clade_segments[i, "y"], clade_segments[i, "yend"]),
-                                  y = incoming_y_coords)
-          Y <- X > 0
-          return(Y)
-        })
-      # }
-    }
-    
-    addAnnotations <- function(tree_plot, tip_vector) {
-      g <- tree_plot
-      for (i in seq_along(tip_vector)) {
-        any_overlap <- check_overlap(previous_plot = g, incoming_tips = tip_vector[[i]])
-        current_offset <- ifelse(any_overlap, 0.009, 0.004)
-        
-        print(tip_vector[[i]])
-        print(any_overlap)
-        print(current_offset)
-        
-        g <- g +
-          make_layer(
-            tree_plot,
-            tips = tip_vector[[i]],
-            label = paste("Clade", i),
-            color = rev(colors())[i],
-            offset = current_offset
-          )
-      }
-      return(g)
-    }
-    
-    #display that layer onto the tree
+    #display the layer onto the tree
     observeEvent(input$add_annotation, {
-      # update the reactive value as a count
-      new <- n_annotations() + 1
-      n_annotations(new)
+      # update the number of annotations
+      Values[["n"]] <- Values[["n"]] + 1
       
-      #add the tip vector (aka label) to the annotation reactive value
-      annotations$data[[paste0("ann", n_annotations())]] <-
-        dataWithSelection2()
+      #add label to tipVector if isTip == True
+      req(input$plot_brush)
+      tipVector <- c()
+      selected_tips <- brushedPoints(Values[["phy"]]$data, input$plot_brush)
+      for (i in 1:length(selected_tips$label)) {
+        if (selected_tips$isTip[i])
+          tipVector <- c(tipVector, selected_tips$label[i])
+      }
+      Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- tipVector
       
-      tips <- lapply(1:n_annotations(), function(i)
-        annotations$data[[paste0("ann", i)]])
+      # check if the tips of the current annotation overlap with tips from previous annotations
+      current_tips <- Values[["tip_vec"]][[  Values[["n"]] ]]
+      previous_tips <- Values[["tip_vec"]][ -Values[["n"]] ]
+      n_overlap <- sapply(previous_tips, function(a) any(current_tips %in% a)) %>% unlist %>% sum
+      
+      # set the clade label offset based on how many sets of previous tips it overlaps
+      label_offset <- 0.004 + n_overlap*0.002
+      
       # browser()
-      output$treeDisplay <- renderPlot({
-        addAnnotations(tree_plot = make_treeOut() , tip_vector =  tips)
-      })
       
+      make_layer <- function(tree, tips, label, color, offset) {
+        ggtree::geom_cladelabel(
+          node = phytools::findMRCA(ape::as.phylo(tree), tips),
+          label = label,
+          color = color,
+          angle = 0,
+          offset = offset
+        )
+      }
       
+      anno_phy <- Values[["phy"]] +
+        make_layer(
+          tree = Values[["phy"]],
+          tips =  current_tips,
+          color = "grey25",
+          label = paste("Clade", Values[["n"]]),
+          offset = label_offset
+        )
+      
+      Values[["phy"]] <- anno_phy
     })
     
+    output$treeDisplay <- renderPlot({
+      Values[["phy"]]
+    })
+      
     #this will reload the session and clear exisiting info - good if you want to start TOTALLY new
     observeEvent(input$reload, {
       session$reload()
     })
     
-    # #remove a reactive annotation one by one
-    # #note to self - must have something be brushed
-    anno_plot_undo <- eventReactive(input$tree_reset, {
-      # update the reactive value as a count of - 1
+    if (FALSE) {
       
-      new <- n_annotations() - 1
-      n_annotations(new)
+      # disabling for now
+      # both this and the next reactive listen to the same event
+      # for now keep it simple and remove all annotations
       
-      #list apply over the make_layer function to add the annotation
-      plt <-
-        lapply(1:n_annotations(), function(i)
-          make_layer(
-            make_treeOut(),
-            tips = annotations$data[[paste0("ann", i)]],
-            label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], function(x) {
-              round(mean(x), 0)
-            })),
-            color = "red",
-            offSet = max(make_treeOut()$data$x)
-          ))
-      return(plt)
-    })
+      # #remove a reactive annotation one by one
+      # #note to self - must have something be brushed
+      anno_plot_undo <- eventReactive(input$tree_reset, {
+        # update the reactive value as a count of - 1
+        
+        new <- n_annotations() - 1
+        n_annotations(new)
+        
+        #list apply over the make_layer function to add the annotation
+        plt <-
+          lapply(1:n_annotations(), function(i)
+            make_layer(
+              make_treeOut(),
+              tips = annotations$data[[paste0("ann", i)]],
+              label = paste("Clade", "\nSNP(s) -", lapply(snpMean()[i], function(x) {
+                round(mean(x), 0)
+              })),
+              color = "red",
+              offSet = max(make_treeOut()$data$x)
+            ))
+        return(plt)
+      })
+      
+    }
+    
     
     # remove the annotations
     observeEvent(input$tree_reset, {
-      output$treeDisplay <- renderPlot({
-        if (n_annotations() == 1) {
-          n_annotations <<- reactiveVal(0)
-          return(make_treeOut())
-          
-        } else {
-          make_treeOut() + anno_plot_undo()
-        }
-      })
+      Values[["phy"]] <- make_treeOut()
+      Values[["n"]]   <- 0
+      Values[["tip_vec"]] <- list()
     })
-    
     
     #reactive to send tree with annoations to downloadImage module
-    treeWLayers <- reactive ({
-      if (!is.null(make_treeOut() + anno_plot_undo())) {
-        make_treeOut() + anno_plot_undo()
-      } else {
-        make_treeOut() +  anno_plot()
-      }
-    })
+    # treeWLayers <- reactive ({
+      # if (!is.null(make_treeOut() + anno_plot_undo())) {
+      #   make_treeOut() + anno_plot_undo()
+      # } else {
+      #   make_treeOut() +  anno_plot()
+      # }
+    # })
+    
+    return(reactive({
+      Values[["phy"]]
+    }))
+    
   }
-
-
 
 ## To be copied in the UI
 # mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
