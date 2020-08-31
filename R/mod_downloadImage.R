@@ -36,6 +36,7 @@ mod_downloadImage_ui <- function(id){
 mod_downloadImage_server <- function(input, output, session, treeWLayers){
   ns <- session$ns
 
+<<<<<<< HEAD
   observe({input$download
     ggplot2::ggsave(filename = paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''),
                                       path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
@@ -44,11 +45,118 @@ mod_downloadImage_server <- function(input, output, session, treeWLayers){
               files = paste(tempdir(), "/", "treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''))
     })
 
+||||||| d594354
+  # observe({input$download
+  #   
+  #     ggplot2::ggsave(filename = "treePlot",path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
+  # })
+  #   
+  # output$download <- downloadHandler(
+  #   
+  #   filename = function(){
+  #         paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')} ,
+  # 
+  #   content = function(file){
+  #     file.copy(paste(tempdir(), "/", filename= 
+  #                       paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''), sep = ""), file)
+  #     
+  #   }
+  #   
+  # )     
+  
+  
+  observe({input$download
+
+    #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")
+
+    ggplot2::ggsave(filename = paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''),
+                                      path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
+
+
+    zip::zipr(zipfile = paste(tempdir(), "/", "treePlot.zip", sep = ""),
+              files = paste(tempdir(), "/", "treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''))
+                
+                #paste(tempdir(), "/", "treePlot", sep = ""))
+  })
+
+=======
+  # observe({input$download
+  #   
+  #     ggplot2::ggsave(filename = "treePlot",path = tempdir(), plot = treeWLayers(), width = input$width, height = input$height, device = input$fileType)
+  # })
+  #   
+  # output$download <- downloadHandler(
+  #   
+  #   filename = function(){
+  #         paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = '')} ,
+  # 
+  #   content = function(file){
+  #     file.copy(paste(tempdir(), "/", filename= 
+  #                       paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''), sep = ""), file)
+  #     
+  #   }
+  #   
+  # )     
+  
+  
+  observeEvent(input$download, {
+    
+    
+    #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")
+    
+    ggplot2::ggsave(
+      filename = paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''),
+      path = tempdir(),
+      plot = treeWLayers(),
+      width = input$width,
+      height = input$height,
+      device = input$fileType
+    )
+    
+    zip::zipr(
+      zipfile = paste(tempdir(), "/", "treePlot.zip", sep = ""),
+      files = paste(
+        tempdir(),
+        "/",
+        "treePlot",
+        '.',
+        Sys.Date(),
+        '.',
+        input$fileType,
+        sep = ''
+      )
+    )
+    
+    #paste(tempdir(), "/", "treePlot", sep = ""))
+  })
+  
+>>>>>>> annotator
   output$download <- downloadHandler(
     filename = "treePlot.zip",
+<<<<<<< HEAD
     content = function(file){
+||||||| d594354
+
+    content = function(file){
+
+=======
+    
+    content = function(file) {
+>>>>>>> annotator
       file.copy(paste(tempdir(), "/", "treePlot.zip", sep = ""), file)
+<<<<<<< HEAD
+||||||| d594354
+
+=======
+      
+>>>>>>> annotator
     }
+<<<<<<< HEAD
+||||||| d594354
+
+=======
+    
+>>>>>>> annotator
   )
   
   observeEvent(input$text, {
