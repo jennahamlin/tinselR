@@ -16,7 +16,6 @@
 mod_downloadImage_ui <- function(id){
   ns <- NS(id)
   tagList(
-
     selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
     numericInput(ns("width"), "Width of Image (inches)", value = 6),
     numericInput(ns("height"), "Height of Images (inches)", value = 8),
@@ -35,6 +34,8 @@ mod_downloadImage_ui <- function(id){
 mod_downloadImage_server <- function(input, output, session, treeWLayers){
   ns <- session$ns
 
+  #observe({input$download
+  
   observeEvent(input$download, {
     
     #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")

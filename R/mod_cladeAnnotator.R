@@ -39,6 +39,23 @@ mod_cladeAnnotator_server <-
            make_treeOut) {
     ns <- session$ns
     
+    
+    #convert to long data frame - three columns.
+    #This takes as input the genetic distance object from display tree module
+    geneFile <-reactive({
+      label <- NULL
+      geneObjectOut()%>%
+        stats::na.omit()%>%
+        tidyr::pivot_longer(-label)
+    })
+    
+    #remove self comparisons for this table - necessary for snp mean/median calculation.
+    geneFileSNP <-reactive({
+      label <- NULL
+      geneFile()[which(geneFile()$label != geneFile()$name),]
+    })
+    
+    
     #displays the tree plot, uses output from the displayTree module
     observeEvent(input$add_tree, {
       output$treeDisplay <- renderPlot({
@@ -76,6 +93,13 @@ mod_cladeAnnotator_server <-
       
       # set the clade label offset based on how many sets of previous tips it overlaps
       label_offset <- 0.004 + n_overlap*0.002
+
+      #use snp_anno function to get the snps differences between compared tips
+      snpMean <- lapply(1:length(Values[["n"]]), function(i)
+          snpAnno(geneFile = geneFileSNP(),
+                  tips = tipVector
+          ))
+  
       
       # browser()
       
@@ -94,7 +118,10 @@ mod_cladeAnnotator_server <-
           tree = Values[["phy"]],
           tips =  current_tips,
           color = "grey25",
-          label = paste("Clade", Values[["n"]]),
+          label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x) {
+            round(mean(x), 0)
+          })),
+            #paste("Clade", Values[["n"]]),
           offset = label_offset
         )
       
@@ -158,9 +185,9 @@ mod_cladeAnnotator_server <-
     # }
     # })
     
-    return(reactive({
+    treeWLayers <- reactive({
       Values[["phy"]]
-    }))
+    })
     
   }
 
