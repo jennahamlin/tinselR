@@ -97,7 +97,10 @@ mod_cladeAnnotator_server <-
       #use snp_anno function to get the snps differences between compared tips
       snpMean <- lapply(1:length(Values[["n"]]), function(i)
           snpAnno(geneFile = geneFileSNP(),
-                  tips = tipVector
+                  tips =  current_tips[i]
+                    #Values[["tip_vec"]][[  Values[["n"]] ]]
+                    #Values[["tip_vec"]][[paste0("tips", i)]] 
+                    #tipVector
           ))
   
       
