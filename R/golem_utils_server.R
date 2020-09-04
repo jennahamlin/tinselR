@@ -55,6 +55,7 @@ fileCheck<- function(fileUp, fileType, fileSep){
 snpVector <- c()
 
 snpAnno <- function(geneFile, tips){
+  str(tips)
   label <- name <- value <- NULL # adding this helps with devtools::check() note of 'no visible binding for global variables as noted here https://www.r-bloggers.com/no-visible-binding-for-global-variable/
   for (i in 1:length(tips)){
     for (j in 1:length(tips)){

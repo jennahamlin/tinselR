@@ -1,10 +1,10 @@
 {
   "R": {
-    "Version": "3.6.0",
+    "Version": "3.6.1",
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://ftp.ussg.iu.edu/CRAN"
+        "URL": "https://mirrors.nics.utk.edu/cran"
       }
     ]
   },
@@ -861,17 +861,17 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.0.0",
+      "Version": "1.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8187ca2c27e80978f5b143bec554a437"
+      "Hash": "fb73a010ace00d6c584c2b53a21b969c"
     },
     "tidyselect": {
       "Package": "tidyselect",
-      "Version": "1.1.0",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6ea435c354e8448819627cf686f66e0a"
+      "Hash": "7d4b0f1ab542d8cb7a40c593a4de2f36"
     },
     "tidytree": {
       "Package": "tidytree",
