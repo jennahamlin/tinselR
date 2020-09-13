@@ -55,16 +55,13 @@ mod_cladeAnnotator_server <-
       geneFile()[which(geneFile()$label != geneFile()$name),]
     })
     
-    #displays the tree plot, uses output from the displayTree module
-    observeEvent(input$add_tree, {
-      output$treeDisplay <- renderPlot({
-        make_treeOut()
-      })
+    Values <- reactiveValues()
+    observe({
+      Values[["phy"]] <- make_treeOut()
+      Values[["n"]]   <- 0
+      Values[["tip_vec"]] <- list()
     })
-   
-    # Initialize a reactive value and set to zero	
-    n_annotations <- reactiveVal(0)	
-    annotations <- reactiveValues()	
+    
     
     #reactive that holds the brushed points on a plot	
     dataWithSelection <- reactive({	
@@ -101,12 +98,7 @@ mod_cladeAnnotator_server <-
     #     ))
     # })
     
-    Values <- reactiveValues()
-        observe({
-          Values[["phy"]] <- make_treeOut()
-          Values[["n"]]   <- 0
-          Values[["tip_vec"]] <- list()
-        })
+   
     
   #   #display that layer onto the tree
   #   anno_plot <- eventReactive(input$add_annotation, {
@@ -253,9 +245,10 @@ mod_cladeAnnotator_server <-
           tree = Values[["phy"]],
           tips =  current_tips,
           color = "grey25",
-          label = paste("Clade", "\nSNP(s) -", as.list(snpMean()[1], function(x) {
-            round(mean(x), 0)
-          })),
+          label = paste("Clade", "\nSNP(s) -", mean(unlist(as.list(snpMean()[1]))
+                                                    #, function(x) {
+            #round(mean(x), 0)})),
+          )),
             #paste("Clade", Values[["n"]]),
           offset = label_offset
         )
