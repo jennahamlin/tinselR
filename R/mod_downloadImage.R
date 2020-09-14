@@ -17,11 +17,13 @@ mod_downloadImage_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    downloadButton(ns("downloadPlot"), "Download the plot")
-    # selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
-    # numericInput(ns("width"), "Width of Image (inches)", value = 6),
-    # numericInput(ns("height"), "Height of Images (inches)", value = 8),
-    # shinyjs::useShinyjs(),
+     selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
+     numericInput(ns("width"), "Width of Image (inches)", value = 6),
+     numericInput(ns("height"), "Height of Images (inches)", value = 8),
+     downloadButton(ns("downloadPlot"), "Download the plot")
+     
+
+         # shinyjs::useShinyjs(),
     # textInput(ns("text"), "User Id", "", placeholder = "please enter your user id to download"),
     # shinyjs::hidden(downloadButton(ns("download")))
   )
@@ -38,10 +40,10 @@ mod_downloadImage_server <- function(input, output, session, treePlotOut){
   
   output$downloadPlot <- downloadHandler(
     filename = function() {
-      paste("data-", Sys.Date(), ".png", sep="")
+      paste("data-", Sys.Date(), sep="")
     },
     content = function(file) {
-      ggplot2::ggsave(file, plot = treePlotOut(), device = "png")
+      ggplot2::ggsave(file, plot = treePlotOut(), width = input$width, height = input$height, device = input$fileType)
     }
   )
 
