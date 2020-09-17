@@ -136,27 +136,32 @@ mod_cladeAnnotator_server <-
    
     
     addAnnotations <- function(tree_plot, tip_vector) {
+      print("tip_vector=") 
       print(tip_vector)
       g <- tree_plot
     
       #print(offsetTip())
       
-      for (i in seq_along(tip_vector)) {
+      for (i in seq_along(tip_vector)) { #this is the i'th list, for which we are calculating the offset
+        print("i=")
         print(i)
-        # check if the tips of the current annotation overlap with tips from previous annotations
-        current_tips <- Values[["tip_vec"]][[  Values[["n"]] ]]
-        print("Line146")
+        current_tips <- Values[["tip_vec"]][[ i ]]
+        print("current_tips=")
         print(current_tips)
-        
-        previous_tips <- Values[["tip_vec"]][ -Values[["n"]] ]
-        print("Line150")
-        print(previous_tips)
-        n_overlap <- sapply(previous_tips, function(a) any(current_tips %in% a)) %>% unlist %>% sum
-        print(n_overlap)
+        n_overlap = 0     # start by assuming no overlap
+        if (i>1){         # for the first set of tips no comparisons needed
+                          # otherwise do comparisons
+          for (j in 1:(i-1)){  #this is the j'th list, against which we need to compare if i overlaps it
+            print("   j=")
+            print(j)
+            compare_tips <- Values[["tip_vec"]][[ j ]]  #tips to compare to
+            n_overlap <- n_overlap + any(current_tips %in% compare_tips) # for every match, count it
+          }
+        }
         
         # set the clade label offset based on how many sets of previous tips it overlaps
         label_offset <- 0.004 + n_overlap*0.002
-        
+        str(make_treeOut()$data)
         snpMean <- lapply(1:n_annotations(), function(i)
           snpAnno(geneFile = geneFileSNP(),
                   tips = annotations$data[[paste0("ann", i)]]
@@ -167,7 +172,7 @@ mod_cladeAnnotator_server <-
             tree_plot,
             tips = tip_vector[[i]],
             label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x){round(mean(x),0)})),
-            color = rev(colors())[i],
+            color = "blue",
             offset = label_offset
               #tipOut[i]
             #label_offset
