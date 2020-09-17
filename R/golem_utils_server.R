@@ -68,6 +68,18 @@ snpAnno <- function(geneFile, tips){
   return(as.numeric(snpVector))
 }
 
+
+
+#function to add layer, uses findMRCA to get the MRCA(node) for the selected tips
+make_layer <- function(tree, tips, label, color, offset) {
+  ggtree::geom_cladelabel(
+    node = phytools::findMRCA(ape::as.phylo(tree), tips),
+    label = label,
+    color = color,
+    angle = 0,
+    offset = offset
+  )
+}
 # checkOverlap <- function(previous_plot, incoming_tips) {
 #   preG <- ggplot2::ggplot_build(previous_plot)
 #   
