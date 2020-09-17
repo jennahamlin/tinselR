@@ -119,7 +119,8 @@ mod_cladeAnnotator_server <-
     treePlotOut <- reactive({
       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )    })
     
-    return(treePlotOut)
+    #uncomment this out to send tree for download. 
+    #return(treePlotOut)
     
     
     #event reactive which holds the tips information 
@@ -127,9 +128,6 @@ mod_cladeAnnotator_server <-
       
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
-      
-      #add the tip vector (aka label) to the annotation reactive value
-      Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
       
       tips <- lapply(1:Values[["n"]], function(i)
         Values[["tip_vec"]][[paste0("tips", i)]])
@@ -145,6 +143,10 @@ mod_cladeAnnotator_server <-
       })
     })
     
+    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+    observeEvent(input$reload,{
+      session$reload()
+    })
     
     
     
