@@ -55,6 +55,8 @@ mod_cladeAnnotator_server <-
       Values[["tip_vec"]] <- list()
     })
     
+    #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
+    #for overlap in annotations. 
     addAnnotations <- function(tree_plot, tip_vector) {
       g <- tree_plot
       
@@ -72,10 +74,12 @@ mod_cladeAnnotator_server <-
         # set the clade label offset based on how many sets of previous tips it overlaps
         label_offset <- 0.005 + n_overlap*0.003
         
+        #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- lapply(1:Values[["n"]], function(i)
           snpAnno(geneFile = geneObjectOut(),
                   tips = current_tips))
         
+        #generates the layer for the set of brushed tips
         g <- g +
           make_layer(
             tree_plot,

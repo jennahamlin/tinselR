@@ -17,15 +17,13 @@ mod_downloadImage_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-     selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
-     numericInput(ns("width"), "Width of Image (inches)", value = 6),
-     numericInput(ns("height"), "Height of Images (inches)", value = 8),
-     downloadButton(ns("downloadPlot"), "Download the plot")
-     
-
-         # shinyjs::useShinyjs(),
-    # textInput(ns("text"), "User Id", "", placeholder = "please enter your user id to download"),
-    # shinyjs::hidden(downloadButton(ns("download")))
+    selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
+    numericInput(ns("width"), "Width of Image (inches)", value = 6),
+    numericInput(ns("height"), "Height of Images (inches)", value = 8),
+    
+    shinyjs::useShinyjs(),
+    textInput(ns("text"), "User Id", "", placeholder = "please enter your user id to download"),
+    shinyjs::hidden(downloadButton(ns("downloadPlot")))
   )
 }
 
@@ -46,53 +44,16 @@ mod_downloadImage_server <- function(input, output, session, treePlotOut){
       ggplot2::ggsave(file, plot = treePlotOut(), width = input$width, height = input$height, device = input$fileType)
     }
   )
-
-  #observe({input$download
   
-  # observeEvent(input$download, {
-  #   
-  #   #ggplot2::ggsave(filename = "treePlot", treeWLayers(), path = tempdir(), width = input$width, height = input$height, device = "png")
-  #   
-  #   ggplot2::ggsave(
-  #     filename = paste("treePlot", '.', Sys.Date(), '.', input$fileType, sep = ''),
-  #     path = tempdir(),
-  #     plot = treeWLayers(),
-  #     width = input$width,
-  #     height = input$height,
-  #     device = input$fileType
-  #   )
-  #   
-  #   zip::zipr(
-  #     zipfile = paste(tempdir(), "/", "treePlot.zip", sep = ""),
-  #     files = paste(
-  #       tempdir(),
-  #       "/",
-  #       "treePlot",
-  #       '.',
-  #       Sys.Date(),
-  #       '.',
-  #       input$fileType,
-  #       sep = ''
-  #     )
-  #   )
-  # })
-  # 
-  # output$download <- downloadHandler(
-  #   filename = "treePlot.zip",
-  #   content = function(file) {
-  # 
-  #     file.copy(paste(tempdir(), "/", "treePlot.zip", sep = ""), file)
-  #     }
-  #   )
-  # 
-  # observeEvent(input$text, {
-  #   if (input$text == "") 
-  #     shinyjs::hide("download")
-  #   else
-  #     shinyjs::show("download")
-  #   utils::write.table(input$text, file = "tinselUsers.txt", append = T)
-  #   
-  # })
+  #these essentially serves as a count for number of downloads
+  observeEvent(input$text, {
+    if (input$text == "")
+      shinyjs::hide("downloadPlot")
+    else
+      shinyjs::show("downloadPlot")
+    utils::write.table(input$text, file = "tinselUsers.txt", append = T)
+    
+  })
 }
 
 ## To be copied in the UI
