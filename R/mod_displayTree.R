@@ -27,7 +27,7 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFileOut, geneFileCorOrUnOut, treeformat, lim, align, font, numscale, node, midP){
+                                   treeFileOut, geneObjectOutForS4, treeformat, lim, align, font, numscale, node, midP){
   ns <- session$ns
   
   midTree <- reactive({
@@ -44,16 +44,9 @@ mod_displayTree_server <- function(input, output, session,
     tibble::as_tibble(midTree())
   })
 
-  #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
-  geneObjectOut <- reactive({
-    label <- . <- NULL
-    dplyr::rename(geneFileCorOrUnOut(), label = 1)%>%
-      replace(., .=="-", 0)
-  })
-
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
-    dplyr::full_join(treeObject(), geneObject(), by = "label")%>%
+    dplyr::full_join(treeObject(), geneObjectOutForS4(), by = "label")%>%
       treeio::as.treedata()
   })
   
@@ -77,20 +70,9 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
   
-  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
-  geneObject <-reactive({
-    label <- NULL
-    geneObjectOut()%>%
-      stats::na.omit()%>%
-      tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
-      .[which(.$label != .$name),] #remove self comparisons for this table - necessary for snp mean/median calculation.
-  })
-  
-  
   #return these reactive objects to be used in cladeAnnotator module 
   return(
     list(
-      geneObjectOut = reactive(geneObject()),
       make_treeOut = reactive(make_tree())
     ))
 }

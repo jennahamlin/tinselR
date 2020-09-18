@@ -12,7 +12,7 @@ mod_displayTree_server(
   output,
   session,
   treeFileOut,
-  geneFileCorOrUnOut,
+  geneObjectOutForS4,
   treeformat,
   lim,
   align,

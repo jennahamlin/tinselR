@@ -115,11 +115,28 @@ mod_exampleData_server <- function(input, output, session){
     }
   })
 
+  #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
+  exGeneObjectOut <- reactive({
+    label <- . <- NULL
+    dplyr::rename(exGeneFileCorOrUn(), label = 1)%>%
+      replace(., .=="-", 0)
+  })
+  
+  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
+  exGeneObject <-reactive({
+    label <- NULL
+    exGeneObjectOut()%>%
+      stats::na.omit()%>%
+      tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
+      .[which(.$label != .$name),] #remove self comparisons for this table - necessary for snp mean/median calculation.
+  })
+ 
   #return these reactive objects to be used in tree display module
   return(
     list(
       extreeFileOut = reactive(exTreeFileUp()),
-      exgeneFileCorOrUnOut = reactive(exGeneFileCorOrUn())
+      exGeneObjectOutForS4 = reactive(exGeneObjectOut()),
+      exGeneObjectForSNP = reactive(exGeneObject())
     ))
 }
 

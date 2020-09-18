@@ -13,7 +13,7 @@ mod_cladeAnnotator_ui <- function(id) {
     actionButton(ns("add_tree"), "Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree",icon("plus"),class = "btn btn-primary"),
     actionButton(ns("remove_annotation"),"Remove Previous Annotation(s) on Tree",icon("refresh"),class = "btn btn-primary"),
-    #actionButton(ns("reload"), "Remove all annotations"),
+    actionButton(ns("reload"), "Relaunch the Application"),
     plotOutput(ns("treeDisplay"), brush = ns("plot_brush"))
   )
 }
@@ -22,7 +22,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #'
 #' @noRd
 mod_cladeAnnotator_server <-
-  function(input, output, session, geneObjectOut, make_treeOut) {
+  function(input, output, session, geneObjectForSNP, make_treeOut) {
     ns <- session$ns
     
     #displays the tree plot, uses output from the displayTree module
@@ -56,7 +56,7 @@ mod_cladeAnnotator_server <-
     })
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
-    #for overlap in annotations. 
+    #for overlap in annotations and adjusts as necessary
     addAnnotations <- function(tree_plot, tip_vector) {
       g <- tree_plot
       
@@ -76,7 +76,7 @@ mod_cladeAnnotator_server <-
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- lapply(1:Values[["n"]], function(i)
-          snpAnno(geneFile = geneObjectOut(),
+          snpAnno(geneFile = geneObjectForSNP(),
                   tips = current_tips))
         
         #generates the layer for the set of brushed tips
@@ -114,15 +114,7 @@ mod_cladeAnnotator_server <-
         addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
       })
     })
-    
-    #send tree with annotations to the download module
-    treePlotOut <- reactive({
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )    })
-    
-    #uncomment this out to send tree for download. 
-    #return(treePlotOut)
-    
-    
+
     #event reactive which holds the tips information 
     anno_plotUndo<- eventReactive(input$remove_annotation, {
       
@@ -136,6 +128,11 @@ mod_cladeAnnotator_server <-
       
     })
     
+    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+    observeEvent(input$reload,{
+      session$reload()
+    })
+    
     #display that layer onto the tree
     observeEvent(input$remove_annotation, {
       output$treeDisplay <- renderPlot({
@@ -143,83 +140,36 @@ mod_cladeAnnotator_server <-
       })
     })
     
-    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
-    observeEvent(input$reload,{
-      session$reload()
+    
+    # remove the annotations
+    observeEvent(input$remove_annotation, {
+      
+      output$treeDisplay <- renderPlot({
+        if (Values[["n"]] == 1) {
+          Values[["n"]] <- 0
+          return(make_treeOut())
+          
+        } else {
+          addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
+        }
+      })
     })
     
     
+    # #send tree with annotations to the download module
+    # treePlotOut <- reactive({
+    #   addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )    })
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    #  #display that layer onto the tree
-    # annoplot<- eventReactive(input$add_annotation, {
-    #   
-    #   # update the reactive value as a count
-    #   Values[["n"]] <- Values[["n"]] + 1
-    #   
-    #   tips <- lapply(1:n_annotations(), function(i) annotations$data[[paste0("ann", i)]])
-    #   
-    #   Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
-    #   
-    #   addAnnotations(tree_plot = make_treeOut() , tip_vector = Values[["tip_vec"]] )
-    # })
-    # 
-    # 
-    # 
-    # 
-    # observeEvent(input$add_annotation,{
-    #   
-    #   output$treeDisplay <- renderPlot({
-    #     make_treeOut() + annoplot()
-    #   })
-    # })
-    # 
-    # 
-    # 
-    # 
-    # #display that layer onto the tree
-    # observeEvent(input$remove_annotation, {
-    #   # update the reactive value as a count
-    #   new <- n_annotations() - 1
-    #   n_annotations(new)
-    #   
-    #   #add the tip vector (aka label) to the annotation reactive value
-    #   #annotations$data[[paste0("ann", n_annotations())]] <- dataWithSelection2()
-    #   
-    #   tips <- lapply(1:n_annotations(), function(i) annotations$data[[paste0("ann", i)]])
-    #   
-    #   Values[["n"]] <- Values[["n"]] - 1
-    #   #Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
-    #   #print(Values[["tip_vec"]])
-    #   
-    #   output$treeDisplay <- renderPlot({
-    #     addAnnotations(tree_plot = make_treeOut() , tip_vector = Values[["tip_vec"]] )
-    #   })
-    # })
-    # 
+    #reactive to send tree with annoations to downloadImage module
+    treePlotOut <- reactive ({
+          if (!is.null(anno_plotUndo())) {
+            addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plotUndo() )
+          } 
+       else {
+             addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )}
+          })
+    #uncomment this out to send tree for download. 
+    return(treePlotOut)
    
   }
 

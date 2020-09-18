@@ -10,11 +10,11 @@ app_server <- function(input, output,session) {
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
-  plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$geneFileCorOrUnOut, 
+  plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$ geneObjectOutForS4, 
                      params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
   
   #annotates tree with incorporated tree viz parameters
-  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$geneObjectOut, plot$make_treeOut)
+  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$geneObjectForSNP, plot$make_treeOut)
   
   #allows tree with annotation and viz parameters to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
@@ -22,14 +22,14 @@ app_server <- function(input, output,session) {
   ##repeated for preloaded data; no need to donwload so that module is not included below
   #uplodad the data (tree, genetic, and meta) and call that module dataDisplay. This is the only module that is re-written, the rest of the same 
   #used in the above section. 
-  exampleTree <- callModule(mod_exampleData_server, "exampleData_ui_1")
+  exampleData <- callModule(mod_exampleData_server, "exampleData_ui_1")
   
   exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
   
-  examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example",exampleTree$extreeFileOut, exampleTree$exgeneFileCorOrUnOut,
+  examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example",exampleData$extreeFileOut, exampleData$exGeneFileCorOrUnOut,
              exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
   
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", examplePlot$geneObjectOut, examplePlot$make_treeOut)
+  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$exGeneObjectForSNP, examplePlot$make_treeOut)
   
 }
 
