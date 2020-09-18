@@ -94,7 +94,7 @@ mod_cladeAnnotator_server <-
     
     #event reactive which holds the tips information 
     anno_plot<- eventReactive(input$add_annotation, {
-      
+      str(Values[["n"]])
       # update the reactive value as a count of + 1
       Values[["n"]] <- Values[["n"]] + 1
       
@@ -115,6 +115,8 @@ mod_cladeAnnotator_server <-
       })
     })
 
+   
+    
     #event reactive which holds the tips information 
     anno_plotUndo<- eventReactive(input$remove_annotation, {
       
@@ -155,27 +157,25 @@ mod_cladeAnnotator_server <-
     #   })
     # })
     
-    anno_plotUndoHold <- reactive({
+    anno_plotUndoHold <-eventReactive(input$remove_annotation, {
       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() )
     })
-    
-    # #send tree with annotations to the download module
-    # treePlotOut <- reactive({
-    #   addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )    })
+
+    return(anno_plotUndoHold)
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
-          if (!is.null(anno_plotUndoHold())) {
-            addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plotUndo() )
-          } 
-       else {
-             addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )}
-          })
+      if (is.null(anno_plotUndoHold())) {
+        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() ) 
+      } 
+      else {
+        addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plotUndo() )
+       }
+    })
     #uncomment this out to send tree for download. 
     return(treePlotOut)
-   
+    
   }
-
 
 
 
