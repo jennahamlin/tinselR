@@ -141,20 +141,23 @@ mod_cladeAnnotator_server <-
     })
     
     
-    # remove the annotations
-    observeEvent(input$remove_annotation, {
-      
-      output$treeDisplay <- renderPlot({
-        if (Values[["n"]] == 1) {
-          Values[["n"]] <- 0
-          return(make_treeOut())
-          
-        } else {
-          addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
-        }
-      })
-    })
+    # # remove the annotations
+    # observeEvent(input$remove_annotation, {
+    #   
+    #   output$treeDisplay <- renderPlot({
+    #     if (Values[["n"]] == 1) {
+    #       Values[["n"]] <- 0
+    #       return(make_treeOut())
+    #       
+    #     } else {
+    #       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
+    #     }
+    #   })
+    # })
     
+    anno_plotUndoHold <- reactive({
+      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() )
+    })
     
     # #send tree with annotations to the download module
     # treePlotOut <- reactive({
@@ -162,7 +165,7 @@ mod_cladeAnnotator_server <-
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
-          if (!is.null(anno_plotUndo())) {
+          if (!is.null(anno_plotUndoHold())) {
             addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plotUndo() )
           } 
        else {
