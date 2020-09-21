@@ -17,7 +17,7 @@ mod_downloadImage_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    selectInput(ns("fileType"), label = "Type", choices = c("png", "pdf", "tiff")),
+    selectInput(ns("fileType"), label = "Type", choices = c( "pdf", "png", "tiff")),
     numericInput(ns("width"), "Width of Image (inches)", value = 6),
     numericInput(ns("height"), "Height of Images (inches)", value = 8),
     
@@ -38,7 +38,7 @@ mod_downloadImage_server <- function(input, output, session, treePlotOut){
   
   output$downloadPlot <- downloadHandler(
     filename = function() {
-      paste("data-", Sys.Date(), sep="")
+      paste("data-", Sys.Date(), ".", input$fileType,  sep="")
     },
     content = function(file) {
       ggplot2::ggsave(file, plot = treePlotOut(), width = input$width, height = input$height, device = input$fileType)
