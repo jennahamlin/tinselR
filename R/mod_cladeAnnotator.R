@@ -115,8 +115,6 @@ mod_cladeAnnotator_server <-
       })
     })
 
-   
-    
     #event reactive which holds the tips information 
     anno_plotUndo<- eventReactive(input$remove_annotation, {
       
@@ -130,11 +128,6 @@ mod_cladeAnnotator_server <-
       
     })
     
-    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
-    observeEvent(input$reload,{
-      session$reload()
-    })
-    
     #display that layer onto the tree
     observeEvent(input$remove_annotation, {
       output$treeDisplay <- renderPlot({
@@ -143,19 +136,24 @@ mod_cladeAnnotator_server <-
     })
     
     
-    # # remove the annotations
-    # observeEvent(input$remove_annotation, {
-    #   
-    #   output$treeDisplay <- renderPlot({
-    #     if (Values[["n"]] == 1) {
-    #       Values[["n"]] <- 0
-    #       return(make_treeOut())
-    #       
-    #     } else {
-    #       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
-    #     }
-    #   })
-    # })
+    # remove the annotations
+    observeEvent(input$remove_annotation, {
+
+      output$treeDisplay <- renderPlot({
+        if (Values[["n"]] > 1) {
+          addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
+        } else {
+          Values[["n"]]   <- 0
+          make_treeOut()
+        }
+      })
+    })
+    
+    
+    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+    observeEvent(input$reload,{
+      session$reload()
+    })
     
     anno_plotUndoHold <-eventReactive(input$remove_annotation, {
       addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() )
