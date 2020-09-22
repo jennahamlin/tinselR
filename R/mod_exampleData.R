@@ -101,14 +101,14 @@ mod_exampleData_server <- function(input, output, session){
   
   #reactive expression that uploads the genetic distance file and allows the optional upload of meta data to correct tree tip labels
   exGeneFileCorOrUn <- reactive({
-    if (is.null(exMetaFileIn()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
+    if (is.null(exMetaFileIn())) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
       exGeneFileIn()
     }
 
     else { #if meta file uploaded correct the distance file to match meta file tip labels
       . <- NULL
       exMetaFileComb <- exMetaFileIn()
-      exGeneFileCorrected <- exGeneFileIn
+      exGeneFileCorrected <- exGeneFileIn()
       colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
       exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
       return(exGeneFileCorrected)
