@@ -55,6 +55,7 @@ mod_exampleData_server <- function(input, output, session){
   ###############
   
   exGeneFileIn <- reactive({
+    validate(need(input$exGeneFile !="", "Please import a genetic distance file to use the clade annotator"))
     if(input$exGeneFile == "example Genetic Distance 1"){
       Tinsel::gene1}
     else if (input$exGeneFile == "example Genetic Distance 2") {
