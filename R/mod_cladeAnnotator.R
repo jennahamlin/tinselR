@@ -25,6 +25,11 @@ mod_cladeAnnotator_server <-
   function(input, output, session, geneObjectForSNP, make_treeOut) {
     ns <- session$ns
     
+    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
+    observeEvent(input$reload,{
+      session$reload()
+    })
+    
     #displays the tree plot, uses output from the displayTree module
     observeEvent(input$add_tree, {
       output$treeDisplay <- renderPlot({
@@ -94,7 +99,7 @@ mod_cladeAnnotator_server <-
     
     #event reactive which holds the tips information and increments by + 1 for each user brushed set of tips
     anno_plot<- eventReactive(input$add_annotation, {
-      str(Values[["n"]])
+      #str(Values[["n"]])
       # update the reactive value as a count of + 1
       Values[["n"]] <- Values[["n"]] + 1
       
@@ -105,13 +110,19 @@ mod_cladeAnnotator_server <-
         Values[["tip_vec"]][[paste0("tips", i)]])
       
       return(tips)
+     
     })
+    
+    # anno_plotOut <- eventReactive(input$add_annotation, {
+    #   addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
+    # })
     
     #display that layer onto the tree
     observeEvent(input$add_annotation, {
       output$treeDisplay <- renderPlot({
         addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
       })
+      #str(anno_plotOut())
     })
 
     #event reactive which holds the tips information and increments by - 1 for each time user pushes the button
@@ -126,6 +137,11 @@ mod_cladeAnnotator_server <-
       return(tips)
       
     })
+    
+    
+    anno_plotUndoHold <-eventReactive(input$remove_annotation, {
+      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() )
+    })
 
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
     # currently, when only two annotations are left, this will remove those last two annotations and give the blank tree
@@ -133,42 +149,32 @@ mod_cladeAnnotator_server <-
     observeEvent(input$remove_annotation, {
 
       output$treeDisplay <- renderPlot({
-        if (Values[["n"]] > 1) {
+        if (Values[["n"]] >= 1) {
           addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
         } else {
           Values[["n"]]   <- 0
           make_treeOut()
         }
       })
+     
+      print("is anno_plotUndo null")
+      print(is.null(anno_plotUndoHold()))
     })
     
-    #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
-    observeEvent(input$reload,{
-      session$reload()
-    })
-    
-    anno_plotOut <-eventReactive(input$remove_annotation, {
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
-      str(anno_plotOut)
-    })
-    
-    #return(anno_plotUndoHold)
-    
-    # anno_plotUndoHold <-eventReactive(input$remove_annotation, {
-    #   addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() )
-    # })
+  
 
     #return(anno_plotUndoHold)
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
-      if (is.null(anno_plotUndoHold())) {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() ) 
+      if (!is.null(anno_plotUndoHold())) {
+        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() ) 
       } 
       else {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plotUndo() )
+        addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot() )
        }
     })
+    
     #uncomment this out to send tree for download. 
     return(treePlotOut)
     
