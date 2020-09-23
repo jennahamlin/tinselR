@@ -1,6 +1,13 @@
 ### What is Tinsel?
 
-Tinsel at its' most basic level is a graphical viewer of newick-formatted phylogenetic trees and as an application for producing publication-ready figures.The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemological outbreak analyses. A genetic distance matrix contains snp differences for all pairwise comparisons for the tips on the tree.  
+Tinsel at its' most basic level is a graphical viewer of newick-formatted phylogenetic trees and as an application for producing publication-ready figures.The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemiological outbreak analyses. A genetic distance matrix contains snp differences for all pairwise comparisons for the tips on the tree.  
+
+
+### Requires - 
+ - tibble_2.1.3 - problems arise if you use tibble_3.0.3
+ - stringi_1.4.* problems arise if you use stringi_1.5.3
+ - ggtree 
+ - treeio
 
 ### Quick Start 
 
@@ -39,13 +46,15 @@ If you have any problems, please file an *issue* [here](https://github.com/jenna
 <hr>
 
 
-**Known issues as August 18, 2020**
+**Known issues as September 23, 2020**
 
-- Unable to remove the very first placed annotation. As is, a user can place annotations and then step them back one by one. However, when only two annotations are visible both will be removed. Then when the user 'visulizaes the tree' again and attempts to add annotations, the first placed annotation remains. 
+- If users add one annotation and then remove that annotation then unable to download the image and this error is produced ' [[: subscript out of bounds'
 
-- Need to develop a check for overlap annotations and when they are the same locaiton, move the newest out by X distance
+- If tip labels are selected and do not overlap but overlap via mrca (node) then overlap in annotations occurs
+
+- If user uploads tree and genetic distance matrix and then annotates the tree, error pops up if user then tries to upload a meta data file. 
 
 **Tinsel has been tested with**
-* R version 3.6.0 (2019-04-26)
+* R version 3.6.0 
 
 
