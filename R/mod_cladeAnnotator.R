@@ -22,7 +22,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #'
 #' @noRd
 mod_cladeAnnotator_server <-
-  function(input, output, session, geneObjectForSNP, make_treeOut) {
+  function(input, output, session, geneObjectForSNP, make_treeOut, labelOff, labColor){
     ns <- session$ns
     
     #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
@@ -77,7 +77,7 @@ mod_cladeAnnotator_server <-
         }
         
         # set the clade label offset based on how many sets of previous tips it overlaps
-        label_offset <- 0.005 + n_overlap*0.003
+        label_offset <- labelOff() + n_overlap*0.003
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- lapply(1:Values[["n"]], function(i)
@@ -90,7 +90,7 @@ mod_cladeAnnotator_server <-
             tree_plot,
             tips = tip_vector[[i]],
             label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x){round(mean(x),0)})),
-            color = "blue",
+            color = labColor(),
             offset = label_offset
           )
       }
@@ -156,7 +156,9 @@ mod_cladeAnnotator_server <-
           make_treeOut()
         }
       })
-     
+      
+      print(anno_plotUndo())
+      
       print("is anno_plotUndo null")
       print(is.null(anno_plotUndoHold()))
     })

@@ -70,7 +70,7 @@ snpAnno <- function(geneFile, tips){
 
 
 
-#function to add layer, uses findMRCA to get the MRCA(node) for the selected tips
+#function to add layer, uses findMRCA to get the MRCA (node) for the selected tips
 make_layer <- function(tree, tips, label, color, offset) {
   ggtree::geom_cladelabel(
     node = phytools::findMRCA(ape::as.phylo(tree), tips),

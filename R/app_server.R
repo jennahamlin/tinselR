@@ -14,7 +14,7 @@ app_server <- function(input, output,session) {
                      params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
   
   #annotates tree with incorporated tree viz parameters
-  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$geneObjectForSNP, plot$make_treeOut)
+  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$geneObjectForSNP, plot$make_treeOut, params$labelOff, params$labColor)
   
   #allows tree with annotation and viz parameters to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
@@ -29,7 +29,7 @@ app_server <- function(input, output,session) {
   examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example",exampleData$extreeFileOut, exampleData$exGeneFileCorOrUnOut,
              exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
   
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$exGeneObjectForSNP, examplePlot$make_treeOut)
+  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$exGeneObjectForSNP, examplePlot$make_treeOut, exampleParams$labelOff, exampleParams$labColor)
   
 }
 

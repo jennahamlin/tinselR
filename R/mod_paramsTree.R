@@ -18,10 +18,11 @@ mod_paramsTree_ui <- function(id){
   tagList(
     checkboxInput(ns("alignTips"), "Align tip labels", FALSE),
     checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
-    
     numericInput(ns("tipLim"), 'Add spacing to plot - ', value = 0.02, max = 1, step = 0.01 ),
     numericInput(ns("numScale"), "Size of the scale bar - ", value = 0.001, step = 0.001),
     numericInput(ns("nodeDisplay"), "Minimum value of bootstrap -", value = 50, max = 100),
+    numericInput(ns("labelOffset"), "Distance to move all annotations over -", value = 0.005, step = 0.01), 
+    selectInput(ns("color"), "Color", c("blue", "red", "black", "gray")), 
     radioButtons(ns("treeFormat"), "What tree layout?", 
                        choices = list(
                          "rectangular" = "rectangular", "slanted" = "slanted", 
@@ -49,7 +50,9 @@ mod_paramsTree_server <- function(input, output, session){
     numscale = reactive(input$numScale),
     node = reactive(input$nodeDisplay),
     lim = reactive(input$tipLim),
-    midP = reactive(input$midPoint))
+    midP = reactive(input$midPoint), 
+    labelOff = reactive(input$labelOffset),
+    labColor = reactive(input$color))
 }
 
 ## To be copied in the UI
