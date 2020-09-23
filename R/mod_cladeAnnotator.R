@@ -57,7 +57,8 @@ mod_cladeAnnotator_server <-
     Values <- reactiveValues()
     observe({
       Values[["n"]]   <- 0
-      Values[["tip_vec"]] <- list()
+      Values[["tip_vec"]] <- list() 
+      Values[["annoUndoCount"]] <- 0
     })
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
@@ -113,16 +114,11 @@ mod_cladeAnnotator_server <-
      
     })
     
-    # anno_plotOut <- eventReactive(input$add_annotation, {
-    #   addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
-    # })
-    
     #display that layer onto the tree
     observeEvent(input$add_annotation, {
       output$treeDisplay <- renderPlot({
         addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
       })
-      #str(anno_plotOut())
     })
 
     #event reactive which holds the tips information and increments by - 1 for each time user pushes the button
@@ -131,7 +127,9 @@ mod_cladeAnnotator_server <-
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
       
-      tips <- lapply(1:Values[["n"]], function(i)
+      Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
+      
+        tips <- lapply(1:Values[["n"]], function(i)
         Values[["tip_vec"]][[paste0("tips", i)]])
       
       return(tips)
@@ -139,8 +137,8 @@ mod_cladeAnnotator_server <-
     })
     
     
-    anno_plotUndoHold <-eventReactive(input$remove_annotation, {
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() )
+    anno_plotHold <-eventReactive(input$add_annotation, {
+      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
     })
 
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
@@ -156,11 +154,10 @@ mod_cladeAnnotator_server <-
           make_treeOut()
         }
       })
-      
-      print(anno_plotUndo())
-      
-      print("is anno_plotUndo null")
-      print(is.null(anno_plotUndoHold()))
+
+      # print("is anno_plotUndo null")
+      # print(is.null(anno_plotUndoHold()))
+      # print(anno_plotUndoHold())
     })
     
   
@@ -169,13 +166,24 @@ mod_cladeAnnotator_server <-
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
-      if (!is.null(anno_plotUndoHold())) {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() ) 
-      } 
-      else {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot() )
-       }
-    })
+      if(Values[["annoUndoCount"]] >= 1){
+        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
+      }
+      else if(Values[["n"]] >=1 ){
+        addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot())
+      } else {
+        make_treeOut()
+      }
+      }) 
+      
+      
+    #   (is.null(anno_plotUndoHold())) {
+    #     addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot() )
+    #   } 
+    #   else {
+    #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() ) 
+    #    }
+    # })
     
     #uncomment this out to send tree for download. 
     return(treePlotOut)
