@@ -37,7 +37,6 @@ Imports:
     ggplot2,
     treeio,
     stats,
-    zip,
     shinyjs,
     here
 RoxygenNote: 7.1.1
