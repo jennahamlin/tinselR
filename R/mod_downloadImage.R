@@ -51,8 +51,8 @@ mod_downloadImage_server <- function(input, output, session, treePlotOut){
       shinyjs::hide("downloadPlot")
     else
       shinyjs::show("downloadPlot")
-      utils::write.table(input$text, file = "tinselUsers.txt", sep = ",", row.names = T, col.names = F, quote = F, append = T)
-    
+    cat(input$text, file = "tinselUserCount.txt", sep = "\n", append = T) 
+
   })
 }
 
