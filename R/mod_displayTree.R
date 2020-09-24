@@ -44,10 +44,16 @@ mod_displayTree_server <- function(input, output, session,
     tibble::as_tibble(midTree())
   })
 
+  combineGandT <- function(treeFile, geneFile){
+    dplyr::full_join(treeFile, geneFile, by = "label")%>%
+      treeio::as.treedata()
+  }
+  
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
-    dplyr::full_join(treeObject(), geneObjectOutForS4(), by = "label")%>%
-      treeio::as.treedata()
+    combineGandT(treeObject(), geneObjectOutForS4())
+    # dplyr::full_join(treeObject(), geneObjectOutForS4(), by = "label")%>%
+    #   treeio::as.treedata()
   })
   
   ## displayTree server functions
