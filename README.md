@@ -33,16 +33,18 @@ run_app()
 * **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file 
 
 <u>Once the phylogenetic tree is uploaded you can -</u>
-* Alter additional visualization parameters in the sidebar panel on the left. 
+* Alter additional visualization parameters in the sidebar panel on the left. See below for tree with aligned tips.  
 
 <p>
     <img src="man/figures/treeWSomeViz.png" />
 </p>
 
-
-
 <u>Once the genetic distance file is uploaded you can -</u>
-* add annotation to the visual representation of the tree.
+* add annotation to the visual representation of the tree. See below for a tree with annotated clades including the range of snps. 
+
+<p>
+    <img src="man/figures/treeWSomeAnn.png" />
+</p>
 
 If you have any problems, please file an *issue* [here](https://github.com/jennahamlin/Tinsel/issues).
 
