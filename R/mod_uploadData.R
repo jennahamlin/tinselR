@@ -102,25 +102,11 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
-  # #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
-  # geneObjectOut <- reactive({
-  #   label <- . <- NULL
-  #   dplyr::rename(geneFileCorOrUn(), label = 1)%>%
-  #     replace(., .=="-", 0)
-  # })
-  
-  # geneObjectOut <- function(geneFileIn){
-  #   dplyr::rename(geneFileIn, label = 1) %>%
-  #     replace(., .=="-", 0)
-  # }
-  # 
-  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
+  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs; uses two functions located in
+  #goloem_utils_server.R file 
   geneObject <-reactive({
     label <- NULL
-    geneObjectOut(geneFileCorOrUn())%>%
-      stats::na.omit()%>%
-      tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
-      .[which(.$label != .$name),] #remove self comparisons for this table - necessary for snp mean/median calculation.
+    geneObjectOut(toThreeColumns(geneFileCorOrUn()))
   })
   
   #return these reactive objects to be used in tree display module 
