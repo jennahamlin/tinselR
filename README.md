@@ -1,11 +1,11 @@
 ### What is Tinsel?
 
-Tinsel at its' most basic level is a graphical viewer of newick-formatted phylogenetic trees and as an application for producing publication-ready figures.The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemiological outbreak analyses. A genetic distance matrix contains snp differences for all pairwise comparisons for the tips on the tree.  
+Tinsel at its' most basic level is a graphical viewer of newick-formatted phylogenetic trees and as an application for producing publication-ready figures. The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemiological outbreak analyses. A genetic distance matrix contains snp differences for all pairwise comparisons for the tips on the tree.  
 
 
 ### Requires - 
- - tibble_2.1.3; problems arise if you use tibble_3.0.3 `devtools::install_version("tibble", version = "2.1.3")
- - stringi_1.4.3; problems arise if you use stringi_1.5.3 `devtools::install_version("stringi", version = "1.4.3")
+ - tibble_2.1.3; problems arise if you use tibble_3.0.3 `devtools::install_version("tibble", version = "2.1.3")`
+ - stringi_1.4.3; problems arise if you use stringi_1.5.3 `devtools::install_version("stringi", version = "1.4.3")`
  - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) 
  - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); which should install if you install ggtree first
 
