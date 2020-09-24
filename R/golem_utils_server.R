@@ -49,6 +49,12 @@ fileCheck<- function(fileUp, fileType, fileSep){
 }
 
 
+geneObjectOut <- function(geneFileIn){
+  dplyr::rename(geneFileIn, label = 1) %>%
+    replace(., .=="-", 0)
+}
+
+
 ## cladeAnnotator server functions
 
 #function which gets the snps for two tips and puts them into the snpVector

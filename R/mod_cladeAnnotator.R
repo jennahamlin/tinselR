@@ -38,7 +38,12 @@ mod_cladeAnnotator_server <-
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
-      brushedPoints(make_treeOut()$data, input$plot_brush)
+      # if (!is.null(metaFileUp()$datapath)){
+      #   
+      # } else {
+      
+        brushedPoints(make_treeOut()$data, input$plot_brush)
+      # }
     })
     
     tipVector <- c()
@@ -128,6 +133,9 @@ mod_cladeAnnotator_server <-
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
       
+      Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
+      
+      
       print(Values[["n"]])
       
         tips <- lapply(1:Values[["n"]], function(i)
@@ -140,14 +148,14 @@ mod_cladeAnnotator_server <-
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
     observeEvent(input$remove_annotation, {
 
-      Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
       
       output$treeDisplay <- renderPlot({
-        if (Values[["n"]] >= 1) {
+         if (Values[["n"]] >= 1) {
           addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
-        } else   {
+        } else {
           make_treeOut()
         }
+        
       })
 
       # print("is anno_plotUndo null")
@@ -158,10 +166,9 @@ mod_cladeAnnotator_server <-
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
-      if(Values[["annoUndoCount"]] >= 1){
+      if(Values[["annoUndoCount"]] >= 1) {
         addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
-      }
-      else if(Values[["n"]] >=1 ){
+      } else if(Values[["n"]] >=1 ) {
         addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot())
       } else {
         make_treeOut()
