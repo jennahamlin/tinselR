@@ -58,7 +58,7 @@ mod_cladeAnnotator_server <-
     observe({
       Values[["n"]]   <- 0
       Values[["tip_vec"]] <- list() 
-      Values[["annoUndoCount"]] <- 0
+      Values[["annoUndoCount"]] <- 0 #use this as a count for sending the downloaded image with annotations removed 
     })
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
@@ -77,7 +77,8 @@ mod_cladeAnnotator_server <-
           }
         }
         
-        # set the clade label offset based on how many sets of previous tips it overlaps
+        # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
+        #option to adjust the position of all annotations
         label_offset <- labelOff() + n_overlap*0.003
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
@@ -90,7 +91,7 @@ mod_cladeAnnotator_server <-
           make_layer(
             tree_plot,
             tips = tip_vector[[i]],
-            label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x){round(mean(x),0)})),
+            label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x){round(range(x),0)})),
             color = labColor(),
             offset = label_offset
           )
@@ -127,7 +128,7 @@ mod_cladeAnnotator_server <-
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
       
-      Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
+      print(Values[["n"]])
       
         tips <- lapply(1:Values[["n"]], function(i)
         Values[["tip_vec"]][[paste0("tips", i)]])
@@ -135,22 +136,16 @@ mod_cladeAnnotator_server <-
       return(tips)
       
     })
-    
-    
-    anno_plotHold <-eventReactive(input$add_annotation, {
-      addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
-    })
 
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
-    # currently, when only two annotations are left, this will remove those last two annotations and give the blank tree
-    # not sure how to change to allow when two annotations are left, then display one annotation
     observeEvent(input$remove_annotation, {
 
+      Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
+      
       output$treeDisplay <- renderPlot({
         if (Values[["n"]] >= 1) {
           addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
-        } else {
-          Values[["n"]]   <- 0
+        } else   {
           make_treeOut()
         }
       })
@@ -160,9 +155,6 @@ mod_cladeAnnotator_server <-
       # print(anno_plotUndoHold())
     })
     
-  
-
-    #return(anno_plotUndoHold)
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
@@ -175,23 +167,11 @@ mod_cladeAnnotator_server <-
         make_treeOut()
       }
       }) 
-      
-      
-    #   (is.null(anno_plotUndoHold())) {
-    #     addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot() )
-    #   } 
-    #   else {
-    #     addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo() ) 
-    #    }
-    # })
-    
-    #uncomment this out to send tree for download. 
+
+      #uncomment this out to send tree for download. 
     return(treePlotOut)
     
   }
-
-
-
 
 ## To be copied in the UI
 # mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
