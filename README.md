@@ -35,7 +35,11 @@ run_app()
 <u>Once the phylogenetic tree is uploaded you can -</u>
 * Alter additional visualization parameters in the sidebar panel on the left. 
 
-![tree with some viz ](https://github.com/jennahamlin/Tinsel/tree/master/man/figures/treeWSomeviz.png)
+<p>
+    <img src="man/figures/treeWSomeViz.png" width="220" height="240" />
+</p>
+
+
 
 <u>Once the genetic distance file is uploaded you can -</u>
 * add annotation to the visual representation of the tree.
