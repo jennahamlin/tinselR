@@ -36,7 +36,7 @@ run_app()
 * Alter additional visualization parameters in the sidebar panel on the left. 
 
 <p>
-    <img src="man/figures/treeWSomeViz.png" align = "center" width="420" height="620" />
+    <img src="man/figures/treeWSomeViz.png" />
 </p>
 
 
