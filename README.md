@@ -35,6 +35,8 @@ run_app()
 <u>Once the phylogenetic tree is uploaded you can -</u>
 * Alter additional visualization parameters in the sidebar panel on the left. 
 
+<img src="man/figs/treeWsomeViz.png", align = "left"/>
+
 <u>Once the genetic distance file is uploaded you can -</u>
 * add annotation to the visual representation of the tree.
 
