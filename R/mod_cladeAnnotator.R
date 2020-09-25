@@ -22,7 +22,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #'
 #' @noRd
 mod_cladeAnnotator_server <-
-  function(input, output, session, geneObjectForSNP, make_treeOut, labelOff, labColor){
+  function(input, output, session, geneObjectForSNP, makeTreeOut, labelOff, labColor){
     ns <- session$ns
     
     #this will reload the session and clear exisiting info - good if you want to start TOTALLY new 
@@ -33,7 +33,7 @@ mod_cladeAnnotator_server <-
     #displays the tree plot, uses output from the displayTree module
     observeEvent(input$add_tree, {
       output$treeDisplay <- renderPlot({
-        make_treeOut()})
+        makeTreeOut()})
     })
     
     #reactive that holds the brushed points on a plot
@@ -42,7 +42,7 @@ mod_cladeAnnotator_server <-
       #   
       # } else {
       
-        brushedPoints(make_treeOut()$data, input$plot_brush)
+        brushedPoints(makeTreeOut()$data, input$plot_brush)
       # }
     })
     
@@ -68,34 +68,34 @@ mod_cladeAnnotator_server <-
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
     #for overlap in annotations and adjusts as necessary
-    addAnnotations <- function(tree_plot, tip_vector) {
-      g <- tree_plot
+    addAnnotations <- function(treePlot, tipVectorIn) {
+      g <- treePlot
       
-      for (i in seq_along(tip_vector)) { #this is the i'th list, for which we are calculating the offset
-        current_tips <- Values[["tip_vec"]][[ i ]]
-        n_overlap = 0     # start by assuming no overlap
+      for (i in seq_along(tipVectorIn)) { #this is the i'th list, for which we are calculating the offset
+        currentTips <- Values[["tip_vec"]][[ i ]]
+        nOverlap = 0     # start by assuming no overlap
         if (i>1){         # for the first set of tips no comparisons needed
           # otherwise do comparisons
           for (j in 1:(i-1)){  #this is the j'th list, against which we need to compare if i overlaps it
-            compare_tips <- Values[["tip_vec"]][[ j ]]  #tips to compare to
-            n_overlap <- n_overlap + any(current_tips %in% compare_tips) # for every match, count it
+            compareTips <- Values[["tip_vec"]][[ j ]]  #tips to compare to
+            nOverlap <- nOverlap + any(currentTips %in% compareTips) # for every match, count it
           }
         }
         
         # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
         #option to adjust the position of all annotations
-        label_offset <- labelOff() + n_overlap*0.003
+        label_offset <- labelOff() + nOverlap*0.003
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- lapply(1:Values[["n"]], function(i)
           snpAnno(geneFile = geneObjectForSNP(),
-                  tips = current_tips))
+                  tips = currentTips))
         
         #generates the layer for the set of brushed tips
         g <- g +
           make_layer(
-            tree_plot,
-            tips = tip_vector[[i]],
+            treePlot,
+            tips = tipVectorIn[[i]],
             label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x){round(range(x),0)})),
             color = labColor(),
             offset = label_offset
@@ -123,7 +123,7 @@ mod_cladeAnnotator_server <-
     #display that layer onto the tree
     observeEvent(input$add_annotation, {
       output$treeDisplay <- renderPlot({
-        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plot() )
+        addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plot() )
       })
     })
 
@@ -148,14 +148,13 @@ mod_cladeAnnotator_server <-
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
     observeEvent(input$remove_annotation, {
 
-      
       output$treeDisplay <- renderPlot({
          if (Values[["n"]] >= 1) {
-          addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
-        } else {
-          make_treeOut()
+          addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
+        } 
+        else {
+          makeTreeOut()
         }
-        
       })
 
       # print("is anno_plotUndo null")
@@ -167,11 +166,11 @@ mod_cladeAnnotator_server <-
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
       if(Values[["annoUndoCount"]] >= 1) {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector =  anno_plotUndo())
+        addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
       } else if(Values[["n"]] >=1 ) {
-        addAnnotations(tree_plot = make_treeOut() , tip_vector = anno_plot())
+        addAnnotations(treePlot = makeTreeOut() , tipVectorIn = anno_plot())
       } else {
-        make_treeOut()
+        makeTreeOut()
       }
       }) 
 

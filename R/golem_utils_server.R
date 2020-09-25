@@ -62,6 +62,11 @@ geneObjectOut  <- function (geneFile) {
     .[which(.$label != .$name),] 
 }
 
+##displayData server functions
+combineGandT <- function(treeFile, geneFile){
+  dplyr::full_join(treeFile, geneFile, by = "label")%>%
+    treeio::as.treedata()
+}
 ## cladeAnnotator server functions
 
 #function which gets the snps for two tips and puts them into the snpVector

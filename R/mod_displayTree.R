@@ -43,17 +43,10 @@ mod_displayTree_server <- function(input, output, session,
   treeObject<-reactive({
     tibble::as_tibble(midTree())
   })
-
-  combineGandT <- function(treeFile, geneFile){
-    dplyr::full_join(treeFile, geneFile, by = "label")%>%
-      treeio::as.treedata()
-  }
   
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
     combineGandT(treeObject(), geneObjectOutForS4())
-    # dplyr::full_join(treeObject(), geneObjectOutForS4(), by = "label")%>%
-    #   treeio::as.treedata()
   })
   
   ## displayTree server functions
@@ -66,7 +59,7 @@ mod_displayTree_server <- function(input, output, session,
   }
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
-  make_tree <- reactive({
+  makeTree <- reactive({
     
     if(is.null(input$id)){ # this disconnects the need for genetic distance file to be uploaded. #not sure why I use input$id here 
       treePlot(midTree())
@@ -79,7 +72,7 @@ mod_displayTree_server <- function(input, output, session,
   #return these reactive objects to be used in cladeAnnotator module 
   return(
     list(
-      make_treeOut = reactive(make_tree())
+      makeTreeOut = reactive(makeTree())
     ))
 }
 
