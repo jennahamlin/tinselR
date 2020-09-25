@@ -50,13 +50,15 @@ fileCheck<- function(fileUp, fileType, fileSep){
 
 #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
 toThreeColumns <- function(geneFileIn){
+  . <- NULL 
   dplyr::rename(geneFileIn, label = 1) %>%
     replace(., .=="-", 0)
 }
 
 #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
 geneObjectOut  <- function (geneFile) {
-  geneFile%>%
+  label <- . <- NULL
+    geneFile%>%
     stats::na.omit()%>%
     tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
     .[which(.$label != .$name),] 

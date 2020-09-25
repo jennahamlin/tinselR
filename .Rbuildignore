@@ -11,4 +11,4 @@ $run_dev.*
 ^\.travis\.yml$
 ^favicon$
 ^LICENSE.md$
-^tinselUsers.txt$
+^tinselUserCount.txt$

@@ -1,11 +1,17 @@
-#' uploadData UI Function
+# Module UI
+
+#' @title   mod_uploadData_ui and mod_uploadData_server
+#' @description  A shiny Module. This module allows the user to upload three different types of files and does file checking to confirm the correct delimiter is selected
 #'
-#' @description A shiny Module.
+#' @param id shiny id
+#' @param input internal
+#' @param output internal
+#' @param session internal
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @rdname mod_uploadData
 #'
-#' @noRd 
-#'
+#' @keywords internal
+#' @export 
 #' @importFrom shiny NS tagList 
 mod_uploadData_ui <- function(id){
   ns <- NS(id)
@@ -31,9 +37,11 @@ mod_uploadData_ui <- function(id){
 }
 
 
-#' uploadData Server Function
-#'
-#' @noRd 
+# Module Server
+
+#' @rdname mod_uploadData
+#' @export
+#' @keywords internal
 mod_uploadData_server <- function(input, output, session){
   ns <- session$ns
   

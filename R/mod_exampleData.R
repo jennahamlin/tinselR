@@ -1,13 +1,17 @@
-# exampleData UI Function
+# Module UI
 
 #' @title   mod_exampleData_ui and mod_exampleData_server
-#' @description A shiny Module. This module sources the pre-loaded example data (e.g. tree (x2), genetic distance file (x2), and meta data file (x2))
+#' @description  A shiny Module. This module sources the pre-loaded example data (e.g. tree (x2), genetic distance file (x2), and meta data file (x2))
 #'
-#'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @param id shiny id
+#' @param input internal
+#' @param output internal
+#' @param session internal
 #'
 #' @rdname mod_exampleData
 #'
+#' @keywords internal
+#' @export 
 #' @importFrom shiny NS tagList 
 mod_exampleData_ui <- function(id){
   ns <- NS(id)
@@ -33,9 +37,11 @@ mod_exampleData_ui <- function(id){
   )
 }
 
-#' exampleData Server Function
-#'
-#' @noRd 
+# Module Server
+
+#' @rdname mod_exampleData
+#' @export
+#' @keywords internal
 mod_exampleData_server <- function(input, output, session){
   ns <- session$ns
   

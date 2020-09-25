@@ -51,6 +51,7 @@ mod_displayTree_server <- function(input, output, session,
   
   ## displayTree server functions
   treePlot <- function(inputFile){
+    label <- NULL
     ggtree::ggtree(inputFile, layout = treeformat())+
       ggplot2::xlim(NA, lim())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +

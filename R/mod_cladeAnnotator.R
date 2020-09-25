@@ -1,12 +1,18 @@
-#' cladeAnnotator UI Function
+# Module UI
+
+#' @title   mod_cladeAnnotator_ui and mod_cladeAnnotator_server
+#' @description  A shiny Module. This module allows the user to add or remove annotations and checks for overlap between those annotaions. 
 #'
-#' @description A shiny Module.
+#' @param id shiny id
+#' @param input internal
+#' @param output internal
+#' @param session internal
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @rdname mod_cladeAnnotator
 #'
-#' @noRd
-#'
-#' @importFrom shiny NS tagList
+#' @keywords internal
+#' @export 
+#' @importFrom shiny NS tagList 
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -18,9 +24,11 @@ mod_cladeAnnotator_ui <- function(id) {
   )
 }
 
-#' cladeAnnotator Server Function
-#'
-#' @noRd
+# Module Server
+
+#' @rdname mod_cladeAnnotator
+#' @export
+#' @keywords internal
 mod_cladeAnnotator_server <-
   function(input, output, session, geneObjectForSNP, makeTreeOut, labelOff, labColor){
     ns <- session$ns
