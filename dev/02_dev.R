@@ -19,7 +19,6 @@ golem::add_module(name = "DisplayTree")
 golem::add_module(name = "exampleDisplay")
 
 #annotation module
-golem::add_module(name = "cladeAnnotatorButtons")
 golem::add_module(name = "cladeAnnotator")
 
 #donwload image
