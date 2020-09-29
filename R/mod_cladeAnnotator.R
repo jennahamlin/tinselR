@@ -143,11 +143,13 @@ mod_cladeAnnotator_server <-
       
       Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
       
-      
-      print(Values[["n"]])
-      
+      tips<-c()
+      if (Values[["n"]]== 0) {
+        skip
+      } else {
         tips <- lapply(1:Values[["n"]], function(i)
-        Values[["tip_vec"]][[paste0("tips", i)]])
+          Values[["tip_vec"]][[paste0("tips", i)]])
+      }
       
       return(tips)
       
@@ -164,10 +166,6 @@ mod_cladeAnnotator_server <-
           makeTreeOut()
         }
       })
-
-      # print("is anno_plotUndo null")
-      # print(is.null(anno_plotUndoHold()))
-      # print(anno_plotUndoHold())
     })
     
     
