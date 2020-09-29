@@ -121,11 +121,19 @@ mod_cladeAnnotator_server <-
       #add the tip vector (aka label) to the annotation reactive value
       Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
       
-      tips <- lapply(1:Values[["n"]], function(i)
-        Values[["tip_vec"]][[paste0("tips", i)]])
+      if (Values[["annoUndoCount"]] < 1){
+        skip
+      } else {
+        Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] - 1 }
       
+      tips<-c()
+      if (Values[["n"]] < 1 ) {
+        skip
+      } else {
+        tips <- lapply(1:Values[["n"]], function(i)
+          Values[["tip_vec"]][[paste0("tips", i)]])
+      }
       return(tips)
-     
     })
     
     #display that layer onto the tree
@@ -141,10 +149,13 @@ mod_cladeAnnotator_server <-
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
       
-      Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1
+      if (Values[["annoUndoCount"]] == 1){
+        skip
+      } else {
+        Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1 }
       
       tips<-c()
-      if (Values[["n"]]== 0) {
+      if (Values[["n"]] < 1 ) {
         skip
       } else {
         tips <- lapply(1:Values[["n"]], function(i)
@@ -168,12 +179,19 @@ mod_cladeAnnotator_server <-
       })
     })
     
+    # annoUndoHold <- reactive({
+    #  hold <-  addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
+    #  return(hold)
+    # })
+    # 
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
-      if(Values[["annoUndoCount"]] >= 1) {
+      if(Values[["annoUndoCount"]] == 1) {
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
-      } else if(Values[["n"]] >=1 ) {
+      } else if( 
+        #Values[["annoUndoCount"]] >= 1) {
+        Values[["n"]] >=1  ) {
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn = anno_plot())
       } else {
         makeTreeOut()
