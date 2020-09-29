@@ -99,12 +99,18 @@ mod_cladeAnnotator_server <-
           snpAnno(geneFile = geneObjectForSNP(),
                   tips = currentTips))
         
+        snpNumber <- lapply(snpMean[i], function(x){round(range(x),0)})
+        
+        lowSNP <- snpNumber[[1]][1]
+        highSNP <- snpNumber[[1]][2]
+        
         #generates the layer for the set of brushed tips
         g <- g +
           make_layer(
             treePlot,
-            tips = tipVectorIn[[i]],
-            label = paste("Clade", "\nSNP(s) -", lapply(snpMean[i], function(x){round(range(x),0)})),
+            tips = tipVectorIn[[i]], 
+            label = paste0("Range \nof SNP(s)- \n", paste0(lowSNP, sep =",", highSNP)), 
+                           #lapply(snpMean[i], function(x){round(range(x),0)})),
             color = labColor(),
             offset = label_offset
           )
@@ -149,6 +155,7 @@ mod_cladeAnnotator_server <-
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
       
+      
       if (Values[["annoUndoCount"]] == 1){
         skip
       } else {
@@ -179,11 +186,7 @@ mod_cladeAnnotator_server <-
       })
     })
     
-    # annoUndoHold <- reactive({
-    #  hold <-  addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
-    #  return(hold)
-    # })
-    # 
+
     
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
