@@ -20,6 +20,8 @@ golem::add_module(name = "exampleDisplay")
 
 #annotation module
 golem::add_module(name = "cladeAnnotator")
+golem::add_module(name = "cladeAnnotatorButtons")
+
 
 #donwload image
 golem::add_module(name="downloadImage")
