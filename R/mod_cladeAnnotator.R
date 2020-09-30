@@ -128,13 +128,13 @@ mod_cladeAnnotator_server <-
       Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
       
       if (Values[["annoUndoCount"]] < 1){
-        skip
+        #skip
       } else {
         Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] - 1 }
       
       tips<-c()
       if (Values[["n"]] < 1 ) {
-        skip
+        #skip
       } else {
         tips <- lapply(1:Values[["n"]], function(i)
           Values[["tip_vec"]][[paste0("tips", i)]])
@@ -157,13 +157,13 @@ mod_cladeAnnotator_server <-
       
       
       if (Values[["annoUndoCount"]] == 1){
-        skip
+        #skip
       } else {
         Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1 }
       
       tips<-c()
       if (Values[["n"]] < 1 ) {
-        skip
+        #skip
       } else {
         tips <- lapply(1:Values[["n"]], function(i)
           Values[["tip_vec"]][[paste0("tips", i)]])
