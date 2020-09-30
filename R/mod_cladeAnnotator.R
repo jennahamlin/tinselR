@@ -16,13 +16,11 @@
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    sidebarPanel(
     actionButton(ns("add_tree"), "Visualize Tree"),
     actionButton(ns("add_annotation"),"Add Annotation to Tree",icon("plus"),class = "btn btn-primary"),
     actionButton(ns("remove_annotation"),"Remove Previous Annotation(s) on Tree",icon("refresh"),class = "btn btn-primary"),
-    actionButton(ns("reload"), "Relaunch the Application")),
-    mainPanel(
-    plotOutput(ns("treeDisplay"), brush = ns("plot_brush")))
+    actionButton(ns("reload"), "Relaunch the Application"),
+    plotOutput(ns("treeDisplay"), brush = ns("plot_brush"))
   )
 }
 
