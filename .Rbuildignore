@@ -10,3 +10,4 @@ $run_dev.*
 ^favicon$
 ^LICENSE.md$
 ^tinselUserCount.txt$
+^tinselStructure.png
