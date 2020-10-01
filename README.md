@@ -2,6 +2,7 @@
 
 Tinsel at its' most basic level is a graphical viewer of newick-formatted phylogenetic trees and as an application for producing publication-ready figures. The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemiological outbreak analyses. A genetic distance matrix contains snp differences for all pairwise comparisons for the tips on the tree.  
 
+If you have any problems, please file an *issue* on github located [here](https://github.com/jennahamlin/Tinsel/issues).
 
 ### Requires - 
  - tibble_2.1.3; problems arise if you use tibble_3.0.3 `devtools::install_version("tibble", version = "2.1.3")`
@@ -50,8 +51,6 @@ run_app()
 <p>
     <img src="man/figures/treeWSomeAnn.png" />
 </p>
-
-If you have any problems, please file an *issue* [here](https://github.com/jennahamlin/Tinsel/issues).
 
 #### Tinsel Flow Control diagram 
 
