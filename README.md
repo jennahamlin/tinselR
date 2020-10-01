@@ -9,6 +9,11 @@ Tinsel at its' most basic level is a graphical viewer of newick-formatted phylog
  - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) 
  - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); which should install if you install ggtree first
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.com/jennahamlin/Tinsel)
+<!-- badges: end -->
+<hr>
+
 ### Quick Start 
 
 **1). Install devtools package** 
@@ -48,11 +53,11 @@ run_app()
 
 If you have any problems, please file an *issue* [here](https://github.com/jennahamlin/Tinsel/issues).
 
-<!-- badges: start -->
-[![Travis build status](https://travis-ci.com/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.com/jennahamlin/Tinsel)
-<!-- badges: end -->
-<hr>
+#### Tinsel Flow Control diagram 
 
+<p>
+    <img src="man/figures/tinselFlowControl.pdf" />
+</p>
 
 **Known issues as September 23, 2020**
 
