@@ -56,7 +56,7 @@ If you have any problems, please file an *issue* [here](https://github.com/jenna
 #### Tinsel Flow Control diagram 
 
 <p>
-    <img src="man/figures/tinselFlowControl.pdf" />
+    <img src="man/figures/tinselFlowControl.png" />
 </p>
 
 **Known issues as September 23, 2020**
