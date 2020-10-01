@@ -56,10 +56,6 @@ If you have any problems, please file an *issue* [here](https://github.com/jenna
 
 **Known issues as September 23, 2020**
 
-- If users add one annotation and then remove that annotation then unable to download the image and this error is produced ' [[: subscript out of bounds'
-
-- If tip labels are selected and do not overlap but overlap via mrca (node) then overlap in annotations occurs
-
 - If user uploads tree and genetic distance matrix and then annotates the tree, error pops up if user then tries to upload a meta data file. 
 
 **Tinsel has been tested with**
