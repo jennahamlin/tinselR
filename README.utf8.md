@@ -38,11 +38,7 @@ run_app()
 
 * **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 * **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file
-* **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels 
-
-<p>
-    <img src="man/figures/metaDataScreenshot.png" />
-</p>
+* **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file - needs column headers of Display.labels and Tip.labels 
 
 #### Once the phylogenetic tree is uploaded you can -
 * Alter additional visualization parameters in the sidebar panel on the left. See below for tree with aligned tips.  

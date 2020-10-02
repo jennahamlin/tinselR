@@ -83,8 +83,11 @@ snpAnno <- function(geneFile, tips){
       snpVector[i]<- geneFile%>%
         dplyr::filter(label == tips[i] & name == tips[j]) %>%
         dplyr::pull(value)
+      print(tips[i])
+      #print(tips[j])
     }
   }
+  print(snpVector[j])
   return(as.numeric(snpVector))
 }
 
