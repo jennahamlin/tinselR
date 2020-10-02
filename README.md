@@ -38,7 +38,7 @@ run_app()
 
 * **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 * **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file
-* **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels 
+* **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels. See image below for a csv file example 
 
 <p>
     <img src="man/figures/metaDataScreenshot.png" />
