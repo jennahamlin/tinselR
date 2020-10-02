@@ -23,7 +23,7 @@ If you have any the above, please file an *issue* on github located [here](https
 
 `install.packages("devtools", dep=T)`
 
-**2). Launcning the Tinsel shiny application**
+**2). Launching the Tinsel shiny application**
 
 Run this code in your R console -     
 
@@ -52,7 +52,7 @@ run_app()
 </p>
 
 #### Once the genetic distance file is uploaded you can -
-* add annotation to the visual representation of the tree. See below for a tree with annotated clades including the range of snps. 
+* add annotation to the visual representation of the tree. See below for a tree with annotated clades including the range of SNPs. 
 
 <p>
     <img src="man/figures/treeWSomeAnn.png" />
