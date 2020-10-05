@@ -75,20 +75,19 @@ combineGandT <- function(treeFile, geneFile){
 snpVector <- c()
 
 snpAnno <- function(geneFile, tips){
-  #str(tips)
   label <- name <- value <- NULL # adding this helps with devtools::check() note of 'no visible binding for global variables as noted here https://www.r-bloggers.com/no-visible-binding-for-global-variable/
-  for (i in 1:length(tips)){
-    for (j in 1:length(tips)){
+  
+  for (i in 1:(length(tips)-1)){
+    for (j in (i+1):length(tips)){
       if(tips[i] == tips[j]) next #https://stackoverflow.com/questions/36329183/exclude-one-fixed-variable-in-for-loop
-      snpVector[i]<- geneFile%>%
+      snpVector<-append(snpVector, geneFile%>%
         dplyr::filter(label == tips[i] & name == tips[j]) %>%
         dplyr::pull(value)
+      )
     }
   }
-  print(tips)
-  print(snpVector)
   return(as.numeric(snpVector))
-  }
+}
 
 
 

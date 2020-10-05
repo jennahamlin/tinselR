@@ -80,6 +80,7 @@ mod_cladeAnnotator_server <-
       
       for (i in seq_along(tipVectorIn)) { #this is the i'th list, for which we are calculating the offset
         currentTips <- Values[["tip_vec"]][[ i ]]
+
         nOverlap = 0     # start by assuming no overlap
         if (i>1){         # for the first set of tips no comparisons needed
           # otherwise do comparisons
@@ -91,26 +92,23 @@ mod_cladeAnnotator_server <-
         
         # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
         #option to adjust the position of all annotations
-        label_offset <- labelOff() + nOverlap*0.003
+        label_offset <- labelOff() + nOverlap*0.002
         
+        
+  
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
-        snpMean <- lapply(1:Values[["n"]], function(i)
+        snpMean <- 
           snpAnno(geneFile = geneObjectForSNP(),
-                  tips = currentTips))
-        
-        snpNumber <- lapply(snpMean[i], function(x){round(range(x),0)})
-        #print(snpNumber)
-        
-        lowSNP <- snpNumber[[1]][1]
-        highSNP <- snpNumber[[1]][2]
+                  tips = currentTips)
         
         #generates the layer for the set of brushed tips
         g <- g +
           make_layer(
             treePlot,
             tips = tipVectorIn[[i]], 
-            label = paste0("Range \nof SNP(s)- \n", paste0(lowSNP, sep =",", highSNP)), 
-                           #lapply(snpMean[i], function(x){round(range(x),0)})),
+            label = paste0("Range \nof SNP(s)- \n", paste0(min(snpMean), sep =",", max(snpMean))),
+                           #(lowSNP, sep =",", highSNP)), 
+                           #(lapply(snpMean[i], function(x){round(range(x),0)}))),
             color = labColor(),
             offset = label_offset
           )
@@ -120,6 +118,7 @@ mod_cladeAnnotator_server <-
     
     #event reactive which holds the tips information and increments by + 1 for each user brushed set of tips
     anno_plot<- eventReactive(input$add_annotation, {
+      print("Line 125")
       #str(Values[["n"]])
       # update the reactive value as a count of + 1
       Values[["n"]] <- Values[["n"]] + 1
@@ -141,7 +140,7 @@ mod_cladeAnnotator_server <-
       }
       return(tips)
     })
-    
+   
     #display that layer onto the tree
     observeEvent(input$add_annotation, {
       output$treeDisplay <- renderPlot({
