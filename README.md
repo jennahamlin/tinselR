@@ -37,10 +37,20 @@ run_app()
 *Please click on the 'Data Upload' pane, where you will be able to upload your files or access example data on the 'Example Data' pane.* 
 
 * **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
-* **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file
+* **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file - see below for image of genetic distance matrix, requires a '.' for column 1 row 1
 * **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels. See image below for a csv file example 
 
 <p>
+
+<h4> genetic Distance screenshot </h4>
+    <img src="man/figures/geneticDistanceScreenshot.png" />
+</p>
+
+
+
+<p>
+
+<h4> meta Data screenshot </h4>
     <img src="man/figures/metaDataScreenshot.png" />
 </p>
 

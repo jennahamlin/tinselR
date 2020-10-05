@@ -46,12 +46,11 @@ mod_cladeAnnotator_server <-
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
-      # if (!is.null(metaFileUp()$datapath)){
-      #   
-      # } else {
-      
+      # if (is.null(metaFileOut())){
         brushedPoints(makeTreeOut()$data, input$plot_brush)
-      # }
+      # } else {
+      #   print("This is seen")
+      #  }
     })
     
     tipVector <- c()
@@ -100,6 +99,7 @@ mod_cladeAnnotator_server <-
                   tips = currentTips))
         
         snpNumber <- lapply(snpMean[i], function(x){round(range(x),0)})
+        #print(snpNumber)
         
         lowSNP <- snpNumber[[1]][1]
         highSNP <- snpNumber[[1]][2]

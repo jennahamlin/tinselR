@@ -117,9 +117,11 @@ mod_uploadData_server <- function(input, output, session){
     geneObjectOut(toThreeColumns(geneFileCorOrUn()))
   })
   
+
   #return these reactive objects to be used in tree display module 
   return(
     list(
+      metaFileOut = reactive(metaFileUp()),
       treeFileOut = reactive(treeFileUp()),
       geneObjectOutForS4 = reactive(geneObjectOut()),
       geneObjectForSNP = reactive(geneObject())))
