@@ -31,7 +31,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, addTree, addAnno, removeAnno,  makeTreeOut, geneObjectForSNP, labelOff, labColor){
+  function(input, output, session, makeTreeOut, addTree, addAnno, removeAnno,   geneObjectForSNP, labelOff, labColor){
     ns <- session$ns
     
 

@@ -15,7 +15,7 @@
 #' @importFrom shiny NS tagList 
 mod_exampleData_ui <- function(id){
   ns <- NS(id)
-  tagList(
+
     tagList(
       
       #select tree file that is sourced using the UI function in app_ui.R file
@@ -34,7 +34,7 @@ mod_exampleData_ui <- function(id){
       tags$hr(style="border-color: black;")
       
     )
-  )
+
 }
 
 # Module Server
@@ -101,7 +101,7 @@ mod_exampleData_server <- function(input, output, session){
     }
     else { #if metafile correct tip labels using phylotools sub.taxa.label function
 
-      exTreeFileIn()%>% 
+      exTreeFileIn()%>%
         phylotools::sub.taxa.label(., as.data.frame(exMetaFileIn())) #this line converts tip labels to pretty labels based on user upload of meta data file
     }
   })
