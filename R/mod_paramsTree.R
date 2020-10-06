@@ -16,7 +16,7 @@
 mod_paramsTree_ui <- function(id){
   ns <- NS(id)
   tagList(
-    checkboxInput(ns("alignTips"), "Align tip labels", FALSE),
+    checkboxInput(ns("alignTips"), h2("Align tip labels", style = "font-weight: 500; color = #4d3a7d;"), FALSE),
     checkboxInput(ns("midPoint"), "Midpoint Root Tree", TRUE),
     numericInput(ns("tipLim"), 'Add spacing to plot - ', value = 0.02, max = 1, step = 0.01 ),
     numericInput(ns("numScale"), "Size of the scale bar - ", value = 0.001, step = 0.001),

@@ -4,7 +4,7 @@
 \alias{run_app}
 \title{Run the Shiny Application}
 \usage{
-run_app(onStart = NULL, options = list(), enableBookmarking = NULL, ...)
+run_app(...)
 }
 \arguments{
 \item{...}{other arguments}
