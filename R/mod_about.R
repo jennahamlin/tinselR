@@ -21,7 +21,7 @@ mod_about_ui <- function(id){
               strong("Please click on the 'Data Upload' pane to upload your files."),
               br(), 
     tags$li(em("Phylogenetic Tree"),"- required; a", a("newick", href="https://en.wikipedia.org/wiki/Newick_format"), "generated tree"),
-    tags$li(em("Genetic Distance Data"), "- optional for use with the annotation function;", br(), "a tsv/txt/csv file of SNP differences, requires a '.' for column 1 row 1"),
+    tags$li(em("Genetic Distance Data"), "- optional for use with the annotation function;", br(), "a tsv/txt/csv file of SNP differences"),
     tags$li(em("Meta Data"), "- optional for easy correction of tip labels;", br(), "a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels"),
     br(), 
     strong("Once the phylogenetic tree is uploaded you can -"), 
