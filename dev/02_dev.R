@@ -25,6 +25,9 @@ golem::add_module(name = "pushButtons")
 #donwload image
 golem::add_module(name="downloadImage") 
 
+#relaunch the application
+golem::add_module(name="relaunchApp")
+
 
 ## 2.2 Add dependencies
 usethis::use_package("config")

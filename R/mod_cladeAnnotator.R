@@ -34,10 +34,7 @@ mod_cladeAnnotator_server <-
   function(input, output, session, addTree, addAnno, removeAnno,  makeTreeOut, geneObjectForSNP, labelOff, labColor){
     ns <- session$ns
     
-    # #this will reload the session and clear exisiting info - good if you want to start TOTALLY new
-    # observeEvent(reload(),{
-    #   session$reload()
-    # })
+
     
     #displays the tree plot, uses output from the displayTree module
     observeEvent(addTree(), {

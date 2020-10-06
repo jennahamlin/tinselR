@@ -11,6 +11,8 @@ app_server <- function(input, output,session) {
   
   buttons <- callModule(mod_pushButtons_server, "pushButtons_ui_data")
   
+  callModule(mod_relaunchApp_server, "relaunchApp_ui_data")
+  
   #displays the tree and uses the params as input to change tree viz
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$ geneObjectOutForS4, 
                      params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
@@ -30,6 +32,8 @@ app_server <- function(input, output,session) {
   exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
   
   exampleButtons <- callModule(mod_pushButtons_server, "pushButtons_ui_example")
+  
+  callModule(mod_relaunchApp_server, "relaunchApp_ui_example")
   
   examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example",exampleData$extreeFileOut, exampleData$exGeneFileCorOrUnOut,
              exampleParams$treeformat, exampleParams$lim, exampleParams$align, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$midP)
