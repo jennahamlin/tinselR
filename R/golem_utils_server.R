@@ -69,8 +69,8 @@ combineGandT <- function(treeFile, geneFile){
   dplyr::full_join(treeFile, geneFile, by = "label")%>%
     treeio::as.treedata()
 }
-## cladeAnnotator server functions
 
+## cladeAnnotator server functions
 #function which gets the snps for two tips and puts them into the snpVector
 snpVector <- c()
 
@@ -89,8 +89,6 @@ snpAnno <- function(geneFile, tips){
   return(as.numeric(snpVector))
 }
 
-
-
 #function to add layer, uses findMRCA to get the MRCA (node) for the selected tips
 make_layer <- function(tree, tips, label, color, offset) {
   ggtree::geom_cladelabel(
@@ -101,65 +99,6 @@ make_layer <- function(tree, tips, label, color, offset) {
     offset = offset
   )
 }
-# checkOverlap <- function(previous_plot, incoming_tips) {
-#   preG <- ggplot2::ggplot_build(previous_plot)
-#   
-#   tip_labels <- preG$data[[3]]
-#   incoming_y_coords <-
-#     tip_labels[tip_labels$label %in% incoming_tips, "y"]
-#   
-#   if (length(preG$data) < 4) {
-#     any_overlap <- FALSE
-#   } else {
-#     cladeSegments <- preG$data[[4]]
-#     overlaps <- sapply(1:nrow(cladeSegments), function(i) {
-#       X <- DescTools::Overlap(
-#         x = c(cladeSegments[i, "y"], cladeSegments[i, "yend"]), 
-#         y = incoming_y_coords)
-#       Y <- X > 0
-#       #return(Y)
-#     })
-#     #print(cladeSegments)
-#     #any_overlap <- any(overlaps)
-#   }
-#   #return(any_overlap)
-# }
 
 
 
-
-
-
-
-# # Inverted versions of in, is.null and is.na
-# `%not_in%` <- Negate(`%in%`)
-# 
-# not_null <- Negate(is.null)
-# 
-# not_na <- Negate(is.na)
-# 
-# # Removes the null from a vector
-# drop_nulls <- function(x){
-#   x[!sapply(x, is.null)]
-# }
-# 
-# # If x is null, return y, otherwise return x
-# "%||%" <- function(x, y){
-#   if (is.null(x)) {
-#     y
-#   } else {
-#     x
-#   }
-# }
-# # If x is NA, return y, otherwise return x
-# "%|NA|%" <- function(x, y){
-#   if (is.na(x)) {
-#     y
-#   } else {
-#     x
-#   }
-# }
-# 
-# # typing reactiveValues is too long
-# rv <- shiny::reactiveValues
-# rvtl <- shiny::reactiveValuesToList

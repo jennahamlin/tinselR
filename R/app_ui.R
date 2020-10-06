@@ -14,21 +14,22 @@ app_ui <- function() {
                           sidebarLayout(
                             sidebarPanel(
                               mod_uploadData_ui("uploadData_ui_1"),
-                              mod_paramsTree_ui("paramsTree_ui_data"),                              
+                              mod_pushButtons_ui("pushButtons_ui_data"),
                               mod_downloadImage_ui("downloadImage_ui_1"),
                               width = 3),
                             mainPanel(
+                              mod_paramsTree_ui("paramsTree_ui_data"),
                               mod_displayTree_ui("displayTree_ui_data"),                              
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_data")
-                              
                             ))),
                  tabPanel("Example Data",
                           sidebarLayout(
                             sidebarPanel(
                               mod_exampleData_ui("exampleData_ui_1"),
-                              mod_paramsTree_ui("paramsTree_ui_example"), 
+                              mod_pushButtons_ui("pushButtons_ui_example"),
                               width = 3), 
                             mainPanel(
+                              mod_paramsTree_ui("paramsTree_ui_example"),
                               mod_displayTree_ui("displayTree_ui_example"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_example"))))
       )

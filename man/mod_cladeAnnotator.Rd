@@ -11,8 +11,11 @@ mod_cladeAnnotator_server(
   input,
   output,
   session,
-  geneObjectForSNP,
+  addTree,
+  addAnno,
+  removeAnno,
   makeTreeOut,
+  geneObjectForSNP,
   labelOff,
   labColor
 )
