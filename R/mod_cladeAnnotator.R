@@ -28,9 +28,9 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @keywords internal
 mod_cladeAnnotator_server <-
   function(input, output, session, makeTreeOut, addTree, addAnno, removeAnno, geneObjectForSNP, labelOff, labColor){
-    ns <- session$ns
+    #add overlapAd to the input parameters above 
     
-
+    ns <- session$ns
     
     #displays the tree plot, uses output from the displayTree module
     observeEvent(addTree(), {
@@ -87,6 +87,8 @@ mod_cladeAnnotator_server <-
         # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
         #option to adjust the position of all annotations
         label_offset <- labelOff() + nOverlap*0.004
+        
+        #overlapAd()
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- 

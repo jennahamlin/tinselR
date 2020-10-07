@@ -20,6 +20,7 @@ app_server <- function(input, output,session) {
   #annotates tree with incorporated tree viz parameters
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$makeTreeOut, buttons$addTree, buttons$addAnno, buttons$removeAnno, 
                               dataDisplay$geneObjectForSNP, params$labelOff,  params$labColor)
+  #params$overlapAd - add if i can figure this out 
   
   #allows tree with annotation and viz parameters to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)

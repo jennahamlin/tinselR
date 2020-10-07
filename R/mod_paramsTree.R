@@ -18,33 +18,34 @@ mod_paramsTree_ui <- function(id){
   tagList(
     
     tags$table(width ="100%",
-               tags$th("Alter tree viz parameters", colspan="3", style="font-size:20px; color:#afafae")),
-    tags$hr(style="border-color: black;"),
+               tags$th("Alter Tree Visual Parameters", colspan="3", style="font-size:20px; color:#7ab567;")),
+    tags$hr(style="border-color: #99b6d8;"),
     column(
-      checkboxInput(ns("alignTips"), ("Align the tips"), FALSE),
-      numericInput(ns("numScale"), "Size of Scale Bar - ", value = 0.001, step = 0.001),
-      numericInput(ns("nodeDisplay"), "Min. Value of Bootstrap -", value = 50, max = 100), width = 3),
+      numericInput(ns("numScale"), tags$b("Size of Scale Bar - ", style="color:#afafae"), value = 0.001, step = 0.001),
+      numericInput(ns("nodeDisplay"), tags$b("Min. Value of Bootstrap -", style="color:#afafae"), value = 50, max = 100), 
+      selectInput(ns("color"), tags$b("Tip Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")), width = 3),
     
     column(
-      checkboxInput(ns("midPoint"), "Midpoint Root", TRUE),
-      numericInput(ns("tipLim"), 'Add Spacing to Plot - ', value = 0.02, max = 1, step = 0.01 ), 
-      numericInput(ns("labelOffset"), "Move All Annotations -", value = 0.005, step = 0.01), width = 3),
+      numericInput(ns("tipLim"), tags$b("Add Spacing to Plot - ", style="color:#afafae"), value = 0.02, max = 1, step = 0.01 ), 
+      numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01), width = 3), 
+      #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), width = 3),
     
     column(
-      radioButtons(ns("treeFormat"), "Tree layout -", 
-                   choices = list(
-                     "rectangular" = "rectangular", "slanted" = "slanted", 
-                     "circular" = "circular", "fan" = "fan"), selected = "rectangular"),
-      selectInput(ns("color"), "Tip Label Color - ", c("blue", "red", "black", "gray")), width =3),
-    
-    column(
-      radioButtons(ns("fontFormat"), "Font Format - ", 
+      radioButtons(ns("fontFormat"), tags$b("Font Format", style="color:#afafae"), 
                    choices = list(
                      "bold" = "bold", "italic" = "italic", 
-                     "bold+italic" = "bold.italic"), selected = "bold"), width = 3),     
+                     "bold+italic" = "bold.italic"), selected = "bold"),
+      checkboxInput(ns("midPoint"), tags$b("Midpoint Root", style="color:#afafae"), TRUE), 
+      checkboxInput(ns("alignTips"), tags$b("Align the tips", style="color:#afafae"), FALSE), width = 3),
+    
+    column(
+      radioButtons(ns("treeFormat"), tags$b("Tree layout", style="color:#afafae"), 
+                   choices = list(
+                     "rectangular" = "rectangular", "slanted" = "slanted", 
+                     "circular" = "circular", "fan" = "fan"), selected = "rectangular"), width = 3),     
     tags$table(width ="100%",
-               tags$th("tree display", colspan="3", style="font-size:20px; color:#afafae")),
-    tags$hr(style="border-color: black;")
+               tags$th("Tree Display", colspan="3", style="font-size:20px; color:#7ab567;")),
+    tags$hr(style="border-color: #99b6d8;")
     
   )
 }
