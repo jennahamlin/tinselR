@@ -18,24 +18,25 @@ mod_uploadData_ui <- function(id){
   tagList(
     
     tags$table(width ="100%",
-               tags$th("Upload File options", colspan="3", style="font-size:20px; color:#afafae")),
-    tags$hr(style="border-color: black;"),
+               tags$th("Upload Files", colspan="3", style="font-size:20px; color:#7ab567;")),
+    tags$hr(style="border-color: #99b6d8;"),
     
     #upload tree file 
-    fileInput(ns("treeFile"), label ="1. Upload a newick file"),
+    fileInput(ns("treeFile"), label = tags$b("1. Upload a newick file", style="color:#afafae")),
     
     #upload genetic distance file using a function 
-     fileUpload(ns("geneFile"), fileLabel = "2. Upload a genetic distance file"),
-
+    fileUpload(ns("geneFile"), fileLabel = tags$b("2. Upload a genetic distance file", style="color:#afafae")),
+    
     div(style = "margin-top:-2em", #this decreases the distance between the two buttons (fileupload and inputseparator)
-    #specify the type of separator for the genetic distance file uploaded
-    inputSeparator(ns("geneSep"), fileLabel = "Separator for genetic distance file")),
-
-    fileUpload(ns("metaFile"), fileLabel = "3. Upload an optional meta data file"),
-
+        #specify the type of separator for the genetic distance file uploaded
+        inputSeparator(ns("geneSep"), fileLabel = tags$em("Separator for genetic distance file", style="color:#afafae"))),
+    
+    fileUpload(ns("metaFile"), fileLabel = tags$b("3. Upload an optional meta data file", style="color:#afafae")),
+    
     div(style = "margin-top:-2em",
-    inputSeparator(ns("metaSep"), fileLabel = "Separator for optional meta data file")),
-    tags$hr(style="border-color: black;")
+        inputSeparator(ns("metaSep"), fileLabel = tags$em("Separator for optional meta data file", style="color:#afafae"))
+    ),
+    tags$hr(style="border-color: #99b6d8;")
     
   )
 }

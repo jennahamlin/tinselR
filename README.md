@@ -77,6 +77,7 @@ run_app()
 **Known issues as September 23, 2020**
 
 - If user uploads tree and genetic distance matrix and then annotates the tree, error pops up if user then tries to upload a meta data file. 
+- Strange css styling for the push buttons; would love comments to know how to deal with this. 
 
 **Tinsel has been tested with**
 * R version 3.6.0 

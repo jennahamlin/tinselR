@@ -16,22 +16,25 @@
 mod_exampleData_ui <- function(id){
   ns <- NS(id)
 
-    tagList(
-      
-      #select tree file that is sourced using the UI function in app_ui.R file
-      selectInput(ns("exTreeFile"), label ="1. Select example newick file", 
-                  choices = c("", "example Tree 1", "example Tree 2")),
-      
-      #select genetic distance file 
-      selectInput(ns("exGeneFile"), label = "2. Selected assocaited genetic distance file",
-                  choices =c("", "example Genetic Distance 1", "example Genetic Distance 2")),
-      
-      #select meta data file 
-      selectInput(ns("exMetaFile"), label = "3. Select associated (optional) meta data file",
-                   choices = c("",  "example Meta Data 1", "example Meta Data 2")),
-      
-      #add horizontal line to seperate tree viz parameters
-      tags$hr(style="border-color: black;")
+  tagList(
+    tags$table(width ="100%",
+               tags$th("Upload Files", colspan="3", style="font-size:20px; color:#7ab567")),
+    tags$hr(style="border-color: #99b6d8;"),
+    
+    #select tree file that is sourced using the UI function in app_ui.R file
+    selectInput(ns("exTreeFile"), label = tags$b("1. Select example newick file", style="color:#afafae"), 
+                choices = c("", "example Tree 1", "example Tree 2")),
+    
+    #select genetic distance file 
+    selectInput(ns("exGeneFile"), label = tags$b("2. Selected assocaited genetic distance file", style="color:#afafae"),
+                choices =c("", "example Genetic Distance 1", "example Genetic Distance 2")),
+    
+    #select meta data file 
+    selectInput(ns("exMetaFile"), label = tags$b("3. Select associated (optional) meta data file", style="color:#afafae"),
+                choices = c("",  "example Meta Data 1", "example Meta Data 2")),
+    
+    #add horizontal line to seperate tree viz parameters
+    tags$hr(style="border-color: #99b6d8;")
       
     )
 

@@ -16,7 +16,8 @@ mod_about_ui <- function(id){
     as a program for producing publication-ready figures.", br(), "The",em("power"),"of Tinsel comes
     with combining a genetic distance matrix for annotating a tree for epidemological outbreak
     analyses.", br(), "A genetic distance matrix contains the number of snp differences for all pairwise 
-                comparisons."), 
+                comparisons.", br(), "Note that the data you upload is only held within the application while you are on the site (i.e. no data
+                is stored."), 
               br(), 
               strong("Please click on the 'Data Upload' pane to upload your files."),
               br(), 
@@ -32,6 +33,9 @@ mod_about_ui <- function(id){
     br(),
     "add annotation to the visual representation of the tree",
     br(),
+    strong("When you are happy with the way your tree looks-"),
+    br(),
+    "scroll to the bottom; enter your name and press Download",
     br(),
     "If you have any problems, please file an", a("issue", href = "https://github.com/jennahamlin/Tinsel/issues")
     

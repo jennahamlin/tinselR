@@ -18,17 +18,18 @@ mod_downloadImage_ui <- function(id){
   tagList(
     
     tags$table(width ="100%",
-               tags$th("Download options", colspan="3", style="font-size:20px; color:#afafae")),
-    tags$hr(style="border-color: black;"),
-    column(selectInput(ns("fileType"), label = "Type", choices = c( "pdf", "png", "tiff")), width = 3),
+               tags$th("Download Options", colspan="3", style="font-size:20px; color:#7ab567")),
+    tags$hr(style="border-color: #99b6d8;"),
+    column(selectInput(ns("fileType"), label =  tags$b("File Type", style="color:#afafae"), choices = c( "pdf", "png", "tiff")), width = 2),
     
-    column(numericInput(ns("width"), "Width of Image (inches)", value = 6), width = 3),
-    column(numericInput(ns("height"), "Height of Images (inches)", value = 8), width = 3),
+    column(numericInput(ns("width"),  tags$b("Width (inches)", style="color:#afafae"), value = 6), width = 2),
+    column(numericInput(ns("height"),  tags$b("Height (inches)", style="color:#afafae"), value = 8), width = 2),
     
     column(
-    shinyjs::useShinyjs(),
-    textInput(ns("text"), "User Id", "", placeholder = "please enter your name or user id to download"),
-    shinyjs::hidden(downloadButton(ns("downloadPlot"))), width = 3)
+      shinyjs::useShinyjs(),
+      textInput(ns("text"), tags$b("User Id or Name", style="color:#afafae"), "", placeholder = "please enter info to download"), width = 2),
+    column(
+      shinyjs::hidden(downloadButton(ns("downloadPlot"))), width = 2)
   )
 }
 
