@@ -17,6 +17,10 @@ mod_uploadData_ui <- function(id){
   ns <- NS(id)
   tagList(
     
+    tags$table(width ="100%",
+               tags$th("Upload File options", colspan="3", style="font-size:20px; color:#afafae")),
+    tags$hr(style="border-color: black;"),
+    
     #upload tree file 
     fileInput(ns("treeFile"), label ="1. Upload a newick file"),
     
@@ -96,15 +100,16 @@ mod_uploadData_server <- function(input, output, session){
     
     else { #if meta file uploaded do an error check, then do an error check for genetic distance and then correct the distance file to match meta file tip labels
       
-      center <- NULL
+      . <- NULL
       
       metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
       
-      geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep)
+      geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep) %>%
+        dplyr::rename(center = 1)
+      
+      #geneFileCorrected %>% dplyr::rename(center = 1)
       
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
-      
-      geneFileCorrected %>% rename(center = 1)
       
       geneFileCorrected$center = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$center)]
       

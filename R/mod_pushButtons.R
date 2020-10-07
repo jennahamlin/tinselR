@@ -10,9 +10,10 @@
 mod_pushButtons_ui <- function(id){
   ns <- NS(id)
   tagList(
-    actionButton(ns("add_tree"), "Visualize Tree"),
-    actionButton(ns("add_annotation"), HTML("Add Annotation <br/> to Tree"), icon("plus"), class = "btn btn-primary"),
-    actionButton(ns("remove_annotation"), HTML("Remove Previous <br/> Annotation(s) on Tree"),icon("minus"),class = "btn btn-primary")
+    column(
+    actionButton(ns("add_tree"), "Visualize Tree", icon("tree")),
+    actionButton(ns("add_annotation"), "Add Annotation(s) ", icon("plus"), class = "btn btn-primary"),
+    actionButton(ns("remove_annotation"), HTML("Remove Previous <br/> Annotation(s)"), icon("minus"), class = "btn btn-primary"), width =3)
   )
 }
     

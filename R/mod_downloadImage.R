@@ -17,13 +17,18 @@ mod_downloadImage_ui <- function(id){
   ns <- NS(id)
   tagList(
     
-    selectInput(ns("fileType"), label = "Type", choices = c( "pdf", "png", "tiff")),
-    numericInput(ns("width"), "Width of Image (inches)", value = 6),
-    numericInput(ns("height"), "Height of Images (inches)", value = 8),
+    tags$table(width ="100%",
+               tags$th("Download options", colspan="3", style="font-size:20px; color:#afafae")),
+    tags$hr(style="border-color: black;"),
+    column(selectInput(ns("fileType"), label = "Type", choices = c( "pdf", "png", "tiff")), width = 3),
     
+    column(numericInput(ns("width"), "Width of Image (inches)", value = 6), width = 3),
+    column(numericInput(ns("height"), "Height of Images (inches)", value = 8), width = 3),
+    
+    column(
     shinyjs::useShinyjs(),
-    textInput(ns("text"), "User Id", "", placeholder = "please enter your user id to download"),
-    shinyjs::hidden(downloadButton(ns("downloadPlot")))
+    textInput(ns("text"), "User Id", "", placeholder = "please enter your name or user id to download"),
+    shinyjs::hidden(downloadButton(ns("downloadPlot"))), width = 3)
   )
 }
 

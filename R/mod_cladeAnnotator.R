@@ -16,10 +16,6 @@
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    # actionButton(ns("add_tree"), "Visualize Tree"),
-    # actionButton(ns("add_annotation"),"Add Annotation to Tree",icon("plus"),class = "btn btn-primary"),
-    # actionButton(ns("remove_annotation"),"Remove Previous Annotation(s) on Tree",icon("refresh"),class = "btn btn-primary"),
-    # actionButton(ns("reload"), "Relaunch the Application"),
     mainPanel(
     plotOutput(ns("treeDisplay"), brush = ns("plot_brush")))
   )
@@ -31,7 +27,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, makeTreeOut, addTree, addAnno, removeAnno,   geneObjectForSNP, labelOff, labColor){
+  function(input, output, session, makeTreeOut, addTree, addAnno, removeAnno, geneObjectForSNP, labelOff, labColor){
     ns <- session$ns
     
 
@@ -90,7 +86,7 @@ mod_cladeAnnotator_server <-
         
         # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
         #option to adjust the position of all annotations
-        label_offset <- labelOff() + nOverlap*0.003
+        label_offset <- labelOff() + nOverlap*0.004
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- 

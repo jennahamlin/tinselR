@@ -10,7 +10,6 @@
 mod_relaunchApp_ui <- function(id){
   ns <- NS(id)
   tagList(
- 
     actionButton(ns("reloadSession"), HTML("Relaunch the <br/> Application"), icon("refresh"))
   )
 }
