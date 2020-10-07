@@ -50,7 +50,7 @@ fileCheck<- function(fileUp, fileType, fileSep){
 
 #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
 toThreeColumns <- function(geneFileIn){
-  center <- NULL 
+  . <- NULL 
   dplyr::rename(geneFileIn, label = 1) %>%
     replace(., .=="-", 0)
 }
