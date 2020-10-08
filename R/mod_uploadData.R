@@ -114,6 +114,15 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
+  geneFileTipCheck <- reactive({ 
+    if (is.null(metaFileUp()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
+      
+      geneFileUncorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep)
+      
+      return(geneFileUncorrected)
+    } 
+  })
+  
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs; uses two functions located in
   #goloem_utils_server.R file 
   geneObject <-reactive({
@@ -128,7 +137,9 @@ mod_uploadData_server <- function(input, output, session){
       metaFileOut = reactive(metaFileUp()),
       treeFileOut = reactive(treeFileUp()),
       geneObjectOutForS4 = reactive(geneObjectOut()),
-      geneObjectForSNP = reactive(geneObject())))
+      geneObjectForSNP = reactive(geneObject()),
+      geneFileTipCheckOut = reactive(geneFileTipCheck())
+    ))
 }
 
 ## To be copied in the UI

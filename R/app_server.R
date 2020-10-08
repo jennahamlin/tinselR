@@ -6,7 +6,9 @@ app_server <- function(input, output,session) {
   #uplodad the data (tree, genetic distance and meta data) and call that module output by dataDisplay$
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
-  callModule(mod_tipCheck_server, "tipCheck_ui_data")
+  tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$metaFileOut, dataDisplay$geneFileTipCheckOut, dataDisplay$treeFileOut)
+  
+  callModule(mod_htmlMessages_server, "htmlMessages_ui_1", tipCheckOut$fileTest)
   
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
@@ -16,7 +18,7 @@ app_server <- function(input, output,session) {
   callModule(mod_relaunchApp_server, "relaunchApp_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
-  plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$ geneObjectOutForS4, 
+  plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$geneObjectOutForS4, 
                      params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
   
   #annotates tree with incorporated tree viz parameters

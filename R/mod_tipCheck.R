@@ -10,8 +10,13 @@
 mod_tipCheck_ui <- function(id){
   ns <- NS(id)
   tagList(
-    actionButton(ns("fileTesting"),  HTML("Confirm Files Match "), 
-                 style="color: #fff; background-color: #d1ad5b; border-color: #d1ad5b; width: 200px;",  icon("tree"))
+    actionButton(ns("fileTesting"),  "Confirm Files Match ",
+                 style="color: #fff; background-color: #d1ad5b; border-color: #d1ad5b; width: 200px;", icon("equals")),
+    
+    #uiOutput(ns('fileChecking'))
+    htmlOutput(ns('fileChecking'))
+    
+    #htmlOutput(ns("text"))
  
   )
 }
@@ -19,24 +24,24 @@ mod_tipCheck_ui <- function(id){
 #' tipCheck Server Function
 #'
 #' @noRd 
-mod_tipCheck_server <- function(input, output, session){
+mod_tipCheck_server <- function(input, output, session, metaFileOut, geneFileTipCheckOut, treeFileOut){
   ns <- session$ns
   
   # Check imported data files for tip label agreement. Abort with instructions to fix if disagreement found.
-  sanity <- function(impTree, impMeta, metSep, impGene, genSep) {
-    tree <- treeio::read.newick(file = impTree) #this is the imported tree - impTree
-    treeTips <- sort(tree$tip.label)
+  sanity <- function(impTree, impMeta, impGene ) {
+    #tree <- treeio::read.newick(file = impTree) #this is the imported tree - impTree
+    treeTips <- sort(impTree$tip.label)
     
-    gFile <- readData(impGene, genSep) #fileIn is either tsv, txt, or csv of genetic distance and sep is a reactive selected by user and is the variable of impGene
-    gFileTips <- gFile %>% dplyr::pull(1) %>% sort
+    #gFile <- readData(impGene, genSep) #fileIn is either tsv, txt, or csv of genetic distance and sep is a reactive selected by user and is the variable of impGene
+    gFileTips <- impGene %>% dplyr::pull(1) %>% sort
     
-    mFile <- readData(impMeta, metSep)
-    mFileTips <- mFile %>% dplyr::pull(1) %>% sort
+    #mFile <- readData(impMeta, metSep)
+    mFileTips <- impMeta %>% dplyr::pull(1) %>% sort
     
     # Check for required column names if meta data file 
-    if("Tip.labels" %in% colnames(mFile) != TRUE) { 
+    if("Tip.labels" %in% colnames(impMeta) != TRUE) { 
       return('<span style="color:red"><font size=4>Your metadata file does not contain the column Tip.labels. Please correct and try again.</font></span>')
-    } else if("Display.labels" %in% colnames(mFile) != TRUE) {
+    } else if("Display.labels" %in% colnames(impMeta) != TRUE) {
       return('<span style="color:red"><font size=4>Your metadata file does not contain the column Display.labels. Please correct and try again.</font></span>')
     } 
     
@@ -81,10 +86,39 @@ mod_tipCheck_server <- function(input, output, session){
     }
   }
   
+  fileTest <- eventReactive(input$fileTesting, {
+
+    if(is.null(metaFileOut())) {
+      return('<span style="color:red"><font size=4>Please select a metadata file before continuing.</font></span>')
+    } else if(is.null(geneFileTipCheckOut())) {
+      return('<span style="color:red"><font size=4>Please select a distance file before continuing.</font></span>')
+    } else if(is.null(treeFileOut())) {
+      return('<span style="color:red"><font size=4>Please select a Newick tree file before continuing.</font></span>')
+    } else {
+      print("Line 95")
+      sanity(impTree = treeFileOut(),
+             impGene = geneFileTipCheckOut(),
+             impMeta = metaFileOut())
+    }
+    return(fileTest)
+    
+    })
+
   
+  # output$text <- renderUI({
+  #   ns <- session$ns
+  #   HTML(paste(c("banana","raccoon","duck","grapefruit")))
+  # })
   
+  output$fileChecking <- renderUI({
+    ns <- session$ns
+    if(is.null(fileTest())) {
+      HTML('<span style="color:green"><font size=4><strong>No errors were detected in the input files. Please continue with Tinsel by clicking the Update Plot button at the bottom of the Decorate Your Tree section below.</strong></font></span>')
+    } else {
+      HTML(fileTest())
+    }
+  })
   
- 
 }
     
 ## To be copied in the UI
