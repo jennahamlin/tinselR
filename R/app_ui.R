@@ -15,7 +15,6 @@ app_ui <- function() {
                             sidebarPanel(
                               mod_uploadData_ui("uploadData_ui_1"),
                               br(), 
-                              
                               mod_pushButtons_ui("pushButtons_ui_data"),
                               mod_relaunchApp_ui("relaunchApp_ui_data"), 
                               width = 3),
@@ -25,6 +24,9 @@ app_ui <- function() {
                               #mod_htmlMessages_ui("htmlMessages_ui_1"),
                               mod_displayTree_ui("displayTree_ui_data"),                              
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_data"),
+                              br(),
+                              br(),
+                              br(),
                               mod_downloadImage_ui("downloadImage_ui_1")
                             ))),
                  tabPanel("Example Data",
