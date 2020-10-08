@@ -83,7 +83,7 @@ mod_uploadData_server <- function(input, output, session){
     } 
     else { #if metafile do an error check and then correct tip labels using phylotools sub.taxa.label function
     
-      metaFileSeperate <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
+      metaFileSeperate <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType()) 
       
       treeio::read.newick(input$treeFile$datapath)%>%
         phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate)) #this line converts tip labels to pretty labels based on user upload of meta data file
@@ -96,14 +96,14 @@ mod_uploadData_server <- function(input, output, session){
   geneFileCorOrUn <- reactive({ 
     if (is.null(metaFileUp()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
       
-      geneFileUncorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep)
+      geneFileUncorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = geneFileType())
     } 
     
     else { #if meta file uploaded do an error check, then do an error check for genetic distance and then correct the distance file to match meta file tip labels
       
-      metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
+      metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType()) 
       
-      geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep) %>%
+      geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = geneFileType()) %>%
         dplyr::rename(center = 1)
       
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
@@ -117,7 +117,7 @@ mod_uploadData_server <- function(input, output, session){
   geneFileTipCheck <- reactive({ 
     if (is.null(metaFileUp()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
       
-      geneFileUncorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep)
+      geneFileUncorrected <- geneFileUp()
       
       return(geneFileUncorrected)
     } 
@@ -138,7 +138,8 @@ mod_uploadData_server <- function(input, output, session){
       treeFileOut = reactive(treeFileUp()),
       geneObjectOutForS4 = reactive(geneObjectOut()),
       geneObjectForSNP = reactive(geneObject()),
-      geneFileTipCheckOut = reactive(geneFileTipCheck())
+      geneFileTipCheckOut = reactive(geneFileTipCheck()),
+                                     geneSep = reactive(geneFileType())
     ))
 }
 
