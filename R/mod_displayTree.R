@@ -59,6 +59,15 @@ mod_displayTree_server <- function(input, output, session,
       ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = 0.00025)
   }
   
+  ########additional reactive tree parameters to possibly include
+  #these could be parameters to increase/decrease how far tree fills
+  #to the margins 
+  #ggplot2::theme(plot.margin=ggplot2::margin(10,10,10,10))
+  
+  #nudge_x for bootstrap
+  
+  
+  
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   makeTree <- reactive({
     

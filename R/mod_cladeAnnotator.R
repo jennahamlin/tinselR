@@ -17,7 +17,7 @@ mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
     mainPanel(
-    plotOutput(ns("treeDisplay"), brush = ns("plot_brush")))
+      plotOutput(ns("treeDisplay"), brush = ns("plot_brush")))
   )
 }
 
@@ -40,11 +40,7 @@ mod_cladeAnnotator_server <-
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
-      # if (is.null(metaFileOut())){
-        brushedPoints(makeTreeOut()$data, input$plot_brush)
-      # } else {
-      #   print("This is seen")
-      #  }
+      brushedPoints(makeTreeOut()$data, input$plot_brush)
     })
     
     tipVector <- c()
@@ -53,12 +49,15 @@ mod_cladeAnnotator_server <-
     dataWithSelection2 <- eventReactive(input$plot_brush, {
       label <- NULL
       for (i in 1:length(dataWithSelection()$label)) {
-        if (dataWithSelection()$isTip[i] == TRUE)
+        if (dataWithSelection()$isTip[i] == TRUE) {
           tipVector <- c(tipVector, dataWithSelection()$label[i])
+        } 
+      #   else if (dataWithSelection()$isTip[i] != TRUE || dataWithSelection()$isTip[i] != FALSE){
+      #     print("add file first")}  
       }
       return(tipVector)
     })
-   
+    
     # Initialize a reactive value and set to zero (count) and an empty list for tip vector input
     Values <- reactiveValues()
     observe({
@@ -74,7 +73,7 @@ mod_cladeAnnotator_server <-
       
       for (i in seq_along(tipVectorIn)) { #this is the i'th list, for which we are calculating the offset
         currentTips <- Values[["tip_vec"]][[ i ]]
-
+        
         nOverlap = 0     # start by assuming no overlap
         if (i>1){         # for the first set of tips no comparisons needed
           # otherwise do comparisons
@@ -110,18 +109,18 @@ mod_cladeAnnotator_server <-
     
     #event reactive which holds the tips information and increments by + 1 for each user brushed set of tips
     anno_plot<- eventReactive(addAnno(), {
-
+      
       # update the reactive value as a count of + 1
       Values[["n"]] <- Values[["n"]] + 1
-
+      
       #add the tip vector (aka label) to the annotation reactive value
       Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
-
+      
       if (Values[["annoUndoCount"]] < 1){
         #skip
       } else {
         Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] - 1 }
-
+      
       tips<-c()
       if (Values[["n"]] < 1 ) {
         #skip
@@ -131,26 +130,26 @@ mod_cladeAnnotator_server <-
       }
       return(tips)
     })
-
+    
     #display that layer onto the tree
     observeEvent(addAnno(), {
       output$treeDisplay <- renderPlot({
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plot() )
       })
     })
-
+    
     #event reactive which holds the tips information and increments by - 1 for each time user pushes the button
     anno_plotUndo<- eventReactive(removeAnno(), {
-
+      
       # update the reactive value as a count of - 1
       Values[["n"]] <- Values[["n"]] - 1
-
-
+      
+      
       if (Values[["annoUndoCount"]] == 1){
         #skip
       } else {
         Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1 }
-
+      
       tips<-c()
       if (Values[["n"]] < 1 ) {
         #skip
@@ -158,16 +157,16 @@ mod_cladeAnnotator_server <-
         tips <- lapply(1:Values[["n"]], function(i)
           Values[["tip_vec"]][[paste0("tips", i)]])
       }
-
+      
       return(tips)
-
+      
     })
-
+    
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
     observeEvent(removeAnno(), {
-
+      
       output$treeDisplay <- renderPlot({
-         if (Values[["n"]] >= 1) {
+        if (Values[["n"]] >= 1) {
           addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
         }
         else {
@@ -175,7 +174,7 @@ mod_cladeAnnotator_server <-
         }
       })
     })
-
+    
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
       if(Values[["annoUndoCount"]] == 1) {
@@ -187,11 +186,11 @@ mod_cladeAnnotator_server <-
       } else {
         makeTreeOut()
       }
-      })
-
-      #uncomment this out to send tree for download.
+    })
+    
+    #uncomment this out to send tree for download.
     return(treePlotOut)
-
+    
   }
 
 ## To be copied in the UI

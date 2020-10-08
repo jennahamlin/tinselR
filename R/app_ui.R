@@ -15,7 +15,9 @@ app_ui <- function() {
                             sidebarPanel(
                               mod_uploadData_ui("uploadData_ui_1"),
                               br(), 
+                              mod_tipCheck_ui("tipCheck_ui_data"),
                               mod_pushButtons_ui("pushButtons_ui_data"),
+                              mod_relaunchApp_ui("relaunchApp_ui_data"), 
                               width = 3),
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_data"),
@@ -28,6 +30,7 @@ app_ui <- function() {
                             sidebarPanel(
                               mod_exampleData_ui("exampleData_ui_1"),
                               mod_pushButtons_ui("pushButtons_ui_example"),
+                              mod_relaunchApp_ui("relaunchApp_ui_example"),
                               width = 3), 
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_example"),

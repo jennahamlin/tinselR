@@ -11,16 +11,15 @@ mod_pushButtons_ui <- function(id){
   ns <- NS(id)
   tagList(
     column(
-      actionButton(ns("add_tree"),  tags$b("Visualize Tree"), 
-                   style="color: #fff; background-color: #d1ad5b; border-color: #d1ad5b; width: 200px;",  icon("tree")),
+     
+      actionButton(ns("add_tree"),  "Visualize Tree", 
+                   style="color: #fff; background-color: #c4b6b0; border-color: #c4b6b0; width: 200px;",  icon("tree")),
       
       actionButton(ns("add_annotation"), "Add Annotation(s) ", 
                    style="color: #fff; background-color: #7ab567; border-color: #7ab567; width: 200px;",  icon("plus")),
       
-      actionButton(ns("remove_annotation"), HTML("Remove Previous <br/> Annotation(s)"), icon("minus"),
-                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;"), 
-      
-      mod_relaunchApp_ui("relaunchApp_ui_data"), width =3)
+      actionButton(ns("remove_annotation"), "Remove Annotation(s)", icon("minus"),
+                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;"), width =3)
   )
 }
     

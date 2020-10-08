@@ -101,14 +101,10 @@ mod_uploadData_server <- function(input, output, session){
     
     else { #if meta file uploaded do an error check, then do an error check for genetic distance and then correct the distance file to match meta file tip labels
       
-      . <- NULL
-      
       metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = input$metaSep) 
       
       geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = input$geneSep) %>%
         dplyr::rename(center = 1)
-      
-      #geneFileCorrected %>% dplyr::rename(center = 1)
       
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
       

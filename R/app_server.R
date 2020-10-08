@@ -6,6 +6,8 @@ app_server <- function(input, output,session) {
   #uplodad the data (tree, genetic distance and meta data) and call that module output by dataDisplay$
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
+  callModule(mod_tipCheck_server, "tipCheck_ui_data")
+  
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
   
@@ -19,7 +21,7 @@ app_server <- function(input, output,session) {
   
   #annotates tree with incorporated tree viz parameters
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$makeTreeOut, buttons$addTree, buttons$addAnno, buttons$removeAnno, 
-                              dataDisplay$geneObjectForSNP, params$labelOff,  params$labColor)
+                            dataDisplay$geneObjectForSNP, params$labelOff,  params$labColor)
   #params$overlapAd - add if i can figure this out 
   
   #allows tree with annotation and viz parameters to be donwloaded
