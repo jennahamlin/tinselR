@@ -135,11 +135,12 @@ mod_uploadData_server <- function(input, output, session){
   return(
     list(
       metaFileOut = reactive(metaFileUp()),
+      metaSep  = reactive(input$metaSep),
       treeFileOut = reactive(treeFileUp()),
       geneObjectOutForS4 = reactive(geneObjectOut()),
       geneObjectForSNP = reactive(geneObject()),
       geneFileTipCheckOut = reactive(geneFileTipCheck()),
-                                     geneSep = reactive(geneFileType())
+                                     geneSep = reactive(input$geneSep)
     ))
 }
 
