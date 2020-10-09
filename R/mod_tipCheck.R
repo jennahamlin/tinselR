@@ -19,7 +19,7 @@ mod_tipCheck_ui <- function(id){
 #' tipCheck Server Function
 #'
 #' @noRd 
-mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, geneFileOut, geneSep){
+mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, geneFileOut, geneSep, treeFileOutTips){
   ns <- session$ns
   
   output$fileChecking <- renderUI({
@@ -29,21 +29,25 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
         impMeta = metaFileOut(),
         metSep = metaSep(),
         impGene = geneFileOut(),
-        genSep = geneSep()
+        genSep = geneSep(), 
+        impTree = treeFileOutTips()
       )
     }  
   })
   
   # Check imported data files for tip label agreement. Abort with instructions to fix if disagreement found.
-  sanity <- function(impMeta, metSep, impGene, genSep) {
+  sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
     
-    mFile <- readData(filePath = impMeta$datapath, sep = metSep)
+    mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
     mFileTips <- mFile %>% dplyr::pull(1) %>% sort
     print(mFileTips)
     
-    gFile <- readData(filePath = impGene$datapath, sep = genSep)
+    gFile <- fileCheck(fileUp = impGene, fileType = genSep, fileSep = genSep)
     gFileTips <- gFile %>% dplyr::pull(1) %>% sort
     print(gFileTips)
+    
+    tFile <- treeio::read.newick(file = impTree$datapath)
+    tFileTips <- sort(tFile$tip.label)
     
     # Check for required column names if meta data file
     if("Tip.labels" %in% colnames(mFile) != TRUE) {

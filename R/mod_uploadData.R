@@ -115,11 +115,11 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
-  # geneFileTipCheck <- reactive({ 
-  #     geneFileUncorrected <- geneFileUp()
-  #     
-  #     return(geneFileUncorrected)
-  # })
+  treeFileIn <- reactive({
+    
+    validate(need(input$treeFile !="", "Please import newick tree file"))
+    req(input$treeFile)
+  })
   
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs; uses two functions located in
   #goloem_utils_server.R file 
@@ -138,7 +138,8 @@ mod_uploadData_server <- function(input, output, session){
       geneObjectOutForS4 = reactive(geneObjectOut()),
       geneObjectForSNP = reactive(geneObject()),
       geneFileOut = reactive(geneFileUp()),
-                                     geneSep = reactive(input$geneSep)
+      geneSep = reactive(input$geneSep),
+      treeFileOutTips = reactive(treeFileIn())
     ))
 }
 

@@ -6,7 +6,7 @@ app_server <- function(input, output,session) {
   #uplodad the data (tree, genetic distance and meta data) and call that module output by dataDisplay$
   dataDisplay <- callModule(mod_uploadData_server, "uploadData_ui_1")
   
-  tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$metaFileOut, dataDisplay$metaSep, dataDisplay$geneFileOut, dataDisplay$geneSep)
+  tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$metaFileOut, dataDisplay$metaSep, dataDisplay$geneFileOut, dataDisplay$geneSep, dataDisplay$treeFileOutTips)
   
   callModule(mod_htmlMessages_server, "htmlMessages_ui_1", tipCheckOut$fileTest)
   
