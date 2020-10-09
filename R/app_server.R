@@ -8,8 +8,6 @@ app_server <- function(input, output,session) {
   
   tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$metaFileOut, dataDisplay$metaSep, dataDisplay$geneFileOut, dataDisplay$geneSep, dataDisplay$treeFileOutTips)
   
-  callModule(mod_htmlMessages_server, "htmlMessages_ui_1", tipCheckOut$fileTest)
-  
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
   

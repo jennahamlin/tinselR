@@ -10,8 +10,6 @@
 mod_pushButtons_ui <- function(id){
   ns <- NS(id)
   tagList(
-    column(
-     
       actionButton(ns("add_tree"),  "Visualize Tree", 
                    style="color: #fff; background-color: #c4b6b0; border-color: #c4b6b0; width: 200px;",  icon("tree")),
       
@@ -19,7 +17,7 @@ mod_pushButtons_ui <- function(id){
                    style="color: #fff; background-color: #7ab567; border-color: #7ab567; width: 200px;",  icon("plus")),
       
       actionButton(ns("remove_annotation"), "Remove Annotation(s)", icon("minus"),
-                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;"), width =3)
+                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;")
   )
 }
     
@@ -29,7 +27,6 @@ mod_pushButtons_ui <- function(id){
 mod_pushButtons_server <- function(input, output, session){
   ns <- session$ns
   
-
   list(
     addTree = reactive(input$add_tree),
     addAnno = reactive(input$add_annotation),

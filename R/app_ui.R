@@ -21,7 +21,6 @@ app_ui <- function() {
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_data"),
                               mod_tipCheck_ui("tipCheck_ui_1"),
-                              #mod_htmlMessages_ui("htmlMessages_ui_1"),
                               mod_displayTree_ui("displayTree_ui_data"),                              
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_data"),
                               br(),

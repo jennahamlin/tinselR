@@ -42,10 +42,10 @@ mod_paramsTree_ui <- function(id){
       radioButtons(ns("treeFormat"), tags$b("Tree layout", style="color:#afafae"), 
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted", 
-                     "circular" = "circular"), selected = "rectangular"), width = 3),     
+                     "circular" = "circular"), selected = "rectangular"), width = 3), 
+    
     tags$table(width ="100%",
-               tags$th("Tree Display", colspan="3", style="font-size:20px; color:#7ab567;")),
-    tags$hr(style="border-color: #99b6d8;")
+               tags$th("Check Your Files", colspan="3", style="font-size:20px; color:#7ab567;"))
     
   )
 }
