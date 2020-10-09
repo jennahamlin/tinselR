@@ -52,7 +52,7 @@ mod_uploadData_server <- function(input, output, session){
   
   #reactive expression that until a file is uploaded, the below message is displayed if attempting to use the clade annotator button
   geneFileUp <- reactive({
-    validate(need(input$geneFile !="", "Please import a genetic distance file to use the clade annotator"))
+    validate(need(input$geneFile !="", "Please import a genetic distance file")) 
     input$geneFile
   })
   
@@ -63,6 +63,7 @@ mod_uploadData_server <- function(input, output, session){
   
   #reactive expression that holds the meta data file, as this is optional not necessary to validate with informative text display
   metaFileUp <- reactive({
+    validate(need(input$metaFile !="", "Please import a meta data file"))
     input$metaFile
   })
   
@@ -114,14 +115,11 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
-  geneFileTipCheck <- reactive({ 
-    if (is.null(metaFileUp()$datapath)) { #if no meta file, error check delimitor choosen for genetic distance file uploaded to be able to use clade annotator function
-      
-      geneFileUncorrected <- geneFileUp()
-      
-      return(geneFileUncorrected)
-    } 
-  })
+  # geneFileTipCheck <- reactive({ 
+  #     geneFileUncorrected <- geneFileUp()
+  #     
+  #     return(geneFileUncorrected)
+  # })
   
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs; uses two functions located in
   #goloem_utils_server.R file 
@@ -139,7 +137,7 @@ mod_uploadData_server <- function(input, output, session){
       treeFileOut = reactive(treeFileUp()),
       geneObjectOutForS4 = reactive(geneObjectOut()),
       geneObjectForSNP = reactive(geneObject()),
-      geneFileTipCheckOut = reactive(geneFileTipCheck()),
+      geneFileOut = reactive(geneFileUp()),
                                      geneSep = reactive(input$geneSep)
     ))
 }
