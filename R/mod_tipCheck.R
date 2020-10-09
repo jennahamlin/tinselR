@@ -54,7 +54,45 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
       return(HTML('Your metadata file does not contain the correct column headers. Please correct and try again.'))
     } else if("Display.labels" %in% colnames(mFile) != TRUE) {
       return(HTML('Your metadata file does not contain the correct column headers. Please correct and try again'))
-    } else {
+    } 
+    # Check for the same number of tips
+    if(length(tFileTips) != length(gFileTips) |
+       length(tFileTips) != length(mFileTips) |
+       length(gFileTips) != length(mFileTips)) {
+      return(paste("No. of labels in tree file:",
+                   as.character(length(tFileTips)),
+                   "No. of labels in distance file:",
+                   as.character(length(gFileTips)),
+                   "No. of labels in meta data file:",
+                   as.character(length(mFileTips)),
+                   '<span style="color:red"><font size=4>The number of tip labels given in your input files are unequal. Please correct and try again.</font></span>'))}
+    
+    if(setequal(tFileTips, gFileTips) != TRUE) {
+      return(paste('<font size=4>Labels',
+                   paste(setdiff(gFileTips, tFileTips), collapse = ", "),
+                   "are present in your distance file but not your tree file.</font>",
+                   '<font size=4>Labels',
+                   paste(setdiff(tFileTips, gFileTips), collapse = ", "),
+                   "are present in your tree file but not your distance file.</font>",
+                   '<span style="color:red"><font size=4>Please correct the label differences in your input files and try again.</font></span>'))
+    } else if(setequal(tFileTips, mFileTips) != TRUE) {
+      return(paste('<font size=4>Labels',
+                   paste(setdiff(mFileTips, tFileTips), sep = ", "),
+                   "are present in your metadata file but not your tree file.</font>",
+                   '<font size=4>Labels',
+                   paste(setdiff(tFileTips, mFileTips), sep = ", "),
+                   "are present in your tree file but not your metadata file.</font>",
+                   '<span style="color:red"><font size=4>Please correct the label differences in your input files and try again.</font></span>'))
+    } else if(setequal(gFileTips, mFileTips) != TRUE) {
+      return(paste('<font size=4>Labels',
+                   paste(setdiff(mFileTips, gFileTips), sep = ", "),
+                   "are present in your metadata file but not your distance file.</font>",
+                   '<font size=4>Labels',
+                   paste(setdiff(gFileTips, mFileTips), sep = ", "),
+                   "are present in your distance file but not your metadata file</font>",
+                   '<span style="color:red"><font size=4>Please correct the label differences in your input files and try again.</font></span>'))
+    } 
+    else {
       HTML("ok this loaded the files; got tips and checked for headers")}
   }
   
