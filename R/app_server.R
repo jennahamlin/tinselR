@@ -12,13 +12,14 @@ app_server <- function(input, output,session) {
   
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
-  
-  
+
   callModule(mod_relaunchApp_server, "relaunchApp_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$geneObjectOutForS4, 
                      params$treeformat, params$lim, params$align, params$font, params$numscale, params$node, params$midP)
+  
+  callModule(mod_addMatrix_server, "addMatrix_ui_1", buttons$addMatrix, plot$makeTreeOut, dataDisplay$metaFileOut, dataDisplay$metaSep  )
   
   #annotates tree with incorporated tree viz parameters
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$makeTreeOut, buttons$addTree, buttons$addAnno, buttons$removeAnno, 

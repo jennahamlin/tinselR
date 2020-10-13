@@ -51,11 +51,11 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
     
     mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
     mFileTips <- mFile %>% dplyr::pull(1) %>% sort
-    print(mFileTips)
+    #print(mFileTips)
     
     gFile <- fileCheck(fileUp = impGene, fileType = genSep, fileSep = genSep)
     gFileTips <- gFile %>% dplyr::pull(1) %>% sort
-    print(gFileTips)
+    #print(gFileTips)
     
     tFile <- treeio::read.newick(file = impTree$datapath)
     tFileTips <- sort(tFile$tip.label)

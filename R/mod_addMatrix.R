@@ -20,10 +20,35 @@ mod_addMatrix_ui <- function(id){
 mod_addMatrix_server <- function(input, output, session, addMatrix, makeTreeOut, metaFileOut, metaSep){
   ns <- session$ns
  
-  mFile <- fileCheck(fileUp = metaFileOut(), fileType = metaSep(), fileSep = metaSep())
   
-  observeEvent(addMatrix() == T, {
-  ggtree::gheatmap(makeTreeOut())
+  
+  mFileConversion <- function(impMeta, metSep){
+    mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+    
+    print(mFile$Display.labels)
+    
+    meta2 <-mFile %>%
+        #tibble::remove_rownames() %>%
+        tibble::column_to_rownames(var = "Display.labels") %>%
+        dplyr::select(SourceSite)  #this can be user input
+        
+    
+    print(meta2)
+  }
+  
+  mFileOut <- reactive({mFileConversion( impMeta = metaFileOut(),
+                                         metSep = metaSep())
+    })
+  
+
+  
+  observeEvent(addMatrix(), {
+    output$treeDisplay <- renderPlot({
+      #print(makeTreeOut()$data$label)
+      ggtree::gheatmap(makeTreeOut(), mFileOut(), offset = 0.009, width = 0.02) +
+      ggplot2::scale_fill_manual(breaks = c("Stool", "Other", "Environmental", "Urine"),
+                                 values=c("steelblue", "firebrick", "darkgreen", "brown"))
+      })
   })
 }
     
