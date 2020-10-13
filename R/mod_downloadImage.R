@@ -30,7 +30,7 @@ mod_downloadImage_ui <- function(id){
       textInput(ns("text"), tags$b("User Id or Name", style="color:#afafae"), "", placeholder = "please enter info to download"), width = 2),
     column(
       shinyjs::hidden(downloadButton(ns("downloadPlot"))), width = 2)
-  )
+  )    
 }
 
 # Module Server

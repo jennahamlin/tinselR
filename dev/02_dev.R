@@ -11,18 +11,18 @@ golem::add_module(name="about")
 
 #upload data - tree, genetic, meta
 golem::add_module(name="tipCheck")
-golem::add_module(name ="htmlMessages")
 golem::add_module(name="uploadData")
 golem::add_module(name="exampleData")
 
 #tree parameters and display
+golem::add_module(name = "pushButtons")
 golem::add_module(name = "paramsTree")
 golem::add_module(name = "DisplayTree")
 golem::add_module(name = "exampleDisplay")
 
 #annotation module
 golem::add_module(name = "cladeAnnotator")
-golem::add_module(name = "pushButtons")
+golem::add_module(name ="addMatrix")
 
 #donwload image
 golem::add_module(name="downloadImage") 

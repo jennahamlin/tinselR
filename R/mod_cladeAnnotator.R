@@ -34,26 +34,30 @@ mod_cladeAnnotator_server <-
     
     #displays the tree plot, uses output from the displayTree module
     observeEvent(addTree(), {
+      p#rint("Line 37")
+      #print("This is okay for order tree, genetic, annotate, then meta")
+      str(makeTreeOut())
       output$treeDisplay <- renderPlot({
         makeTreeOut()})
     })
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
+      print("Line 45")
+      print("This is okay for order tree, genetic, annotate, then meta")
       brushedPoints(makeTreeOut()$data, input$plot_brush)
-    })
+      })
     
     tipVector <- c()
     
     #add label to tipVector if isTip == True
     dataWithSelection2 <- eventReactive(input$plot_brush, {
       label <- NULL
+      print("Line 59")
+      print("This is okay for order tree, genetic, annotate, then meta")
       for (i in 1:length(dataWithSelection()$label)) {
-        if (dataWithSelection()$isTip[i] == TRUE) {
+         if (dataWithSelection()$isTip[i] == TRUE) 
           tipVector <- c(tipVector, dataWithSelection()$label[i])
-        } 
-      #   else if (dataWithSelection()$isTip[i] != TRUE || dataWithSelection()$isTip[i] != FALSE){
-      #     print("add file first")}  
       }
       return(tipVector)
     })

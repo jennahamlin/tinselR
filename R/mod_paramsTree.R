@@ -27,8 +27,8 @@ mod_paramsTree_ui <- function(id){
     
     column(
       numericInput(ns("tipLim"), tags$b("Add Spacing to Plot - ", style="color:#afafae"), value = 0.02, max = 1, step = 0.01 ), 
-      numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01), width = 3), 
-      #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), width = 3),
+      numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01), width = 3),
+      #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), 
     
     column(
       radioButtons(ns("fontFormat"), tags$b("Font Format", style="color:#afafae"), 
@@ -42,11 +42,7 @@ mod_paramsTree_ui <- function(id){
       radioButtons(ns("treeFormat"), tags$b("Tree layout", style="color:#afafae"), 
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted", 
-                     "circular" = "circular"), selected = "rectangular"), width = 3), 
-    
-    tags$table(width ="100%",
-               tags$th("Check Your Files", colspan="3", style="font-size:20px; color:#7ab567;"))
-    
+                     "circular" = "circular"), selected = "rectangular"), width = 3)
   )
 }
 
@@ -68,7 +64,9 @@ mod_paramsTree_server <- function(input, output, session){
     lim = reactive(input$tipLim),
     midP = reactive(input$midPoint), 
     labelOff = reactive(input$labelOffset),
-    labColor = reactive(input$color))
+    overAdd = reactive(input$overlapAdjust),
+    labColor = reactive(input$color)
+    )
 }
 
 ## To be copied in the UI

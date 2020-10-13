@@ -63,7 +63,7 @@ mod_uploadData_server <- function(input, output, session){
   
   #reactive expression that holds the meta data file, as this is optional not necessary to validate with informative text display
   metaFileUp <- reactive({
-    validate(need(input$metaFile !="", "Please import a meta data file"))
+    #validate(need(input$metaFile !="", "Please import a meta data file"))
     input$metaFile
   })
   
@@ -116,8 +116,6 @@ mod_uploadData_server <- function(input, output, session){
   })
   
   treeFileIn <- reactive({
-    
-    validate(need(input$treeFile !="", "Please import newick tree file"))
     req(input$treeFile)
   })
   

@@ -17,6 +17,9 @@ mod_pushButtons_ui <- function(id){
                    style="color: #fff; background-color: #7ab567; border-color: #7ab567; width: 200px;",  icon("plus")),
       
       actionButton(ns("remove_annotation"), "Remove Annotation(s)", icon("minus"),
+                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;"),
+      
+      actionButton(ns("add_matrix"), "Add heatmap matrix", icon("bars"),
                    style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;")
   )
 }
@@ -30,7 +33,8 @@ mod_pushButtons_server <- function(input, output, session){
   list(
     addTree = reactive(input$add_tree),
     addAnno = reactive(input$add_annotation),
-    removeAnno = reactive(input$remove_annotation)
+    removeAnno = reactive(input$remove_annotation),
+    addMatrix = reactive(input$add_matrix)
   )
 
 }

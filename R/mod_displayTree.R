@@ -46,6 +46,8 @@ mod_displayTree_server <- function(input, output, session,
   
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
+    print("Line 49")
+    print("This is okay for order tree, genetic, annotate, then meta")
     combineGandT(treeObject(), geneObjectOutForS4())
   })
   
@@ -55,7 +57,7 @@ mod_displayTree_server <- function(input, output, session,
     ggtree::ggtree(inputFile, layout = treeformat())+
       ggplot2::xlim(NA, lim())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
-      ggtree::geom_treescale(width = numscale())+
+      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -1 )+
       ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = 0.00025)
   }
   

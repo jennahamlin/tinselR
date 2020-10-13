@@ -10,9 +10,8 @@
 mod_tipCheck_ui <- function(id){
   ns <- NS(id)
   tagList(
-
-    actionButton(ns("fileTesting"),  "Confirm Files Match ",
-                 style="color: #fff; background-color: #d1ad5b; border-color: #d1ad5b; width: 200px;", icon("equals")),
+    tags$table(width ="100%",
+               tags$th("File Check Output", colspan="3", style="font-size:20px; color:#7ab567;")),
     htmlOutput(ns('fileChecking')),
     
     tags$hr(style="border-color: #99b6d8;"),
@@ -30,15 +29,21 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
   
   output$fileChecking <- renderUI({
     ns <- session$ns
-    if(input$fileTesting == T){
-      sanity(
-        impMeta = metaFileOut(),
-        metSep = metaSep(),
-        impGene = geneFileOut(),
-        genSep = geneSep(), 
-        impTree = treeFileOutTips()
-      )
-    }  
+    if (is.null(treeFileOutTips())) { 
+      return(HTML('<span style="color:gray">Please upload a tree file</span>'))
+    } else if (is.null(geneFileOut())){
+      return(HTML('<span style="color:gray">Please upload a genetic distance file</span>'))
+    } else if (is.null(metaFileOut())){
+      return(HTML('<span style="color:gray">Please upload a meta data file</span>'))
+      } else {
+        sanity(
+          impTree = treeFileOutTips(),
+          impGene = geneFileOut(),
+          genSep = geneSep(),
+          impMeta = metaFileOut(),
+          metSep = metaSep()
+        )
+      } 
   })
   
   # Check imported data files for tip label agreement. Abort with instructions to fix if disagreement found.
@@ -57,9 +62,9 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
     
     # Check for required column names if meta data file
     if("Tip.labels" %in% colnames(mFile) != TRUE) {
-      return('Your metadata file does not contain the correct column headers. Please correct and try again.')
+      return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
     } else if("Display.labels" %in% colnames(mFile) != TRUE) {
-      return('Your metadata file does not contain the correct column headers. Please correct and try again')
+      return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
     } 
     
     # Check for the same number of tips
@@ -67,16 +72,16 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
        length(tFileTips) != length(mFileTips) |
        length(gFileTips) != length(mFileTips)) {
       return(HTML(paste(
-        "The number of tip labels in your input files are unequal, please correct.", 
-        "No. of labels in tree file:", 
+        '<span style="color:gray">The number of tip labels in your input files are unequal, please correct.</span>', 
+        '<span style="color:gray">No. of labels in tree file:</span>', 
         as.character(length(tFileTips)),
-        "No. of labels in distance file:",
+        '<span style="color:gray">No. of labels in distance file:</span>',
         as.character(length(gFileTips)),
-        "No. of labels in meta data file:",
+        '<span style="color:gray">No. of labels in meta data file:</span>',
         as.character(length(mFileTips)),
         sep = "<br/>")))
-      } else {
-      HTML("All three files pass checks and contain the same tip labels! - Go ahead and visualize")}
+    } else {
+      return(HTML('<span style="color:gray">All three files pass checks and contain the same tip labels!</span>'))}
   }
   
 }
