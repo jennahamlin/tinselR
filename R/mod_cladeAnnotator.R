@@ -36,7 +36,7 @@ mod_cladeAnnotator_server <-
     observeEvent(addTree(), {
       p#rint("Line 37")
       #print("This is okay for order tree, genetic, annotate, then meta")
-      str(makeTreeOut())
+      #str(makeTreeOut())
       output$treeDisplay <- renderPlot({
         makeTreeOut()})
     })
