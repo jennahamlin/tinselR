@@ -13,12 +13,13 @@ mod_displayTree_server(
   session,
   treeFileOut,
   geneObjectOutForS4,
-  treeformat,
-  lim,
   align,
+  treeformat,
   font,
   numscale,
   node,
+  lim,
+  bootPos,
   midP
 )
 }

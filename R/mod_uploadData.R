@@ -105,8 +105,10 @@ mod_uploadData_server <- function(input, output, session){
       metaFileComb <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType()) 
       
       geneFileCorrected <- fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = geneFileType()) %>%
-        dplyr::rename(center = 1)
+        dplyr::rename(center = 1) #rename column to center; necessary for next step. 
       
+      #the next two lines essentially map the perferred tip lab display in the meta data file to that in the genetic distance file, which has the long tip display names
+      #so essentially replacing the long tip labels with whatever the user prefers. 
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
       
       geneFileCorrected$center = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$center)]
@@ -115,12 +117,13 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
+  #reactive which holds just the tree file, this is used in the tipcheck module
   treeFileIn <- reactive({
     req(input$treeFile)
   })
   
-  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs; uses two functions located in
-  #goloem_utils_server.R file 
+  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs for either the corrected or uncorrected file; uses two functions located in
+  #goloem_utils_server.R file and has a description of those functions. 
   geneObject <-reactive({
     label <- NULL
     geneObjectOut(toThreeColumns(geneFileCorOrUn()))
@@ -130,14 +133,14 @@ mod_uploadData_server <- function(input, output, session){
   #return these reactive objects to be used in tree display module 
   return(
     list(
-      metaFileOut = reactive(metaFileUp()),
-      metaSep  = reactive(input$metaSep),
-      treeFileOut = reactive(treeFileUp()),
-      geneObjectOutForS4 = reactive(geneObjectOut()),
-      geneObjectForSNP = reactive(geneObject()),
-      geneFileOut = reactive(geneFileUp()),
-      geneSep = reactive(input$geneSep),
-      treeFileOutTips = reactive(treeFileIn())
+      metaFileOut = reactive(metaFileUp()), #for tip check
+      metaSep  = reactive(input$metaSep), #for tip check
+      treeFileOut = reactive(treeFileUp()), #for display tree
+      geneObjectOutForS4 = reactive(geneObjectOut()), #for display tree
+      geneObjectForSNP = reactive(geneObject()), #for clade annotator
+      geneFileOut = reactive(geneFileUp()), #for tip check
+      geneSep = reactive(input$geneSep), #for tip check 
+      treeFileOutTips = reactive(treeFileIn()) #for tip check
     ))
 }
 

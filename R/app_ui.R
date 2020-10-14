@@ -1,14 +1,13 @@
 #' @import shiny
 app_ui <- function() {
   tagList(
-    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes
+    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes; if you want
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
       theme = shinythemes::shinytheme('yeti'),
       navbarPage("Tinsel - a tree visulization and annotation tool",
-                 #tabPanel("ReadMe",fluidRow(column(12, wellPanel( includeHTML("About.Rhtml"))))), # wellPanel adds a gray box
                  tabPanel("About", mod_about_ui("about_ui_1")),
                  tabPanel("Data Upload",
                           sidebarLayout(
@@ -27,8 +26,8 @@ app_ui <- function() {
                               br(),
                               br(),
                               br()
-                              #,
-                              #mod_downloadImage_ui("downloadImage_ui_1")
+                              ,
+                              mod_downloadImage_ui("downloadImage_ui_1")
                             ))),
                  tabPanel("Example Data",
                           sidebarLayout(

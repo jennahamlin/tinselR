@@ -30,8 +30,9 @@ mod_pushButtons_ui <- function(id){
 mod_pushButtons_server <- function(input, output, session){
   ns <- session$ns
   
+  #all of these buttons are 'pushed' and activated in the clade annotator module
   list(
-    addTree = reactive(input$add_tree),
+    addTree = reactive(input$add_tree), 
     addAnno = reactive(input$add_annotation),
     removeAnno = reactive(input$remove_annotation),
     addMatrix = reactive(input$add_matrix)

@@ -64,7 +64,6 @@ mod_exampleData_server <- function(input, output, session){
   ###############
   
   exGeneFileIn <- reactive({
-    #validate(need(input$exGeneFile !="", "Please import a genetic distance file to use the clade annotator"))
     if(input$exGeneFile == "example Genetic Distance 1"){
       Tinsel::gene1}
     else if (input$exGeneFile == "example Genetic Distance 2") {
@@ -125,31 +124,20 @@ mod_exampleData_server <- function(input, output, session){
     }
   })
 
-  # #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
-  # exGeneObjectOut <- reactive({
-  #   label <- . <- NULL
-  #   dplyr::rename(exGeneFileCorOrUn(), label = 1)%>%
-  #     replace(., .=="-", 0)
-  # })
-  
+
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
   #geneObjectOut is a function that is applied to another function (toThreeColumns) for the reactive exGeneFileCorOrU
   exGeneObject <-reactive({
     label <- NULL
     geneObjectOut(toThreeColumns(exGeneFileCorOrUn()))
-
-        # exGeneObjectOut()%>%
-    #   stats::na.omit()%>%
-    #   tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
-    #   .[which(.$label != .$name),] #remove self comparisons for this table - necessary for snp mean/median calculation.
   })
  
   #return these reactive objects to be used in tree display module
   return(
     list(
-      extreeFileOut = reactive(exTreeFileUp()),
-      exGeneObjectOutForS4 = reactive(geneObjectOut()),
-      exGeneObjectForSNP = reactive(exGeneObject())
+      extreeFileOut = reactive(exTreeFileUp()), #for data display
+      exGeneObjectOutForS4 = reactive(geneObjectOut()), #for data display
+      exGeneObjectForSNP = reactive(exGeneObject()) #for clade annotator
     ))
 }
 

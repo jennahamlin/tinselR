@@ -29,8 +29,9 @@ mod_addMatrix_server <- function(input, output, session, addMatrix, makeTreeOut,
     
     meta2 <-mFile %>%
         #tibble::remove_rownames() %>%
-        tibble::column_to_rownames(var = "Display.labels") %>%
-        dplyr::select(SourceSite)  #this can be user input
+        tibble::column_to_rownames(var = "Display.labels") 
+    #%>%
+    #    dplyr::select(SourceSite)  #this can be user input
         
     
     print(meta2)
@@ -45,9 +46,10 @@ mod_addMatrix_server <- function(input, output, session, addMatrix, makeTreeOut,
   observeEvent(addMatrix(), {
     output$treeDisplay <- renderPlot({
       #print(makeTreeOut()$data$label)
-      ggtree::gheatmap(makeTreeOut(), mFileOut(), offset = 0.009, width = 0.02) +
-      ggplot2::scale_fill_manual(breaks = c("Stool", "Other", "Environmental", "Urine"),
-                                 values=c("steelblue", "firebrick", "darkgreen", "brown"))
+      ggtree::gheatmap(makeTreeOut(), mFileOut(), offset = 0.009, width = 0.02) 
+      #+
+      #ggplot2::scale_fill_manual(breaks = c("Stool", "Other", "Environmental", "Urine"),
+      #                           values=c("steelblue", "firebrick", "darkgreen", "brown"))
       })
   })
 }

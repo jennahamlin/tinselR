@@ -1,6 +1,8 @@
 ###functions
 
-##uploadData server functions
+######################################
+#### uploadData server functions ####
+######################################
 
 #function to read in the data using readr::read_delim
 readData<-function(filePath, sep)
@@ -28,12 +30,10 @@ fileType <- function(inVar){
 #function to confirm the type of file uploaded matches the selected type 
 # this uses the fille uploaded (fileUp), the type of file selected (fileType - either a csv or tsv), and the file seperate from input$sep
 fileCheck<- function(fileUp, fileType, fileSep){
-  myLines <- readLines(con = fileUp$datapath,
-                       n = 3)
+  myLines <- readLines(con = fileUp$datapath, n = 3)
   fileChk <- validate(
     need(
       length(strsplit(myLines[2], fileType)[[1]]) == length(strsplit(myLines[3], fileType)[[1]]),
-      #paste(fileUp[1])
       paste("Error: the delimiter chosen does not match the file type uploaded: ", fileUp[1], sep = "")
     ), 
     need(
@@ -41,7 +41,6 @@ fileCheck<- function(fileUp, fileType, fileSep){
       paste("Error: the delimiter chosen does not match the file type uploaded: ", fileUp[1], sep = "")))
   if (is.null(fileChk) == TRUE) {
     FileName <- readData(filePath = fileUp$datapath, sep = fileSep)
-    #return(FileName)
   }
   else {
     return(fileChk)
@@ -51,24 +50,78 @@ fileCheck<- function(fileUp, fileType, fileSep){
 #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
 toThreeColumns <- function(geneFileIn){
   . <- NULL 
-  dplyr::rename(geneFileIn, label = 1) %>%
-    replace(., .=="-", 0)
+  dplyr::rename(geneFileIn, label = 1) %>% #rename columnn 1 to label for joining of data sets later
+    replace(., .=="-", 0) #replace - with zero in the file; if zeros already infile, still works
 }
 
 #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
 geneObjectOut  <- function (geneFile) {
   label <- . <- NULL
     geneFile%>%
-    stats::na.omit()%>%
+    stats::na.omit()%>% #remove na
     tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
-    .[which(.$label != .$name),] 
+    .[which(.$label != .$name),]  #remove self comparisons for this table - necessary for snp mean/median calculation.
 }
 
-##displayData server functions
+######################################
+###### tipCheck server function ######
+######################################
+
+## tipCheck server function
+# Function to check imported data files for tip label agreement. If no tip label agreement, tells user what is problematic
+sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
+  
+  #meta data get tips
+  mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+  mFileTips <- mFile %>% dplyr::pull(1) %>% sort
+  #print(mFileTips)
+  
+  #genetic data get tips
+  gFile <- fileCheck(fileUp = impGene, fileType = genSep, fileSep = genSep)
+  gFileTips <- gFile %>% dplyr::pull(1) %>% sort
+  #print(gFileTips)
+  
+  #tree file get tips
+  tFile <- treeio::read.newick(file = impTree$datapath)
+  tFileTips <- sort(tFile$tip.label)
+  
+  # Check for required column names in meta data file
+  if("Tip.labels" %in% colnames(mFile) != TRUE) {
+    return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
+  } else if("Display.labels" %in% colnames(mFile) != TRUE) {
+    return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
+  } 
+  
+  # Check for the same number of tips for all three files
+  if(length(tFileTips) != length(gFileTips) |
+     length(tFileTips) != length(mFileTips) |
+     length(gFileTips) != length(mFileTips)) {
+    return(HTML(paste(
+      '<span style="color:gray">The number of tip labels in your input files are unequal, please correct.</span>', 
+      '<span style="color:gray">No. of labels in tree file:</span>', 
+      as.character(length(tFileTips)),
+      '<span style="color:gray">No. of labels in distance file:</span>',
+      as.character(length(gFileTips)),
+      '<span style="color:gray">No. of labels in meta data file:</span>',
+      as.character(length(mFileTips)),
+      sep = "<br/>")))
+  } else {
+    return(HTML('<span style="color:gray">All three files pass checks and contain the same tip labels!</span>'))}
+}
+
+######################################
+#### displayData server functions ####
+######################################
+
+#this combines the genetic distance file and the tree data by the 'label' 
 combineGandT <- function(treeFile, geneFile){
   dplyr::full_join(treeFile, geneFile, by = "label")%>%
     treeio::as.treedata()
 }
+
+#####################################
+## cladeAnnotator server functions ##
+#####################################
 
 ## cladeAnnotator server functions
 #function which gets the snps for two tips and puts them into the snpVector

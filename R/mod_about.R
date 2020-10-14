@@ -17,7 +17,7 @@ mod_about_ui <- function(id){
     with combining a genetic distance matrix for annotating a tree for epidemological outbreak
     analyses.", br(), "A genetic distance matrix contains the number of snp differences for all pairwise 
                 comparisons.", br(), "Note that the data you upload is only held within the application while you are on the site (i.e. no data
-                is stored."), 
+                is stored.)"), 
               br(), 
               strong("Please click on the 'Data Upload' pane to upload your files."),
               br(), 
@@ -36,6 +36,7 @@ mod_about_ui <- function(id){
     strong("When you are happy with the way your tree looks-"),
     br(),
     "scroll to the bottom; enter your name and press Download",
+    br(),
     br(),
     "If you have any problems, please file an", a("issue", href = "https://github.com/jennahamlin/Tinsel/issues")
     

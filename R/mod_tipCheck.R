@@ -27,6 +27,8 @@ mod_tipCheck_ui <- function(id){
 mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, geneFileOut, geneSep, treeFileOutTips){
   ns <- session$ns
   
+  #this will render the output from the sanity function found in the golem_utils_server.R file
+  #and takes in 5 reactive files - tree, genetic distance, genetic distance seperator, meta data, and meta data seperartor
   output$fileChecking <- renderUI({
     ns <- session$ns
     if (is.null(treeFileOutTips())) { 
@@ -45,45 +47,6 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
         )
       } 
   })
-  
-  # Check imported data files for tip label agreement. Abort with instructions to fix if disagreement found.
-  sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
-    
-    mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-    mFileTips <- mFile %>% dplyr::pull(1) %>% sort
-    #print(mFileTips)
-    
-    gFile <- fileCheck(fileUp = impGene, fileType = genSep, fileSep = genSep)
-    gFileTips <- gFile %>% dplyr::pull(1) %>% sort
-    #print(gFileTips)
-    
-    tFile <- treeio::read.newick(file = impTree$datapath)
-    tFileTips <- sort(tFile$tip.label)
-    
-    # Check for required column names if meta data file
-    if("Tip.labels" %in% colnames(mFile) != TRUE) {
-      return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
-    } else if("Display.labels" %in% colnames(mFile) != TRUE) {
-      return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
-    } 
-    
-    # Check for the same number of tips
-    if(length(tFileTips) != length(gFileTips) |
-       length(tFileTips) != length(mFileTips) |
-       length(gFileTips) != length(mFileTips)) {
-      return(HTML(paste(
-        '<span style="color:gray">The number of tip labels in your input files are unequal, please correct.</span>', 
-        '<span style="color:gray">No. of labels in tree file:</span>', 
-        as.character(length(tFileTips)),
-        '<span style="color:gray">No. of labels in distance file:</span>',
-        as.character(length(gFileTips)),
-        '<span style="color:gray">No. of labels in meta data file:</span>',
-        as.character(length(mFileTips)),
-        sep = "<br/>")))
-    } else {
-      return(HTML('<span style="color:gray">All three files pass checks and contain the same tip labels!</span>'))}
-  }
-  
 }
 
 ## To be copied in the UI

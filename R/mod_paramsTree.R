@@ -23,12 +23,13 @@ mod_paramsTree_ui <- function(id){
     column(
       numericInput(ns("numScale"), tags$b("Size of Scale Bar - ", style="color:#afafae"), value = 0.001, step = 0.001),
       numericInput(ns("nodeDisplay"), tags$b("Min. Value of Bootstrap -", style="color:#afafae"), value = 50, max = 100), 
-      selectInput(ns("color"), tags$b("Tip Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")), width = 3),
+      numericInput(ns('bootPosition'), tags$b("Bootstrap Positions - ", style="color:#afafae"), value = 0.00025, max =1, step = 0.01), width = 3),
     
     column(
       numericInput(ns("tipLim"), tags$b("Add Spacing to Plot - ", style="color:#afafae"), value = 0.02, max = 1, step = 0.01 ), 
-      numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01), width = 3),
-      #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), 
+      numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01),
+      selectInput(ns("color"), tags$b("Tip Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")), width = 3),
+    #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), 
     
     column(
       radioButtons(ns("fontFormat"), tags$b("Font Format", style="color:#afafae"), 
@@ -55,18 +56,23 @@ mod_paramsTree_ui <- function(id){
 mod_paramsTree_server <- function(input, output, session){
   ns <- session$ns
   
-  list(
+  # list of tree visulazation parameters that can be changed. 
+  # if you want to include more tree viz parameters for a user to adjust, 
+  # add them to the ui above and return them here with name to be used in 
+  # data display module
+  return(list(
     align = reactive(input$alignTips),
     treeformat = reactive(input$treeFormat),
     font = reactive(input$fontFormat),
     numscale = reactive(input$numScale),
     node = reactive(input$nodeDisplay),
     lim = reactive(input$tipLim),
+    bootPos = reactive(input$bootPosition), 
     midP = reactive(input$midPoint), 
     labelOff = reactive(input$labelOffset),
     overAdd = reactive(input$overlapAdjust),
     labColor = reactive(input$color)
-    )
+    ))
 }
 
 ## To be copied in the UI
