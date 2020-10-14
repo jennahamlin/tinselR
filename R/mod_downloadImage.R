@@ -18,7 +18,7 @@ mod_downloadImage_ui <- function(id){
   tagList(
     
     tags$table(width ="100%",
-               tags$th("Download Options", colspan="3", style="font-size:20px; color:#7ab567")),
+               tags$th("Download Options", colspan="3", style="font-size:20px; color:#444444")),
     tags$hr(style="border-color: #99b6d8;"),
     column(selectInput(ns("fileType"), label =  tags$b("File Type", style="color:#afafae"), choices = c( "pdf", "png", "tiff")), width = 2),
     

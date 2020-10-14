@@ -27,15 +27,15 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, makeTreeOut, addTree, addAnno, removeAnno, geneObjectForSNP, labelOff, labColor){
+  function(input, output, session, metaFileOut, metaSep, makeTreeOut, addTree, addAnno, removeAnno, 
+           addMatrix, geneObjectForSNP, labelOff, labColor, matOff){
+
     #add overlapAd to the input parameters above 
     
     ns <- session$ns
     
     #displays the tree plot, uses output from the displayTree module
     observeEvent(addTree(), {
-      p#rint("Line 37")
-      #print("This is okay for order tree, genetic, annotate, then meta")
       #str(makeTreeOut())
       output$treeDisplay <- renderPlot({
         makeTreeOut()})
@@ -43,8 +43,6 @@ mod_cladeAnnotator_server <-
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
-      print("Line 45")
-      print("This is okay for order tree, genetic, annotate, then meta")
       brushedPoints(makeTreeOut()$data, input$plot_brush)
       })
     
@@ -53,8 +51,6 @@ mod_cladeAnnotator_server <-
     #add label to tipVector if isTip == True
     dataWithSelection2 <- eventReactive(input$plot_brush, {
       label <- NULL
-      print("Line 59")
-      print("This is okay for order tree, genetic, annotate, then meta")
       for (i in 1:length(dataWithSelection()$label)) {
          if (dataWithSelection()$isTip[i] == TRUE) 
           tipVector <- c(tipVector, dataWithSelection()$label[i])
@@ -67,7 +63,7 @@ mod_cladeAnnotator_server <-
     observe({
       Values[["n"]]   <- 0
       Values[["tip_vec"]] <- list() 
-      Values[["annoUndoCount"]] <- 0 #use this as a count for sending the downloaded image with annotations removed 
+      Values[["annoUndoCount"]] <- 0 #use this as a count for sending the downloaded image with annotations removed essentially turn on/turn off
     })
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
@@ -90,8 +86,6 @@ mod_cladeAnnotator_server <-
         # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
         #option to adjust the position of all annotations
         label_offset <- labelOff() + nOverlap*0.004
-        
-        #overlapAd()
         
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- 
@@ -184,13 +178,42 @@ mod_cladeAnnotator_server <-
       if(Values[["annoUndoCount"]] == 1) {
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
       } else if(
-        #Values[["annoUndoCount"]] >= 1) {
         Values[["n"]] >=1  ) {
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn = anno_plot())
       } else {
         makeTreeOut()
       }
     })
+    
+    mFileConversion <- function(impMeta, metSep){
+      mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+      
+      meta2 <-mFile %>%
+        tibble::column_to_rownames(var = "Display.labels")%>% 
+        dplyr::select(-Tip.labels) 
+      
+      print(meta2)
+    }
+    
+    mFileOut <- reactive({mFileConversion(impMeta = metaFileOut(),
+                                           metSep = metaSep())
+    })
+   
+    
+    matTree <- eventReactive(addMatrix(), {
+      ggtree::gheatmap(treePlotOut(), mFileOut(), offset =  matOff(), width = 0.2)
+    })
+     
+    
+    
+    observeEvent(addMatrix(), {
+      output$treeDisplay <- renderPlot({
+        #print(makeTreeOut()$data$label)
+        matTree()
+      })
+    })
+
+
     
     #uncomment this out to send tree for download.
     return(treePlotOut)

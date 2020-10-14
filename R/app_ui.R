@@ -21,7 +21,7 @@ app_ui <- function() {
                               mod_paramsTree_ui("paramsTree_ui_data"),
                               mod_tipCheck_ui("tipCheck_ui_1"),
                               mod_displayTree_ui("displayTree_ui_data"),                              
-                              mod_addMatrix_ui("addMatrix_ui_1"),
+                              #mod_addMatrix_ui("addMatrix_ui_1"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_data"),
                               br(),
                               br(),

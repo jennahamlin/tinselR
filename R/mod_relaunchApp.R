@@ -10,9 +10,11 @@
 mod_relaunchApp_ui <- function(id){
   ns <- NS(id)
   tagList(
-    actionButton(ns("reloadSession"), HTML("Relaunch the <br/> Application"),
-                 style="color: #fff; background-color: #c85f66; border-color: #c85f66; width: 200px;", icon("refresh")))
+    actionButton(ns("reloadSession"), HTML("Relaunch App"),
+                 style="color: #fff; background-color:#731b1b ; border-color: #731b1b; width: 200px;", icon("refresh")))
 }
+##c85f66
+#HTML("Relaunch the <br/> Application")
     
 #' relaunchApp Server Function
 #'

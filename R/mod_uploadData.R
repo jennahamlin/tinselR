@@ -18,7 +18,7 @@ mod_uploadData_ui <- function(id){
   tagList(
     
     tags$table(width ="100%",
-               tags$th("Upload Files", colspan="3", style="font-size:20px; color:#7ab567;")),
+               tags$th("Upload Files", colspan="3", style="font-size:20px; color:#444444;")),
     tags$hr(style="border-color: #99b6d8;"),
     
     #upload tree file 

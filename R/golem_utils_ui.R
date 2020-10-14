@@ -23,19 +23,6 @@ inputSeparator <- function(fileId, fileLabel){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Turn an R list into an HTML list
 #
 # @param list An R list

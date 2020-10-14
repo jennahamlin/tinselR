@@ -23,11 +23,13 @@ app_server <- function(input, output,session) {
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$treeFileOut, dataDisplay$geneObjectOutForS4, 
                      params$align, params$treeformat, params$font, params$numscale, params$node, params$lim, params$bootPos, params$midP)
   
-  callModule(mod_addMatrix_server, "addMatrix_ui_1", buttons$addMatrix, plot$makeTreeOut, dataDisplay$metaFileOut, dataDisplay$metaSep  )
+  #callModule(mod_addMatrix_server, "addMatrix_ui_1", buttons$addMatrix, plot$makeTreeOut, dataDisplay$metaFileOut, dataDisplay$metaSep)
   
   #annotates tree with incorporated tree viz parameters
-  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$makeTreeOut, buttons$addTree, buttons$addAnno,
-                            buttons$removeAnno, dataDisplay$geneObjectForSNP, params$labelOff,  params$labColor)
+  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data",dataDisplay$metaFileOut, dataDisplay$metaSep, plot$makeTreeOut,
+                            buttons$addTree, buttons$addAnno, buttons$removeAnno,  buttons$addMatrix, dataDisplay$geneObjectForSNP, params$labelOff, 
+                            params$labColor)
+  
   #params$overlapAd - add if i can figure this out 
   
   #allows tree with annotation and viz parameters to be donwloaded
@@ -36,20 +38,20 @@ app_server <- function(input, output,session) {
   ##repeated for preloaded data; no need to download so that module is not included below
   #uplodad the data (tree, genetic, and meta) and call that module dataDisplay. This is the only module that is re-written, the rest of the same 
   #used in the above section and are called the same as above. 
-  exampleData <- callModule(mod_exampleData_server, "exampleData_ui_1")
-  
-  exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
-  
-  exampleButtons <- callModule(mod_pushButtons_server, "pushButtons_ui_example")
-  
-  callModule(mod_relaunchApp_server, "relaunchApp_ui_example")
-  
-  examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example",exampleData$extreeFileOut, exampleData$exGeneFileCorOrUnOut,
-            exampleParams$align, exampleParams$treeformat, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$lim,   
-            exampleParams$bootPos, exampleParams$midP)
-  
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", examplePlot$makeTreeOut, exampleButtons$addTree, 
-             exampleButtons$addAnno, exampleButtons$removeAnno, exampleData$exGeneObjectForSNP,  exampleParams$labelOff, exampleParams$labColor)
-  
+  # exampleData <- callModule(mod_exampleData_server, "exampleData_ui_1")
+  # 
+  # exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
+  # 
+  # exampleButtons <- callModule(mod_pushButtons_server, "pushButtons_ui_example")
+  # 
+  # callModule(mod_relaunchApp_server, "relaunchApp_ui_example")
+  # 
+  # examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example", exampleData$extreeFileOut, exampleData$exGeneFileCorOrUnOut,
+  #           exampleParams$align, exampleParams$treeformat, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$lim,   
+  #           exampleParams$bootPos, exampleParams$midP)
+  # 
+  # callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", examplePlot$makeTreeOut, exampleButtons$addTree, 
+  #            exampleButtons$addAnno, exampleButtons$removeAnno, exampleData$exGeneObjectForSNP,  exampleParams$labelOff, exampleParams$labColor)
+  # 
 }
 

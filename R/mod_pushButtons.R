@@ -11,17 +11,18 @@ mod_pushButtons_ui <- function(id){
   ns <- NS(id)
   tagList(
       actionButton(ns("add_tree"),  "Visualize Tree", 
-                   style="color: #fff; background-color: #c4b6b0; border-color: #c4b6b0; width: 200px;",  icon("tree")),
-      
+                   style="color: #fff; background-color:#334b38 ; border-color: #334b38; width: 200px;",  icon("tree")),
+      ##c4b6b0
       actionButton(ns("add_annotation"), "Add Annotation(s) ", 
-                   style="color: #fff; background-color: #7ab567; border-color: #7ab567; width: 200px;",  icon("plus")),
-      
+                   style="color: #fff; background-color:#e49600 ; border-color: #e49600; width: 200px;",  icon("plus")),
+      ##7ab567
       actionButton(ns("remove_annotation"), "Remove Annotation(s)", icon("minus"),
-                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;"),
-      
+                   style="color: #fff; background-color:#275a5c ; border-color: #275a5c; width: 200px;"),
+      #463d60
       actionButton(ns("add_matrix"), "Add heatmap matrix", icon("bars"),
-                   style="color: #fff; background-color: #463d60; border-color: #463d60; width: 200px;")
-  )
+                   style="color: #fff; background-color:#9c461e ; border-color: #9c461e; width: 200px;")
+      #d8b189
+      )
 }
     
 #' pushButtons Server Function

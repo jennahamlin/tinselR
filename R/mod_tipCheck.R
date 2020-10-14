@@ -11,12 +11,12 @@ mod_tipCheck_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$table(width ="100%",
-               tags$th("File Check Output", colspan="3", style="font-size:20px; color:#7ab567;")),
+               tags$th("File Check Output", colspan="3", style="font-size:20px; color:#444444;")),
     htmlOutput(ns('fileChecking')),
     
     tags$hr(style="border-color: #99b6d8;"),
     tags$table(width ="100%",
-               tags$th("Tree Display", colspan="3", style="font-size:20px; color:#7ab567;")),
+               tags$th("Tree Display", colspan="3", style="font-size:20px; color:#444444;")),
     tags$hr(style="border-color: #99b6d8;")
   )
 }
@@ -47,6 +47,7 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
         )
       } 
   })
+  
 }
 
 ## To be copied in the UI
