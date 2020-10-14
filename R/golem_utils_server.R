@@ -119,6 +119,15 @@ combineGandT <- function(treeFile, geneFile){
     treeio::as.treedata()
 }
 
+# treePlot <- function(inputFile, align, layout, fontface, width, node, limit, nudge_x){
+#   label <- NULL
+#   ggtree::ggtree(inputFile, layout)+
+#     ggplot2::xlim(NA, limit)+
+#     ggtree::geom_tiplab(align, fontface, family="Helvetica")+
+#     ggtree::geom_treescale(width, x = 0.005, y = -1 )+
+#     ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node), nudge_x )
+# }
+
 #####################################
 ## cladeAnnotator server functions ##
 #####################################

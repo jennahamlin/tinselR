@@ -31,6 +31,7 @@ mod_displayTree_server <- function(input, output, session,
                                    treeformat, font,  numscale, node, lim, bootPos, midP){
   ns <- session$ns
   
+  #midpoint root the tree based on reactive value, if not just display the tree
   midTree <- reactive({
     if(midP() == TRUE) {
       return(phytools::midpoint.root(treeFileOut()))
@@ -47,42 +48,43 @@ mod_displayTree_server <- function(input, output, session,
   
   #join the treeobject and updated genetic distance file by label and convert to s4 object
   gandTS4 <- reactive({
-    print("Line 49")
-    print("This is okay for order tree, genetic, annotate, then meta")
     combineGandT(treeObject(), geneObjectOutForS4())
   })
-  
-  ## displayTree server functions
-  treePlot <- function(inputFile){
-    label <- NULL
-    ggtree::ggtree(inputFile, layout = treeformat())+
-      ggplot2::xlim(NA, lim())+
-      ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica") +
-      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -1 )+
-      ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
-  }
   
   ########additional reactive tree parameters to possibly include
   #these could be parameters to increase/decrease how far tree fills
   #to the margins 
   #ggplot2::theme(plot.margin=ggplot2::margin(10,10,10,10))
-  
-  #nudge_x for bootstrap
-  
-  
+
+  ## displayTree server function. In theory this function should be able to be moved over to the golem_utils_server.R script
+  # and updating the function to take all of the reactive values but I have been unsuccessful at doing that and
+  # get a strange error `Warning: Error in modifyList: is.list(val) is not TRUE` so leaving here for now
+  treePlot <- function(inputFile){
+    label <- NULL
+    ggtree::ggtree(inputFile, layout = treeformat())+
+      ggplot2::xlim(NA, lim())+
+      ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica")+
+      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -1 )+
+      ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
+  }
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
   makeTree <- reactive({
     
-    if(is.null(input$id)){ # this disconnects the need for genetic distance file to be uploaded. #not sure why I use input$id here 
+    if(is.null(input$gandTS4)){ # this disconnects the need for genetic distance file to be uploaded for the tree viz to happen
       treePlot(midTree())
+      #what the call should look like if treePlot function was in the golem_utils_server.R file
+      #treePlot(inputFile = midTree(), align = align(), layout = treeformat(), fontface = font(), width = numscale(), node = node(), limit = lim(), nudge_x = bootPos())
+    
     } 
     else{
       treePlot(gandTS4())
+      #what the call should look like if treePlot function was in the golem_utils_server.R file
+      #treePlot(inputFile = gandTS4(), align = align(), layout = treeformat(), fontface = font(), width = numscale(), node = node(), limit = lim(), nudge_x = bootPos())
     }
   })
   
-  #return these reactive objects to be used in cladeAnnotator module 
+  #return display tree reactive to be used in cladeAnnotator module 
   return(
     list(
       makeTreeOut = reactive(makeTree())
