@@ -121,12 +121,13 @@ mFileConversion <- function(impMeta, metSep){
 
 #get the number of columns of the meta data file. Here columns should be 1 or more after transformation of meta data
 notColumns <- function (file){
-  colFile<- ncol(file)
+  colNFile<- ncol(file)
+  colHFile <- colnames(file) #could include what the column headers are
   
-  if(colFile < 1 ){
+  if(colNFile < 1 ){
     return(HTML("And looks like there is not a column for matrix plotting"))
   } else {
-    return(paste("And looks like the number of columns for matrix plotting is", colFile))
+    return(paste("And looks like the number of columns for matrix plotting is: ", colNFile))
   }
 }
 
