@@ -29,8 +29,8 @@ mod_cladeAnnotator_ui <- function(id) {
 mod_cladeAnnotator_server <-
   function(input, output, session, metaFileOut, metaSep, makeTreeOut, addTree, addAnno, removeAnno, 
            addMatrix, geneObjectForSNP, labelOff, labColor, matOff){
-
-    #add overlapAd to the input parameters above 
+    
+    #add other tree viz parameters above 
     
     ns <- session$ns
     
@@ -44,7 +44,7 @@ mod_cladeAnnotator_server <-
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
       brushedPoints(makeTreeOut()$data, input$plot_brush)
-      })
+    })
     
     tipVector <- c()
     
@@ -52,7 +52,7 @@ mod_cladeAnnotator_server <-
     dataWithSelection2 <- eventReactive(input$plot_brush, {
       label <- NULL
       for (i in 1:length(dataWithSelection()$label)) {
-         if (dataWithSelection()$isTip[i] == TRUE) 
+        if (dataWithSelection()$isTip[i] == TRUE) 
           tipVector <- c(tipVector, dataWithSelection()$label[i])
       }
       return(tipVector)
@@ -120,6 +120,7 @@ mod_cladeAnnotator_server <-
         Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] - 1 }
       
       tips<-c()
+      
       if (Values[["n"]] < 1 ) {
         #skip
       } else {
@@ -149,6 +150,7 @@ mod_cladeAnnotator_server <-
         Values[["annoUndoCount"]] <- Values[["annoUndoCount"]] + 1 }
       
       tips<-c()
+      
       if (Values[["n"]] < 1 ) {
         #skip
       } else {
@@ -173,8 +175,23 @@ mod_cladeAnnotator_server <-
       })
     })
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     #reactive to send tree with annoations to downloadImage module
     treePlotOut <- reactive ({
+      #if (is.null(input$id))
       if(Values[["annoUndoCount"]] == 1) {
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
       } else if(
@@ -185,26 +202,9 @@ mod_cladeAnnotator_server <-
       }
     })
     
-    mFileConversion <- function(impMeta, metSep){
-      mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-      
-      meta2 <-mFile %>%
-        tibble::column_to_rownames(var = "Display.labels")%>% 
-        dplyr::select(-Tip.labels) 
-      
-      print(meta2)
-    }
-    
-    mFileOut <- reactive({mFileConversion(impMeta = metaFileOut(),
-                                           metSep = metaSep())
-    })
-   
-    
     matTree <- eventReactive(addMatrix(), {
       ggtree::gheatmap(treePlotOut(), mFileOut(), offset =  matOff(), width = 0.2)
     })
-     
-    
     
     observeEvent(addMatrix(), {
       output$treeDisplay <- renderPlot({
@@ -212,10 +212,17 @@ mod_cladeAnnotator_server <-
         matTree()
       })
     })
-
-
     
     #uncomment this out to send tree for download.
+    treeOut <- reactive({
+      if(is.null(matTree())){
+        return(treePlotOut())
+      } else{
+        return(matTree())
+      }
+    })
+    
+    #return(matTree)
     return(treePlotOut)
     
   }
