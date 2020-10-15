@@ -63,8 +63,8 @@ mod_displayTree_server <- function(input, output, session,
     label <- NULL
     ggtree::ggtree(inputFile, layout = treeformat())+
       ggplot2::xlim(NA, lim())+
-      ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica")+
-      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -1 )+
+      ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
+      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
       ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
   }
   

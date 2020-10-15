@@ -109,6 +109,7 @@ mod_uploadData_server <- function(input, output, session){
       
       #the next two lines essentially map the perferred tip lab display in the meta data file to that in the genetic distance file, which has the long tip display names
       #so essentially replacing the long tip labels with whatever the user prefers. 
+      
       colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
       
       geneFileCorrected$center = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$center)]

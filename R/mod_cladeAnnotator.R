@@ -28,7 +28,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @keywords internal
 mod_cladeAnnotator_server <-
   function(input, output, session, metaFileOut, metaSep, makeTreeOut, addTree, addAnno, removeAnno, 
-           addMatrix, geneObjectForSNP, labelOff, labColor, matOff){
+           addMatrix, geneObjectForSNP, labelOff, labColor, matOff,  matCol){
     
     #add other tree viz parameters above 
     
@@ -200,12 +200,12 @@ mod_cladeAnnotator_server <-
       } else {
         Values[["matrixCount"]] <- Values[["matrixCount"]] + 1 }
       
-      ggtree::gheatmap(treePlotOut(), mFile(), offset =  matOff(), width = 0.2)
+      ggtree::gheatmap(treePlotOut(), mFile(), offset =  matOff(), width = 0.2, colnames_angle = 45, colnames_offset_y = -1, hjust =  0.5)  +
+        ggplot2::scale_fill_viridis_d(option= matCol())
     })
     
     observeEvent(addMatrix(), {
       output$treeDisplay <- renderPlot({
-        #print(makeTreeOut()$data$label)
         matTree()
       })
     })

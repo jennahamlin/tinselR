@@ -32,20 +32,21 @@ mod_paramsTree_ui <- function(id){
     #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), 
     
     column(
+      checkboxInput(ns("midPoint"), tags$b("Midpoint Root", style="color:#afafae"), TRUE), 
+      checkboxInput(ns("alignTips"), tags$b("Align the tips", style="color:#afafae"), FALSE),
+      selectInput(ns("color"), tags$b("Annotation Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")),
+      selectInput(ns("matColor"), tags$b("Matrix Color Options - ", style="color:#afafae"), c("A", "B", "C", "D", "E")), width = 3),
+   
+     column(
       radioButtons(ns("fontFormat"), tags$b("Font Format", style="color:#afafae"), 
                    choices = list(
                      "bold" = "bold", "italic" = "italic", 
                      "bold+italic" = "bold.italic"), selected = "bold"),
-      checkboxInput(ns("midPoint"), tags$b("Midpoint Root", style="color:#afafae"), TRUE), 
-      checkboxInput(ns("alignTips"), tags$b("Align the tips", style="color:#afafae"), FALSE), width = 3),
-    
-    column(
       radioButtons(ns("treeFormat"), tags$b("Tree layout", style="color:#afafae"), 
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted", 
-                     "circular" = "circular"), selected = "rectangular"),
-      selectInput(ns("color"), tags$b("Tip Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")), width = 3),
-    
+                     "circular" = "circular"), selected = "rectangular"), width = 3),
+  
     tags$hr(style="border-color: #99b6d8;"),
     tags$table(width ="100%",
                tags$th("Tree Display", colspan="3", style="font-size:20px; color:#444444;")),
@@ -80,7 +81,8 @@ mod_paramsTree_server <- function(input, output, session){
     labelOff = reactive(input$labelOffset),
     overAdd = reactive(input$overlapAdjust),
     labColor = reactive(input$color),
-    matOff = reactive(input$matOffset)
+    matOff = reactive(input$matOffset),
+    matCol = reactive(input$matColor)
     ))
 }
 

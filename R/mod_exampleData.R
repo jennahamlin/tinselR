@@ -23,15 +23,15 @@ mod_exampleData_ui <- function(id){
     
     #select tree file that is sourced using the UI function in app_ui.R file
     selectInput(ns("exTreeFile"), label = tags$b("1. Select example newick file", style="color:#afafae"), 
-                choices = c("", "example Tree 1", "example Tree 2")),
+                choices = c("", "example Tree 1", "example Tree 2", "example Tree 3" )),
     
     #select genetic distance file 
     selectInput(ns("exGeneFile"), label = tags$b("2. Selected assocaited genetic distance file", style="color:#afafae"),
-                choices =c("", "example Genetic Distance 1", "example Genetic Distance 2")),
+                choices =c("", "example Genetic Distance 1", "example Genetic Distance 2", "example Genetic Distance 3")),
     
     #select meta data file 
     selectInput(ns("exMetaFile"), label = tags$b("3. Select associated (optional) meta data file", style="color:#afafae"),
-                choices = c("",  "example Meta Data 1", "example Meta Data 2")),
+                choices = c("",  "example Meta Data 1", "example Meta Data 2", "example Meta Data 3")),
     
     #add horizontal line to seperate tree viz parameters
     tags$hr(style="border-color: #99b6d8;")
@@ -68,6 +68,9 @@ mod_exampleData_server <- function(input, output, session){
       Tinsel::gene1}
     else if (input$exGeneFile == "example Genetic Distance 2") {
       Tinsel::gene2}
+    else if (input$exGeneFile == "example Genetic Distance 3"){
+      Tinsel::gene3}
+    
   })
 
   ############
@@ -79,6 +82,8 @@ mod_exampleData_server <- function(input, output, session){
       Tinsel::meta1}
     else if (input$exMetaFile == "example Meta Data 2") {
       Tinsel::meta2}
+    else if (input$exMetaFile == "example Meta Data 3"){
+      Tinsel::meta3}
   })
   
   ##############
@@ -90,6 +95,8 @@ mod_exampleData_server <- function(input, output, session){
       Tinsel::tree1}
     else if (input$exTreeFile == "example Tree 2") {
       Tinsel::tree2}
+    else if (input$exTreeFile == "example Tree 3"){
+      Tinsel::tree3}
     })
  
   #reactive expression that uploads the newick tree and allows the optional upload of meta data to correct tree tip labels
@@ -121,6 +128,7 @@ mod_exampleData_server <- function(input, output, session){
       colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
       exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
       return(exGeneFileCorrected)
+      return(exMetaFileComb)
     }
   })
 
@@ -135,6 +143,7 @@ mod_exampleData_server <- function(input, output, session){
   #return these reactive objects to be used in tree display module
   return(
     list(
+      exMetaFileOut = reactive(exMetaFileComb()), 
       extreeFileOut = reactive(exTreeFileUp()), #for data display
       exGeneObjectOutForS4 = reactive(geneObjectOut()), #for data display
       exGeneObjectForSNP = reactive(exGeneObject()) #for clade annotator

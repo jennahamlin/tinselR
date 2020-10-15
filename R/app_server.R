@@ -32,7 +32,7 @@ app_server <- function(input, output,session) {
   #annotates tree with incorporated tree viz parameters
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$metaFileOut, dataDisplay$metaSep, plot$makeTreeOut,
                             buttons$addTree, buttons$addAnno, buttons$removeAnno, buttons$addMatrix, dataDisplay$geneObjectForSNP, params$labelOff, 
-                            params$labColor, params$matOff)
+                            params$labColor, params$matOff, params$matCol)
   
   #allows tree with annotation and viz parameters to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
@@ -44,7 +44,7 @@ app_server <- function(input, output,session) {
   #repeated for preloaded data; no need to download so that module is not included below
   #uplodad the data (tree, genetic, and meta) and call that module dataDisplay. This is the only module that is re-written, the rest of the same
   #used in the above section and are called the same as above.
-  
+
   exampleData <- callModule(mod_exampleData_server, "exampleData_ui_1")
 
   exampleParams <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
@@ -57,9 +57,9 @@ app_server <- function(input, output,session) {
             exampleParams$align, exampleParams$treeformat, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$lim,
             exampleParams$bootPos, exampleParams$midP)
 
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example",exampleData$metaFileOut, exampleData$metaSep, examplePlot$makeTreeOut, 
+  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example",exampleData$metaFileOut, exampleData$metaSep, examplePlot$makeTreeOut,
              exampleButtons$addTree, exampleButtons$addAnno, exampleButtons$removeAnno, exampleButtons$addMatrix, exampleData$exGeneObjectForSNP,
-             exampleParams$labelOff, exampleParams$labColor, exampleParams$matOff)
+             exampleParams$labelOff, exampleParams$labColor, exampleParams$matOff, exampleParams$matCol)
 
 }
 

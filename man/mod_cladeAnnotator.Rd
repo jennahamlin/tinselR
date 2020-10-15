@@ -21,7 +21,8 @@ mod_cladeAnnotator_server(
   geneObjectForSNP,
   labelOff,
   labColor,
-  matOff
+  matOff,
+  matCol
 )
 }
 \arguments{
