@@ -18,8 +18,8 @@ app_ui <- function() {
                               mod_relaunchApp_ui("relaunchApp_ui_data"), 
                               width = 3),
                             mainPanel(
-                              mod_paramsTree_ui("paramsTree_ui_data"),
                               mod_tipCheck_ui("tipCheck_ui_1"),
+                              mod_paramsTree_ui("paramsTree_ui_data"),
                               mod_displayTree_ui("displayTree_ui_data"),                              
                               #mod_addMatrix_ui("addMatrix_ui_1"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_data"),

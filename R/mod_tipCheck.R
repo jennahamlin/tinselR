@@ -13,11 +13,7 @@ mod_tipCheck_ui <- function(id){
     tags$table(width ="100%",
                tags$th("File Check Output", colspan="3", style="font-size:20px; color:#444444;")),
     htmlOutput(ns('fileChecking')), # this output info about if tip labels are not concordant between all three files
-    htmlOutput(ns('fileChecking2')), # this one will tell user if they can add a matrix to the tree 
-    
-    tags$hr(style="border-color: #99b6d8;"),
-    tags$table(width ="100%",
-               tags$th("Tree Display", colspan="3", style="font-size:20px; color:#444444;")),
+    uiOutput(ns('fileChecking2')), # this one will tell user if they can add a matrix to the tree 
     tags$hr(style="border-color: #99b6d8;")
   )
 }
@@ -49,41 +45,16 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
       } 
   })
   
-  mFileConversion <- function(impMeta, metSep){
-    mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-    
-    meta2 <-mFile %>%
-      tibble::column_to_rownames(var = "Display.labels")%>% 
-      dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
-  }
-  
-  
-  
-  notColumns <- function (file){
-    colFile<- ncol(file)
-    
-    print(colFile)
-    
-    if(colFile < 1 ){
-      return("Looks like there is not a column for matrix plotting")
-    } else {
-      return("Can add a matrix")
-    }
-  }
-  
-  
+  #displays number of columns that are available for adding a matrix to the tree
   output$fileChecking2 <- renderUI({
     ns <- session$ns
     if (is.null(metaFileOut())) { 
       return(NULL)
     } else {
-  #  mFileOut <- reactive({
-    #mFileConversion(impMeta = metaFileOut(),metSep = metaSep() ) 
     mFile <- mFileConversion(impMeta = metaFileOut(), metSep = metaSep() ) 
     validate(notColumns(file = mFile))}
   })
-#  })
-  
+
   
 }
 

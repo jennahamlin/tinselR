@@ -44,7 +44,12 @@ mod_paramsTree_ui <- function(id){
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted", 
                      "circular" = "circular"), selected = "rectangular"),
-      selectInput(ns("color"), tags$b("Tip Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")), width = 3)
+      selectInput(ns("color"), tags$b("Tip Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")), width = 3),
+    
+    tags$hr(style="border-color: #99b6d8;"),
+    tags$table(width ="100%",
+               tags$th("Tree Display", colspan="3", style="font-size:20px; color:#444444;")),
+    tags$hr(style="border-color: #99b6d8;")
     
      
   )

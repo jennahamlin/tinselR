@@ -57,7 +57,7 @@ toThreeColumns <- function(geneFileIn){
 #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
 geneObjectOut  <- function (geneFile) {
   label <- . <- NULL
-    geneFile%>%
+  geneFile%>%
     stats::na.omit()%>% #remove na
     tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
     .[which(.$label != .$name),]  #remove self comparisons for this table - necessary for snp mean/median calculation.
@@ -99,14 +99,35 @@ sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
     return(HTML(paste(
       '<span style="color:gray">The number of tip labels in your input files are unequal, please correct.</span>', 
       '<span style="color:gray">No. of labels in tree file:</span>', 
-      as.character(length(tFileTips)),
+      length(tFileTips),
       '<span style="color:gray">No. of labels in distance file:</span>',
-      as.character(length(gFileTips)),
+      length(gFileTips),
       '<span style="color:gray">No. of labels in meta data file:</span>',
-      as.character(length(mFileTips)),
+      length(mFileTips),
       sep = "<br/>")))
   } else {
     return(HTML('<span style="color:gray">All three files pass checks and contain the same tip labels!</span>'))}
+}
+
+#function to read in the meta data file; transform and determine if there is a column that can be plotted
+#for a matrix 
+mFileConversion <- function(impMeta, metSep){
+  mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+  
+  meta2 <-mFile %>%
+    tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
+    dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
+}
+
+#get the number of columns of the meta data file. Here columns should be 1 or more after transformation of meta data
+notColumns <- function (file){
+  colFile<- ncol(file)
+  
+  if(colFile < 1 ){
+    return(HTML("And looks like there is not a column for matrix plotting"))
+  } else {
+    return(paste("And looks like the number of columns for matrix plotting is", colFile))
+  }
 }
 
 ######################################
@@ -143,8 +164,8 @@ snpAnno <- function(geneFile, tips){
     for (j in (i+1):length(tips)){
       if(tips[i] == tips[j]) next #https://stackoverflow.com/questions/36329183/exclude-one-fixed-variable-in-for-loop
       snpVector<-append(snpVector, geneFile%>%
-        dplyr::filter(label == tips[i] & name == tips[j]) %>%
-        dplyr::pull(value)
+                          dplyr::filter(label == tips[i] & name == tips[j]) %>%
+                          dplyr::pull(value)
       )
     }
   }
