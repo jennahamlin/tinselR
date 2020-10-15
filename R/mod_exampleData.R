@@ -134,10 +134,10 @@ mod_exampleData_server <- function(input, output, session){
 
 
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
-  #geneObjectOut is a function that is applied to another function (toThreeColumns) for the reactive exGeneFileCorOrU
+  #geneObjectOut is a function that is applied to another function (replaceHwithZero) for the reactive exGeneFileCorOrU
   exGeneObject <-reactive({
     label <- NULL
-    geneObjectOut(toThreeColumns(exGeneFileCorOrUn()))
+    geneObjectOut(replaceHwithZero(exGeneFileCorOrUn()))
   })
  
   #return these reactive objects to be used in tree display module

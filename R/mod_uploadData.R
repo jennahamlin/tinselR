@@ -127,7 +127,7 @@ mod_uploadData_server <- function(input, output, session){
   #goloem_utils_server.R file and has a description of those functions. 
   geneObject <-reactive({
     label <- NULL
-    geneObjectOut(toThreeColumns(geneFileCorOrUn()))
+    geneObjectOut(replaceHwithZero(geneFileCorOrUn()))
   })
   
 

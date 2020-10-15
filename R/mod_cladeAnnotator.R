@@ -65,7 +65,7 @@ mod_cladeAnnotator_server <-
       Values[["tip_vec"]] <- list() 
       Values[["annoUndoCount"]] <- 0 #use this as a count for sending the downloaded image with annotations removed essentially turn on/turn off
       Values[["matrixCount"]] <- 0 
-      })
+    })
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
     #for overlap in annotations and adjusts as necessary
@@ -180,19 +180,6 @@ mod_cladeAnnotator_server <-
       mFileConversion(impMeta = metaFileOut(), metSep = metaSep() )
     })
     
-    #reactive to send tree with annoations to downloadImage module
-    treePlotOut <- reactive ({
-      #if (is.null(input$id))
-      if(Values[["annoUndoCount"]] == 1) {
-        addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
-      } else if(
-        Values[["n"]] >=1  ) {
-        addAnnotations(treePlot = makeTreeOut() , tipVectorIn = anno_plot())
-      } else {
-        makeTreeOut()
-      }
-    })
-    
     matTree <- eventReactive(addMatrix(), {
       
       if (Values[["matrixCount"]] == 1){
@@ -204,10 +191,27 @@ mod_cladeAnnotator_server <-
         ggplot2::scale_fill_viridis_d(option= matCol())
     })
     
-    observeEvent(addMatrix(), {
+    observeEvent(addMatrix(),{
+      if(Values[["n"]]>= 1)
       output$treeDisplay <- renderPlot({
         matTree()
-      })
+      }) else if (Values[["n"]]==0){
+        output$treeDisplay <- renderPlot({
+          matTree()
+    })}
+    })
+    
+    #reactive to send tree with annoations to downloadImage module
+    treePlotOut <- reactive ({
+      #if (is.null(input$id))
+      if(Values[["annoUndoCount"]] == 1) {
+        addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
+      } else if(
+        Values[["n"]] >=1  ) {
+        addAnnotations(treePlot = makeTreeOut() , tipVectorIn = anno_plot())
+      } else {
+        makeTreeOut()
+      }
     })
     
     #uncomment this out to send tree for download.

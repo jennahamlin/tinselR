@@ -48,7 +48,7 @@ fileCheck<- function(fileUp, fileType, fileSep){
 }
 
 #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
-toThreeColumns <- function(geneFileIn){
+replaceHwithZeros <- function(geneFileIn){
   . <- NULL 
   dplyr::rename(geneFileIn, label = 1) %>% #rename columnn 1 to label for joining of data sets later
     replace(., .=="-", 0) #replace - with zero in the file; if zeros already infile, still works
