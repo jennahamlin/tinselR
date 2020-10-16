@@ -180,23 +180,9 @@ mod_cladeAnnotator_server <-
       })
     })
     
-    
-    
     mFile <- reactive({
       mFileConversion(mFile = mFileMat() )
     })
-    
-    mFileConversion <- function(mFile){
-      #mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-      
-      meta2 <-mFile %>%
-        tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-        dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
-    }
-    
-    # mFile <- reactive({
-    #   mFileConversion(impMeta = metaFileOut(), metSep = metaSep() )
-    # })
     
     matTree <- eventReactive(addMatrix(), {
       

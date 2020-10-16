@@ -45,23 +45,18 @@ mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, m
       } 
   })
   
-  mFileConversion <- function(mFile){
-    #mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-    
-    meta2 <-mFile %>%
-      tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-      dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
-  }
+ 
   
   #displays number of columns that are available for adding a matrix to the tree
   output$fileChecking2 <- renderUI({
     ns <- session$ns
-    if (is.null(mFileMat()())) { 
-      return(NULL)
-    } else {
-    mFile <- mFileConversion(mFileMat())
+    # if (is.null(mFileMat()())) {
+    #   return(NULL)
+    # } else {
+      validate(notColumns(  mFileConversion(mFileMat() ) ) )
+      #}
     #impMeta = metaFileOut(), metSep = metaSep() ) 
-    validate(notColumns(file = mFile))}
+    #validate(notColumns(file = mFile))}
   })
 
   

@@ -113,7 +113,7 @@ sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
 #for a matrix 
 # mFileConversion <- function(impMeta, metSep){
 #   mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-#   
+# 
 #   meta2 <-mFile %>%
 #     tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
 #     dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
@@ -128,6 +128,14 @@ notColumns <- function (file){
     return(HTML("And looks like there is not a column for matrix plotting"))
   } else {
     return(paste("And looks like the number of columns for matrix plotting is: ", colNFile))
+  }
+}
+
+mFileConversion <- function(mFile){
+
+  meta2 <-mFile %>%
+    tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
+    dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
   }
 }
 
