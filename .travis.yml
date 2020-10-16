@@ -1,37 +1,28 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
+#minimal requirements for travis and R
 language: R
-sudo: false
 cache: packages
+
+sudo: false
+
+#Define multiple R-versions; this is for old release and current
+r:
+  - oldrel
+  - release
+
+# Set one of your dependencies from CRAN
+#By default, Travis CI will find all R packages listed as dependencies in your package’s DESCRIPTION file, and install them from CRAN.
+packages:
+  - covr
+  
+
+# Set one of your dependencies from bioconductor
 bioc_packages:
   - ggtree
   - treeio
-  
-os:
-  - linux
-  - osx
 
-apt_packages:
-  - libfftw3-dev
-
-r_packages:
-  - covr
-  - ape
-  - ggplot2
-  - tidyr
-  - phytools
-
-env:
-  global:
-    - _R_CHECK_FORCE_SUGGESTS_=False
-    - R_LIBS="http://cran.rstudio.com"
-
-after_failure:
-  - ./travis-tool.sh dump_logs
-
-after_success:
-- Rscript -e 'library(covr); codecov()'
-
+# Install all system dependencies of ImageMagick. Documented here: https://towardsdatascience.com/travis-ci-for-r-advanced-guide-719cb2d9e0e5
 addons:
   apt:
     update: true
@@ -46,3 +37,29 @@ addons:
       - libfftw3-dev
       - cargo
       - gsfonts
+      
+#test multiple operating systems
+os:
+  - linux
+  - osx
+  - windows
+
+
+install:
+- R -e 'devtools::install_deps(dep = T)'
+
+script:
+- R CMD build .
+- R CMD check *tar.gz
+
+
+#neev to confirm if I need the below lines
+env:
+  global:
+    - _R_CHECK_FORCE_SUGGESTS_=False
+    - R_LIBS="http://cran.rstudio.com"
+
+
+after_success:
+- Rscript -e 'library(covr); codecov()'
+
