@@ -57,7 +57,7 @@ app_server <- function(input, output,session) {
             exampleParams$align, exampleParams$treeformat, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$lim,
             exampleParams$bootPos, exampleParams$midP)
 
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$mFileOut, examplePlot$makeTreeOut,
+  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$exMetaFileOut, examplePlot$makeTreeOut,
              exampleButtons$addTree, exampleButtons$addAnno, exampleButtons$removeAnno, exampleButtons$addMatrix, exampleData$exGeneObjectForSNP,
              exampleParams$labelOff, exampleParams$labColor, exampleParams$matOff, exampleParams$matCol)
 

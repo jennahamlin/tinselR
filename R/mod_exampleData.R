@@ -18,7 +18,7 @@ mod_exampleData_ui <- function(id){
 
   tagList(
     tags$table(width ="100%",
-               tags$th("Upload Files", colspan="3", style="font-size:20px; color:#7ab567")),
+               tags$th("Upload Files", colspan="3", style="font-size:20px; color:#444444")),
     tags$hr(style="border-color: #99b6d8;"),
     
     #select tree file that is sourced using the UI function in app_ui.R file
@@ -128,9 +128,11 @@ mod_exampleData_server <- function(input, output, session){
       colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
       exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
       return(exGeneFileCorrected)
-      return(exMetaFileComb)
+      #return(exMetaFileComb)
     }
   })
+  
+  exMeta = reactive({exMetaFileIn()})
 
 
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
@@ -143,7 +145,7 @@ mod_exampleData_server <- function(input, output, session){
   #return these reactive objects to be used in tree display module
   return(
     list(
-      exMetaFileOut = reactive(exMetaFileComb()), 
+      exMetaFileOut = reactive(exMeta()), 
       extreeFileOut = reactive(exTreeFileUp()), #for data display
       exGeneObjectOutForS4 = reactive(geneObjectOut()), #for data display
       exGeneObjectForSNP = reactive(exGeneObject()) #for clade annotator
