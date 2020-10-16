@@ -27,7 +27,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, mFileMat, metaFileOut, metaSep, makeTreeOut, addTree, addAnno, removeAnno, 
+  function(input, output, session, mFileMat, metaFileOut, makeTreeOut, addTree, addAnno, removeAnno, 
            addMatrix, geneObjectForSNP, labelOff, labColor, matOff,  matCol){
     
     #add other tree viz parameters above 

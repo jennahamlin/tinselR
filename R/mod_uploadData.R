@@ -137,9 +137,8 @@ mod_uploadData_server <- function(input, output, session){
   #return these reactive objects to be used in tree display module 
   return(
     list(
-      mFileMat = reactive(metaFileMat()), #for dealing with matrix
+      mFileMat = reactive(metaFileMat()), #for tip check and dealing with matrix
       metaFileOut = reactive(metaFileUp()), #for tip check
-      metaSep  = reactive(input$metaSep), #for tip check
       treeFileOut = reactive(treeFileUp()), #for display tree
       geneObjectOutForS4 = reactive(geneObjectOut()), #for display tree
       geneObjectForSNP = reactive(geneObject()), #for clade annotator

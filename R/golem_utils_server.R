@@ -70,10 +70,11 @@ geneObjectOut  <- function (geneFile) {
 
 ## tipCheck server function
 # Function to check imported data files for tip label agreement. If no tip label agreement, tells user what is problematic
-sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
+sanity <- function(mFile, impGene, genSep, impTree) { 
+  #function(impMeta, metSep, impGene, genSep, impTree) {
   
   #meta data get tips
-  mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+  #mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
   mFileTips <- mFile %>% dplyr::pull(1) %>% sort
   #print(mFileTips)
   

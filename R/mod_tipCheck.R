@@ -21,7 +21,7 @@ mod_tipCheck_ui <- function(id){
 #' tipCheck Server Function
 #'
 #' @noRd 
-mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, metaSep, geneFileOut, geneSep, treeFileOutTips){
+mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, geneFileOut, geneSep, treeFileOutTips){
   ns <- session$ns
   
   #this will render the output from the sanity function found in the golem_utils_server.R file
@@ -39,8 +39,7 @@ mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, m
           impTree = treeFileOutTips(),
           impGene = geneFileOut(),
           genSep = geneSep(),
-          impMeta = metaFileOut(),
-          metSep = metaSep()
+          mFile = mFileMat()
         )
       } 
   })
