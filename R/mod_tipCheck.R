@@ -21,7 +21,7 @@ mod_tipCheck_ui <- function(id){
 #' tipCheck Server Function
 #'
 #' @noRd 
-mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, gFileOut, tFileOut){
+mod_tipCheck_server <- function(input, output, session, mFileOut, metaFileOut, gFileOut, tFileOut){
   ns <- session$ns
   
   #this will render the output from the sanity function found in the golem_utils_server.R file
@@ -38,7 +38,7 @@ mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, g
         sanity(
           tFile = tFileOut(),
           gFile = gFileOut(), 
-          mFile = mFileMat()
+          mFile = mFileOut()
         )
       } 
   })
@@ -48,10 +48,10 @@ mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, g
   #displays number of columns that are available for adding a matrix to the tree
   output$fileChecking2 <- renderUI({
     ns <- session$ns
-    if (is.null(mFileMat() )) {
+    if (is.null(mFileOut() )) {
       return(NULL)
     } else {
-      validate(notColumns(  mFileConversion(mFileMat() ) ) )
+      validate(notColumns(  mFileConversion(mFileOut() ) ) )
       }
   })
 

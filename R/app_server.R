@@ -14,7 +14,7 @@ app_server <- function(input, output,session) {
   buttons <- callModule(mod_pushButtons_server, "pushButtons_ui_data")
   
   #outputs directly if the file tip labels are all the same for the three files
-  tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$mFileMat, dataDisplay$metaFileOut, 
+  tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$mFileOut, dataDisplay$metaFileOut, 
                             dataDisplay$gFileOut, dataDisplay$tFileOut)
   
   #module which holds the tree viz parameters and referenced with params$
@@ -30,7 +30,7 @@ app_server <- function(input, output,session) {
   #callModule(mod_addMatrix_server, "addMatrix_ui_1", buttons$addMatrix, plot$makeTreeOut, dataDisplay$metaFileOut, dataDisplay$metaSep)
   
   #annotates tree with incorporated tree viz parameters
-  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$mFileMat, dataDisplay$metaFileOut, plot$makeTreeOut,
+  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$mFileOut, plot$makeTreeOut,
                             buttons$addTree, buttons$addAnno, buttons$removeAnno, buttons$addMatrix, dataDisplay$geneObjectForSNP, params$labelOff, 
                             params$labColor, params$matOff, params$matCol)
   
@@ -57,7 +57,7 @@ app_server <- function(input, output,session) {
             exampleParams$align, exampleParams$treeformat, exampleParams$font, exampleParams$numscale, exampleParams$node, exampleParams$lim,
             exampleParams$bootPos, exampleParams$midP)
 
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$mFileMat, exampleData$metaFileOut, examplePlot$makeTreeOut,
+  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", exampleData$mFileOut, examplePlot$makeTreeOut,
              exampleButtons$addTree, exampleButtons$addAnno, exampleButtons$removeAnno, exampleButtons$addMatrix, exampleData$exGeneObjectForSNP,
              exampleParams$labelOff, exampleParams$labColor, exampleParams$matOff, exampleParams$matCol)
 
