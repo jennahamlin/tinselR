@@ -30,7 +30,8 @@ fileType <- function(inVar){
 #function to confirm the type of file uploaded matches the selected type 
 # this uses the fille uploaded (fileUp), the type of file selected (fileType - either a csv or tsv), and the file seperate from input$sep
 fileCheck<- function(fileUp, fileType, fileSep){
-  myLines <- readLines(con = fileUp$datapath, n = 3)
+  myFile <- req(fileUp$datapath)
+  myLines <- readLines(con = myFile, n = 3)
   fileChk <- validate(
     need(
       length(strsplit(myLines[2], fileType)[[1]]) == length(strsplit(myLines[3], fileType)[[1]]),
@@ -119,6 +120,13 @@ sanity <- function(impMeta, metSep, impGene, genSep, impTree) {
 #     dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
 # }
 
+mFileConversion <- function(mFile){
+  
+  meta2 <-mFile %>%
+    tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
+    dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
+}
+
 #get the number of columns of the meta data file. Here columns should be 1 or more after transformation of meta data
 notColumns <- function (file){
   colNFile<- ncol(file)
@@ -128,14 +136,6 @@ notColumns <- function (file){
     return(HTML("And looks like there is not a column for matrix plotting"))
   } else {
     return(paste("And looks like the number of columns for matrix plotting is: ", colNFile))
-  }
-}
-
-mFileConversion <- function(mFile){
-
-  meta2 <-mFile %>%
-    tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-    dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
   }
 }
 

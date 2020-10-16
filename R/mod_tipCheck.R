@@ -50,13 +50,11 @@ mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, m
   #displays number of columns that are available for adding a matrix to the tree
   output$fileChecking2 <- renderUI({
     ns <- session$ns
-    # if (is.null(mFileMat()())) {
-    #   return(NULL)
-    # } else {
+    if (is.null(mFileMat() )) {
+      return(NULL)
+    } else {
       validate(notColumns(  mFileConversion(mFileMat() ) ) )
-      #}
-    #impMeta = metaFileOut(), metSep = metaSep() ) 
-    #validate(notColumns(file = mFile))}
+      }
   })
 
   
