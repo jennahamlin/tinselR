@@ -51,7 +51,6 @@ mod_paramsTree_ui <- function(id){
     tags$table(width ="100%",
                tags$th("Tree Display", colspan="3", style="font-size:20px; color:#444444;")),
     tags$hr(style="border-color: #99b6d8;")
-    
      
   )
 }

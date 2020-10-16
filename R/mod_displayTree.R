@@ -68,7 +68,8 @@ mod_displayTree_server <- function(input, output, session,
       ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
   }
   
-  #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made from import of treeFileOut and the  Upload data module 
+  #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made
+  #from import of treeFileOut and the  Upload data module 
   makeTree <- reactive({
     
     if(is.null(input$gandTS4)){ # this disconnects the need for genetic distance file to be uploaded for the tree viz to happen

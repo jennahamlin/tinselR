@@ -41,21 +41,26 @@ mod_cladeAnnotator_server <-
         makeTreeOut()})
     })
     
+    uploadOrder <- function(file) {
+      if(is.null(file)) {
+        return("please relaunch the application") 
+      } else if (is.null(file))
+        return(NULL)
+    }
+    
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
+      uploadOrder(mFileOut())
       brushedPoints(makeTreeOut()$data, input$plot_brush)
     })
-    
-    uploadOrder <- function() {
-      
-    }
     
     tipVector <- c()
     
     #add label to tipVector if isTip == True
     dataWithSelection2 <- eventReactive(input$plot_brush, {
       label <- NULL
-      for (i in 1:length(dataWithSelection()$label)) {
+     
+       for (i in 1:length(dataWithSelection()$label)) {
         if (dataWithSelection()$isTip[i] == TRUE) 
           tipVector <- c(tipVector, dataWithSelection()$label[i])
       }

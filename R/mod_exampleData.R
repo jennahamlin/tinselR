@@ -53,7 +53,7 @@ mod_exampleData_server <- function(input, output, session){
   ### EXAMPLE DATA ###
   ####################
   
-  #reactive expressions that loads and allows to user to select from two different datasets (e.g tree1, gene1, meta1)
+  #reactive expressions that loads and allows to user to select from three different datasets (e.g tree1, gene1, meta1)
   #example data are made via reading in the data, usethis::use_data(), and finally documenting the data
   #tree2 <- treeio::read.newick("C:/Users/ptx4/Desktop/Tinsel/inst/extdata/1509MNJJP-1_RAxML_bipartitions")
   #usethis::use_data(tree2, tree2)
@@ -128,10 +128,10 @@ mod_exampleData_server <- function(input, output, session){
       colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
       exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
       return(exGeneFileCorrected)
-      #return(exMetaFileComb)
     }
   })
   
+  #reactive that allows for the matrix visualzation on phylogenetic trees - specific to example data set 3
   exMeta = reactive({exMetaFileIn()})
 
 

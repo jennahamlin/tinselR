@@ -116,14 +116,6 @@ sanity <- function(mFile, gFile, tFile) {
 
 #function to read in the meta data file; transform and determine if there is a column that can be plotted
 #for a matrix 
-# mFileConversion <- function(impMeta, metSep){
-#   mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-# 
-#   meta2 <-mFile %>%
-#     tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-#     dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
-# }
-
 mFileConversion <- function(mFile){
   
   meta2 <-mFile %>%

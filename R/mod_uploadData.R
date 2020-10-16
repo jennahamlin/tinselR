@@ -135,11 +135,11 @@ mod_uploadData_server <- function(input, output, session){
   })
   
 
-  #return these reactive objects to be used in tree display module 
+  #return these reactive objects to be used in particular modules 
   return(
     list(
       mFileOut = reactive(metaFileOut()), #for tip check and dealing with matrix
-      metaFileOut = reactive(metaFileUp()), #for tip check
+      metaFileOut = reactive(metaFileUp()), #for tip check; unclear why mFileOut can be used, but witout this a user message doesn't get displayed
       treeFileOut = reactive(treeFileUp()), #for display tree - holds tree with or without converted tip labels
       geneObjectOutForS4 = reactive(geneObjectOut()), #for display tree to make a combined tree and genetic distance matrix
       geneObjectForSNP = reactive(geneObject()), #for clade annotator to get snp differences and calculate the mean
