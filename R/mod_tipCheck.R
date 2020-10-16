@@ -36,7 +36,7 @@ mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, g
       return(HTML('<span style="color:gray">Please upload a meta data file</span>'))
       } else {
         sanity(
-          impTree = tFileOut(),
+          tFile = tFileOut(),
           gFile = gFileOut(), 
           mFile = mFileMat()
         )

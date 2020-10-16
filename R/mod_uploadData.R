@@ -119,7 +119,7 @@ mod_uploadData_server <- function(input, output, session){
   })
   
   #reactive which holds just the tree file, this is used in the tipcheck module
-  treeFileIn <- reactive({req(input$treeFile)})
+  treeFileOut <- reactive({req(input$treeFile)})
   
   #reactive which holds just the meta file, this is used tipcheck and matrix check in their module
   metaFileMat <- reactive({ fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())  })
@@ -140,13 +140,11 @@ mod_uploadData_server <- function(input, output, session){
     list(
       mFileMat = reactive(metaFileMat()), #for tip check and dealing with matrix
       metaFileOut = reactive(metaFileUp()), #for tip check
-      treeFileOut = reactive(treeFileUp()), #for display tree
+      treeFileOut = reactive(treeFileUp()), #for display tree - holds tree with or without converted tip labels
       geneObjectOutForS4 = reactive(geneObjectOut()), #for display tree
       geneObjectForSNP = reactive(geneObject()), #for clade annotator
       gFileOut = reactive(genFile()), #for tip check 
-      geneFileOut = reactive(geneFileUp()), #for tip check
-      geneSep = reactive(input$geneSep), #for tip check 
-      treeFileOutTips = reactive(treeFileIn()) #for tip check
+      tFileOut = reactive(treeFileOut()) #for tip check
     ))
 }
 

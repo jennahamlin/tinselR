@@ -75,7 +75,7 @@ geneObjectOut  <- function (geneFile) {
 
 ## tipCheck server function
 # Function to check imported data files for tip label agreement. If no tip label agreement, tells user what is problematic
-sanity <- function(mFile, gFile, impTree) { 
+sanity <- function(mFile, gFile, tFile) { 
   #function(impMeta, metSep, impGene, genSep, impTree) {
   
   #meta data get tips
@@ -87,8 +87,8 @@ sanity <- function(mFile, gFile, impTree) {
   #print(gFileTips)
   
   #tree file get tips
-  tFile <- treeio::read.newick(file = impTree$datapath)
-  tFileTips <- sort(tFile$tip.label)
+  tFileHold <- treeio::read.newick(file = tFile$datapath)
+  tFileTips <- sort(tFileHold$tip.label)
   
   # Check for required column names in meta data file
   if("Tip.labels" %in% colnames(mFile) != TRUE) {
