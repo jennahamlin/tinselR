@@ -13,7 +13,7 @@ app_server <- function(input, output,session) {
   #reactive which stores the buttons a user can push
   buttons <- callModule(mod_pushButtons_server, "pushButtons_ui_data")
   
-  #outputs directly if the file tip labels are all the same for the three files
+  #outputs directly a user message if the file tip labels are all the same for the three files and tells user if they can use matrix button
   tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$mFileOut, dataDisplay$metaFileOut, 
                             dataDisplay$gFileOut, dataDisplay$tFileOut)
   
@@ -29,7 +29,7 @@ app_server <- function(input, output,session) {
   
   #callModule(mod_addMatrix_server, "addMatrix_ui_1", buttons$addMatrix, plot$makeTreeOut, dataDisplay$metaFileOut, dataDisplay$metaSep)
   
-  #annotates tree with incorporated tree viz parameters
+  #annotates tree with incorporated tree viz parameters and allows user to add visual matrix
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$mFileOut, plot$makeTreeOut,
                             buttons$addTree, buttons$addAnno, buttons$removeAnno, buttons$addMatrix, dataDisplay$geneObjectForSNP, params$labelOff, 
                             params$labColor, params$matOff, params$matCol)
