@@ -5,6 +5,10 @@
 ######################################
 
 #function to read in the data using readr::read_delim
+#filePath is the path to the location of the file you want to read in
+#sep is the specified delimiter, probably either a tab ("\t") or comma (",")
+#the other bits here help with reading in the file: trim whitespace, skip empty row, column names, 
+#and how to read in the data; default is set at column as characters
 readData<-function(filePath, sep)
 {readr::read_delim(filePath,
                    sep,
@@ -15,7 +19,7 @@ readData<-function(filePath, sep)
 )
 }
 
-#function which maps the type of file uploaded based on user selection. For example, inVAr could be input$genesep
+#function which maps the type of file uploaded based on user selection. For example, inVar could be input$genesep
 fileType <- function(inVar){
   if(inVar == "\t")
   {
@@ -27,8 +31,9 @@ fileType <- function(inVar){
   }
 }
 
-#function to confirm the type of file uploaded matches the selected type 
-# this uses the fille uploaded (fileUp), the type of file selected (fileType - either a csv or tsv), and the file seperate from input$sep
+#function to confirm the type of file uploaded, matches the selected type 
+# this uses the fille uploaded (fileUp), the type of file delimited selected (fileType - either a csv or tsv),
+#and the file seperate from input$sep, which the user specifies on the interface -so this is ultimately a reactive
 fileCheck<- function(fileUp, fileType, fileSep){
   myFile <- req(fileUp$datapath)
   myLines <- readLines(con = myFile, n = 3)
@@ -70,16 +75,14 @@ geneObjectOut  <- function (geneFile) {
 
 ## tipCheck server function
 # Function to check imported data files for tip label agreement. If no tip label agreement, tells user what is problematic
-sanity <- function(mFile, impGene, genSep, impTree) { 
+sanity <- function(mFile, gFile, impTree) { 
   #function(impMeta, metSep, impGene, genSep, impTree) {
   
   #meta data get tips
-  #mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
   mFileTips <- mFile %>% dplyr::pull(1) %>% sort
   #print(mFileTips)
   
   #genetic data get tips
-  gFile <- fileCheck(fileUp = impGene, fileType = genSep, fileSep = genSep)
   gFileTips <- gFile %>% dplyr::pull(1) %>% sort
   #print(gFileTips)
   

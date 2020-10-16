@@ -119,15 +119,16 @@ mod_uploadData_server <- function(input, output, session){
   })
   
   #reactive which holds just the tree file, this is used in the tipcheck module
-  treeFileIn <- reactive({
-    req(input$treeFile)
-  })
+  treeFileIn <- reactive({req(input$treeFile)})
   
+  #reactive which holds just the meta file, this is used tipcheck and matrix check in their module
   metaFileMat <- reactive({ fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())  })
   
+  #reactive which holds just the gene file, this is used in tipcheck module
+  genFile <- reactive({ fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = geneFileType())  })
   
-  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs for either the corrected or uncorrected file; uses two functions located in
-  #goloem_utils_server.R file and has a description of those functions. 
+  #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs for either the corrected or uncorrected file;
+  #uses two functions located in goloem_utils_server.R file and has a description of those functions within. 
   geneObject <-reactive({
     label <- NULL
     geneObjectOut(replaceHwithZeros(geneFileCorOrUn()))
@@ -142,6 +143,7 @@ mod_uploadData_server <- function(input, output, session){
       treeFileOut = reactive(treeFileUp()), #for display tree
       geneObjectOutForS4 = reactive(geneObjectOut()), #for display tree
       geneObjectForSNP = reactive(geneObject()), #for clade annotator
+      gFileOut = reactive(genFile()), #for tip check 
       geneFileOut = reactive(geneFileUp()), #for tip check
       geneSep = reactive(input$geneSep), #for tip check 
       treeFileOutTips = reactive(treeFileIn()) #for tip check

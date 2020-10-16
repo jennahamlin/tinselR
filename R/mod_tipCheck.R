@@ -21,24 +21,23 @@ mod_tipCheck_ui <- function(id){
 #' tipCheck Server Function
 #'
 #' @noRd 
-mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, geneFileOut, geneSep, treeFileOutTips){
+mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, gFileOut, tFileOut){
   ns <- session$ns
   
   #this will render the output from the sanity function found in the golem_utils_server.R file
   #and takes in 5 reactive files - tree, genetic distance, genetic distance seperator, meta data, and meta data seperartor
   output$fileChecking <- renderUI({
     ns <- session$ns
-    if (is.null(treeFileOutTips())) { 
+    if (is.null(tFileOut())) { 
       return(HTML('<span style="color:gray">Please upload a tree file</span>'))
-    } else if (is.null(geneFileOut())){
+    } else if (is.null(gFileOut())){
       return(HTML('<span style="color:gray">Please upload a genetic distance file</span>'))
     } else if (is.null(metaFileOut())){
       return(HTML('<span style="color:gray">Please upload a meta data file</span>'))
       } else {
         sanity(
-          impTree = treeFileOutTips(),
-          impGene = geneFileOut(),
-          genSep = geneSep(),
+          impTree = tFileOut(),
+          gFile = gFileOut(), 
           mFile = mFileMat()
         )
       } 

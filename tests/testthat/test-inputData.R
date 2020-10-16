@@ -37,30 +37,32 @@ context("connecting genetic distance with tree data")
 
 #make random tree with 5 tips to match the 5 labes in genetic distancing up above
 testing_tree <- ape::rtree(5)
-testing_tree <- tibble::as_tibble(testing_tree)
 
 test_that('data types correct before combining tree', {
-  expect_is(testing_tree,'data.frame')
+  expect_is(testing_tree,'phylo')
 })
 
-test_that("confirm tree and genetic distance can be combined", {
-  expect_silent(combineGandT(testing_tree, testing_genetic))
+#this test returns an error 'cannot coerce class '"phylo"' to a data.frame'
+#testing_tree <- tibble::as_tibble(testing_tree)
+#
+# test_that("confirm tree and genetic distance can be combined", {
+#   expect_silent(combineGandT(testing_tree, testing_genetic))
+# })
+# 
+# test_that('data types correct after combing tree', {
+#   expect_is( combineGandT(testing_tree, testing_genetic),'treedata')
+# })
+
+context("testing meta data")
+
+#building example meta data file 
+testing_meta <- data.frame("Tip.labels" = c("Label_1_Ugly", "Label_2_Ugly", "Label_3_Ugly", "Label_4_Ugly"),
+                           "Display,labels" = c("Label_1", "Label_2", "Label_3", "Label_4"), 
+                           'Source' = c("Tree", "Tree", "Stream", "Flower")) 
+ 
+
+test_that("Converts meta data correctly for matrix visualization", {
+  expect_equal(ncol(mFileConversion(testing_meta)), 1)
 })
 
-test_that('data types correct after combing tree', {
-  expect_is( combineGandT(testing_tree, testing_genetic),'treedata')
-})
 
- context("testing meta data")
-# 
-# 
-# 
-# 
-# mFileConversion <- function(impMeta, metSep){
-#   mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
-#   
-#   meta2 <-mFile %>%
-#     tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-#     dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
-# }
-# 

@@ -15,7 +15,7 @@ app_server <- function(input, output,session) {
   
   #outputs directly if the file tip labels are all the same for the three files
   tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1", dataDisplay$mFileMat, dataDisplay$metaFileOut, 
-                            dataDisplay$geneFileOut, dataDisplay$geneSep, dataDisplay$treeFileOutTips)
+                            dataDisplay$gFileOut, dataDisplay$treeFileOutTips)
   
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
