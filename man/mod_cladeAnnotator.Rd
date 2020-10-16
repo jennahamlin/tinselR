@@ -11,6 +11,7 @@ mod_cladeAnnotator_server(
   input,
   output,
   session,
+  mFileMat,
   metaFileOut,
   metaSep,
   makeTreeOut,

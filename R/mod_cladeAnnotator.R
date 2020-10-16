@@ -27,7 +27,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, metaFileOut, metaSep, makeTreeOut, addTree, addAnno, removeAnno, 
+  function(input, output, session, mFileMat, metaFileOut, metaSep, makeTreeOut, addTree, addAnno, removeAnno, 
            addMatrix, geneObjectForSNP, labelOff, labColor, matOff,  matCol){
     
     #add other tree viz parameters above 
@@ -45,6 +45,10 @@ mod_cladeAnnotator_server <-
     dataWithSelection <- reactive({
       brushedPoints(makeTreeOut()$data, input$plot_brush)
     })
+    
+    uploadOrder <- function() {
+      
+    }
     
     tipVector <- c()
     
@@ -176,9 +180,23 @@ mod_cladeAnnotator_server <-
       })
     })
     
+    
+    
     mFile <- reactive({
-      mFileConversion(impMeta = metaFileOut(), metSep = metaSep() )
+      mFileConversion(mFile = mFileMat() )
     })
+    
+    mFileConversion <- function(mFile){
+      #mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+      
+      meta2 <-mFile %>%
+        tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
+        dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
+    }
+    
+    # mFile <- reactive({
+    #   mFileConversion(impMeta = metaFileOut(), metSep = metaSep() )
+    # })
     
     matTree <- eventReactive(addMatrix(), {
       

@@ -137,7 +137,7 @@ mod_exampleData_server <- function(input, output, session){
   #geneObjectOut is a function that is applied to another function (replaceHwithZero) for the reactive exGeneFileCorOrU
   exGeneObject <-reactive({
     label <- NULL
-    geneObjectOut(replaceHwithZero(exGeneFileCorOrUn()))
+    geneObjectOut(replaceHwithZeros(exGeneFileCorOrUn()))
   })
  
   #return these reactive objects to be used in tree display module

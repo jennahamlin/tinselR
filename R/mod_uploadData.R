@@ -123,17 +123,21 @@ mod_uploadData_server <- function(input, output, session){
     req(input$treeFile)
   })
   
+  metaFileMat <- reactive({ fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())  })
+  
+  
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs for either the corrected or uncorrected file; uses two functions located in
   #goloem_utils_server.R file and has a description of those functions. 
   geneObject <-reactive({
     label <- NULL
-    geneObjectOut(replaceHwithZero(geneFileCorOrUn()))
+    geneObjectOut(replaceHwithZeros(geneFileCorOrUn()))
   })
   
 
   #return these reactive objects to be used in tree display module 
   return(
     list(
+      mFileMat = reactive(metaFileMat()), #for dealing with matrix
       metaFileOut = reactive(metaFileUp()), #for tip check
       metaSep  = reactive(input$metaSep), #for tip check
       treeFileOut = reactive(treeFileUp()), #for display tree

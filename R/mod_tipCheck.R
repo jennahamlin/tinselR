@@ -21,7 +21,7 @@ mod_tipCheck_ui <- function(id){
 #' tipCheck Server Function
 #'
 #' @noRd 
-mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, geneFileOut, geneSep, treeFileOutTips){
+mod_tipCheck_server <- function(input, output, session, mFileMat, metaFileOut, metaSep, geneFileOut, geneSep, treeFileOutTips){
   ns <- session$ns
   
   #this will render the output from the sanity function found in the golem_utils_server.R file
@@ -45,13 +45,22 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, metaSep, ge
       } 
   })
   
+  mFileConversion <- function(mFile){
+    #mFile <- fileCheck(fileUp = impMeta, fileType = metSep, fileSep = metSep)
+    
+    meta2 <-mFile %>%
+      tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
+      dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
+  }
+  
   #displays number of columns that are available for adding a matrix to the tree
   output$fileChecking2 <- renderUI({
     ns <- session$ns
-    if (is.null(metaFileOut())) { 
+    if (is.null(mFileMat()())) { 
       return(NULL)
     } else {
-    mFile <- mFileConversion(impMeta = metaFileOut(), metSep = metaSep() ) 
+    mFile <- mFileConversion(mFileMat())
+    #impMeta = metaFileOut(), metSep = metaSep() ) 
     validate(notColumns(file = mFile))}
   })
 
