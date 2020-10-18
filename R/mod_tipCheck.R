@@ -34,16 +34,14 @@ mod_tipCheck_server <- function(input, output, session, mFileOut, metaFileOut, g
       return(HTML('<span style="color:gray">Please upload a genetic distance file</span>'))
     } else if (is.null(metaFileOut())){
       return(HTML('<span style="color:gray">Please upload a meta data file</span>'))
-      } else {
-        sanity(
-          tFile = tFileOut(),
-          gFile = gFileOut(), 
-          mFile = mFileOut()
-        )
-      } 
+    } else {
+      sanity(
+        tFile = tFileOut(),
+        gFile = gFileOut(), 
+        mFile = mFileOut()
+      )
+    } 
   })
-  
- 
   
   #displays number of columns that are available for adding a matrix to the tree
   output$fileChecking2 <- renderUI({
@@ -52,9 +50,9 @@ mod_tipCheck_server <- function(input, output, session, mFileOut, metaFileOut, g
       return(NULL)
     } else {
       validate(notColumns(  mFileConversion(mFileOut() ) ) )
-      }
+    }
   })
-
+  
   
 }
 

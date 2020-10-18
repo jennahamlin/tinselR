@@ -26,7 +26,7 @@ mod_displayTree_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_displayTree_server <- function(input, output, session, mFileOut, 
+mod_displayTree_server <- function(input, output, session, 
                                    treeFileOut, geneObjectOutForS4, align,
                                    treeformat, font,  numscale, node, lim, bootPos, midP, matOff){
   ns <- session$ns
@@ -52,17 +52,6 @@ mod_displayTree_server <- function(input, output, session, mFileOut,
   })
   
   
-  mFile <- reactive({
-    if(!is.null(mFileOut())){
-    mFileHold <-  mFileConversion(mFile = mFileOut() )
-      print("Line 58 Display Tree with mFileConversion output")
-      print( mFileConversion(mFile = mFileOut() ))
-    } else {
-      #skip
-    }
-    return(mFileHold)
-  })
-  
   ########additional reactive tree parameters to possibly include
   #these could be parameters to increase/decrease how far tree fills
   #to the margins 
@@ -73,35 +62,14 @@ mod_displayTree_server <- function(input, output, session, mFileOut,
   # get a strange error `Warning: Error in modifyList: is.list(val) is not TRUE` so leaving here for now
   treePlot <- function(inputFile){
     label <- NULL
-    print("L 74 Display Tree")
-    if(!is.null(mFileOut()) & ncol(mFile())>= 1){
-      print("L 76 display Tree")
-      g <- ggtree::ggtree(inputFile, layout = treeformat())+
-        ggplot2::xlim(NA, lim())+
-        ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
-        ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
-        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
-      
-       g <- ggtree::gheatmap(g,
-                         mFile(),
-                         offset = matOff(),
-                         width = 0.2,
-                         colnames_angle = 45,
-                         colnames_offset_y = -1,
-                         hjust = 0.5)
-      
-      
-    } else {
-      g <- ggtree::ggtree(inputFile, layout = treeformat())+
-        ggplot2::xlim(NA, lim())+
-        ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
-        ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
-        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos()) 
-      
-    }
-    return(g)
-    } 
-
+    ggtree::ggtree(inputFile, layout = treeformat())+
+      ggplot2::xlim(NA, lim())+
+      ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
+      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
+      ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
+    
+  } 
+  
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made
   #from import of treeFileOut and the  Upload data module 

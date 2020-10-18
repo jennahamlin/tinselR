@@ -118,14 +118,12 @@ sanity <- function(mFile, gFile, tFile) {
 #for a matrix 
 mFileConversion <- function(mFile){
   if(!is.null(mFile)){
-    #print("L 120 utils server")
     meta2 <-mFile %>%
       tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
       dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels  
-    #print(meta2)
     
   } else {
-  #skip 
+    #skip 
   }
 }
 
@@ -134,9 +132,11 @@ notColumns <- function (file){
   colNFile<- ncol(file)
   colHFile <- colnames(file) #could include what the column headers are
   
+  print("L135 checking meta file")
   if(colNFile < 1 ){
     return(HTML("And looks like there is not a column for matrix plotting"))
   } else {
+    #Values[["validMeta"]] <- 1
     return(paste("And looks like the number of columns for matrix plotting is: ", colNFile))
   }
 }
@@ -193,6 +193,3 @@ make_layer <- function(tree, tips, label, color, offset) {
     offset = offset
   )
 }
-
-
-

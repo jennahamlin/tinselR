@@ -1,5 +1,4 @@
 #' @import shiny
-#' @import shiny
 app_server <- function(input, output,session) {
   # List the first level callModules here
   
@@ -24,14 +23,14 @@ app_server <- function(input, output,session) {
   callModule(mod_relaunchApp_server, "relaunchApp_ui_data")
   
   #displays the tree and uses the params as input to change tree viz
-  plot <- callModule(mod_displayTree_server, "displayTree_ui_data", dataDisplay$mFileOut,    dataDisplay$treeFileOut, dataDisplay$geneObjectOutForS4, 
+  plot <- callModule(mod_displayTree_server, "displayTree_ui_data",  dataDisplay$treeFileOut, dataDisplay$geneObjectOutForS4, 
                      params$align, params$treeformat, params$font, params$numscale, params$node, params$lim, params$bootPos, params$midP,  params$matOff)
   
   #callModule(mod_addMatrix_server, "addMatrix_ui_1", buttons$addMatrix, plot$makeTreeOut, dataDisplay$metaFileOut, dataDisplay$metaSep)
   
   #annotates tree with incorporated tree viz parameters and allows user to add visual matrix
-  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", plot$makeTreeOut,
-                            buttons$addTree, buttons$addAnno, buttons$removeAnno, buttons$addMatrix, dataDisplay$geneObjectForSNP, params$labelOff, 
+  treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data", dataDisplay$mFileMatOut, plot$makeTreeOut,
+                            buttons$addTree, buttons$addAnno, buttons$removeAnno, buttons$addMatrix, buttons$removeMatrix, dataDisplay$geneObjectForSNP, params$labelOff, 
                             params$labColor)
   
   #allows tree with annotation and viz parameters to be donwloaded

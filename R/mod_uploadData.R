@@ -130,10 +130,18 @@ mod_uploadData_server <- function(input, output, session){
   #reactive which holds just the meta file, this is used tipcheck and matrix check in their module
   metaFileOut <- reactive({ 
     if (is.null(metaFileUp())){
-      print("L 133 uploadData skip")
       return (NULL) # this allows the seperation of meta data from tree + genetic and allows user to annotate
     } else {
       fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())
+    }
+  })
+  
+  
+  mFileMat <- reactive({
+    if(!is.null(metaFileUp())){
+      mFileConversion(mFile = metaFileOut() )
+    } else {
+      #skip
     }
   })
   
@@ -151,7 +159,7 @@ mod_uploadData_server <- function(input, output, session){
   #return these reactive objects to be used in particular modules 
   return(
     list(
-      mFileOnOff = reactive(Values[["mFile"]]),
+      mFileMatOut = reactive(mFileMat()),
       mFileOut = reactive(metaFileOut()), #for tip check and dealing with matrix
       metaFileOut = reactive(metaFileUp()), #for tip check; unclear why mFileOut can be used, but witout this a user message doesn't get displayed
       treeFileOut = reactive(treeFileUp()), #for display tree - holds tree with or without converted tip labels

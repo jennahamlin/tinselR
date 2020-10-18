@@ -28,7 +28,7 @@ mod_paramsTree_ui <- function(id){
     column(
       numericInput(ns("tipLim"), tags$b("Add Spacing to Plot - ", style="color:#afafae"), value = 0.02, max = 1, step = 0.01 ), 
       numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01),
-      numericInput(ns("matOffset"), tags$b("Move Matrix -", style="color:#afafae"), value = 0.01, step = 0.01), width = 3),
+      numericInput(ns("matOffset"), tags$b("Move Matrix -", style="color:#afafae"), value = 0.05, step = 0.01), width = 3),
     #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), 
     
     column(
@@ -36,8 +36,8 @@ mod_paramsTree_ui <- function(id){
       checkboxInput(ns("alignTips"), tags$b("Align the tips", style="color:#afafae"), FALSE),
       selectInput(ns("color"), tags$b("Annotation Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")),
       selectInput(ns("matColor"), tags$b("Matrix Color Options - ", style="color:#afafae"), c("A", "B", "C", "D", "E")), width = 3),
-   
-     column(
+    
+    column(
       radioButtons(ns("fontFormat"), tags$b("Font Format", style="color:#afafae"), 
                    choices = list(
                      "bold" = "bold", "italic" = "italic", 
@@ -46,12 +46,12 @@ mod_paramsTree_ui <- function(id){
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted", 
                      "circular" = "circular"), selected = "rectangular"), width = 3),
-  
+    
     tags$hr(style="border-color: #99b6d8;"),
     tags$table(width ="100%",
                tags$th("Tree Display", colspan="3", style="font-size:20px; color:#444444;")),
     tags$hr(style="border-color: #99b6d8;")
-     
+    
   )
 }
 
@@ -82,7 +82,7 @@ mod_paramsTree_server <- function(input, output, session){
     labColor = reactive(input$color),
     matOff = reactive(input$matOffset),
     matCol = reactive(input$matColor)
-    ))
+  ))
 }
 
 ## To be copied in the UI
