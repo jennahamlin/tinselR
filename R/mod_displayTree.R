@@ -26,9 +26,9 @@ mod_displayTree_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_displayTree_server <- function(input, output, session,
+mod_displayTree_server <- function(input, output, session, mFileOut, 
                                    treeFileOut, geneObjectOutForS4, align,
-                                   treeformat, font,  numscale, node, lim, bootPos, midP,  matOff){
+                                   treeformat, font,  numscale, node, lim, bootPos, midP, matOff){
   ns <- session$ns
   
   #midpoint root the tree based on reactive value, if not just display the tree
@@ -40,7 +40,7 @@ mod_displayTree_server <- function(input, output, session,
       return(treeFileOut())
     }
   })
-
+  
   #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree and genetic distance matrix
   treeObject<-reactive({
     tibble::as_tibble(midTree())
@@ -51,41 +51,51 @@ mod_displayTree_server <- function(input, output, session,
     combineGandT(treeObject(), geneObjectOutForS4())
   })
   
-  # mFile <- reactive({
-  #   mFileConversion(mFile = mFileOut() )
-  # })
+  
+  mFile <- reactive({
+    if(!is.null(mFileOut())){
+      mFileConversion(mFile = mFileOut() )
+      print("Line 58 Display Tree")
+      print( mFileConversion(mFile = mFileOut() ))
+    } else {
+      #skip
+    }
+  })
   
   ########additional reactive tree parameters to possibly include
   #these could be parameters to increase/decrease how far tree fills
   #to the margins 
   #ggplot2::theme(plot.margin=ggplot2::margin(10,10,10,10))
-
+  
   ## displayTree server function. In theory this function should be able to be moved over to the golem_utils_server.R script
   # and updating the function to take all of the reactive values but I have been unsuccessful at doing that and
   # get a strange error `Warning: Error in modifyList: is.list(val) is not TRUE` so leaving here for now
   treePlot <- function(inputFile){
     label <- NULL
+    print("L 74 Display Tree")
+    if(is.null(mFileOut())){
+      print("L 76 display Tree")
     ggtree::ggtree(inputFile, layout = treeformat())+
       ggplot2::xlim(NA, lim())+
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
       ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
-      ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
-    #+
-    #   
-    #   if(is.null(mFile())){
-    #     
-    #   } else {
-    #     g <- ggtree::gheatmap(inputFile,
-    #                           mFile(), 
-    #                           offset = matOff(), 
-    #                           width = 0.2,
-    #                           colnames_angle = 45,
-    #                           colnames_offset_y = -1,
-    #                           hjust = 0.5)}
-    # #+ 
-    # #ggplot2::scale_fill_viridis_d(options = matCol())
-    # print("L 133 - displayTree")
-  }
+      ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos()) 
+    } else {
+      ggtree::ggtree(inputFile, layout = treeformat())+
+        ggplot2::xlim(NA, lim())+
+        ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
+        ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
+        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())+
+        ggtree::gheatmap(inputFile,
+                         mFile(),
+                         offset = matOff(),
+                         width = 0.2,
+                         colnames_angle = 45,
+                         colnames_offset_y = -1,
+                         hjust = 0.5)
+      }
+    } 
+
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made
   #from import of treeFileOut and the  Upload data module 
@@ -95,7 +105,7 @@ mod_displayTree_server <- function(input, output, session,
       treePlot(midTree())
       #what the call should look like if treePlot function was in the golem_utils_server.R file
       #treePlot(inputFile = midTree(), align = align(), layout = treeformat(), fontface = font(), width = numscale(), node = node(), limit = lim(), nudge_x = bootPos())
-    
+      
     } 
     else{
       treePlot(gandTS4())

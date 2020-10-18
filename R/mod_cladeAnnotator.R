@@ -27,7 +27,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, mFileOut, makeTreeOut, addTree, addAnno, removeAnno, 
+  function(input, output, session,  makeTreeOut, addTree, addAnno, removeAnno, 
            addMatrix, geneObjectForSNP, labelOff, labColor, matOff){
     
     #add other tree viz parameters above 
@@ -41,16 +41,15 @@ mod_cladeAnnotator_server <-
         makeTreeOut()})
     })
     
-    uploadOrder <- function(file) {
-      if(is.null(file)) {
-        return("please relaunch the application") 
-      } else if (is.null(file))
-        return(NULL)
-    }
+    # uploadOrder <- function(file) {
+    #   if(is.null(file)) {
+    #     return("please relaunch the application") 
+    #   } else if (is.null(file))
+    #     return(NULL)
+    # }
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
-      #uploadOrder(mFileOut())
       brushedPoints(makeTreeOut()$data, input$plot_brush)
     })
     
@@ -76,11 +75,7 @@ mod_cladeAnnotator_server <-
       Values[["matrixCount"]] <- 0 
       Values[["showM"]] <- 0
     })
-    
-    mFile <- reactive({
-      mFileConversion(mFile = mFileOut() )
-    })
-    
+
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
     #for overlap in annotations and adjusts as necessary
     addAnnotations <- function(treePlot, tipVectorIn) {
@@ -113,23 +108,7 @@ mod_cladeAnnotator_server <-
             color = labColor(),
             offset = label_offset
           )
-        
-        
-        if(is.null(mFileOut())){
-          
-        } else {
-          g <- ggtree::gheatmap(g,
-                                mFile(),
-                                #offset = matOff(),
-                                width = 0.2,
-                                colnames_angle = 45,
-                                colnames_offset_y = -1,
-                                hjust = 0.5)}
-        #+
-        #ggplot2::scale_fill_viridis_d(options = matCol())
-        print("L 133 - clade Annotate")
-        
-      }
+       }
       return(g)
     }
     

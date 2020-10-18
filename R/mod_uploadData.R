@@ -130,11 +130,10 @@ mod_uploadData_server <- function(input, output, session){
   #reactive which holds just the meta file, this is used tipcheck and matrix check in their module
   metaFileOut <- reactive({ 
     if (is.null(metaFileUp())){
-      return (NULL)
+      print("L 133 uploadData skip")
+      return (NULL) # this allows the seperation of meta data from tree + genetic and allows user to annotate
     } else {
       fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())
-      Values[["mFile "]] == 1
-      print(Values[["mFile"]])
     }
   })
   

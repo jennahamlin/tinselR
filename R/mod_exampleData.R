@@ -133,11 +133,11 @@ mod_exampleData_server <- function(input, output, session){
  
   #reactive that allows for the matrix visualization on phylogenetic trees - specific to example data set 3
   exMeta = reactive({
-    # if (is.null(exMetaFileUp())){
-    #   return (NULL)
-    # } else {
+    if (is.null(exMetaFileIn())){
+      #skip
+    } else {
     exMetaFileIn()
-    # }
+     }
       })
 
 

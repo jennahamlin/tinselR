@@ -117,14 +117,15 @@ sanity <- function(mFile, gFile, tFile) {
 #function to read in the meta data file; transform and determine if there is a column that can be plotted
 #for a matrix 
 mFileConversion <- function(mFile){
-  if(is.null(mFile)){
-    return(NULL)
+  if(!is.null(mFile)){
+    #print("L 120 utils server")
+    meta2 <-mFile %>%
+      tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
+      dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels  
+    #print(meta2)
+    
   } else {
-  print("L 120 utils server")
-  print(mFile)
-  meta2 <-mFile %>%
-    tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-    dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels
+  #skip 
   }
 }
 

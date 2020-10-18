@@ -11,7 +11,6 @@ mod_cladeAnnotator_server(
   input,
   output,
   session,
-  mFileOut,
   makeTreeOut,
   addTree,
   addAnno,

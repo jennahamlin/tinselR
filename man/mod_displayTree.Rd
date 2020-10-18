@@ -11,6 +11,7 @@ mod_displayTree_server(
   input,
   output,
   session,
+  mFileOut,
   treeFileOut,
   geneObjectOutForS4,
   align,
