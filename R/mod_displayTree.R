@@ -74,7 +74,7 @@ mod_displayTree_server <- function(input, output, session, mFileOut,
   treePlot <- function(inputFile){
     label <- NULL
     print("L 74 Display Tree")
-    if(!is.null(mFileOut())){
+    if(!is.null(mFileOut()) & ncol(mFile())>= 1){
       print("L 76 display Tree")
       g <- ggtree::ggtree(inputFile, layout = treeformat())+
         ggplot2::xlim(NA, lim())+
@@ -82,8 +82,6 @@ mod_displayTree_server <- function(input, output, session, mFileOut,
         ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
         ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
       
-      
-      #+
        g <- ggtree::gheatmap(g,
                          mFile(),
                          offset = matOff(),

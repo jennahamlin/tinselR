@@ -196,7 +196,7 @@ mod_cladeAnnotator_server <-
     # })
     
     observeEvent(addMatrix(),{
-      
+      print("L 199 cladeAnnotate")
       output$treeDisplay <- renderPlot({
         
         addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plot())

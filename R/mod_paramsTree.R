@@ -28,7 +28,7 @@ mod_paramsTree_ui <- function(id){
     column(
       numericInput(ns("tipLim"), tags$b("Add Spacing to Plot - ", style="color:#afafae"), value = 0.02, max = 1, step = 0.01 ), 
       numericInput(ns("labelOffset"), tags$b("Move All Annotations -", style="color:#afafae"), value = 0.005, step = 0.01),
-      numericInput(ns("matOffset"), tags$b("Move Matrix -", style="color:#afafae"), value = 0.05, step = 0.01), width = 3),
+      numericInput(ns("matOffset"), tags$b("Move Matrix -", style="color:#afafae"), value = 0.01, step = 0.01), width = 3),
     #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ", style="color:#afafae"), value = 0.004, max =1, step = 0.01), 
     
     column(
