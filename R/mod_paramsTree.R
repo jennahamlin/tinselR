@@ -35,7 +35,8 @@ mod_paramsTree_ui <- function(id){
       checkboxInput(ns("midPoint"), tags$b("Midpoint Root", style="color:#afafae"), TRUE), 
       checkboxInput(ns("alignTips"), tags$b("Align the tips", style="color:#afafae"), FALSE),
       selectInput(ns("color"), tags$b("Annotation Label Color - ", style="color:#afafae"), c("blue", "red", "black", "gray")),
-      selectInput(ns("matColor"), tags$b("Matrix Color Options - ", style="color:#afafae"), c("A", "B", "C", "D", "E")), width = 3),
+      #selectInput(ns("matColor"), tags$b("Matrix Color Options - ", style="color:#afafae"), c("A", "B", "C", "D", "E")), 
+      width = 3),
     
     column(
       radioButtons(ns("fontFormat"), tags$b("Font Format", style="color:#afafae"), 
@@ -80,8 +81,9 @@ mod_paramsTree_server <- function(input, output, session){
     labelOff = reactive(input$labelOffset),
     overAdd = reactive(input$overlapAdjust),
     labColor = reactive(input$color),
-    matOff = reactive(input$matOffset),
-    matCol = reactive(input$matColor)
+    matOff = reactive(input$matOffset)
+    #,
+    #matCol = reactive(input$matColor)
   ))
 }
 

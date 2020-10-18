@@ -115,17 +115,18 @@ mod_cladeAnnotator_server <-
       })
     }) 
     
-    
-    
     addMap <- function(tree, metaFile){
-      if(Values[["showMap"]] > 0 & !is.null(metaFile)) {
+      if(Values[["showMap"]] > 0 & !is.null(metaFile) ) {
         tree <- ggtree::gheatmap(tree,
                                  metaFile,
-                                 offset = 0.01, #matOff(),
+                                 offset = matOff(),
                                  width = 0.2,
                                  colnames_angle = 45, 
                                  colnames_offset_y = -1,
                                  hjust = 0.5)
+        #+
+        #  ggplot2::scale_color_viridis_d(option = matCol())
+          
       }
       return(tree)
     }
