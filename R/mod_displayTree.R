@@ -54,12 +54,13 @@ mod_displayTree_server <- function(input, output, session, mFileOut,
   
   mFile <- reactive({
     if(!is.null(mFileOut())){
-      mFileConversion(mFile = mFileOut() )
-      print("Line 58 Display Tree")
+    mFileHold <-  mFileConversion(mFile = mFileOut() )
+      print("Line 58 Display Tree with mFileConversion output")
       print( mFileConversion(mFile = mFileOut() ))
     } else {
       #skip
     }
+    return(mFileHold)
   })
   
   ########additional reactive tree parameters to possibly include
@@ -73,27 +74,34 @@ mod_displayTree_server <- function(input, output, session, mFileOut,
   treePlot <- function(inputFile){
     label <- NULL
     print("L 74 Display Tree")
-    if(is.null(mFileOut())){
+    if(!is.null(mFileOut())){
       print("L 76 display Tree")
-    ggtree::ggtree(inputFile, layout = treeformat())+
-      ggplot2::xlim(NA, lim())+
-      ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
-      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
-      ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos()) 
-    } else {
-      ggtree::ggtree(inputFile, layout = treeformat())+
+      g <- ggtree::ggtree(inputFile, layout = treeformat())+
         ggplot2::xlim(NA, lim())+
         ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
         ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
-        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())+
-        ggtree::gheatmap(inputFile,
+        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
+      
+      
+      #+
+       g <- ggtree::gheatmap(g,
                          mFile(),
                          offset = matOff(),
                          width = 0.2,
                          colnames_angle = 45,
                          colnames_offset_y = -1,
                          hjust = 0.5)
-      }
+      
+      
+    } else {
+      g <- ggtree::ggtree(inputFile, layout = treeformat())+
+        ggplot2::xlim(NA, lim())+
+        ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
+        ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
+        ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos()) 
+      
+    }
+    return(g)
     } 
 
   
