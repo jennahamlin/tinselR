@@ -83,7 +83,7 @@ mod_uploadData_server <- function(input, output, session){
       treeio::read.newick(input$treeFile$datapath)
     } 
     else { #if metafile do an error check and then correct tip labels using phylotools sub.taxa.label function
-    
+      
       metaFileSeperate <- fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType()) 
       
       treeio::read.newick(input$treeFile$datapath)%>%
@@ -118,11 +118,25 @@ mod_uploadData_server <- function(input, output, session){
     }
   })
   
+  
+  Values <- reactiveValues()
+  observe({
+    Values[["mFile"]] <- 0 #used to turn on/turn off
+  })
+  
   #reactive which holds just the tree file, this is used in the tipcheck module
   treeFileOut <- reactive({req(input$treeFile)})
   
   #reactive which holds just the meta file, this is used tipcheck and matrix check in their module
-  metaFileOut <- reactive({ fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())  })
+  metaFileOut <- reactive({ 
+    if (is.null(metaFileUp())){
+      return (NULL)
+    } else {
+      fileCheck(fileUp = metaFileUp(), fileType = metaFileType(), fileSep = metaFileType())
+      Values[["mFile "]] == 1
+      print(Values[["mFile"]])
+    }
+  })
   
   #reactive which holds just the gene file, this is used in tipcheck module
   genFile <- reactive({ fileCheck(fileUp = geneFileUp(), fileType = geneFileType(), fileSep = geneFileType())  })
@@ -134,10 +148,11 @@ mod_uploadData_server <- function(input, output, session){
     geneObjectOut(replaceHwithZeros(geneFileCorOrUn()))
   })
   
-
+  
   #return these reactive objects to be used in particular modules 
   return(
     list(
+      mFileOnOff = reactive(Values[["mFile"]]),
       mFileOut = reactive(metaFileOut()), #for tip check and dealing with matrix
       metaFileOut = reactive(metaFileUp()), #for tip check; unclear why mFileOut can be used, but witout this a user message doesn't get displayed
       treeFileOut = reactive(treeFileUp()), #for display tree - holds tree with or without converted tip labels

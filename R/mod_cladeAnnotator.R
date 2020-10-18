@@ -28,7 +28,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @keywords internal
 mod_cladeAnnotator_server <-
   function(input, output, session, mFileOut, makeTreeOut, addTree, addAnno, removeAnno, 
-           addMatrix, geneObjectForSNP, labelOff, labColor, matOff,  matCol){
+           addMatrix, geneObjectForSNP, labelOff, labColor, matOff){
     
     #add other tree viz parameters above 
     
@@ -50,7 +50,7 @@ mod_cladeAnnotator_server <-
     
     #reactive that holds the brushed points on a plot
     dataWithSelection <- reactive({
-      uploadOrder(mFileOut())
+      #uploadOrder(mFileOut())
       brushedPoints(makeTreeOut()$data, input$plot_brush)
     })
     
@@ -59,8 +59,8 @@ mod_cladeAnnotator_server <-
     #add label to tipVector if isTip == True
     dataWithSelection2 <- eventReactive(input$plot_brush, {
       label <- NULL
-     
-       for (i in 1:length(dataWithSelection()$label)) {
+      
+      for (i in 1:length(dataWithSelection()$label)) {
         if (dataWithSelection()$isTip[i] == TRUE) 
           tipVector <- c(tipVector, dataWithSelection()$label[i])
       }
@@ -74,6 +74,11 @@ mod_cladeAnnotator_server <-
       Values[["tip_vec"]] <- list() 
       Values[["annoUndoCount"]] <- 0 #use this as a count for sending the downloaded image with annotations removed essentially turn on/turn off
       Values[["matrixCount"]] <- 0 
+      Values[["showM"]] <- 0
+    })
+    
+    mFile <- reactive({
+      mFileConversion(mFile = mFileOut() )
     })
     
     #this functions calculates the mean # snps and adds that layer as annotation. Additionally, it checks
@@ -92,16 +97,13 @@ mod_cladeAnnotator_server <-
             nOverlap <- nOverlap + any(currentTips %in% compareTips) # for every match, count it
           }
         }
-        
-        # set the clade label offset based on how many sets of previous tips it overlaps and provide user 
-        #option to adjust the position of all annotations
+        # set the clade label offset based on how many sets of previous tips it overlaps and provide user #option to adjust the position of all annotations
         label_offset <- labelOff() + nOverlap*0.004
-        
         #uses the snpAnno function to calculate the mean # of snps for brushed tips 
         snpMean <- 
           snpAnno(geneFile = geneObjectForSNP(),
                   tips = currentTips)
-        
+        print("L 106 - cladeAnnotate")
         #generates the layer for the set of brushed tips
         g <- g +
           make_layer(
@@ -111,6 +113,22 @@ mod_cladeAnnotator_server <-
             color = labColor(),
             offset = label_offset
           )
+        
+        
+        if(is.null(mFileOut())){
+          
+        } else {
+          g <- ggtree::gheatmap(g,
+                                mFile(),
+                                #offset = matOff(),
+                                width = 0.2,
+                                colnames_angle = 45,
+                                colnames_offset_y = -1,
+                                hjust = 0.5)}
+        #+
+        #ggplot2::scale_fill_viridis_d(options = matCol())
+        print("L 133 - clade Annotate")
+        
       }
       return(g)
     }
@@ -185,29 +203,34 @@ mod_cladeAnnotator_server <-
       })
     })
     
-    mFile <- reactive({
-      mFileConversion(mFile =mFileOut() )
-    })
     
-    matTree <- eventReactive(addMatrix(), {
-      
-      if (Values[["matrixCount"]] == 1){
-        #skip
-      } else {
-        Values[["matrixCount"]] <- Values[["matrixCount"]] + 1 }
-      
-      ggtree::gheatmap(treePlotOut(), mFile(), offset =  matOff(), width = 0.2, colnames_angle = 45, colnames_offset_y = -1, hjust =  0.5)  +
-        ggplot2::scale_fill_viridis_d(option= matCol())
-    })
+    
+    # matTree <- eventReactive(addMatrix(), {
+    #   
+    #   if (Values[["matrixCount"]] == 1){
+    #     #skip
+    #   } else {
+    #     Values[["matrixCount"]] <- Values[["matrixCount"]] + 1 }
+    #   
+    #   ggtree::gheatmap(treePlotOut(), mFile(), offset =  matOff(), width = 0.2, colnames_angle = 45, colnames_offset_y = -1, hjust =  0.5)  +
+    #     ggplot2::scale_fill_viridis_d(option= matCol())
+    # })
     
     observeEvent(addMatrix(),{
-      if(Values[["n"]]>= 1)
+      
       output$treeDisplay <- renderPlot({
-        matTree()
-      }) else if (Values[["n"]]==0){
-        output$treeDisplay <- renderPlot({
-          matTree()
-    })}
+        
+        addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plot())
+      })
+      
+      
+      #   if(Values[["n"]]>= 1)
+      #   output$treeDisplay <- renderPlot({
+      #     matTree()
+      #   }) else if (Values[["n"]]==0){
+      #     output$treeDisplay <- renderPlot({
+      #       matTree()
+      # })}
     })
     
     #reactive to send tree with annoations to downloadImage module

@@ -20,7 +20,8 @@ mod_displayTree_server(
   node,
   lim,
   bootPos,
-  midP
+  midP,
+  matOff
 )
 }
 \arguments{

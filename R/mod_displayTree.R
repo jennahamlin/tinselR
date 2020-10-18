@@ -26,9 +26,9 @@ mod_displayTree_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_displayTree_server <- function(input, output, session, 
+mod_displayTree_server <- function(input, output, session,
                                    treeFileOut, geneObjectOutForS4, align,
-                                   treeformat, font,  numscale, node, lim, bootPos, midP){
+                                   treeformat, font,  numscale, node, lim, bootPos, midP,  matOff){
   ns <- session$ns
   
   #midpoint root the tree based on reactive value, if not just display the tree
@@ -51,6 +51,10 @@ mod_displayTree_server <- function(input, output, session,
     combineGandT(treeObject(), geneObjectOutForS4())
   })
   
+  # mFile <- reactive({
+  #   mFileConversion(mFile = mFileOut() )
+  # })
+  
   ########additional reactive tree parameters to possibly include
   #these could be parameters to increase/decrease how far tree fills
   #to the margins 
@@ -66,6 +70,21 @@ mod_displayTree_server <- function(input, output, session,
       ggtree::geom_tiplab(align = align(), fontface = font(), family="Helvetica", size = 3)+
       ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
       ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node()), nudge_x = bootPos())
+    #+
+    #   
+    #   if(is.null(mFile())){
+    #     
+    #   } else {
+    #     g <- ggtree::gheatmap(inputFile,
+    #                           mFile(), 
+    #                           offset = matOff(), 
+    #                           width = 0.2,
+    #                           colnames_angle = 45,
+    #                           colnames_offset_y = -1,
+    #                           hjust = 0.5)}
+    # #+ 
+    # #ggplot2::scale_fill_viridis_d(options = matCol())
+    # print("L 133 - displayTree")
   }
   
   #major plotting reactive using an S4 object called above (gandTS4) or the base midTree reactive made

@@ -130,9 +130,15 @@ mod_exampleData_server <- function(input, output, session){
       return(exGeneFileCorrected)
     }
   })
-  
-  #reactive that allows for the matrix visualzation on phylogenetic trees - specific to example data set 3
-  exMeta = reactive({exMetaFileIn()})
+ 
+  #reactive that allows for the matrix visualization on phylogenetic trees - specific to example data set 3
+  exMeta = reactive({
+    # if (is.null(metaFileUp())){
+    #   return (NULL)
+    # } else {
+    exMetaFileIn()
+    # }
+      })
 
 
   #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
