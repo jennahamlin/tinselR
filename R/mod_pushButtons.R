@@ -20,10 +20,10 @@ mod_pushButtons_ui <- function(id){
                  style="color: #fff; background-color:#275a5c ; border-color: #275a5c; width: 200px;"),
     #463d60
     actionButton(ns("add_matrix"), "Add heatmap", icon("bars"),
-                 style="color: #fff; background-color:#9c461e ; border-color: #9c461e; width: 200px;"),
+                 style="color: #fff; background-color: #a4b46b ; border-color:#a4b46b; width: 200px;"),
     
     actionButton(ns("remove_matrix"), "Remove heatmap", icon("bars"),
-                 style="color: #fff; background-color:#9c461e ; border-color: #9c461e; width: 200px;")
+                 style="color: #fff; background-color:#899097 ; border-color:#899097 ; width: 200px;")
     #d8b189
   )
 }

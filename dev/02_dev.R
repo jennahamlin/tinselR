@@ -43,7 +43,7 @@ usethis::use_package("ggtree") # for tree viz
 usethis::use_package("readr") # for reading in files
 usethis::use_package("tidyr")
 usethis::use_package("phylotools")
-usethis::use_package("tibble")
+usethis::use_package("tibble") #<= "2.1.3"
 usethis::use_package("shinythemes")
 usethis::use_package("colorspace")
 usethis::use_package("phangorn")

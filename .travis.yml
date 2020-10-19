@@ -16,7 +16,6 @@ r:
 packages:
   - covr
   
-
 # Set one of your dependencies from bioconductor
 bioc_packages:
   - ggtree
@@ -43,8 +42,6 @@ os:
   - linux
   - osx
 #  - windows
-
-
 
 script:
 - R CMD build .

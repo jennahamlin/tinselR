@@ -10,13 +10,13 @@
 mod_about_ui <- function(id){
   ns <- NS(id)
   tagList(
-    fluidRow(column(12, offset = 0, style='padding:0px;',mainPanel(h1("Getting started with Tinsel"),
+    fluidRow(column(12, offset = 0, style='padding:0px;',mainPanel(h1(strong("Getting started with Tinsel")),
               br(),
               p("Tinsel at its' most basic level is a graphical viewer of newick phylogenetic trees and 
     as a program for producing publication-ready figures.", br(), "The",em("power"),"of Tinsel comes
     with combining a genetic distance matrix for annotating a tree for epidemological outbreak
     analyses.", br(), "A genetic distance matrix contains the number of snp differences for all pairwise 
-                comparisons.", br(), "Note that the data you upload is only held within the application while you are on the site (i.e. no data
+                comparisons.", br(), "Note that the data you upload is only held within the application while on the site (i.e. no data
                 is stored.)"), 
               br(), 
               strong("Please click on the 'Data Upload' pane to upload your files."),
