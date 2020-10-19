@@ -116,9 +116,6 @@ mod_cladeAnnotator_server <-
     #allow the user to add a matrix to a tree; change showMap to the value of 1
     observeEvent(addMatrix(),{
       
-      # if (is.null(mFileMatOut())) {
-      #   #skip
-      # } else {
         
         #display that layer onto the tree
         Values[["showMap"]] <-  1
@@ -127,22 +124,17 @@ mod_cladeAnnotator_server <-
           #render the plot using the currentTreeOut function. 
           currentTreeOut()
         })
-      #}
     }) 
     
     #as above with add matrix but this allows the removal of the matrix by setting showMap to 0
     observeEvent(removeMatrix(),{
-      
-      if (is.null(mFileMatOut())) {
-        #skip
-      } else {
+     
         
         #display that layer onto the tree
         Values[["showMap"]] <-  0
         output$treeDisplay <- renderPlot({
           currentTreeOut()
         })
-      }
     }) 
     
     #add map funciton takes in a tree and the converted meta data file. 
