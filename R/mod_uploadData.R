@@ -76,6 +76,8 @@ mod_uploadData_server <- function(input, output, session){
   #this also performs a check to see if the correct delimitor is selected before reading in the file and provides users with error output
   treeFileUp <- reactive({
     
+    . <- NULL #this refers to the file that is passed through
+    
     validate(need(input$treeFile !="", "Please import newick tree file"))
     req(input$treeFile)
     
