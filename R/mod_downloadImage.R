@@ -39,7 +39,7 @@ mod_downloadImage_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_downloadImage_server <- function(input, output, session, treePlotOut){
+mod_downloadImage_server <- function(input, output, session, treeOut){
   ns <- session$ns
   
   output$downloadPlot <- downloadHandler(
@@ -47,7 +47,7 @@ mod_downloadImage_server <- function(input, output, session, treePlotOut){
       paste("data-", Sys.Date(), ".", input$fileType,  sep="")
     },
     content = function(file) {
-      ggplot2::ggsave(file, plot = treePlotOut(), width = input$width, height = input$height, device = input$fileType)
+      ggplot2::ggsave(file, plot = treeOut(), width = input$width, height = input$height, device = input$fileType)
     }
   )
   

@@ -7,7 +7,7 @@
 \usage{
 mod_downloadImage_ui(id)
 
-mod_downloadImage_server(input, output, session, treePlotOut)
+mod_downloadImage_server(input, output, session, treeOut)
 }
 \arguments{
 \item{id}{shiny id}

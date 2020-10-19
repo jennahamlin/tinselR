@@ -103,7 +103,7 @@ mod_cladeAnnotator_server <-
       #display that layer onto the tree
       Values[["showMap"]] <-  1
       output$treeDisplay <- renderPlot({
-        addMap(tree = addAnnotations(treePlot = makeTreeOut() , tipVectorIn = createTipList() ), metaFile = mFileMatOut())
+        currentTreeOut()
       })
     }) 
     
@@ -111,7 +111,7 @@ mod_cladeAnnotator_server <-
       #display that layer onto the tree
       Values[["showMap"]] <-  0
       output$treeDisplay <- renderPlot({
-        addMap(tree = addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  createTipList() ), metaFile = mFileMatOut())
+        currentTreeOut()
       })
     }) 
     
@@ -181,31 +181,16 @@ mod_cladeAnnotator_server <-
       return(g)
     }
     
+    currentTreeOut <- function(){
+      addMap(tree = addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  createTipList() ), metaFile = mFileMatOut())
+    }
     
     #reactive to send tree with annoations to downloadImage module
-    # treePlotOut <- reactive ({
-    #   #if (is.null(input$id))
-    #   if(Values[["annoUndoCount"]] == 1) {
-    #     addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  anno_plotUndo())
-    #   } else if(
-    #     Values[["n"]] >=1  ) {
-    #     addAnnotations(treePlot = makeTreeOut() , tipVectorIn = anno_plot())
-    #   } else {
-    #     makeTreeOut()
-    #   }
-    # })
-    # 
-    # #uncomment this out to send tree for download.
-    # treeOut <- reactive({
-    #   if( Values[["matrixCount"]] != 1){
-    #     return(treePlotOut())
-    #   } else{
-    #     return(matTree())
-    #   }
-    # })
-    # 
-    # #return(matTree)
-    # return(treeOut)
+    treeOut <- reactive ({
+      currentTreeOut()
+    })
+
+     return(treeOut)
     
   }
 

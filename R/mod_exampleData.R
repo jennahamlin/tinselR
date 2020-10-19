@@ -136,7 +136,7 @@ mod_exampleData_server <- function(input, output, session){
     if (is.null(exMetaFileIn())){
       #skip
     } else {
-      mFileConversion(exMetaFileIn())
+     exMetaFileIn()
     }
   })
   
