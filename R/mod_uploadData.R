@@ -119,11 +119,6 @@ mod_uploadData_server <- function(input, output, session){
   })
   
   
-  Values <- reactiveValues()
-  observe({
-    Values[["mFile"]] <- 0 #used to turn on/turn off
-  })
-  
   #reactive which holds just the tree file, this is used in the tipcheck module
   treeFileOut <- reactive({req(input$treeFile)})
   

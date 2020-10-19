@@ -12,8 +12,11 @@ mod_tipCheck_ui <- function(id){
   tagList(
     tags$table(width ="100%",
                tags$th("File Check Output", colspan="3", style="font-size:20px; color:#444444;")),
+    
     htmlOutput(ns('fileChecking')), # this output info about if tip labels are not concordant between all three files
+    
     uiOutput(ns('fileChecking2')), # this one will tell user if they can add a matrix to the tree 
+    
     tags$hr(style="border-color: #99b6d8;")
   )
 }

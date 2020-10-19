@@ -67,54 +67,86 @@ mod_cladeAnnotator_server <-
         makeTreeOut()})
     })
     
-    #display that layer onto the tree
+    #display that user-brushed layer onto the tree
     observeEvent(addAnno(), {
       
-      Values[["n"]] <- Values[["n"]] + 1
-      #add the tip vector (aka label) to the annotation reactive value
-      Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
-      
-      tips <- createTipList()
-      
-      output$treeDisplay <- renderPlot({
-        addMap(tree = addAnnotations(treePlot = makeTreeOut(), tipVectorIn =  tips ), metaFile = mFileMatOut())
-      })
+      #this acts as a control for if the user accidently presses the addAnno button without the file loaded
+      if (is.null(geneObjectForSNP())) {
+        #skip
+      } else {
+        
+        Values[["n"]] <- Values[["n"]] + 1
+        
+        #add the tip vector (aka label) to the annotation reactive value
+        Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
+        
+        #add to variable called tips
+        tips <- createTipList()
+        
+        output$treeDisplay <- renderPlot({
+          addMap(tree = addAnnotations(treePlot = makeTreeOut(), tipVectorIn =  tips ), metaFile = mFileMatOut())
+        })
+      }
     })
     
     # remove the annotations one by one, when number of values equals one, then display tree without annotations.
     observeEvent(removeAnno(), {
       
-      if(Values[["n"]] > 0) {
+      if (is.null(geneObjectForSNP())) {
+        #skip
+      } else {
         
-        Values[["n"]] <- Values[["n"]] - 1
+        if(Values[["n"]] > 0) {
+          
+          Values[["n"]] <- Values[["n"]] - 1
+          
+          tempTip <-Values[["tip_vec"]]
+          
+          #remove the last set of tips that the user selected
+          Values[["tip_vec"]]<- tempTip[-length(tempTip)] }
         
-        tempTip <-Values[["tip_vec"]]
+        tips <- createTipList()
         
-        Values[["tip_vec"]]<- tempTip[-length(tempTip)] }
-      
-      tips <- createTipList()
-      
-      output$treeDisplay <- renderPlot({
-        addMap(tree = addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  tips), metaFile = mFileMatOut())        
-      })
+        output$treeDisplay <- renderPlot({
+          addMap(tree = addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  tips), metaFile = mFileMatOut())        
+        })
+      }
     })
     
+    #allow the user to add a matrix to a tree; change showMap to the value of 1
     observeEvent(addMatrix(),{
-      #display that layer onto the tree
-      Values[["showMap"]] <-  1
-      output$treeDisplay <- renderPlot({
-        currentTreeOut()
-      })
+      
+      # if (is.null(mFileMatOut())) {
+      #   #skip
+      # } else {
+        
+        #display that layer onto the tree
+        Values[["showMap"]] <-  1
+        output$treeDisplay <- renderPlot({
+          
+          #render the plot using the currentTreeOut function. 
+          currentTreeOut()
+        })
+      #}
     }) 
     
+    #as above with add matrix but this allows the removal of the matrix by setting showMap to 0
     observeEvent(removeMatrix(),{
-      #display that layer onto the tree
-      Values[["showMap"]] <-  0
-      output$treeDisplay <- renderPlot({
-        currentTreeOut()
-      })
+      
+      if (is.null(mFileMatOut())) {
+        #skip
+      } else {
+        
+        #display that layer onto the tree
+        Values[["showMap"]] <-  0
+        output$treeDisplay <- renderPlot({
+          currentTreeOut()
+        })
+      }
     }) 
     
+    #add map funciton takes in a tree and the converted meta data file. 
+    #only allows the inclusion of the mapk if the value of showMap is greater than 0
     addMap <- function(tree, metaFile){
       if(Values[["showMap"]] > 0 & !is.null(metaFile) ) {
         tree <- ggtree::gheatmap(tree,
@@ -125,12 +157,13 @@ mod_cladeAnnotator_server <-
                                  colnames_offset_y = -1,
                                  hjust = 0.5)
         #+
-        #  ggplot2::scale_color_viridis_d(option = matCol())
-          
+        #  ggplot2::scale_color_viridis_d(option = matCol()) #ideally, will add in this option to change the color
+        
       }
       return(tree)
     }
     
+    #function to create the tip list. list apply over the counter('n') and paste the values in the tip vector to the variable tips
     createTipList <- function(){
       tips <- c()
       if (Values[["n"]] < 1 ) {
@@ -148,8 +181,6 @@ mod_cladeAnnotator_server <-
       g <- treePlot
       
       if(Values[["n"]] > 0) {
-        print("L116; addAnnitations; this is the initial value of n")
-        print(Values[["n"]])
         for (i in seq_along(tipVectorIn)) { #this is the i'th list, for which we are calculating the offset
           currentTips <- Values[["tip_vec"]][[ i ]]
           
@@ -181,16 +212,17 @@ mod_cladeAnnotator_server <-
       return(g)
     }
     
+    #function to create the tree.
     currentTreeOut <- function(){
       addMap(tree = addAnnotations(treePlot = makeTreeOut() , tipVectorIn =  createTipList() ), metaFile = mFileMatOut())
     }
     
-    #reactive to send tree with annoations to downloadImage module
+    #reactive to send tree to downloadImage module
     treeOut <- reactive ({
       currentTreeOut()
     })
-
-     return(treeOut)
+    
+    return(treeOut)
     
   }
 
