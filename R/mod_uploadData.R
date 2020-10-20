@@ -181,12 +181,12 @@ mod_uploadData_server <- function(input, output, session){
       #tip display names so essentially replacing the long tip labels with
       #whatever the user prefers. 
       
-      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = 
+      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] <-
         metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% 
                                             colnames(geneFileCorrected)
                                           [2:ncol(geneFileCorrected)])]
       
-      geneFileCorrected$center =
+      geneFileCorrected$center <-
         metaFileComb$Display.labels[which(metaFileComb$Tip.labels
                                           %in% geneFileCorrected$center)]
       

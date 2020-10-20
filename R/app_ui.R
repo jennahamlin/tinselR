@@ -21,7 +21,6 @@ app_ui <- function() {
                               mod_tipCheck_ui("tipCheck_ui_1"),
                               mod_paramsTree_ui("paramsTree_ui_data"),
                               mod_displayTree_ui("displayTree_ui_data"),                              
-                              #mod_addMatrix_ui("addMatrix_ui_1"),
                               mod_cladeAnnotator_ui("cladeAnnotator_ui_data"),
                               br(),
                               br(),
@@ -55,13 +54,10 @@ golem_add_external_resources <- function(){
   
   tags$head(
     golem::activate_js(),
-    golem::favicon()
-    #,
-    #attempting to use a different style sheet - but it appears to be unsucessful
-    #tags$link(rel="stylesheet", type="text/css", href="/Users/jennahamlin/Desktop/Tinsel/inst/app/www/bootswatch.litera.css")
+    golem::favicon(),
     # Add here all the external resources
     # If you have a custom.css in the inst/app/www
     # Or for example, you can add shinyalert::useShinyalert() here
-    #tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
+    tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
   )
 }

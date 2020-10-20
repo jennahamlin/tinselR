@@ -146,11 +146,11 @@ mod_exampleData_server <- function(input, output, session){
       . <- NULL
       exMetaFileComb <- exMetaFileIn()
       exGeneFileCorrected <- exGeneFileIn()
-      colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = 
+      colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] <- 
         exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in%
                                               colnames(exGeneFileCorrected)
                                             [2:ncol(exGeneFileCorrected)])]
-      exGeneFileCorrected$. = 
+      exGeneFileCorrected$. <- 
         exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels
                                             %in% exGeneFileCorrected$.)]
       return(exGeneFileCorrected)

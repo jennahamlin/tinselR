@@ -80,7 +80,8 @@ geneObjectOut  <- function (geneFile) {
     stats::na.omit()%>%
     #convert to a three column data frame
     tidyr::pivot_longer(-label)%>%
-    #remove self comparisons for this table - necessary for snp mean/median calculation.
+    #remove self comparisons for this table - necessary for snp mean/median 
+    #calculation.
     .[which(.$label != .$name),] %>% 
     ##replace - with zero in the file; if zeros already infile, still works
     dplyr::mutate(value=ifelse(value=="-", 0,value))
@@ -144,12 +145,15 @@ sanity <- function(mFile, gFile, tFile) {
 mFileConversion <- function(mFile){
   Tip.labels <- NULL
     meta2 <-mFile %>%
-      tibble::column_to_rownames(var = "Display.labels")%>% #convert the column Display labels to the row name
-      dplyr::select(-Tip.labels) #do not include the column of 'ugly' tip labels  
+      #convert the column Display labels to the row name
+      tibble::column_to_rownames(var = "Display.labels")%>% 
+      #do not include the column of 'ugly' tip labels  
+      dplyr::select(-Tip.labels) 
 
 }
 
-#get the number of columns of the meta data file. Here columns should be 1 or more after transformation of meta data
+#get the number of columns of the meta data file. Here columns should be 1 or 
+#more after transformation of meta data
 notColumns <- function (file){
   colNFile<- ncol(file)
   #colHFile <- colnames(file) #could include what the column headers are
@@ -158,7 +162,9 @@ notColumns <- function (file){
   if(colNFile < 1 ){
     return("And looks like there is not a column for matrix plotting")
   } else {
-    return(paste("And looks like the number of columns for matrix plotting is: ", colNFile))
+    return(
+      paste("And looks like the number of columns for matrix plotting is: ",
+            colNFile))
   }
 }
 
@@ -172,13 +178,15 @@ combineGandT <- function(treeFile, geneFile){
     treeio::as.treedata()
 }
 
-# treePlot <- function(inputFile, align, layout, fontface, width, node, limit, nudge_x){
+# treePlot <- function(inputFile, align, layout, fontface, width, node,
+#limit, nudge_x){
 #   label <- NULL
 #   ggtree::ggtree(inputFile, layout)+
 #     ggplot2::xlim(NA, limit)+
 #     ggtree::geom_tiplab(align, fontface, family="Helvetica")+
 #     ggtree::geom_treescale(width, x = 0.005, y = -1 )+
-#     ggtree::geom_text2(ggplot2::aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > node), nudge_x )
+#     ggtree::geom_text2(ggplot2::aes(label=label, 
+#subset = !is.na(as.numeric(label)) & as.numeric(label) > node), nudge_x )
 # }
 
 #####################################
@@ -190,11 +198,14 @@ combineGandT <- function(treeFile, geneFile){
 snpVector <- c()
 
 snpAnno <- function(geneFile, tips){
-  label <- name <- value <- NULL # adding this helps with devtools::check() note of 'no visible binding for global variables as noted here https://www.r-bloggers.com/no-visible-binding-for-global-variable/
+  #adding this helps with devtools::check() note of 'no visible binding for
+  #global variables
+  label <- name <- value <- NULL 
   
   for (i in 1:(length(tips)-1)){
     for (j in (i+1):length(tips)){
-      if(tips[i] == tips[j]) next #https://stackoverflow.com/questions/36329183/exclude-one-fixed-variable-in-for-loop
+      if(tips[i] == tips[j]) 
+        next
       snpVector<-append(snpVector, geneFile%>%
                           dplyr::filter(label == tips[i] & name == tips[j]) %>%
                           dplyr::pull(value)
@@ -204,7 +215,8 @@ snpAnno <- function(geneFile, tips){
   return(as.numeric(snpVector))
 }
 
-#function to add layer, uses findMRCA to get the MRCA (node) for the selected tips
+#function to add layer, uses findMRCA to get the MRCA (node) for the 
+#selected tips
 make_layer <- function(tree, tips, label, color, offset) {
   ggtree::geom_cladelabel(
     node = phytools::findMRCA(ape::as.phylo(tree), tips),
