@@ -6,7 +6,7 @@
 #' application and provides a link to the github repo where users may file
 #' an issue
 #'
-#'@rdname mod_about
+#' @rdname mod_about
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
@@ -80,7 +80,7 @@ mod_about_ui <- function(id){
 
 #' about Server Function
 #'
-#' @noRd 
+#' @rdname mod_about
 mod_about_server <- function(input, output, session){
   ns <- session$ns
   

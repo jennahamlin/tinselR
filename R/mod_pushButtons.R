@@ -3,7 +3,7 @@
 #' @title mod_pushButtons_ui mod_pushButtons_server
 #' 
 #' @description A shiny Module. This module generates the displayed action
-#' buttons for add/remov annotations and add/remove heatmap. 
+#' buttons for add/remove annotations and add/remove heatmap. 
 #'
 #' @rdname mod_pushButtons
 #'

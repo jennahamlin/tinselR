@@ -14,7 +14,7 @@ mod_pushButtons_server(input, output, session)
 }
 \description{
 A shiny Module. This module generates the displayed action
-buttons for add/remov annotations and add/remove heatmap.
+buttons for add/remove annotations and add/remove heatmap.
 }
 \details{
 pushButtons UI Function

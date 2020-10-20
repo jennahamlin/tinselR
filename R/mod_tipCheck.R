@@ -1,21 +1,29 @@
 #' tipCheck UI Function
 #'
-#' @description A shiny Module.
+#' @title mod_tipCheck_ui mod_tipCheck_server
+#' 
+#' @description A shiny Module. This module generates the landing page for the 
+#' application and provides a link to the github repo where users may file
+#' an issue
+#'
+#' @rdname mod_tipCheck
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
-#'
-#' @noRd 
 #'
 #' @importFrom shiny NS tagList 
 mod_tipCheck_ui <- function(id){
   ns <- NS(id)
   tagList(
     tags$table(width ="100%",
-               tags$th("File Check Output", colspan="3", style="font-size:20px; color:#444444;")),
+               tags$th("File Check Output", colspan="3",
+                       style="font-size:20px; color:#444444;")),
     
-    htmlOutput(ns('fileChecking')), # this output info about if tip labels are not concordant between all three files
+    # this output info about if tip labels are not concordant between all 
+    #three files
+    htmlOutput(ns('fileChecking')), 
     
-    uiOutput(ns('fileChecking2')), # this one will tell user if they can add a matrix to the tree 
+    # this one will tell user if they can add a matrix to the tree 
+    uiOutput(ns('fileChecking2')), 
     
     tags$hr(style="border-color: #99b6d8;")
   )
@@ -23,20 +31,29 @@ mod_tipCheck_ui <- function(id){
 
 #' tipCheck Server Function
 #'
-#' @noRd 
-mod_tipCheck_server <- function(input, output, session, mFileOut, metaFileOut, gFileOut, tFileOut){
+#' @rdname mod_tipCheck
+#' 
+mod_tipCheck_server <- function(input, output, session, mFileOut,
+                                metaFileOut, gFileOut, tFileOut){
   ns <- session$ns
   
-  #this will render the output from the sanity function found in the golem_utils_server.R file
-  #and takes in 5 reactive files - tree, genetic distance, genetic distance seperator, meta data, and meta data seperartor
+  #this will render the output from the sanity function found in the 
+  #golem_utils_server.R file and takes in 5 reactive files - 
+  #tree, genetic distance, genetic distance separator, meta data, and meta data 
+  #separator
+  
   output$fileChecking <- renderUI({
     ns <- session$ns
     if (is.null(tFileOut())) { 
       return(HTML('<span style="color:gray">Please upload a tree file</span>'))
     } else if (is.null(gFileOut())){
-      return(HTML('<span style="color:gray">Please upload a genetic distance file</span>'))
+      return(HTML(
+        '<span style="color:gray">Please upload a genetic distance file</span>')
+      )
     } else if (is.null(metaFileOut())){
-      return(HTML('<span style="color:gray">Please upload a meta data file</span>'))
+      return(HTML(
+        '<span style="color:gray">Please upload a meta data file</span>')
+      )
     } else {
       sanity(
         tFile = tFileOut(),
@@ -55,7 +72,6 @@ mod_tipCheck_server <- function(input, output, session, mFileOut, metaFileOut, g
       validate(notColumns(  mFileConversion(mFileOut() ) ) )
     }
   })
-  
   
 }
 

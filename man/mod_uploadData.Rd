@@ -19,6 +19,11 @@ mod_uploadData_server(input, output, session)
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module allows the user to upload three different types of files and does file checking to confirm the correct delimiter is selected
+A shiny Module. This module allows the user to upload three
+ different types of files and does file checking to confirm the correct 
+ delimiter is selected
+}
+\details{
+uploadData UI Function
 }
 \keyword{internal}

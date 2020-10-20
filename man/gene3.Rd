@@ -21,30 +21,13 @@ This is a genetic distance matrix of SNPs for 19 isolates of Salmonella
 enterica to be used with the newick phylogenetic tree (example tree 3) and 
 the optional meta data file (example meta 3)
 }
-\keyword{!=}
-\keyword{#'}
-\keyword{#convert}
-\keyword{%>%}
-\keyword{.$name),]%>%}
-\keyword{.[which(.$label}
-\keyword{0,value))}
-\keyword{1)%>%}
-\keyword{<-}
-\keyword{=}
-\keyword{@examples}
-\keyword{and}
-\keyword{by}
-\keyword{column}
-\keyword{comparisons}
-\keyword{data(gene3)}
+\examples{
+data(gene3)
+#convert to three column tibble by  label column and remove self comparisons
+gene3 <- gene3 \%>\% dplyr::rename( label = 1)\%>\%
+ tidyr::pivot_longer(-label)\%>\%
+ .[which(.$label != .$name),]\%>\%
+ dplyr::mutate(value=ifelse(value=="-", 0,value))
+
+}
 \keyword{datasets}
-\keyword{dplyr::mutate(value=ifelse(value=="-",}
-\keyword{dplyr::rename(}
-\keyword{gene3}
-\keyword{label}
-\keyword{remove}
-\keyword{self}
-\keyword{three}
-\keyword{tibble}
-\keyword{tidyr::pivot_longer(-label)%>%}
-\keyword{to}

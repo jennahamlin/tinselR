@@ -12,7 +12,7 @@
 #' 
 #' @keywords datasets
 #' 
-#' #' @examples
+#' @examples
 #' data(gene3)
 #' #convert to three column tibble by  label column and remove self comparisons
 #' gene3 <- gene3 %>% dplyr::rename( label = 1)%>%
