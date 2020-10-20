@@ -12,6 +12,7 @@ If you have any the above, please file an *issue* on github located [here](https
  - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) 
  - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); which should install if you install ggtree first
 
+
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.com/jennahamlin/Tinsel)
 <!-- badges: end -->
@@ -28,7 +29,7 @@ If you have any the above, please file an *issue* on github located [here](https
 Run this code in your R console -     
 
 ```
-devtools::install_github("jennhamlin/Tinsel")
+devtools::install_github("jennahamlin/Tinsel")
 Library(Tinsel)
 run_app()
 ```  

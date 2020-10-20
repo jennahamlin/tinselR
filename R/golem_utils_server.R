@@ -131,7 +131,7 @@ notColumns <- function (file){
   
   print("L135 checking meta file")
   if(colNFile < 1 ){
-    return(HTML("And looks like there is not a column for matrix plotting"))
+    return("And looks like there is not a column for matrix plotting")
   } else {
     return(paste("And looks like the number of columns for matrix plotting is: ", colNFile))
   }
