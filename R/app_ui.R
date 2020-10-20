@@ -1,7 +1,7 @@
 #' @import shiny
 app_ui <- function() {
   tagList(
-    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes; if you want
+    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes 
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
@@ -39,7 +39,8 @@ app_ui <- function() {
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_example"),
                               mod_displayTree_ui("displayTree_ui_example"),
-                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example"))))
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example")
+                            )))
       )
     )
   )

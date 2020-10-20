@@ -1,6 +1,11 @@
 ### What is Tinsel?
 
-Tinsel at its' most basic level is a graphical viewer of newick-formatted phylogenetic trees and as an application for producing publication-ready figures. The **power** of Tinsel comes with combining a genetic distance matrix for annotating a tree for epidemiological outbreak analyses. A genetic distance matrix contains snp differences for all pairwise comparisons for the tips on the tree.  
+Tinsel at its' most basic level is a graphical viewer of newick-formatted 
+phylogenetic trees and as an application for producing publication-ready 
+figures. The **power** of Tinsel comes with combining a genetic distance matrix 
+for annotating a tree for epidemiological outbreak analyses. A genetic distance
+matrix contains snp differences for all pairwise comparisons for the tips on 
+the tree.  
 
 ### Issues, problems, suggestions, thoughts
 
