@@ -19,6 +19,11 @@ mod_exampleData_server(input, output, session)
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module sources the pre-loaded example data (e.g. tree (x2), genetic distance file (x2), and meta data file (x2))
+A shiny Module. This module sources the pre-loaded 
+example data (e.g. tree (x3), genetic distance file (x3), and meta data file
+(x3))
+}
+\details{
+exampleData UI function
 }
 \keyword{internal}

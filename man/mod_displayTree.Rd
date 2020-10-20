@@ -3,7 +3,7 @@
 \name{mod_displayTree_ui}
 \alias{mod_displayTree_ui}
 \alias{mod_displayTree_server}
-\title{mod_displayTree_ui and mod_displayTree_server}
+\title{displayTree UI Function}
 \usage{
 mod_displayTree_ui(id)
 
@@ -34,6 +34,11 @@ mod_displayTree_server(
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module combines the tree with genetic distance as an S4 object that allows tree plotting and accessing the combined data.
+A shiny Module. This module combines the tree with genetic
+ distance as an S4 object that allows tree plotting and accessing the 
+ combined data.
+}
+\details{
+@title   mod_displayTree_ui and mod_displayTree_server
 }
 \keyword{internal}
