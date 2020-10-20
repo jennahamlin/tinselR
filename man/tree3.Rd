@@ -19,7 +19,7 @@ to be used with the optional genetic distance matrix (example gene 3) and
 }
 \examples{
 data(tree3)
-treeout <- ggtree::ggtree(tree3) 
+treeout <- ggtree::ggtree(tree3)
 treeout <- treeout + ggtree::geom_tiplab() #add labels to the tree
 }
 \keyword{datasets}

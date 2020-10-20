@@ -193,7 +193,7 @@ mod_cladeAnnotator_server <-
         for (i in seq_along(tipVectorIn)) { 
           currentTips <- Values[["tip_vec"]][[ i ]]
           
-          nOverlap = 0     # start by assuming no overlap
+          nOverlap <- 0     # start by assuming no overlap
           if (i>1){         # for the first set of tips no comparisons needed
             # otherwise do comparisons
             
