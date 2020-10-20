@@ -71,7 +71,7 @@ mod_uploadData_server <- function(input, output, session){
   
   #reactive expression that holds the genetic distance file
   geneFileUp <- reactive({
-    #validate(need(input$geneFile !="", "Please import a genetic distance file")) 
+#validate(need(input$geneFile !="", "Please import a genetic distance file")) 
     input$geneFile
   })
   
@@ -121,7 +121,8 @@ mod_uploadData_server <- function(input, output, session){
   #reactive expression that uploads the newick tree and allows the optional
   #upload of meta data to correct tree tip labels this also performs a check to
   #see if the correct delimiter is selected before reading in the file and 
-  #provides users with an error message if the delimiter is in correctly selected
+  #provides users with an error message if the delimiter is in correctly
+  #selected
   treeFileUp <- reactive({
     
     . <- NULL #this refers to the file that is passed through
@@ -141,8 +142,8 @@ mod_uploadData_server <- function(input, output, session){
       
       treeio::read.newick(input$treeFile$datapath)%>%
         phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate))
-      #this above line converts tip labels to pretty labels based on user upload  
-      #of meta data file
+#this above line converts tip labels to pretty labels based on user upload of
+      #meta data file
     }
   })
   
@@ -180,9 +181,14 @@ mod_uploadData_server <- function(input, output, session){
       #tip display names so essentially replacing the long tip labels with
       #whatever the user prefers. 
       
-      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% colnames(geneFileCorrected)[2:ncol(geneFileCorrected)])]
+      colnames(geneFileCorrected)[2:ncol(geneFileCorrected)] = 
+        metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% 
+                                            colnames(geneFileCorrected)
+                                          [2:ncol(geneFileCorrected)])]
       
-      geneFileCorrected$center = metaFileComb$Display.labels[which(metaFileComb$Tip.labels %in% geneFileCorrected$center)]
+      geneFileCorrected$center =
+        metaFileComb$Display.labels[which(metaFileComb$Tip.labels
+                                          %in% geneFileCorrected$center)]
       
       return(geneFileCorrected)
     }

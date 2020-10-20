@@ -122,11 +122,12 @@ mod_exampleData_server <- function(input, output, session){
     
     if (is.null(exMetaFileIn())) { #if no meta file still upload the tree
       exTreeFileIn()
-    }
-    else { #if metafile correct tip labels using phylotools sub.taxa.label function
+    } else { 
+      #if metafile correct tip labels using phylotools sub.taxa.label function
       
       exTreeFileIn()%>%
-        #this line converts tip labels to pretty labels based on user upload of meta data file
+        #this line converts tip labels to pretty labels based on user upload of 
+        #meta data file
         phylotools::sub.taxa.label(., as.data.frame(exMetaFileIn())) #
     }
   })
@@ -145,8 +146,13 @@ mod_exampleData_server <- function(input, output, session){
       . <- NULL
       exMetaFileComb <- exMetaFileIn()
       exGeneFileCorrected <- exGeneFileIn()
-      colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)])]
-      exGeneFileCorrected$. = exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in% exGeneFileCorrected$.)]
+      colnames(exGeneFileCorrected)[2:ncol(exGeneFileCorrected)] = 
+        exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels %in%
+                                              colnames(exGeneFileCorrected)
+                                            [2:ncol(exGeneFileCorrected)])]
+      exGeneFileCorrected$. = 
+        exMetaFileComb$Display.labels[which(exMetaFileComb$Tip.labels
+                                            %in% exGeneFileCorrected$.)]
       return(exGeneFileCorrected)
     }
   })

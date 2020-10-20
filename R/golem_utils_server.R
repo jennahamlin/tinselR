@@ -12,9 +12,9 @@
 readData<-function(filePath, sep)
 {readr::read_delim(filePath,
                    sep,
-                   trim_ws = T,
-                   skip_empty_rows = T,
-                   col_names = T,
+                   trim_ws = TRUE,
+                   skip_empty_rows = TRUE,
+                   col_names = TRUE,
                    col_types = readr::cols(.default = readr::col_character())
 )
 }

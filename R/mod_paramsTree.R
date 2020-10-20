@@ -68,7 +68,8 @@ mod_paramsTree_ui <- function(id){
                                             style="color:#afafae"), 
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted", 
-                     "circular" = "circular"), selected = "rectangular"), width = 3),
+                     "circular" = "circular"), selected = "rectangular"),
+      width = 3),
     
     tags$hr(style="border-color: #99b6d8;"),
     tags$table(width ="100%",

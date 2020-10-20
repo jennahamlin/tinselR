@@ -84,7 +84,8 @@ mod_cladeAnnotator_server <-
         Values[["n"]] <- Values[["n"]] + 1
         
         #add the tip vector (aka label) to the annotation reactive value
-        Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- dataWithSelection2()
+        Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- 
+          dataWithSelection2()
         
         #add to variable called tips
         tips <- createTipList()

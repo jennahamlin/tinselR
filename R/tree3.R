@@ -1,8 +1,8 @@
 ' @title Example Tree 3
 #' 
 #' This is a newick phylogenetic tree for 19 isolates of Salmonella enterica
-#' to be used with the optional genetic distance matrix (example gene 3) and the 
-#' optional meta data file (example meta 3). 
+#' to be used with the optional genetic distance matrix (example gene 3) and
+#'  the optional meta data file (example meta 3). 
 #' 
 #' @docType data
 #' 
