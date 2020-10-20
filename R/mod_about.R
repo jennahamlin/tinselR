@@ -20,10 +20,13 @@ mod_about_ui <- function(id){
                               p("Tinsel at its' most basic level is a graphical
                               viewer of newick phylogenetic trees and as a
                               program for producing publication-ready figures.",
-                                br(), "The",em("power"),"of Tinsel comes with 
-                              combining a genetic distance matrix for annotating 
-                              a tree for epidemological outbreakanalyses.", 
-                                br(), "A genetic distance matrix contains the
+                                br(),
+                                "The",em("power"),"of Tinsel comes with 
+                                combining a genetic distance matrix for
+                                annotating a tree for epidemological 
+                                outbreak analyses.", 
+                                br(),
+                                "A genetic distance matrix contains the
                               number of snp differences for all pairwise 
                               comparisons.", br(), "Note that the data you
                               upload is only held within the application while
@@ -35,7 +38,8 @@ mod_about_ui <- function(id){
                               tags$li(em("Phylogenetic Tree"),"- required; a", 
                                       a("newick", 
                                         href=
-                                          "https://en.wikipedia.org/wiki/Newick_format"
+                                          "https://en.wikipedia.org/wiki/
+                                        Newick_format"
                                       ), 
                                       "generated tree"),
                               tags$li(em("Genetic Distance Data"), 

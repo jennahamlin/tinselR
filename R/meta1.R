@@ -1,8 +1,8 @@
 #' @title Example Meta 1
 #' 
-#' This is a meta data file for tip correction for 19 isolates of Eschericia coli 
-#' to be used with the newick phylogenetic tree (example tree 1) and the optional
-#' genetic distance file (example gene 1)
+#' This is a meta data file for tip correction for 19 isolates of Eschericia 
+#' coli to be used with the newick phylogenetic tree (example tree 1) and the
+#'  optional genetic distance file (example gene 1)
 #'
 #' @docType data
 #' 

@@ -7,8 +7,9 @@
 #function to read in the data using readr::read_delim
 #filePath is the path to the location of the file you want to read in
 #sep is the specified delimiter, probably either a tab ("\t") or comma (",")
-#the other bits here help with reading in the file: trim whitespace, skip empty row, column names, 
-#and how to read in the data; default is set at column as characters
+#the other bits here help with reading in the file: trim whitespace, skip 
+#empty row, column names, and how to read in the data; default is set at column 
+#as characters
 readData<-function(filePath, sep)
 {readr::read_delim(filePath,
                    sep,
@@ -19,7 +20,8 @@ readData<-function(filePath, sep)
 )
 }
 
-#function which maps the type of file uploaded based on user selection. For example, inVar could be input$genesep
+#function which maps the type of file uploaded based on user selection. For 
+#example, inVar could be input$genesep
 fileType <- function(inVar){
   if(inVar == "\t")
   {
@@ -32,19 +34,24 @@ fileType <- function(inVar){
 }
 
 #function to confirm the type of file uploaded, matches the selected type 
-# this uses the fille uploaded (fileUp), the type of file delimited selected (fileType - either a csv or tsv),
-#and the file seperate from input$sep, which the user specifies on the interface -so this is ultimately a reactive
+#this uses the fille uploaded (fileUp), the type of file delimited selected 
+#(fileType - either a csv or tsv), and the file seperate from input$sep, which
+#the user specifies on the interface -so this is ultimately a reactive
 fileCheck<- function(fileUp, fileType, fileSep){
   myFile <- req(fileUp$datapath)
   myLines <- readLines(con = myFile, n = 3)
   fileChk <- validate(
     need(
-      length(strsplit(myLines[2], fileType)[[1]]) == length(strsplit(myLines[3], fileType)[[1]]),
-      paste("Error: the delimiter chosen does not match the file type uploaded: ", fileUp[1], sep = "")
+      length(strsplit(myLines[2],
+                      fileType)[[1]]) == 
+        length(strsplit(myLines[3], fileType)[[1]]),
+      paste("Error: the delimiter chosen does not match the file type uploaded: 
+            ", fileUp[1], sep = "")
     ), 
     need(
       length(strsplit(myLines[2], fileType)[[1]]) > 1,
-      paste("Error: the delimiter chosen does not match the file type uploaded: ", fileUp[1], sep = "")))
+      paste("Error: the delimiter chosen does not match the file type uploaded: 
+            ", fileUp[1], sep = "")))
   if (is.null(fileChk) == TRUE) {
     FileName <- readData(filePath = fileUp$datapath, sep = fileSep)
   }
@@ -53,20 +60,30 @@ fileCheck<- function(fileUp, fileType, fileSep){
   }
 }
 
-#change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
+#change column1, row1 to the id of label and replace - with a 0 within the file
+#necessary for downstream steps
 replaceHwithZeros <- function(geneFileIn){
   . <- NULL 
-  dplyr::rename(geneFileIn, label = 1) #rename columnn 1 to label for joining of data sets later
+  dplyr::rename(geneFileIn, label = 1) 
+  #rename columnn 1 to label for joining of data sets later
 }
 
-#additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
+#additional manipulation of genetic distance matrix for ultimately getting the 
+#mean number of SNPs 
+
+
+
 geneObjectOut  <- function (geneFile) {
   label <- . <- NULL
   geneFile%>%
-    stats::na.omit()%>% #remove na
-    tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
-    .[which(.$label != .$name),] %>% #remove self comparisons for this table - necessary for snp mean/median calculation.
-    dplyr::mutate(value=ifelse(value=="-", 0,value)) ##replace - with zero in the file; if zeros already infile, still works thanks to here: https://community.rstudio.com/t/r-package-development-how-to-deal-with-requiring-a-specific-version-of-an-imported-package/85266/5
+    #remove na
+    stats::na.omit()%>%
+    #convert to a three column data frame
+    tidyr::pivot_longer(-label)%>%
+    #remove self comparisons for this table - necessary for snp mean/median calculation.
+    .[which(.$label != .$name),] %>% 
+    ##replace - with zero in the file; if zeros already infile, still works
+    dplyr::mutate(value=ifelse(value=="-", 0,value))
 }
 
 ######################################
@@ -74,7 +91,8 @@ geneObjectOut  <- function (geneFile) {
 ######################################
 
 ## tipCheck server function
-# Function to check imported data files for tip label agreement. If no tip label agreement, tells user what is problematic
+# Function to check imported data files for tip label agreement. If no tip label
+#agreement, tells user what is problematic
 sanity <- function(mFile, gFile, tFile) { 
   #function(impMeta, metSep, impGene, genSep, impTree) {
   
@@ -92,9 +110,13 @@ sanity <- function(mFile, gFile, tFile) {
   
   # Check for required column names in meta data file
   if("Tip.labels" %in% colnames(mFile) != TRUE) {
-    return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
+    return(HTML('<span style="color:gray">Your metadata file does not contain
+                the correct column headers. Please correct and try again.
+                </span>'))
   } else if("Display.labels" %in% colnames(mFile) != TRUE) {
-    return(HTML('<span style="color:gray">Your metadata file does not contain the correct column headers. Please correct and try again.</span>'))
+    return(HTML('<span style="color:gray">Your metadata file does not contain 
+                the correct column headers. Please correct and try again.
+                </span>'))
   } 
   
   # Check for the same number of tips for all three files
@@ -102,7 +124,8 @@ sanity <- function(mFile, gFile, tFile) {
      length(tFileTips) != length(mFileTips) |
      length(gFileTips) != length(mFileTips)) {
     return(HTML(paste(
-      '<span style="color:gray">The number of tip labels in your input files are unequal, please correct.</span>', 
+      '<span style="color:gray">The number of tip labels in your input files 
+      are unequal, please correct.</span>', 
       '<span style="color:gray">No. of labels in tree file:</span>', 
       length(tFileTips),
       '<span style="color:gray">No. of labels in distance file:</span>',
@@ -111,10 +134,12 @@ sanity <- function(mFile, gFile, tFile) {
       length(mFileTips),
       sep = "<br/>")))
   } else {
-    return(HTML('<span style="color:gray">All three files pass checks and contain the same tip labels!</span>'))}
+    return(HTML('<span style="color:gray">All three files pass checks and 
+                contain the same tip labels!</span>'))}
 }
 
-#function to read in the meta data file; transform and determine if there is a column that can be plotted
+#function to read in the meta data file; transform and determine if there is a 
+#column that can be plotted
 #for a matrix 
 mFileConversion <- function(mFile){
   Tip.labels <- NULL
