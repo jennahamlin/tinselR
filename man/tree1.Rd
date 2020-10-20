@@ -6,21 +6,19 @@
 \title{Example Tree 1
 
 #' This is a newick phylogenetic tree for 19 isolates of Eschericia coli
-to be used with the optional genetic distance matrix (example gene 1) and 
+to be used with the optional genetic distance matrix (example gene 1) and
 the optional meta data file (example meta 1).}
 \format{
 An object of class \code{phylo} of length 5.
 }
 \usage{
 data(tree1)
-
-#' @keywords datasets
 }
 \description{
 Example Tree 1
 
 #' This is a newick phylogenetic tree for 19 isolates of Eschericia coli
-to be used with the optional genetic distance matrix (example gene 1) and 
+to be used with the optional genetic distance matrix (example gene 1) and
 the optional meta data file (example meta 1).
 }
 \examples{

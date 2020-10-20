@@ -5,9 +5,9 @@
 \alias{meta1}
 \title{Example Meta 1
 
-This is a meta data file for tip correction for 19 isolates of Eschericia 
+This is a meta data file for tip correction for 19 isolates of Eschericia
 coli to be used with the newick phylogenetic tree (example tree 1) and the
- optional genetic distance file (example gene 1)}
+ optional genetic distance file (example gene 1).}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 19 rows and 2 columns.
 }
@@ -17,9 +17,9 @@ data(meta1)
 \description{
 Example Meta 1
 
-This is a meta data file for tip correction for 19 isolates of Eschericia 
+This is a meta data file for tip correction for 19 isolates of Eschericia
 coli to be used with the newick phylogenetic tree (example tree 1) and the
- optional genetic distance file (example gene 1)
+ optional genetic distance file (example gene 1).
 }
 \examples{
 data(meta1)

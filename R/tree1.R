@@ -1,8 +1,8 @@
 #' @title Example Tree 1
 #' 
 #' #' This is a newick phylogenetic tree for 19 isolates of Eschericia coli
-#' to be used with the optional genetic distance matrix (example gene 1) and 
-#' the optional meta data file (example meta 1). 
+#' to be used with the optional genetic distance matrix (example gene 1) and
+#' the optional meta data file (example meta 1).
 #' 
 #' @docType data
 #' 
@@ -10,7 +10,7 @@
 #'
 #' @usage data(tree1)
 #' 
-#' #' @keywords datasets
+#' @keywords datasets
 #' 
 #' @examples
 #' data(tree1)
