@@ -3,7 +3,11 @@
 \docType{data}
 \name{gene3}
 \alias{gene3}
-\title{example gene 3}
+\title{Example Gene 3
+
+This is a genetic distance matrix of SNPs for 19 isolates of Salmonella 
+enterica to be used with the newick phylogenetic tree (example tree 3) and 
+the optional meta data file (example meta 3)}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 16 rows and 17 columns.
 }
@@ -11,6 +15,36 @@ An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, 
 data(gene3)
 }
 \description{
-example gene 3
+Example Gene 3
+
+This is a genetic distance matrix of SNPs for 19 isolates of Salmonella 
+enterica to be used with the newick phylogenetic tree (example tree 3) and 
+the optional meta data file (example meta 3)
 }
+\keyword{!=}
+\keyword{#'}
+\keyword{#convert}
+\keyword{%>%}
+\keyword{.$name),]%>%}
+\keyword{.[which(.$label}
+\keyword{0,value))}
+\keyword{1)%>%}
+\keyword{<-}
+\keyword{=}
+\keyword{@examples}
+\keyword{and}
+\keyword{by}
+\keyword{column}
+\keyword{comparisons}
+\keyword{data(gene3)}
 \keyword{datasets}
+\keyword{dplyr::mutate(value=ifelse(value=="-",}
+\keyword{dplyr::rename(}
+\keyword{gene3}
+\keyword{label}
+\keyword{remove}
+\keyword{self}
+\keyword{three}
+\keyword{tibble}
+\keyword{tidyr::pivot_longer(-label)%>%}
+\keyword{to}

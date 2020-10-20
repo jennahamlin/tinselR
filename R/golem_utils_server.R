@@ -56,8 +56,7 @@ fileCheck<- function(fileUp, fileType, fileSep){
 #change column1, row1 to the id of label and replace - with a 0 within the file; necessary for downstream steps
 replaceHwithZeros <- function(geneFileIn){
   . <- NULL 
-  dplyr::rename(geneFileIn, label = 1) %>% #rename columnn 1 to label for joining of data sets later
-    replace(., .=="-", 0) #replace - with zero in the file; if zeros already infile, still works
+  dplyr::rename(geneFileIn, label = 1) #rename columnn 1 to label for joining of data sets later
 }
 
 #additional manipulation of genetic distance matrix for ultimately getting the mean number of SNPs 
@@ -66,7 +65,8 @@ geneObjectOut  <- function (geneFile) {
   geneFile%>%
     stats::na.omit()%>% #remove na
     tidyr::pivot_longer(-label)%>%  #convert to a three column data frame 
-    .[which(.$label != .$name),]  #remove self comparisons for this table - necessary for snp mean/median calculation.
+    .[which(.$label != .$name),] %>% #remove self comparisons for this table - necessary for snp mean/median calculation.
+    dplyr::mutate(value=ifelse(value=="-", 0,value)) ##replace - with zero in the file; if zeros already infile, still works thanks to here: https://community.rstudio.com/t/r-package-development-how-to-deal-with-requiring-a-specific-version-of-an-imported-package/85266/5
 }
 
 ######################################
