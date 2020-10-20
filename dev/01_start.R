@@ -9,7 +9,7 @@
 ## Add information about the package that will contain your app
 
 golem::fill_desc(
-  pkg_name = "tinselR", # The Name of the package containing the App 
+  pkg_name = "Tinsel", # The Name of the package containing the App 
   pkg_title = "PKG_TITLE", # The Title of the package containing the App 
   pkg_description = "Tinsel is a phylogenetic application for adding additional information to trees.", # The Description of the package containing the App 
   author_first_name = "Jenna", # Your First Name

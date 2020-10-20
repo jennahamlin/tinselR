@@ -3,7 +3,11 @@
 \docType{data}
 \name{meta1}
 \alias{meta1}
-\title{example meta 1}
+\title{Example Meta 1
+
+This is a meta data file for tip correction for 19 isolates of Eschericia coli 
+to be used with the newick phylogenetic tree (example tree 1) and the optional
+genetic distance file (example gene 1)}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 19 rows and 2 columns.
 }
@@ -11,6 +15,15 @@ An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, 
 data(meta1)
 }
 \description{
-example meta 1
+Example Meta 1
+
+This is a meta data file for tip correction for 19 isolates of Eschericia coli 
+to be used with the newick phylogenetic tree (example tree 1) and the optional
+genetic distance file (example gene 1)
+}
+\examples{
+data(meta1)
+ #convert the column Display labels to the row name
+meta1 <- meta1 \%>\% tibble::column_to_rownames(var = "Display.labels")
 }
 \keyword{datasets}

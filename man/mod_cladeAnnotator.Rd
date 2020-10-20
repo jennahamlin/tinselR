@@ -36,4 +36,7 @@ mod_cladeAnnotator_server(
 \description{
 A shiny Module. This module allows the user to add or remove annotations and checks for overlap between those annotaions.
 }
+\details{
+cladeAnnotator UI Funciton
+}
 \keyword{internal}

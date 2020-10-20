@@ -1,8 +1,8 @@
 #' @title Example Gene 3
 #' 
-#'This is a genetic distance matrix of SNPs for 19 isolates of Salmonella 
-#'enterica to be used with the newick phylogenetic tree (example tree 3) and 
-#'the optional meta data file (example meta 3)
+#' This is a genetic distance matrix of SNPs for 19 isolates of Salmonella 
+#' enterica to be used with the newick phylogenetic tree (example tree 3) and 
+#' the optional meta data file (example meta 3)
 #'
 #' @docType data
 #' 

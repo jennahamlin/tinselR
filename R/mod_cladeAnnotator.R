@@ -1,5 +1,5 @@
-# Module UI
-
+#' cladeAnnotator UI Funciton 
+#' 
 #' @title   mod_cladeAnnotator_ui and mod_cladeAnnotator_server
 #' @description  A shiny Module. This module allows the user to add or remove annotations and checks for overlap between those annotaions. 
 #'
@@ -21,8 +21,8 @@ mod_cladeAnnotator_ui <- function(id) {
   )
 }
 
-# Module Server
-
+#' cladeAnnotator Server Funciton 
+#'
 #' @rdname mod_cladeAnnotator
 #' @export
 #' @keywords internal

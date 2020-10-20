@@ -1,8 +1,8 @@
 #'@title Example Gene 1
 #'
-#'This is a genetic distance matrix of SNPs for 19 isolates of Eschericia coli 
-#'to be used with the newick phylogenetic tree (example tree 1) and the optional
-#'meta data file (example meta 1)
+#' This is a genetic distance matrix of SNPs for 19 isolates of Eschericia coli 
+#' to be used with the newick phylogenetic tree (example tree 1) and the optional
+#' meta data file (example meta 1)
 #'
 #' @docType data
 #' 

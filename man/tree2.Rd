@@ -3,7 +3,11 @@
 \docType{data}
 \name{tree2}
 \alias{tree2}
-\title{example tree 2}
+\title{Example Tree 2
+
+This is a newick phylogenetic tree for 19 isolates of Salmonella enterica sub
+species enterica to be used with the genetic distance matrix
+(example gene 2) and the optional meta data file (example meta 2).}
 \format{
 An object of class \code{phylo} of length 5.
 }
@@ -11,6 +15,14 @@ An object of class \code{phylo} of length 5.
 data(tree2)
 }
 \description{
-example tree 2
+Example Tree 2
+
+This is a newick phylogenetic tree for 19 isolates of Salmonella enterica sub
+species enterica to be used with the genetic distance matrix
+(example gene 2) and the optional meta data file (example meta 2).
+}
+\examples{
+data(tree2)
+tree2 <- ape::plot.phylo(tree2)
 }
 \keyword{datasets}

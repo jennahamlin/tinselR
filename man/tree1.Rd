@@ -3,14 +3,28 @@
 \docType{data}
 \name{tree1}
 \alias{tree1}
-\title{example tree 1}
+\title{Example Tree 1
+
+#' This is a newick phylogenetic tree for 19 isolates of Eschericia coli
+to be used with the optional genetic distance matrix (example gene 1) and 
+the optional meta data file (example meta 1).}
 \format{
 An object of class \code{phylo} of length 5.
 }
 \usage{
 data(tree1)
+
+#' @keywords datasets
 }
 \description{
-example tree 1
+Example Tree 1
+
+#' This is a newick phylogenetic tree for 19 isolates of Eschericia coli
+to be used with the optional genetic distance matrix (example gene 1) and 
+the optional meta data file (example meta 1).
+}
+\examples{
+data(tree1)
+tree1 <- ggtree::ggtree(tree1)
 }
 \keyword{datasets}
