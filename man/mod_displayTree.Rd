@@ -11,17 +11,17 @@ mod_displayTree_server(
   input,
   output,
   session,
-  treeFileOut,
+  tree_file_out,
   geneObjectOutForSNP,
   align,
-  treeformat,
+  tree_format,
   font,
-  numscale,
+  num_scale,
   node,
   lim,
-  bootPos,
-  midP,
-  matOff
+  boot_pos,
+  mid_p,
+  mat_off
 )
 }
 \arguments{

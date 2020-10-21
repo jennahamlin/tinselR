@@ -26,97 +26,87 @@ mod_displayTree_ui <- function(id){
 #' @export
 #' @keywords internal
 
-mod_displayTree_server <- function(input, output, session, 
-                                   treeFileOut, geneObjectOutForSNP, align,
-                                   treeformat, font,  numscale, node, lim,
-                                   bootPos, midP, matOff){
+mod_displayTree_server <- function(input, output, session,
+                                   tree_file_out, geneObjectOutForSNP, align,
+                                   tree_format, font, num_scale, node, lim,
+                                   boot_pos, mid_p, mat_off) {
   ns <- session$ns
-  
+
   #midpoint root the tree based on reactive value, if not just display the tree
-  midTree <- reactive({
-    if(midP() == TRUE) {
-      return(phytools::midpoint.root(treeFileOut()))
-    }
-    else {
-      return(treeFileOut())
+  mid_tree <- reactive({
+    if (mid_p() == TRUE) {
+      return(phytools::midpoint.root(tree_file_out()))
+    } else {
+      return(tree_file_out())
     }
   })
-  
-  #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree 
+
+  #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree
   #and genetic distance matrix
-  treeObject<-reactive({
-    tibble::as_tibble(midTree())
+  tree_object<-reactive({
+    tibble::as_tibble(mid_tree())
   })
-  
-  #join the treeobject and updated genetic distance file by label and 
+
+  #join the treeobject and updated genetic distance file by label and
   #convert to s4 object
-  gandTS4 <- reactive({
-    combineGandT(treeObject(), geneObjectOutForSNP())
+  g_and_t_s4 <- reactive({
+    combine_g_and_t(tree_object(), geneObjectOutForSNP())
   })
-  
   
   ########additional reactive tree parameters to possibly include
   #these could be parameters to increase/decrease how far tree fills
-  #to the margins 
+  #to the margins
   #ggplot2::theme(plot.margin=ggplot2::margin(10,10,10,10))
-  
+
   ## displayTree server function. In theory this function should be able to be
-  #moved over to the golem_utils_server.R script and updating the function to 
-  #take all of the reactive values but I have been unsuccessful at doing that 
-  #and get a strange error `Warning: Error in modifyList: is.list(val) is not 
+  #moved over to the golem_utils_server.R script and updating the function to
+  #take all of the reactive values but I have been unsuccessful at doing that
+  #and get a strange error `Warning: Error in modifyList: is.list(val) is not
   #TRUE` so leaving here for now
-  
-  treePlot <- function(inputFile){
+
+  treePlot <- function(input_file) {
     label <- NULL
-    ggtree::ggtree(inputFile, layout = treeformat())+
-      ggplot2::xlim(NA, lim())+
-      ggtree::geom_tiplab(align = align(), fontface = font(), 
-                          family="Helvetica", size = 3)+
-      ggtree::geom_treescale(width = numscale(), x = 0.005, y = -3 )+
+    ggtree::ggtree(input_file, layout = tree_format()) +
+      ggplot2::xlim(NA, lim()) +
+      ggtree::geom_tiplab(align = align(), fontface = font(),
+                          family="Helvetica", size = 3) +
+      ggtree::geom_treescale(width = num_scale(), x = 0.005, y = -3 ) +
       ggtree::geom_text2(ggplot2::aes(label=label, 
                                       subset = !is.na(as.numeric(label)) &
                                         as.numeric(label) > node()),
-                         nudge_x = bootPos())
-    
-  } 
-  
-  
+                         nudge_x = boot_pos())
+  }
+
   #major plotting reactive using an S4 object called above (gandTS4) or the
-  #base midTree reactive made from import of treeFileOut and the  Upload data
+  #base mid_tree reactive made from import of treeFileOut and the  Upload data
   #module 
   makeTree <- reactive({
-    
-    # this disconnects the need for genetic distance file to be uploaded for 
+
+    # this disconnects the need for genetic distance file to be uploaded for
     #the tree viz to happen
     if(is.null(input$gandTS4)){
-      treePlot(midTree())
-      
-      #what the call should look like if treePlot function was in the 
+      treePlot(mid_tree())
+
+      #what the call should look like if treePlot function was in the
       #golem_utils_server.R file
-      #treePlot(inputFile = midTree(), align = align(), layout = treeformat(),
+      #treePlot(inputFile = mid_tree(), align = align(), layout = treeformat(),
       #fontface = font(), width = numscale(), node = node(), limit = lim(),
       #nudge_x = bootPos())
-      
-    } 
-    else{
-      treePlot(gandTS4())
-      
-      #what the call should look like if treePlot function was in the 
+
+    } else{
+      treePlot(g_and_t_s4())
+
+      #what the call should look like if treePlot function was in the
       #golem_utils_server.R file
       #treePlot(inputFile = gandTS4(), align = align(), layout = treeformat(),
-      #fontface = font(), width = numscale(), node = node(), limit = lim(), 
+      #fontface = font(), width = numscale(), node = node(), limit = lim(),
       #nudge_x = bootPos())
     }
   })
-  
+
   #return display tree reactive to be used in cladeAnnotator module 
   return(
     list(
       makeTreeOut = reactive(makeTree())
     ))
 }
-## To be copied in the UI
-# mod_displayTree_ui("displayTree_ui_1")
-
-## To be copied in the server
-# callModule(mod_displayTree_server, "displayTree_ui_1"

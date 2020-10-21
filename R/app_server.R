@@ -29,9 +29,9 @@ app_server <- function(input, output,session) {
   #displays the tree and uses the params as input to change tree viz
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data",  
                      dataDisplay$tree_file_out, dataDisplay$geneObjectOutForSNP, 
-                     params$align, params$treeformat, params$font, 
-                     params$numscale, params$node, params$lim, params$bootPos,
-                     params$midP)
+                     params$align, params$tree_format, params$font, 
+                     params$num_scale, params$node, params$lim, params$boot_pos,
+                     params$mid_p)
   
 
     
@@ -39,10 +39,10 @@ app_server <- function(input, output,session) {
   #add visual matrix
   treeWLayers <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_data",
                             dataDisplay$mFileMatOut, plot$makeTreeOut,
-                            buttons$addTree, buttons$addAnno,
-                            buttons$removeAnno, buttons$addMatrix, 
-                            buttons$removeMatrix, dataDisplay$geneObjectForSNP,
-                            params$labelOff, params$labColor, params$matOff)
+                            buttons$add_tree, buttons$add_anno,
+                            buttons$remove_anno, buttons$add_matrix, 
+                            buttons$remove_matrix, dataDisplay$geneObjectForSNP,
+                            params$label_off, params$lab_color, params$mat_off)
   
   #allows tree with annotation and viz parameters to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", treeWLayers)
@@ -67,17 +67,17 @@ app_server <- function(input, output,session) {
   examplePlot <- callModule(mod_displayTree_server, "displayTree_ui_example",
                             exampleData$extreeFileOut,
                             exampleData$exGeneFileCorOrUnOut,
-                            exampleParams$align, exampleParams$treeformat,
-                            exampleParams$font, exampleParams$numscale,
+                            exampleParams$align, exampleParams$tree_format,
+                            exampleParams$font, exampleParams$num_scale,
                             exampleParams$node, exampleParams$lim,
-                            exampleParams$bootPos, exampleParams$midP)
+                            exampleParams$boot_pos, exampleParams$mid_p)
 
   callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example", 
              exampleData$exMetaFileOut, examplePlot$makeTreeOut,
-             exampleButtons$addTree, exampleButtons$addAnno, 
-             exampleButtons$removeAnno, exampleButtons$addMatrix, 
-             exampleButtons$removeMatrix, 
-             exampleData$exGeneObjectForSNP, exampleParams$labelOff,
-             exampleParams$labColor, exampleParams$matOff)
+             exampleButtons$add_tree, exampleButtons$add_anno, 
+             exampleButtons$remove_anno, exampleButtons$add_matrix, 
+             exampleButtons$remove_matrix, 
+             exampleData$exGeneObjectForSNP, exampleParams$label_off,
+             exampleParams$lab_color, exampleParams$mat_off)
   
 }

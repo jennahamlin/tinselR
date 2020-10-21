@@ -30,8 +30,8 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, mFileMatOut, makeTreeOut, addTree, addAnno, 
-           removeAnno, addMatrix, removeMatrix, geneObjectForSNP, labelOff, 
+  function(input, output, session, mFileMatOut, makeTreeOut, add_tree, add_anno, 
+           remove_anno, add_matrix, remove_matrix, geneObjectForSNP, labelOff, 
            labColor, matOff){
     
     #add other tree viz parameters above 
@@ -67,16 +67,16 @@ mod_cladeAnnotator_server <-
     })
     
     #displays the tree plot, uses output from the displayTree module
-    observeEvent(addTree(), {
+    observeEvent(add_tree(), {
       output$treeDisplay <- renderPlot({
         makeTreeOut()})
     })
     
     #display that user-brushed layer onto the tree
-    observeEvent(addAnno(), {
+    observeEvent(add_anno(), {
       
       #this acts as a control for if the user accidently presses the 
-      #addAnno button without the file loaded
+      #add_anno button without the file loaded
       if (is.null(geneObjectForSNP())) {
         #skip
       } else {
@@ -100,7 +100,7 @@ mod_cladeAnnotator_server <-
     
     # remove the annotations one by one, when number of values equals one, 
     #then display tree without annotations.
-    observeEvent(removeAnno(), {
+    observeEvent(remove_anno(), {
       
       if (is.null(geneObjectForSNP())) {
         #skip
@@ -126,7 +126,7 @@ mod_cladeAnnotator_server <-
     })
     
     #allow the user to add a matrix to a tree; change showMap to the value of 1
-    observeEvent(addMatrix(),{
+    observeEvent(add_matrix(),{
       
       
       #display that layer onto the tree
@@ -140,7 +140,7 @@ mod_cladeAnnotator_server <-
     
     #as above with add matrix but this allows the removal of the matrix by 
     #setting showMap to 0
-    observeEvent(removeMatrix(),{
+    observeEvent(remove_matrix(),{
       
       #display that layer onto the tree
       Values[["showMap"]] <-  0

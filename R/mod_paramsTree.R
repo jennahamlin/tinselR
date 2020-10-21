@@ -95,17 +95,16 @@ mod_paramsTree_server <- function(input, output, session) {
   # data display module
   return(list(
     align = reactive(input$alignTips),
-    treeformat = reactive(input$treeFormat),
+    tree_format = reactive(input$treeFormat),
     font = reactive(input$fontFormat),
-    numscale = reactive(input$numScale),
+    num_scale = reactive(input$numScale),
     node = reactive(input$nodeDisplay),
     lim = reactive(input$tipLim),
-    bootPos = reactive(input$bootPosition),
-    midP = reactive(input$midPoint), 
-    labelOff = reactive(input$labelOffset),
-    overAdd = reactive(input$overlapAdjust),
-    labColor = reactive(input$color),
-    matOff = reactive(input$matOffset)
+    boot_pos = reactive(input$bootPosition),
+    mid_p = reactive(input$midPoint), 
+    label_off = reactive(input$labelOffset),
+    lab_color = reactive(input$color),
+    mat_off = reactive(input$matOffset)
     #,
     #matCol = reactive(input$matColor)
   ))

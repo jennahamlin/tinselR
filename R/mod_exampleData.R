@@ -163,7 +163,7 @@ mod_exampleData_server <- function(input, output, session){
     if (is.null(exMetaFileIn())){
       #skip
     } else {
-      mFileConversion( exMetaFileIn())
+      m_file_conversion(exMetaFileIn())
     }
   })
   
@@ -173,7 +173,7 @@ mod_exampleData_server <- function(input, output, session){
   #another function (replaceHwithZeros) for the reactive exGeneFileCorOrU
   exGeneObject <-reactive({
     label <- NULL
-    gene_object_out(replaceHwithZeros(exGeneFileCorOrUn()))
+    gene_object_out(replace_h_with_zeros(exGeneFileCorOrUn()))
   })
   
   #return these reactive objects to be used in tree display module
