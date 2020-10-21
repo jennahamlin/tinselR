@@ -173,7 +173,7 @@ mod_exampleData_server <- function(input, output, session){
   #another function (replaceHwithZeros) for the reactive exGeneFileCorOrU
   exGeneObject <-reactive({
     label <- NULL
-    geneObjectOut(replaceHwithZeros(exGeneFileCorOrUn()))
+    gene_object_out(replaceHwithZeros(exGeneFileCorOrUn()))
   })
   
   #return these reactive objects to be used in tree display module

@@ -82,7 +82,7 @@ mod_uploadData_server <- function(input, output, session) {
   #and is a reactive that is ultimately send to the cladeAnnotator
   m_file_mat <- reactive({
     if(!is.null(meta_file_up())) { #if not; then will complain w/button push
-      mFileConversion(mFile = meta_file())
+      m_file_conversion(m_file = meta_file())
     } else {
       #skip
     }
@@ -171,7 +171,7 @@ mod_uploadData_server <- function(input, output, session) {
   #description of those functions within.
   gene_object <- reactive({
     label <- NULL
-    geneObjectOut(replaceHwithZeros(gene_file_cor_or_un()))
+    gene_object_out(replace_h_with_zeros(gene_file_cor_or_un()))
   })
 
   #return these reactive objects to be used in particular modules

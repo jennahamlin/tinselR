@@ -10,34 +10,29 @@
 #the other bits here help with reading in the file: trim whitespace, skip 
 #empty row, column names, and how to read in the data; default is set at column 
 #as characters
-read_data<-function(filePath, sep)
-{readr::read_delim(filePath,
-                   sep,
-                   trim_ws = TRUE,
-                   skip_empty_rows = TRUE,
-                   col_names = TRUE,
-                   col_types = readr::cols(.default = readr::col_character())
-)
+read_data<-function(filePath, sep) {
+  readr::read_delim(filePath,
+                    sep,
+                    trim_ws = TRUE,
+                    skip_empty_rows = TRUE,
+                    col_names = TRUE,
+                    col_types = readr::cols(.default = readr::col_character()))
 }
 
 #function which maps the type of file uploaded based on user selection. For 
 #example, inVar could be input$genesep
-file_type <- function(inVar){
-  if(inVar == "\t")
-  {
-    return("\t")
-  }
-  else (inVar == ",")
-  {
-    return(",")
-  }
+file_type <- function(inVar) {
+  if(inVar == "\t") {
+    return("\t") }
+  else if (inVar == ",") {
+    return(",") }
 }
 
 #function to confirm the type of file uploaded, matches the selected type 
-#this uses the fille uploaded (file_up), the type of file delimited selected 
-#(file_type - either a csv or tsv), and the file seperate from input$sep, which
+#this uses the fill uploaded (file_up), the type of file delimited selected 
+#(file_type - either a csv or tsv), and the file separate from input$sep, which
 #the user specifies on the interface -so this is ultimately a reactive
-file_check<- function(file_up, file_type, file_sep){
+file_check <- function(file_up, file_type, file_sep) {
   my_file <- req(file_up$datapath)
   my_lines <- readLines(con = my_file, n = 3)
   file_chk <- validate(
@@ -46,23 +41,21 @@ file_check<- function(file_up, file_type, file_sep){
                       file_type)[[1]]) == 
         length(strsplit(my_lines[3], file_type)[[1]]),
       paste("Error: the delimiter chosen does not match the file type uploaded: 
-            ", file_up[1], sep = "")
-    ), 
+            ", file_up[1], sep = "")), 
     need(
       length(strsplit(my_lines[2], file_type)[[1]]) > 1,
       paste("Error: the delimiter chosen does not match the file type uploaded: 
             ", file_up[1], sep = "")))
   if (is.null(file_chk) == TRUE) {
-    FileName <- read_data(filePath = file_up$datapath, sep = file_sep)
-  }
-  else {
+    file_name <- read_data(filePath = file_up$datapath, sep = file_sep)
+  } else {
     return(file_chk)
   }
 }
 
 #change column1, row1 to the id of label and replace - with a 0 within the file
 #necessary for downstream steps
-replace_h_with_zeros <- function(gene_file_in){
+replace_h_with_zeros <- function(gene_file_in) {
   . <- NULL 
   dplyr::rename(gene_file_in, label = 1) 
   #rename column 1 to label for joining of data sets later
@@ -71,18 +64,18 @@ replace_h_with_zeros <- function(gene_file_in){
 #additional manipulation of genetic distance matrix for ultimately getting the 
 #mean number of SNPs 
 
-geneObjectOut  <- function (geneFile) {
+gene_object_out  <- function (geneFile) {
   label <- . <- value <- NULL
-  geneFile%>%
+  geneFile %>%
     #remove na
-    stats::na.omit()%>%
+    stats::na.omit() %>%
     #convert to a three column data frame
-    tidyr::pivot_longer(-label)%>%
+    tidyr::pivot_longer(-label) %>%
     #remove self comparisons for this table - necessary for snp mean/median 
     #calculation.
-    .[which(.$label != .$name),] %>% 
+    .[which(.$label != .$name), ] %>% 
     ##replace - with zero in the file; if zeros already infile, still works
-    dplyr::mutate(value=ifelse(value=="-", 0,value))
+    dplyr::mutate(value = ifelse(value=="-", 0, value))
 }
 
 ######################################
