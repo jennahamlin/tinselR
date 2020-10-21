@@ -16,9 +16,9 @@ app_server <- function(input, output,session) {
   #outputs directly a user message if the file tip labels are all the same for 
   #the three files and tells user if they can use matrix button
   tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1",
-                            dataDisplay$metaFileOut, dataDisplay$mFileOut,
-                            dataDisplay$geneFileOut, dataDisplay$gFileOut, 
-                            dataDisplay$tFileOut)
+                            dataDisplay$meta_file_out, dataDisplay$m_file_out,
+                            dataDisplay$gene_file_out, dataDisplay$g_file_out, 
+                            dataDisplay$t_file_out)
   
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
@@ -28,7 +28,7 @@ app_server <- function(input, output,session) {
   
   #displays the tree and uses the params as input to change tree viz
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data",  
-                     dataDisplay$treeFileOut, dataDisplay$geneObjectOutForSNP, 
+                     dataDisplay$tree_file_out, dataDisplay$geneObjectOutForSNP, 
                      params$align, params$treeformat, params$font, 
                      params$numscale, params$node, params$lim, params$bootPos,
                      params$midP)

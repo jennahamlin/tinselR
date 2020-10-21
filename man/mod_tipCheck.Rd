@@ -11,23 +11,23 @@ mod_tipCheck_server(
   input,
   output,
   session,
-  metaFileOut,
-  mFileOut,
-  geneFileOut,
-  gFileOut,
-  tFileOut
+  meta_file_out,
+  m_file_out,
+  gene_file_out,
+  g_file_out,
+  t_file_out
 )
 }
 \arguments{
 \item{id, input, output, session}{internal}
 
-\item{metaFileOut}{imported meta file for confirmation that file is uploaded}
-
-\item{mFileOut}{imported meta data file for tip checking}
+\item{tFileOut}{imported tree for tip checking}
 
 \item{gFileOut}{imported genetic distance file for tip checking}
 
-\item{tFileOut}{imported tree for tip checking}
+\item{metaFileOut}{imported meta file for confirmation that file is uploaded}
+
+\item{mFileOut}{imported meta data file for tip checking}
 }
 \description{
 A shiny Module. This module generates the landing page for the

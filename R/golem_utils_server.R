@@ -92,27 +92,27 @@ geneObjectOut  <- function (geneFile) {
 ## tipCheck server function
 # Function to check imported data files for tip label agreement. If no tip label
 #agreement, tells user what is problematic
-sanity <- function(mFile, gFile, tFile) { 
+sanity <- function(m_file, g_file, t_file) { 
   #function(impMeta, metSep, impGene, genSep, impTree) {
   
   #meta data get tips
-  mFileTips <- mFile %>% dplyr::pull(1) %>% sort
+  mFileTips <- m_file %>% dplyr::pull(1) %>% sort
   #print(mFileTips)
   
   #genetic data get tips
-  gFileTips <- gFile %>% dplyr::pull(1) %>% sort
+  gFileTips <- g_file %>% dplyr::pull(1) %>% sort
   #print(gFileTips)
   
   #tree file get tips
-  tFileHold <- treeio::read.newick(file = tFile$datapath)
+  tFileHold <- treeio::read.newick(file = t_file$datapath)
   tFileTips <- sort(tFileHold$tip.label)
   
   # Check for required column names in meta data file
-  if("Tip.labels" %in% colnames(mFile) != TRUE) {
+  if("Tip.labels" %in% colnames(m_file) != TRUE) {
     return(HTML('<span style="color:gray">Your metadata file does not contain
                 the correct column headers. Please correct and try again.
                 </span>'))
-  } else if("Display.labels" %in% colnames(mFile) != TRUE) {
+  } else if("Display.labels" %in% colnames(m_file) != TRUE) {
     return(HTML('<span style="color:gray">Your metadata file does not contain 
                 the correct column headers. Please correct and try again.
                 </span>'))

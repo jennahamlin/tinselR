@@ -25,10 +25,10 @@ mod_tipCheck_ui <- function(id){
 
     # this output info about if tip labels are not concordant between all
     #three files
-    htmlOutput(ns('fileChecking')),
+    htmlOutput(ns('file_checking')),
 
     # this one will tell user if they can add a matrix to the tree
-    uiOutput(ns('fileChecking2')),
+    uiOutput(ns('file_checking_mat')),
 
     tags$hr(style = "border-color: #99b6d8;")
   )
@@ -38,8 +38,9 @@ mod_tipCheck_ui <- function(id){
 #'
 #' @rdname mod_tipCheck
 #'
-mod_tipCheck_server <- function(input, output, session, metaFileOut, mFileOut,
-                                geneFileOut, gFileOut, tFileOut) {
+mod_tipCheck_server <- function(input, output, session, meta_file_out,
+                                m_file_out, gene_file_out, g_file_out,
+                                t_file_out) {
   ns <- session$ns
 
   #this will render the output from the sanity function found in the
@@ -47,41 +48,35 @@ mod_tipCheck_server <- function(input, output, session, metaFileOut, mFileOut,
   #tree, genetic distance, genetic distance separator, meta data, and meta data
   #separator
 
-  output$fileChecking <- renderUI({
+  output$file_checking <- renderUI({
     ns <- session$ns
 
-    if (is.null(tFileOut())) {
+    if (is.null(t_file_out())) {
       return(HTML('<span style="color:gray">Please upload a tree file</span>'))
-    } else if (is.null(geneFileOut())) {
+    } else if (is.null(gene_file_out())) {
       return(HTML(
         '<span style="color:gray">Please upload a genetic distance file</span>')
       )
-    } else if (is.null(metaFileOut())) {
+    } else if (is.null(meta_file_out())) {
       return(HTML(
         '<span style="color:gray">Please upload a meta data file</span>')
       )
     } else {
       sanity(
-        tFile = tFileOut(),
-        gFile = gFileOut(),
-        mFile = mFileOut()
+        t_file = t_file_out(),
+        g_file = g_file_out(),
+        m_file = m_file_out()
       )
     } 
   })
 
   #displays number of columns that are available for adding a matrix to the tree
-  output$fileChecking2 <- renderUI({
+  output$file_checking_mat <- renderUI({
     ns <- session$ns
-    if (is.null(mFileOut())) {
+    if (is.null(m_file_out())) {
       return(NULL)
     } else {
-      validate(notColumns(mFileConversion(mFileOut())))
+      validate(notColumns(mFileConversion(m_file_out())))
     }
   })
 }
-
-## To be copied in the UI
-## mod_tipCheck_ui("tipCheck_ui_1")
-
-## To be copied in the server
-## callModule(mod_tipCheck_server, "tipCheck_ui_1")

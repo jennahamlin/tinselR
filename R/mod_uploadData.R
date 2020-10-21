@@ -181,26 +181,26 @@ mod_uploadData_server <- function(input, output, session) {
       mFileMatOut = reactive(m_file_mat()),
 
       #checks for file and sends user message; sent to tipCheck
-      metaFileOut = reactive(meta_file_up()),
+      meta_file_out = reactive(meta_file_up()),
 
       #used for sanity (concordant check between files) and mFileConversion
       #(convert for heatmap) functions
-      mFileOut = reactive(meta_file()),
+      m_file_out = reactive(meta_file()),
 
       #checks for file and sends user message; sent to tipCheck
-      geneFileOut = reactive(gene_file_up()),
+      gene_file_out = reactive(gene_file_up()),
 
       #used for sanity (concordant check between files); sent to tipCheck
-      gFileOut = reactive(gene_file()),
+      g_file_out = reactive(gene_file()),
 
       #for clade annotator to get snp differences and calculate the mean
       geneObjectForSNP = reactive(gene_object()),
 
       #holds tree with or without converted tip labels; send to displayTree
-      treeFileOut = reactive(tree_file_up()),
+      tree_file_out = reactive(tree_file_up()),
 
       #require tree file for concordant tip checking; send to tipCheck
-      tFileOut = reactive({
+      t_file_out = reactive({
         req(input$tree_file)})
     ))
 }
