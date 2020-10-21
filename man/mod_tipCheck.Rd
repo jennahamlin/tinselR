@@ -18,7 +18,15 @@ mod_tipCheck_server(
 )
 }
 \arguments{
-\item{id, input, output, session}{Internal parameters for {shiny}.}
+\item{id, input, output, session}{internal}
+
+\item{mFileOut}{imported meta data file for tip checking}
+
+\item{metaFileOut}{imported meta file for confirmation that file is uploaded}
+
+\item{gFileOut}{imported genetic distance file for tip checking}
+
+\item{tFileOut}{imported tree for tip checking}
 }
 \description{
 A shiny Module. This module generates the landing page for the 

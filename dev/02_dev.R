@@ -32,31 +32,43 @@ golem::add_module(name="relaunchApp")
 
 
 ## 2.2 Add dependencies
-usethis::use_package("config")
-usethis::use_package("utils")
-usethis::use_package("markdown") # for the documentation page
-usethis::use_package( "dplyr" ) # for manipulating input files 
-usethis::use_package("assertthat", type = "Suggests")
-usethis::use_package("phytools") # for the find MRCA function
-usethis::use_package("magrittr") # for %>% essentially a pipe
-usethis::use_package("ggtree") # for tree viz
-usethis::use_package("readr") # for reading in files
-usethis::use_package("tidyr")
-usethis::use_package("phylotools")
-usethis::use_package("tibble") #<= "2.1.3"
-usethis::use_package("shinythemes")
-usethis::use_package("colorspace", type = "Suggests")
-usethis::use_package("glue")
-usethis::use_package("gtools")
 usethis::use_package("ape")
+usethis::use_package("config")
+usethis::use_package("dplyr" ) # for manipulating input files 
+usethis::use_package("gtools")
 usethis::use_package("ggplot2")
-usethis::use_package("treeio")
+usethis::use_package("ggtree") # for tree viz
+usethis::use_package("golem")
+usethis::use_package("magrittr") # for %>% essentially a pipe
+usethis::use_package("markdown") # for the documentation page
+usethis::use_package("phytools") # for the find MRCA function
+usethis::use_package("phylotools")
+usethis::use_package("shinythemes")
+usethis::use_package("readr") # for reading in files
+usethis::use_package("shiny")
 usethis::use_package("stats")
-usethis::use_package("zip")
 usethis::use_package("shinyjs")
-usethis::use_package("here", type = "Suggests")
-usethis::use_package("DescTools")
+usethis::use_package("tibble") 
+usethis::use_package("tidyr")
+usethis::use_package("treeio")
+usethis::use_package("utils")
+
 usethis::use_pipe() 
+
+usethis::use_package("assertthat", type = "Suggests")
+usethis::use_package("attempt", type = "Suggests")
+usethis::use_package("colorspace", type = "Suggests")
+usethis::use_package("DT", type = "Suggests")
+usethis::use_package("glue", type = "Suggests")
+usethis::use_package("here", type = "Suggests")
+usethis::use_package("htmltools", type = "Suggests")
+usethis::use_package("knitr")
+usethis::use_package("pkgload", type = "Suggests")
+usethis::use_package("processx", type = "Suggests")
+usethis::use_package("purrr", type = "Suggests")
+usethis::use_package("rmarkdown", type = "Suggests")
+usethis::use_package("testthat", min_version = "2.1.0")
+usethis::use_package("xfun", type = "Suggests")
 
 
 

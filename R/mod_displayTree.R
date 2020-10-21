@@ -19,7 +19,6 @@ mod_displayTree_ui <- function(id){
   ns <- NS(id)
   tagList(
   )
-  
 }
 
 #' displayTree Server Function
@@ -116,7 +115,6 @@ mod_displayTree_server <- function(input, output, session,
       makeTreeOut = reactive(makeTree())
     ))
 }
-
 ## To be copied in the UI
 # mod_displayTree_ui("displayTree_ui_1")
 

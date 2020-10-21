@@ -1,4 +1,4 @@
-#' downloadImage UI Funciton
+#' downloadImage UI Function
 #' 
 #' @title   mod_downloadImage_ui and mod_downloadImage_server
 #' 

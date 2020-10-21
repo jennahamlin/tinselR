@@ -1,51 +1,51 @@
 Package: Tinsel
-Title: PKG_TITLE
+Title: An R Shiny Application for annotating outbreak phylogenetic trees
 Version: 0.0.0.9000
 Authors@R: person('Jenna', 'Hamlin', email = 'ptx4@cdc.gov', role = c('cre', 'aut'))
-Description: This package is a phylogenetic application for adding manipulating and annotating trees using Rshiny.
+Description: This is a phylogenetic tree application for adding additional information to trees. 
+  Additional information could come from a genetic distance file or meta data file.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    shiny,
-    golem,
-    processx,
-    attempt,
-    glue,
-    htmltools,
-    dplyr,
-    utils,
-    markdown,
-    xfun,
-    pkgload,
-    phytools,
-    purrr,
-    magrittr,
-    phylotools,
-    tidyr,
-    tibble,
-    shinythemes,
-    phangorn,
-    gtools,
-    DT,
-    config,
     ape,
-    ggtree,
-    readr,
+    config,
+    dplyr,
+    gtools,
     ggplot2,
-    treeio,
+    ggtree,
+    magrittr,
+    markdown,
+    phytools,
+    phylotools,
+    shinythemes,
+    readr,
+    shiny,
     stats,
-    shinyjs
+    shinyjs,
+    tibble,
+    tidyr,
+    treeio,
+    utils,
+    knitr,
+    testthat (>= 2.1.0),
+    golem
 RoxygenNote: 7.1.1
 URL: https://github.com/jennahamlin/Tinsel
 BugReports: https://github.com/jennahamlin/Tinsel/issues
 Suggests: 
-    testthat (>= 2.1.0),
-    knitr,
-    rmarkdown,
+    assertthat,
+    attempt,
     colorspace,
+    DT,
+    glue,
     here,
-    assertthat
+    htmltools,
+    pkgload,
+    processx,
+    purrr,
+    rmarkdown,
+    xfun
 Depends: 
     R (>= 2.10)
 VignetteBuilder: knitr

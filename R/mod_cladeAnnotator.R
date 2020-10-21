@@ -1,4 +1,4 @@
-#' cladeAnnotator UI Funciton 
+#' cladeAnnotator UI Function 
 #' 
 #' @title   mod_cladeAnnotator_ui and mod_cladeAnnotator_server
 #' 
@@ -246,7 +246,6 @@ mod_cladeAnnotator_server <-
     })
     
     return(treeOut)
-    
   }
 
 ## To be copied in the UI

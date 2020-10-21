@@ -10,8 +10,9 @@
 
 golem::fill_desc(
   pkg_name = "Tinsel", # The Name of the package containing the App 
-  pkg_title = "PKG_TITLE", # The Title of the package containing the App 
-  pkg_description = "Tinsel is a phylogenetic application for adding additional information to trees.", # The Description of the package containing the App 
+  pkg_title = "An R Shiny Application for annotating outbreak phylogenetic trees", # The Title of the package containing the App 
+  pkg_description = "This is a phylogenetic tree application for adding additional information to trees. 
+  Additional information could come from a genetic distance file or meta data file.", # The Description of the package containing the App 
   author_first_name = "Jenna", # Your First Name
   author_last_name = "Hamlin",  # Your Last Name
   author_email = "ptx4@cdc.gov",      # Your Email

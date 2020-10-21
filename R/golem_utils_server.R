@@ -65,16 +65,14 @@ fileCheck<- function(fileUp, fileType, fileSep){
 replaceHwithZeros <- function(geneFileIn){
   . <- NULL 
   dplyr::rename(geneFileIn, label = 1) 
-  #rename columnn 1 to label for joining of data sets later
+  #rename column 1 to label for joining of data sets later
 }
 
 #additional manipulation of genetic distance matrix for ultimately getting the 
 #mean number of SNPs 
 
-
-
 geneObjectOut  <- function (geneFile) {
-  label <- . <- NULL
+  label <- . <- value <- NULL
   geneFile%>%
     #remove na
     stats::na.omit()%>%
@@ -144,12 +142,12 @@ sanity <- function(mFile, gFile, tFile) {
 #for a matrix 
 mFileConversion <- function(mFile){
   Tip.labels <- NULL
-    meta2 <-mFile %>%
-      #convert the column Display labels to the row name
-      tibble::column_to_rownames(var = "Display.labels")%>% 
-      #do not include the column of 'ugly' tip labels  
-      dplyr::select(-Tip.labels) 
-
+  meta2 <-mFile %>%
+    #convert the column Display labels to the row name
+    tibble::column_to_rownames(var = "Display.labels")%>% 
+    #do not include the column of 'ugly' tip labels  
+    dplyr::select(-Tip.labels) 
+  
 }
 
 #get the number of columns of the meta data file. Here columns should be 1 or 
@@ -179,14 +177,14 @@ combineGandT <- function(treeFile, geneFile){
 }
 
 # treePlot <- function(inputFile, align, layout, fontface, width, node,
-#limit, nudge_x){
+# limit, nudge_x){
 #   label <- NULL
 #   ggtree::ggtree(inputFile, layout)+
 #     ggplot2::xlim(NA, limit)+
 #     ggtree::geom_tiplab(align, fontface, family="Helvetica")+
 #     ggtree::geom_treescale(width, x = 0.005, y = -1 )+
-#     ggtree::geom_text2(ggplot2::aes(label=label, 
-#subset = !is.na(as.numeric(label)) & as.numeric(label) > node), nudge_x )
+#     ggtree::geom_text2(ggplot2::aes(label=label,
+# subset = !is.na(as.numeric(label)) & as.numeric(label) > node), nudge_x )
 # }
 
 #####################################

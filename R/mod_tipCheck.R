@@ -8,12 +8,17 @@
 #'
 #' @rdname mod_tipCheck
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @param id,input,output,session internal
+#' @param tFileOut imported tree for tip checking
+#' @param gFileOut imported genetic distance file for tip checking
+#' @param metaFileOut imported meta file for confirmation that file is uploaded
+#' @param mFileOut imported meta data file for tip checking
 #'
 #' @importFrom shiny NS tagList 
 mod_tipCheck_ui <- function(id){
   ns <- NS(id)
   tagList(
+    
     tags$table(width ="100%",
                tags$th("File Check Output", colspan="3",
                        style="font-size:20px; color:#444444;")),
@@ -27,6 +32,7 @@ mod_tipCheck_ui <- function(id){
     
     tags$hr(style="border-color: #99b6d8;")
   )
+  
 }
 
 #' tipCheck Server Function
@@ -37,6 +43,8 @@ mod_tipCheck_server <- function(input, output, session, mFileOut,
                                 metaFileOut, gFileOut, tFileOut){
   ns <- session$ns
   
+  tFileOut <- NULL
+  
   #this will render the output from the sanity function found in the 
   #golem_utils_server.R file and takes in 5 reactive files - 
   #tree, genetic distance, genetic distance separator, meta data, and meta data 
@@ -44,6 +52,7 @@ mod_tipCheck_server <- function(input, output, session, mFileOut,
   
   output$fileChecking <- renderUI({
     ns <- session$ns
+    
     if (is.null(tFileOut())) { 
       return(HTML('<span style="color:gray">Please upload a tree file</span>'))
     } else if (is.null(gFileOut())){
