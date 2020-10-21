@@ -1,6 +1,6 @@
 #' Run the Shiny Application
 #' 
-#' @param ... other arguments 
+#' @param ... other arguments
 #'
 #' @export
 #' @importFrom shiny shinyApp
@@ -10,7 +10,7 @@ run_app <- function(...
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
-      server = app_server), 
+      server = app_server),
     golem_opts = list(...)
   )
 }
