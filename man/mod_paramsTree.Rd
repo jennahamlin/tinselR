@@ -19,7 +19,7 @@ mod_paramsTree_server(input, output, session)
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module holds all of the parameters that 
+A shiny Module. This module holds all of the parameters that
 can be adjusted for the visualization of a phylogenetic tree.
 }
 \details{

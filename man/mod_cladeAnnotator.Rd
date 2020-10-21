@@ -39,6 +39,6 @@ remove annotations and checks for overlap between those annotations and
 allows the addition of the heatmap.
 }
 \details{
-cladeAnnotator UI Funciton
+cladeAnnotator UI Function
 }
 \keyword{internal}

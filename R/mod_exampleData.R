@@ -73,6 +73,19 @@ mod_exampleData_server <- function(input, output, session){
   #no need to provide option to select input delimiter as this is done when 
   #reading in data to use with usethis::use_data()
   
+  ############
+  ### META ###
+  ############
+  
+  exMetaFileIn <- eventReactive(input$exMetaFile, {
+    if(input$exMetaFile == "example Meta Data 1"){
+      Tinsel::meta1}
+    else if (input$exMetaFile == "example Meta Data 2") {
+      Tinsel::meta2}
+    else if (input$exMetaFile == "example Meta Data 3"){
+      Tinsel::meta3}
+  })
+
   ###############
   ### GENETIC ###
   ###############
@@ -85,19 +98,6 @@ mod_exampleData_server <- function(input, output, session){
     else if (input$exGeneFile == "example Genetic Distance 3"){
       Tinsel::gene3}
     
-  })
-  
-  ############
-  ### META ###
-  ############
-  
-  exMetaFileIn <- eventReactive(input$exMetaFile, {
-    if(input$exMetaFile == "example Meta Data 1"){
-      Tinsel::meta1}
-    else if (input$exMetaFile == "example Meta Data 2") {
-      Tinsel::meta2}
-    else if (input$exMetaFile == "example Meta Data 3"){
-      Tinsel::meta3}
   })
   
   ##############

@@ -3,7 +3,9 @@
 \docType{data}
 \name{tree3}
 \alias{tree3}
-\title{This is a newick phylogenetic tree for 19 isolates of Salmonella enterica
+\title{Example Tree 3
+
+This is a newick phylogenetic tree for 19 isolates of Salmonella enterica
 to be used with the optional genetic distance matrix (example gene 3) and
  the optional meta data file (example meta 3).}
 \format{
@@ -13,6 +15,8 @@ An object of class \code{phylo} of length 5.
 data(tree3)
 }
 \description{
+Example Tree 3
+
 This is a newick phylogenetic tree for 19 isolates of Salmonella enterica
 to be used with the optional genetic distance matrix (example gene 3) and
  the optional meta data file (example meta 3).

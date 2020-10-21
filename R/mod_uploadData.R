@@ -59,27 +59,84 @@ mod_uploadData_ui <- function(id) {
 mod_uploadData_server <- function(input, output, session) {
   ns <- session$ns
 
-  #reactive which holds just the tree file, this is used in the tipcheck module
-  treeFileOut <- reactive({
-    req(input$treeFile)})
-
-  #reactive which holds just the gene file, this is used in tipcheck module
-  genFile <- reactive(
+  ############
+  ### META ###
+  ############
+  
+  #1. reactive expression that holds meta data file and sends tipcheck message
+  metaFileUp <- reactive({
+    input$metaFile
+  })
+  
+  #2. to perform check for correctly selected delimiter using fileType function
+  metaFileType <- eventReactive(input$metaSep, {
+    fileType(input$metaSep)
+  })
+  
+  #3. read in the file using file up and file type reactive 
+  metaFile <- reactive({
+    fileCheck(fileUp = metaFileUp(), fileType = metaFileType(),
+              fileSep = metaFileType())
+  })
+  
+  #this performs file conversion for the meta file if there is matrix data,
+  #and is a reactive that is ultimately send to the cladeAnnotator
+  mFileMat <- reactive({
+    if(!is.null(metaFileUp())) { 
+      mFileConversion(mFile = metaFile())
+    } else {
+      #skip
+    }
+  })
+  
+  ###############
+  ### GENETIC ###
+  ###############
+  
+  #1. reactive expression that holds the genetic distance file
+  geneFileUp <- reactive({
+    input$geneFile
+  })
+  
+  #2. to perform check for correctly selected delimiter using fileType function
+  geneFileType <- eventReactive(input$geneSep, {
+    fileType(input$geneSep)
+  })
+  
+  #3. read in the file using file up and file type reactive 
+  geneFile <- reactive(
     {fileCheck(fileUp = geneFileUp(),
                                   fileType = geneFileType(),
                                   fileSep = geneFileType())  })
 
-  #reactive expression that holds the genetic distance file
-  geneFileUp <- reactive({
-    input$geneFile
-  })
+  ##############
+  ### TREES ###
+  ##############
 
-  #reactive which holds the input selected for delimiter for gene file using
-  #fileType function - this will check for correctly selected delimiter
-  geneFileType <- eventReactive(input$geneSep, {
-    fileType(input$geneSep)
-  })
+  #reactive expression that uploads the newick tree and allows the optional
+  #upload of meta data to correct tree tip labels 
+  treeFileUp <- reactive({
+    
+    . <- NULL #this refers to the file that is passed through
+    
+    validate(need(input$treeFile != "", "Please import newick tree file"))
+    req(input$treeFile)
+    
+    if (is.null(metaFileUp()$datapath)) { #if no meta file still upload the tree
+      treeio::read.newick(input$treeFile$datapath)
+    } else {
+      metaFileSeperate <- metaFile()
 
+      treeio::read.newick(input$treeFile$datapath) %>%
+        phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate))
+      #above line converts tip labels to pretty labels based on user meta upload 
+    }
+  })
+ 
+ 
+
+
+  
   #additional manipulation of genetic distance matrix for ultimately
   #getting the mean number of SNPs for either the corrected or uncorrected file;
   #uses two functions located in goloem_utils_server.R file and has a
@@ -88,62 +145,9 @@ mod_uploadData_server <- function(input, output, session) {
     label <- NULL
     geneObjectOut(replaceHwithZeros(geneFileCorOrUn()))
   })
-
-  #reactive which holds just the meta file, this is used tipcheck and matrix
-  #check in their module
-  metaFileOut <- reactive({
-    fileCheck(fileUp = metaFileUp(), fileType = metaFileType(),
-              fileSep = metaFileType())
-  })
-
-  #this performs file conversion for the meta file if there is matrix data,
-  #and is a reactive that is ultimately send to the cladeAnnotator
-  mFileMat <- reactive({
-    if(!is.null(metaFileUp())) {
-      mFileConversion(mFile = metaFileOut())
-    } else {
-      #skip
-    }
-  })
-
-  #reactive expression that holds the meta data file
-  metaFileUp <- reactive({
-    input$metaFile
-  })
-
-  #reactive which holds the input selected for delimiter for meta file
-  metaFileType <- eventReactive(input$metaSep, {
-    fileType(input$metaSep)
-  })
-
-
-  #reactive expression that uploads the newick tree and allows the optional
-  #upload of meta data to correct tree tip labels this also performs a check to
-  #see if the correct delimiter is selected before reading in the file and
-  #provides users with an error message if the delimiter is in correctly
-  #selected
-  treeFileUp <- reactive({
-
-    . <- NULL #this refers to the file that is passed through
-
-    validate(need(input$treeFile != "", "Please import newick tree file"))
-    req(input$treeFile)
-
-    if (is.null(metaFileUp()$datapath)) { #if no meta file still upload the tree
-      treeio::read.newick(input$treeFile$datapath)
-    } else {
-      metaFileSeperate <- fileCheck(fileUp = metaFileUp(),
-                                    fileType = metaFileType(),
-                                    fileSep = metaFileType())
-      #if metafile do an error check and then correct tip labels using
-      #phylotools sub.taxa.label function
-
-      treeio::read.newick(input$treeFile$datapath) %>%
-        phylotools::sub.taxa.label(., as.data.frame(metaFileSeperate))
-#this above line converts tip labels to pretty labels based on user upload of
-#meta data file
-    }
-  })
+  
+  
+  
 
   #reactive expression that uploads the genetic distance file and allows the
   #optional upload of meta data to correct tree tip labels this also performs a
@@ -154,23 +158,16 @@ mod_uploadData_server <- function(input, output, session) {
   #uploaded to be able to use clade annotator function
   geneFileCorOrUn <- reactive({
     if (is.null(metaFileUp()$datapath)) {
-      geneFileUncorrected <- fileCheck(fileUp = geneFileUp(),
-                                       fileType = geneFileType(),
-                                       fileSep = geneFileType())
+      geneFileUncorrected <- geneFile()
     }
 
     else { #if meta file uploaded do an error check, then do an error check for
       #genetic distance and then correct the distance file to match meta file
       #tip labels
 
-      metaFileComb <- fileCheck(fileUp = metaFileUp(),
-                                fileType = metaFileType(),
-                                fileSep = metaFileType())
+      metaFileComb <- metaFile()
 
-      geneFileCorrected <- fileCheck(fileUp = geneFileUp(),
-                                     fileType = geneFileType(),
-                                     fileSep = geneFileType()) %>%
-        dplyr::rename(center = 1)
+      geneFileCorrected <- geneFile() %>% dplyr::rename(center = 1)
       #rename column to center; necessary for next step.
 
       #the next two lines essentially map the perferred tip lab display in the
@@ -194,30 +191,35 @@ mod_uploadData_server <- function(input, output, session) {
   #return these reactive objects to be used in particular modules
   return(
     list(
-      #for adding on a heatmap
+      #for adding on a heatmap; sent to cladeAnnotator module
       mFileMatOut = reactive(mFileMat()),
-
-      #for tip check and dealing with matrix in above code
-      mFileOut = reactive(metaFileOut()),
-
-      #for tip check; unclear why mFileOut can be used, but without this a user
-      #message doesn't get displayed
+      
+      #checks for file and sends user message; sent to tipCheck
       metaFileOut = reactive(metaFileUp()),
+      
+      #used for sanity (concordant check between files) and mFileConversion
+      #(convert for heatmap) functions
+      mFileOut = reactive(metaFile()),
 
+      #checks for file and sends user message; sent to tipCheck
+      geneFileOut = reactive(geneFileUp()),
+      
+      #used for sanity (concordant check between files); sent to tipCheck
+      gFileOut = reactive(geneFile()),
+      
+      #for display tree to make a combined tree and genetic distance matrix
+      geneObjectOutForS4 = reactive(geneObjectOut()),
+      
+      #for clade annotator to get snp differences and calculate the mean
+      geneObjectForSNP = reactive(geneObject()),
+      
+      
       #for display tree - holds tree with or without converted tip labels
       treeFileOut = reactive(treeFileUp()),
 
-      #for display tree to make a combined tree and genetic distance matrix
-      geneObjectOutForS4 = reactive(geneObjectOut()),
-
-      #for clade annotator to get snp differences and calculate the mean
-      geneObjectForSNP = reactive(geneObject()),
-
-      #for tip check
-      gFileOut = reactive(genFile()),
-
-      #for tip check
-      tFileOut = reactive(treeFileOut())
+      #sent to tipCheck Module 
+      tFileOut = reactive({
+        req(input$treeFile)})
     ))
 }
 

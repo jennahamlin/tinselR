@@ -38,8 +38,8 @@ mod_tipCheck_ui <- function(id){
 #'
 #' @rdname mod_tipCheck
 #'
-mod_tipCheck_server <- function(input, output, session, mFileOut,
-                                metaFileOut, gFileOut, tFileOut) {
+mod_tipCheck_server <- function(input, output, session, metaFileOut, mFileOut,
+                                geneFileOut, gFileOut, tFileOut) {
   ns <- session$ns
 
   #this will render the output from the sanity function found in the
@@ -52,7 +52,7 @@ mod_tipCheck_server <- function(input, output, session, mFileOut,
 
     if (is.null(tFileOut())) {
       return(HTML('<span style="color:gray">Please upload a tree file</span>'))
-    } else if (is.null(gFileOut())) {
+    } else if (is.null(geneFileOut())) {
       return(HTML(
         '<span style="color:gray">Please upload a genetic distance file</span>')
       )

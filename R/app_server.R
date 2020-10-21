@@ -16,8 +16,9 @@ app_server <- function(input, output,session) {
   #outputs directly a user message if the file tip labels are all the same for 
   #the three files and tells user if they can use matrix button
   tipCheckOut <- callModule(mod_tipCheck_server, "tipCheck_ui_1",
-                            dataDisplay$mFileOut, dataDisplay$metaFileOut, 
-                            dataDisplay$gFileOut, dataDisplay$tFileOut)
+                            dataDisplay$metaFileOut, dataDisplay$mFileOut,
+                            dataDisplay$geneFileOut, dataDisplay$gFileOut, 
+                            dataDisplay$tFileOut)
   
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
