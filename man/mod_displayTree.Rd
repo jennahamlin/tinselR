@@ -12,7 +12,7 @@ mod_displayTree_server(
   output,
   session,
   treeFileOut,
-  geneObjectOutForS4,
+  geneObjectOutForSNP,
   align,
   treeformat,
   font,

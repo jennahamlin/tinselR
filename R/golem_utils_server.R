@@ -22,7 +22,7 @@ readData<-function(filePath, sep)
 
 #function which maps the type of file uploaded based on user selection. For 
 #example, inVar could be input$genesep
-fileType <- function(inVar){
+file_type <- function(inVar){
   if(inVar == "\t")
   {
     return("\t")
@@ -34,26 +34,26 @@ fileType <- function(inVar){
 }
 
 #function to confirm the type of file uploaded, matches the selected type 
-#this uses the fille uploaded (fileUp), the type of file delimited selected 
-#(fileType - either a csv or tsv), and the file seperate from input$sep, which
+#this uses the fille uploaded (file_up), the type of file delimited selected 
+#(file_type - either a csv or tsv), and the file seperate from input$sep, which
 #the user specifies on the interface -so this is ultimately a reactive
-fileCheck<- function(fileUp, fileType, fileSep){
-  myFile <- req(fileUp$datapath)
+file_check<- function(file_up, file_type, file_sep){
+  myFile <- req(file_up$datapath)
   myLines <- readLines(con = myFile, n = 3)
   fileChk <- validate(
     need(
       length(strsplit(myLines[2],
-                      fileType)[[1]]) == 
-        length(strsplit(myLines[3], fileType)[[1]]),
+                      file_type)[[1]]) == 
+        length(strsplit(myLines[3], file_type)[[1]]),
       paste("Error: the delimiter chosen does not match the file type uploaded: 
-            ", fileUp[1], sep = "")
+            ", file_up[1], sep = "")
     ), 
     need(
-      length(strsplit(myLines[2], fileType)[[1]]) > 1,
+      length(strsplit(myLines[2], file_type)[[1]]) > 1,
       paste("Error: the delimiter chosen does not match the file type uploaded: 
-            ", fileUp[1], sep = "")))
+            ", file_up[1], sep = "")))
   if (is.null(fileChk) == TRUE) {
-    FileName <- readData(filePath = fileUp$datapath, sep = fileSep)
+    FileName <- readData(filePath = file_up$datapath, sep = file_sep)
   }
   else {
     return(fileChk)

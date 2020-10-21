@@ -27,7 +27,7 @@ mod_displayTree_ui <- function(id){
 #' @keywords internal
 
 mod_displayTree_server <- function(input, output, session, 
-                                   treeFileOut, geneObjectOutForS4, align,
+                                   treeFileOut, geneObjectOutForSNP, align,
                                    treeformat, font,  numscale, node, lim,
                                    bootPos, midP, matOff){
   ns <- session$ns
@@ -51,7 +51,7 @@ mod_displayTree_server <- function(input, output, session,
   #join the treeobject and updated genetic distance file by label and 
   #convert to s4 object
   gandTS4 <- reactive({
-    combineGandT(treeObject(), geneObjectOutForS4())
+    combineGandT(treeObject(), geneObjectOutForSNP())
   })
   
   

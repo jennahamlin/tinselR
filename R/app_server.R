@@ -28,7 +28,7 @@ app_server <- function(input, output,session) {
   
   #displays the tree and uses the params as input to change tree viz
   plot <- callModule(mod_displayTree_server, "displayTree_ui_data",  
-                     dataDisplay$treeFileOut, dataDisplay$geneObjectOutForS4, 
+                     dataDisplay$treeFileOut, dataDisplay$geneObjectOutForSNP, 
                      params$align, params$treeformat, params$font, 
                      params$numscale, params$node, params$lim, params$bootPos,
                      params$midP)
