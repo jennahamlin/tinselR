@@ -10,7 +10,7 @@
 #the other bits here help with reading in the file: trim whitespace, skip 
 #empty row, column names, and how to read in the data; default is set at column 
 #as characters
-readData<-function(filePath, sep)
+read_data<-function(filePath, sep)
 {readr::read_delim(filePath,
                    sep,
                    trim_ws = TRUE,
@@ -38,33 +38,33 @@ file_type <- function(inVar){
 #(file_type - either a csv or tsv), and the file seperate from input$sep, which
 #the user specifies on the interface -so this is ultimately a reactive
 file_check<- function(file_up, file_type, file_sep){
-  myFile <- req(file_up$datapath)
-  myLines <- readLines(con = myFile, n = 3)
-  fileChk <- validate(
+  my_file <- req(file_up$datapath)
+  my_lines <- readLines(con = my_file, n = 3)
+  file_chk <- validate(
     need(
-      length(strsplit(myLines[2],
+      length(strsplit(my_lines[2],
                       file_type)[[1]]) == 
-        length(strsplit(myLines[3], file_type)[[1]]),
+        length(strsplit(my_lines[3], file_type)[[1]]),
       paste("Error: the delimiter chosen does not match the file type uploaded: 
             ", file_up[1], sep = "")
     ), 
     need(
-      length(strsplit(myLines[2], file_type)[[1]]) > 1,
+      length(strsplit(my_lines[2], file_type)[[1]]) > 1,
       paste("Error: the delimiter chosen does not match the file type uploaded: 
             ", file_up[1], sep = "")))
-  if (is.null(fileChk) == TRUE) {
-    FileName <- readData(filePath = file_up$datapath, sep = file_sep)
+  if (is.null(file_chk) == TRUE) {
+    FileName <- read_data(filePath = file_up$datapath, sep = file_sep)
   }
   else {
-    return(fileChk)
+    return(file_chk)
   }
 }
 
 #change column1, row1 to the id of label and replace - with a 0 within the file
 #necessary for downstream steps
-replaceHwithZeros <- function(geneFileIn){
+replace_h_with_zeros <- function(gene_file_in){
   . <- NULL 
-  dplyr::rename(geneFileIn, label = 1) 
+  dplyr::rename(gene_file_in, label = 1) 
   #rename column 1 to label for joining of data sets later
 }
 
@@ -140,9 +140,9 @@ sanity <- function(m_file, g_file, t_file) {
 #function to read in the meta data file; transform and determine if there is a 
 #column that can be plotted
 #for a matrix 
-mFileConversion <- function(mFile){
+m_file_conversion <- function(m_file){
   Tip.labels <- NULL
-  meta2 <-mFile %>%
+  meta2 <-m_file %>%
     #convert the column Display labels to the row name
     tibble::column_to_rownames(var = "Display.labels")%>% 
     #do not include the column of 'ugly' tip labels  
@@ -152,7 +152,7 @@ mFileConversion <- function(mFile){
 
 #get the number of columns of the meta data file. Here columns should be 1 or 
 #more after transformation of meta data
-notColumns <- function (file){
+not_columns <- function (file){
   colNFile<- ncol(file)
   #colHFile <- colnames(file) #could include what the column headers are
   

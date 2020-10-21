@@ -76,7 +76,7 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
     if (is.null(m_file_out())) {
       return(NULL)
     } else {
-      validate(notColumns(mFileConversion(m_file_out())))
+      validate(not_columns(m_file_conversion(m_file_out())))
     }
   })
 }
