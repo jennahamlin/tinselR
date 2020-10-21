@@ -1,22 +1,24 @@
 # Building a Prod-Ready, Robust Shiny Application.
-# 
+#
 # Each step is optional.
-# 
+#
 # 1 - On init
-# 
+#
 ## 1.1 - Fill the descripion & set options
-## 
+##
 ## Add information about the package that will contain your app
 
 golem::fill_desc(
-  pkg_name = "Tinsel", # The Name of the package containing the App 
-  pkg_title = "An R Shiny Application for annotating outbreak phylogenetic trees", # The Title of the package containing the App 
-  pkg_description = "This is a phylogenetic tree application for adding additional information to trees. 
-  Additional information could come from a genetic distance file or meta data file.", # The Description of the package containing the App 
+  pkg_name = "Tinsel", # The Name of the package containing the App
+  pkg_title = "An R Shiny Application for annotating outbreak phylogenetic
+  trees",
+  pkg_description = "This is a phylogenetic tree application for adding
+  additional information to trees. Additional information could come from a
+  genetic distance file or meta data file.",
   author_first_name = "Jenna", # Your First Name
   author_last_name = "Hamlin",  # Your Last Name
   author_email = "ptx4@cdc.gov",      # Your Email
-  repo_url = "https://github.com/jennahamlin/Tinsel" # The (optional) URL of the GitHub Repo
+  repo_url = "https://github.com/jennahamlin/Tinsel" # URL of the GitHub Repo
 )
 
 ## Use this desc to set {golem} options
@@ -28,7 +30,7 @@ golem::set_golem_options()
 ## If you want to use the MIT licence, README, code of conduct,
 ## lifecycle badge, and news
 
-usethis::use_mit_license(name = "Jenna Hamlin")  
+usethis::use_mit_license(name = "Jenna Hamlin")
 usethis::use_readme_rmd(open = FALSE)
 # usethis::use_code_of_conduct()
 # usethis::use_lifecycle_badge("Experimental")

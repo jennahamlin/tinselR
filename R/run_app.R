@@ -1,5 +1,5 @@
 #' Run the Shiny Application
-#' 
+#'
 #' @param ... other arguments
 #'
 #' @export

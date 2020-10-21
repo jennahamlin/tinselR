@@ -1,9 +1,7 @@
-# Set options here
-# TRUE = production mode, FALSE = development mode
+# Set options here TRUE = production mode, FALSE = development mode
 options(golem.app.prod = FALSE)
 
 # Detach all loaded packages and clean your environment
-# rm(list=ls(all.names = TRUE))
 golem::detach_all_attached()
 
 
