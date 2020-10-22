@@ -1,7 +1,7 @@
 #' pushButtons UI Function
 #'
 #' @title mod_pushButtons_ui mod_pushButtons_server
-#' 
+#'
 #' @description A shiny Module. This module generates the displayed action
 #' buttons for add/remove annotations and add/remove heatmap.
 #'
@@ -19,7 +19,7 @@ mod_pushButtons_ui <- function(id) {
                  border-color: #334b38; width: 200px;",  icon("tree")),
 
     actionButton(ns("add_annotation"), "Add Annotation(s) ",
-                 style = "color: #fff; background-color:#e49600 ; 
+                 style = "color: #fff; background-color:#e49600 ;
                  border-color: #e49600; width: 200px;",  icon("plus")),
 
     actionButton(ns("remove_annotation"), "Remove Annotation(s)", icon("minus"),

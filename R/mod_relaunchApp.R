@@ -10,7 +10,7 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @importFrom shiny NS tagList
-mod_relaunchApp_ui <- function(id){
+mod_relaunchApp_ui <- function(id) {
   ns <- NS(id)
   tagList(
     actionButton(ns("reload_session"), HTML("Relaunch App"),

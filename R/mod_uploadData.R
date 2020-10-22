@@ -41,7 +41,7 @@ mod_uploadData_ui <- function(id) {
           "Separator for genetic distance file", style = "color:#afafae"))),
 
     fileUpload(ns("meta_file"), fileLabel = tags$b(
-      "3. Upload an optional meta data file", style="color:#afafae")),
+      "3. Upload an optional meta data file", style = "color:#afafae")),
 
     div(style = "margin-top:-2em",
         inputSeparator(ns("meta_sep"), fileLabel = tags$em(
@@ -81,7 +81,7 @@ mod_uploadData_server <- function(input, output, session) {
   #this performs file conversion for the meta file if there is matrix data,
   #and is a reactive that is ultimately send to the cladeAnnotator
   m_file_mat <- reactive({
-    if(!is.null(meta_file_up())) { #if not; then will complain w/button push
+    if (!is.null(meta_file_up())) { #if not; then will complain w/button push
       m_file_conversion(m_file = meta_file())
     } else {
       #skip
@@ -129,7 +129,7 @@ mod_uploadData_server <- function(input, output, session) {
 
       treeio::read.newick(input$tree_file$datapath) %>%
         phylotools::sub.taxa.label(., as.data.frame(meta_file_seperate))
-      #above line converts tip labels to pretty labels based on user meta upload 
+      #line converts tip labels to pretty labels based on user meta upload
     }
   })
 
@@ -164,7 +164,7 @@ mod_uploadData_server <- function(input, output, session) {
       return(gene_file_corrected)
     }
   })
-  
+
   #additional manipulation of genetic distance matrix for ultimately
   #getting the mean number of SNPs for either the corrected or uncorrected file;
   #uses two functions located in goloem_utils_server.R file and has a

@@ -15,20 +15,20 @@
 #' @param mFileOut imported meta data file for tip checking
 #'
 #' @importFrom shiny NS tagList
-mod_tipCheck_ui <- function(id){
+mod_tipCheck_ui <- function(id) {
   ns <- NS(id)
   tagList(
 
-    tags$table(width ="100%",
+    tags$table(width = "100%",
                tags$th("File Check Output", colspan = "3",
                        style = "font-size:20px; color:#444444;")),
 
     # this output info about if tip labels are not concordant between all
     #three files
-    htmlOutput(ns('file_checking')),
+    htmlOutput(ns("file_checking")),
 
     # this one will tell user if they can add a matrix to the tree
-    uiOutput(ns('file_checking_mat')),
+    uiOutput(ns("file_checking_mat")),
 
     tags$hr(style = "border-color: #99b6d8;")
   )
@@ -67,7 +67,7 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
         g_file = g_file_out(),
         m_file = m_file_out()
       )
-    } 
+    }
   })
 
   #displays number of columns that are available for adding a matrix to the tree
