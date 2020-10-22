@@ -9,6 +9,20 @@ app_ui <- function() {
       theme = shinythemes::shinytheme("yeti"),
       navbarPage("Tinsel - a tree visulization and annotation tool",
                  tabPanel("About", mod_about_ui("about_ui_1")),
+                 tabPanel("About Example Data",
+                       mod_aboutExample_ui("aboutExample_ui_1")),
+                 tabPanel("Example Data",
+                          sidebarLayout(
+                            sidebarPanel(
+                              mod_exampleData_ui("exampleData_ui_1"),
+                              mod_pushButtons_ui("pushButtons_ui_example"),
+                              mod_relaunchApp_ui("relaunchApp_ui_example"),
+                              width = 3),
+                            mainPanel(
+                              mod_paramsTree_ui("paramsTree_ui_example"),
+                              mod_displayTree_ui("displayTree_ui_example"),
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example")
+                            ))),
                  tabPanel("Data Upload",
                           sidebarLayout(
                             sidebarPanel(
@@ -30,22 +44,10 @@ app_ui <- function() {
                                 "cladeAnnotator_ui_data"),
                               br(),
                               br(),
-                              br()
-                              ,
+                              br(),
                               mod_downloadImage_ui("downloadImage_ui_1")
-                            ))),
-                 tabPanel("Example Data",
-                          sidebarLayout(
-                            sidebarPanel(
-                              mod_exampleData_ui("exampleData_ui_1"),
-                              mod_pushButtons_ui("pushButtons_ui_example"),
-                              mod_relaunchApp_ui("relaunchApp_ui_example"),
-                              width = 3),
-                            mainPanel(
-                              mod_paramsTree_ui("paramsTree_ui_example"),
-                              mod_displayTree_ui("displayTree_ui_example"),
-                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example")
                             )))
+                 
       )
     )
   )

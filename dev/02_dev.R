@@ -8,6 +8,7 @@
 ## 2.1 Add modules
 ##
 golem::add_module(name = "about")
+golem::add_module(name = "aboutExample")
 
 #upload data - tree, genetic, meta
 golem::add_module(name = "tipCheck")
