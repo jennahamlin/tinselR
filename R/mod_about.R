@@ -101,9 +101,6 @@ mod_about_ui <- function(id) {
                                        tags$img(src =
                                                   "www/treeWAnnoAndHeatMap.PNG",
                                                 height = "50%", width = "50%")),
-                              tags$br(),
-                              strong("When you are happy with the way your tree
-                                     looks-"),
                               tags$br()
                     )
     )
