@@ -89,7 +89,7 @@ mod_exampleData_server <- function(input, output, session) {
   ###############
   ### GENETIC ###
   ###############
-  
+
   ex_gene_file_in <- reactive({
     if (input$ex_gene_file == "example Genetic Distance 1") {
       Tinsel::gene1

@@ -9,10 +9,11 @@
 #' @rdname mod_tipCheck
 #'
 #' @param id,input,output,session internal
-#' @param tFileOut imported tree for tip checking
-#' @param gFileOut imported genetic distance file for tip checking
-#' @param metaFileOut imported meta file for confirmation that file is uploaded
-#' @param mFileOut imported meta data file for tip checking
+#' @param t_file_out imported tree for tip checking
+#' @param g_file_out imported genetic distance file for tip checking
+#' @param gene_file_out imported gene file for confirming that file is uploaded
+#' @param meta_file_out imported meta file for confirming that file is uploaded
+#' @param m_file_out imported meta data file for tip checking
 #'
 #' @importFrom shiny NS tagList
 mod_tipCheck_ui <- function(id) {

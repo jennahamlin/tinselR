@@ -23,9 +23,10 @@ read_data <- function(file_path, sep) {
 #example, inVar could be input$genesep
 file_type <- function(in_var) {
   if (in_var == "\t") {
-    return("\t") 
+    return("\t")
     } else if (in_var == ",") {
-    return(",") }
+    return(",") 
+      }
 }
 
 #function to confirm the type of file uploaded, matches the selected type
@@ -142,7 +143,6 @@ m_file_conversion <- function(m_file) {
 #more after transformation of meta data
 not_columns <- function(file) {
   col_n_file <- ncol(file)
-  #colHFile <- colnames(file) #could include what the column headers are
 
   if (col_n_file < 1) {
     return("And looks like there is not a column for matrix plotting")
@@ -189,7 +189,7 @@ snp_anno <- function(gene_file, tips) {
   snp_vector <- c()
   for (i in 1:(length(tips) - 1)) {
     for (j in (i + 1):length(tips)) {
-      if (tips[i] == tips[j]) 
+      if (tips[i] == tips[j])
         next
       snp_vector <- append(snp_vector, gene_file %>%
                           dplyr::filter(label == tips[i] & name == tips[j]) %>%

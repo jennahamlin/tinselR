@@ -24,7 +24,7 @@ optional meta data file (example meta 1).
 \examples{
 data(gene1)
 #renames column 1, row 1 from '.' to 'center' for further manipulation
-gene1 <- gene1 \%>\% dplyr::rename(center = 1)  
+gene1 <- gene1 \%>\% dplyr::rename(center = 1)
 
 }
 \keyword{datasets}

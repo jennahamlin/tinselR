@@ -25,6 +25,6 @@ enterica sub species enterica to be used with the newick phylogenetic tree
 data(gene2)
 #convert to three column tibble by the label column
 gene2 <- gene2 \%>\% dplyr::rename( label = 1) \%>\% tidyr::pivot_longer(-label)
- 
+
 }
 \keyword{datasets}

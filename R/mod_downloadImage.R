@@ -53,7 +53,7 @@ mod_downloadImage_server <- function(input, output, session, treeOut) {
 
   output$download_plot <- downloadHandler(
     filename = function() {
-      paste("data-", Sys.Date(), ".", input$file_type,  sep= "")
+      paste("data-", Sys.Date(), ".", input$file_type,  sep = "")
     },
     content = function(file) {
       ggplot2::ggsave(file, plot = treeOut(), width = input$width,

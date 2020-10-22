@@ -40,7 +40,7 @@ app_ui <- function() {
                               mod_exampleData_ui("exampleData_ui_1"),
                               mod_pushButtons_ui("pushButtons_ui_example"),
                               mod_relaunchApp_ui("relaunchApp_ui_example"),
-                              width = 3), 
+                              width = 3),
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_example"),
                               mod_displayTree_ui("displayTree_ui_example"),
@@ -57,7 +57,7 @@ golem_add_external_resources <- function() {
   addResourcePath(
     "www", system.file("app/www", package = "Tinsel")
   )
-  
+
   tags$head(
     golem::activate_js(),
     golem::favicon(),

@@ -17,7 +17,7 @@ testing_genetic[1, 1] <- "A"
 testing_genetic[2, 1] <- "B"
 testing_genetic[3, 1] <- "C"
 testing_genetic[4, 1] <- "D"
-testing_genetic <- replaceHwithZeros(testing_genetic)
+testing_genetic <- replace_h_with_zeros(testing_genetic)
 
 test_that("no missing values", {
   expect_identical(testing_genetic, na.omit(testing_genetic))
@@ -29,7 +29,7 @@ test_that("data types correct", {
 })
 
 test_that("confirm genetic distance swithces - or 0", {
-  expect_silent(replaceHwithZeros(testing_genetic))
+  expect_silent(replace_h_with_zeros(testing_genetic))
 })
 
 test_that("make distance matrix into a 3 column file", {

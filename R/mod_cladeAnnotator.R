@@ -30,7 +30,7 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, mFileMatOut, make_tree_out, add_tree, 
+  function(input, output, session, mFileMatOut, make_tree_out, add_tree,
            add_anno, remove_anno, add_matrix, remove_matrix, geneObjectForSNP,
            label_off, lab_color, mat_off) {
 
@@ -107,10 +107,10 @@ mod_cladeAnnotator_server <-
 
           Values[["n"]] <- Values[["n"]] - 1
 
-          tempTip <- Values[["tip_vec"]]
+          temp_tip <- Values[["tip_vec"]]
 
           #remove the last set of tips that the user selected
-          Values[["tip_vec"]] <- tempTip[-length(tempTip)]
+          Values[["tip_vec"]] <- temp_tip[-length(temp_tip)]
           }
 
         tips <- create_tip_list()

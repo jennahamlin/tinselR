@@ -13,7 +13,7 @@ file_upload <- function(file_id, file_label) {
                        ".tsv"))
   }
 
-input_separator <- function(file_id, file_label){
+input_separator <- function(file_id, file_label) {
   radioButtons(file_id,
                file_label,
                choices = c(Comma = ",",
