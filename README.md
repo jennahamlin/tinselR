@@ -95,7 +95,7 @@ with annotated clades including the range of SNPs.
     <img src="man/figures/treeWAnno.PNG" />
 </p>
 
-#### If column for heatmap included in meta data file you  can -
+#### If column for heatmap included in meta data file you can -
 * add the heatmap on to a tree with or without annotations. See below for a tree
 with annotated clades and a heatmap. 
 

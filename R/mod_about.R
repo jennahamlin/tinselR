@@ -27,63 +27,78 @@ mod_about_ui <- function(id) {
                                 the number of snp differences for all pairwise
                                 comparisons. Note that the data you upload is
                                 only held within the application while on the
-                                site (i.e. no data is stored.)"),
-                              tags$strong("Please click on the 'Data Upload'
-                                          pane to upload your files."),
+                                site (i.e. no data is stored.) When you are 
+                                happy with the way your tree scroll to the 
+                                bottom; enter your name and press Download"),
+                              tags$p("If you have any problems, please file an",
+                                     a("issue", href =
+                                         "https://github.com/jennahamlin/Tinsel/issues"
+                                     )), 
+                              tags$br(),
+                              tags$h4(strong("Data Upload")),
+                              tags$p("Please click on the 'Data Upload' pane
+                              to upload your files. Alternatively, take a look
+                              at the Example Data to test out the application.
+                              A brief description about the example data is
+                              provided in the About the Example Data pane."),
+                              tags$br(),
                               tags$li(em("Phylogenetic Tree"), "- required; a",
                                       a("newick",
                                         href =
                                           "https://en.wikipedia.org/wiki/
                                         Newick_format"),"generated tree"),
                               tags$br(),
-                              tags$li(em("Genetic Distance Data"),
-                                      "- optional for use with the annotation
-                                      function.",
-                                      tags$br(), "A tsv/txt/csv file of
-                                      SNP differences. See image below for
-                                      example"),
+                              tags$div(tags$li(em("Genetic Distance Data"),
+                                               "- optional for use with the 
+                                               annotation function.",
+                                               tags$br(), "A tsv/txt/csv file of
+                                      SNP differences. See image below for 
+                                               example."),
+                                       tags$br(),
+                                       tags$img(src = 
+                                                  "www/geneDistanceExample.PNG",
+                                                height = "50%", width = "50%")),
                               tags$br(),
-                              tags$img(src = "www/geneDistanceExample.PNG",
-                                       height = "50%", width = "50%"),
+                              tags$div(tags$li(em("Meta Data"), "- optional for 
+                              easy correction of tip labels;",
+                                               tags$br(), 
+                                               "a tsv/txt/csv file - requires 
+                                               column headers of Display.labels
+                                               and Tip.labels. See image below 
+                                               for example."),
+                                       tags$br(),
+                                       tags$img(src = "www/metaDataExample.PNG",
+                                                height = "50%", width = "50%")),
                               tags$br(),
-                              tags$li(em("Meta Data"), "- optional for easy
-                                      correction of tip labels;",
-                                      tags$br(), "a tsv/txt/csv file - requires
-                                      column headers of Display.labels and
-                                      Tip.labels. See image Below for
-                                      example."),
+                              tags$div(tags$li(tags$em("Once the phylogenetic 
+                              tree is uploaded you can -")),
+                                       "Alter visualization parameters",
+                                       tags$br(),
+                                       tags$img(src = 
+                                                  "www/treeWAlignedTips.PNG",
+                                                height = "50%", width = "50%")),
                               tags$br(),
-                              tags$img(src = "www/metaDataExample.PNG",
-                                       height = "50%", width = "50%"),
+                              
+                              tags$div(tags$li(tags$em("Once the genetic 
+                              distance file is uploaded you can -")), "add 
+                              annotation to the visual representation of 
+                                               the tree",
+                                       tags$br(),
+                                       tags$img(src = "www/treeWAnno.PNG",
+                                                height = "50%", width = "50%")),
                               tags$br(),
-                              tags$li(tags$strong("Once the phylogenetic tree is
-                              uploaded you can -")),
-                              tags$br(),
-                              "Alter visualization parameters",
-                              tags$br(),
-                              tags$img(src = "www/treeWAlignedTips.PNG",
-                                       height = "50%", width = "50%"),
-                              tags$br(),
-                              strong("Once the genetic distance file is
-                                     uploaded you can -"),
-                              "add annotation to the visual representation of
-                              the tree",
-                              tags$br(),
-                              tags$img(src = "www/treeWAnno.PNG",
-                                       height = "50%", width = "50%"),
-                              tags$br(),
+                              tags$div(tags$li(tags$em("If column for heatmap 
+                                                       included in meta data
+                                                       file you  can")), "add
+                                       a heatmap with or without annotatios",
+                                       tags$br(),
+                                       tags$img(src =
+                                                  "www/treeWAnnoAndHeatMap.PNG",
+                                                height = "50%", width = "50%")),
                               tags$br(),
                               strong("When you are happy with the way your tree
                                      looks-"),
-                              tags$br(),
-                              "scroll to the bottom; enter your name and press
-                              Download",
-                              tags$br(),
-                              tags$br(),
-                              "If you have any problems, please file an",
-                              a("issue", href =
-                                  "https://github.com/jennahamlin/Tinsel/issues"
-                              )
+                              tags$br()
                     )
     )
     )
