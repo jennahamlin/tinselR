@@ -30,6 +30,8 @@ If you have any the above, please submit an *issue* on github located
 
 **1). Install devtools package** 
 
+Run this code in your R console -     
+
 `install.packages("devtools", dep=T)`
 
 **2). Install ggtree and treeio**
@@ -42,7 +44,6 @@ BiocManager::install("ggtree")
 
 **3). Install and launch the Tinsel shiny application**
 
-Run this code in your R console -     
 
 ```
 devtools::install_github("jennahamlin/Tinsel")
@@ -52,12 +53,18 @@ run_app()
 
 **4). Load your data or use the example data**  
 
-*Please click on the 'Data Upload' pane, where you will be able to upload your
-files or access example data on the 'Example Data' pane.* 
+*Please click on the 'Data Upload' pane, where you can upload your files*
+*Example data is availale for playing with Tinsel in the 'Example Data' pane.* 
 
-* **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
-* **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file - see below for image of genetic distance matrix, requires column headers
-* **Metadata** - optional for easy correction of tip labels; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels. See image below for a csv file example 
+* **Phylogenetic Tree** - required; a 
+[newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
+
+* **Genetic Distance data** - optional for use with the annotation function;
+a tsv/txt/csv file - see below for image of genetic distance matrix
+
+* **Metadata** - optional for easy correction of tip labels or adding a heatmap;
+a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels.
+See image below for a csv file example 
 
 <p>
 
