@@ -20,7 +20,7 @@ mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
     mainPanel(
-      plotOutput(ns("treeDisplay"), brush = ns("plot_brush")))
+      plotOutput(ns("tree_display"), brush = ns("plot_brush")))
   )
 }
 
@@ -30,9 +30,9 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, mFileMatOut, makeTreeOut, add_tree, add_anno, 
-           remove_anno, add_matrix, remove_matrix, geneObjectForSNP, labelOff, 
-           labColor, matOff){
+  function(input, output, session, mFileMatOut, make_tree_out, add_tree, add_anno, 
+           remove_anno, add_matrix, remove_matrix, geneObjectForSNP, label_off, 
+           lab_color, mat_off){
     
     #add other tree viz parameters above 
     
@@ -44,32 +44,31 @@ mod_cladeAnnotator_server <-
     observe({
       Values[["n"]]   <- 0
       Values[["tip_vec"]] <- list() 
-      Values[["validMeta"]] <- 0
-      Values[["showMap"]] <- 0
+      Values[["show_map"]] <- 0
     })
     
     #reactive that holds the brushed points on a plot
-    dataWithSelection <- reactive({
-      brushedPoints(makeTreeOut()$data, input$plot_brush)
+    data_with_selection <- reactive({
+      brushedPoints(make_tree_out()$data, input$plot_brush)
     })
     
     
     #add label to tipVector if isTip == True
-    dataWithSelection2 <- eventReactive(input$plot_brush, {
+    data_with_selection2 <- eventReactive(input$plot_brush, {
       label <- NULL
-      tipVector <- c()
+      tip_vector <- c()
       
-      for (i in 1:length(dataWithSelection()$label)) {
-        if (dataWithSelection()$isTip[i] == TRUE) 
-          tipVector <- c(tipVector, dataWithSelection()$label[i])
+      for (i in 1:length(data_with_selection()$label)) {
+        if (data_with_selection()$isTip[i] == TRUE) 
+          tip_vector <- c(tip_vector, data_with_selection()$label[i])
       }
-      return(tipVector)
+      return(tip_vector)
     })
     
     #displays the tree plot, uses output from the displayTree module
     observeEvent(add_tree(), {
-      output$treeDisplay <- renderPlot({
-        makeTreeOut()})
+      output$tree_display <- renderPlot({
+        make_tree_out()})
     })
     
     #display that user-brushed layer onto the tree
@@ -85,14 +84,14 @@ mod_cladeAnnotator_server <-
         
         #add the tip vector (aka label) to the annotation reactive value
         Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <- 
-          dataWithSelection2()
+          data_with_selection2()
         
         #add to variable called tips
-        tips <- createTipList()
+        tips <- create_tip_list()
         
-        output$treeDisplay <- renderPlot({
-          addMap(tree = addAnnotations(treePlot = makeTreeOut(), 
-                                       tipVectorIn =  tips ), 
+        output$tree_display <- renderPlot({
+          add_map(tree = add_annotations(tree_plot = make_tree_out(), 
+                                       tip_vector_in =  tips ), 
                  metaFile = mFileMatOut())
         })
       }
@@ -115,48 +114,48 @@ mod_cladeAnnotator_server <-
           #remove the last set of tips that the user selected
           Values[["tip_vec"]]<- tempTip[-length(tempTip)] }
         
-        tips <- createTipList()
+        tips <- create_tip_list()
         
-        output$treeDisplay <- renderPlot({
-          addMap(tree = addAnnotations(treePlot = makeTreeOut(),
-                                       tipVectorIn =  tips),
+        output$tree_display <- renderPlot({
+          add_map(tree = add_annotations(tree_plot = make_tree_out(),
+                                       tip_vector_in =  tips),
                  metaFile = mFileMatOut())        
         })
       }
     })
     
-    #allow the user to add a matrix to a tree; change showMap to the value of 1
+    #allow the user to add a matrix to a tree; change show_map to the value of 1
     observeEvent(add_matrix(),{
       
       
       #display that layer onto the tree
-      Values[["showMap"]] <-  1
-      output$treeDisplay <- renderPlot({
+      Values[["show_map"]] <-  1
+      output$tree_display <- renderPlot({
         
-        #render the plot using the currentTreeOut function. 
-        currentTreeOut()
+        #render the plot using the  current_tree_out function. 
+         current_tree_out()
       })
     }) 
     
     #as above with add matrix but this allows the removal of the matrix by 
-    #setting showMap to 0
+    #setting show_map to 0
     observeEvent(remove_matrix(),{
       
       #display that layer onto the tree
-      Values[["showMap"]] <-  0
-      output$treeDisplay <- renderPlot({
-        currentTreeOut()
+      Values[["show_map"]] <-  0
+      output$tree_display <- renderPlot({
+         current_tree_out()
       })
     }) 
     
     #add map funciton takes in a tree and the converted meta data file. 
-    #only allows the inclusion of the mapk if the value of showMap is
+    #only allows the inclusion of the mapk if the value of show_map is
     #greater than 0
-    addMap <- function(tree, metaFile){
-      if(Values[["showMap"]] > 0 & !is.null(metaFile) ) {
+    add_map <- function(tree, metaFile){
+      if(Values[["show_map"]] > 0 & !is.null(metaFile) ) {
         tree <- ggtree::gheatmap(tree,
                                  metaFile,
-                                 offset = matOff(),
+                                 offset = mat_off(),
                                  width = 0.2,
                                  colnames_angle = 45, 
                                  colnames_offset_y = -1,
@@ -171,7 +170,7 @@ mod_cladeAnnotator_server <-
     
     #function to create the tip list. list apply over the counter('n') and 
     #paste the values in the tip vector to the variable tips
-    createTipList <- function(){
+    create_tip_list <- function(){
       tips <- c()
       if (Values[["n"]] < 1 ) {
         #skip
@@ -185,12 +184,12 @@ mod_cladeAnnotator_server <-
     #this functions calculates the mean # snps and adds that layer as
     #annotation. Additionally, it checks for overlap in annotations and adjusts
     #as necessary
-    addAnnotations <- function(treePlot, tipVectorIn) {
-      g <- treePlot
+    add_annotations <- function(tree_plot, tip_vector_in) {
+      g <- tree_plot
       
       if(Values[["n"]] > 0) {
         #this is the i'th list, for which we are calculating the offset
-        for (i in seq_along(tipVectorIn)) { 
+        for (i in seq_along(tip_vector_in)) { 
           currentTips <- Values[["tip_vec"]][[ i ]]
           
           nOverlap <- 0     # start by assuming no overlap
@@ -210,22 +209,22 @@ mod_cladeAnnotator_server <-
           # set the clade label offset based on how many sets of previous tips
           #it overlaps and provide user #option to adjust the position of
           #all annotations
-          label_offset <- labelOff() + nOverlap*0.004
+          label_offset <- label_off() + nOverlap*0.004
           
           #uses the snpAnno function to calculate the mean # of snps for 
           #brushed tips 
-          snpMean <- 
-            snpAnno(geneFile = geneObjectForSNP(),
+          snp_mean <- 
+            snp_anno(gene_file = geneObjectForSNP(),
                     tips = currentTips)
           
           #generates the layer for the set of brushed tips
           g <- g +
             make_layer(
-              treePlot,
-              tips = tipVectorIn[[i]], 
+              tree_plot,
+              tips = tip_vector_in[[i]], 
               label = paste0("Range \nof \nSNP(s)- \n", 
-                             paste0(min(snpMean), sep =",", max(snpMean))),
-              color = labColor(),
+                             paste0(min(snp_mean), sep =",", max(snp_mean))),
+              color = lab_color(),
               offset = label_offset
             )
         }
@@ -234,22 +233,16 @@ mod_cladeAnnotator_server <-
     }
     
     #function to create the tree.
-    currentTreeOut <- function(){
-      addMap(tree = addAnnotations(treePlot = makeTreeOut(),
-                                   tipVectorIn =  createTipList() ),
+     current_tree_out <- function(){
+      add_map(tree = add_annotations(tree_plot = make_tree_out(),
+                                   tip_vector_in =  create_tip_list() ),
              metaFile = mFileMatOut())
     }
     
     #reactive to send tree to downloadImage module
-    treeOut <- reactive ({
-      currentTreeOut()
+    tree_out <- reactive ({
+       current_tree_out()
     })
     
-    return(treeOut)
+    return(tree_out)
   }
-
-## To be copied in the UI
-# mod_cladeAnnotator_ui("cladeAnnotator_ui_1")
-
-## To be copied in the server
-# callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_1")

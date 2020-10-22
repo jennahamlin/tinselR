@@ -10,4 +10,3 @@ golem::document_and_reload()
 
 # Run the application
 Tinsel::run_app()
-

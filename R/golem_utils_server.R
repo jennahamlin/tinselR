@@ -180,24 +180,24 @@ combine_g_and_t <- function(tree_file, gene_file){
 
 ## cladeAnnotator server functions
 #function which gets the snps for two tips and puts them into the snpVector
-snpVector <- c()
 
-snpAnno <- function(geneFile, tips){
+
+snp_anno <- function(gene_file, tips) {
   #adding this helps with devtools::check() note of 'no visible binding for
   #global variables
   label <- name <- value <- NULL 
-  
-  for (i in 1:(length(tips)-1)){
-    for (j in (i+1):length(tips)){
+  snp_vector <- c()
+  for (i in 1:(length(tips) - 1)) {
+    for (j in (i + 1):length(tips)) {
       if(tips[i] == tips[j]) 
         next
-      snpVector<-append(snpVector, geneFile%>%
+      snp_vector<-append(snp_vector, gene_file %>%
                           dplyr::filter(label == tips[i] & name == tips[j]) %>%
                           dplyr::pull(value)
       )
     }
   }
-  return(as.numeric(snpVector))
+  return(as.numeric(snp_vector))
 }
 
 #function to add layer, uses findMRCA to get the MRCA (node) for the 

@@ -12,16 +12,16 @@ mod_cladeAnnotator_server(
   output,
   session,
   mFileMatOut,
-  makeTreeOut,
+  make_tree_out,
   add_tree,
   add_anno,
   remove_anno,
   add_matrix,
   remove_matrix,
   geneObjectForSNP,
-  labelOff,
-  labColor,
-  matOff
+  label_off,
+  lab_color,
+  mat_off
 )
 }
 \arguments{

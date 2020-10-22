@@ -19,7 +19,7 @@ mod_downloadImage_server(input, output, session, treeOut)
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module allows one to download the 
+A shiny Module. This module allows one to download the
 adjusted tree image. Current download formats include png, pdf, and tiff.
 }
 \details{

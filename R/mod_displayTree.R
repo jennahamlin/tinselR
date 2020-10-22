@@ -64,7 +64,7 @@ mod_displayTree_server <- function(input, output, session,
   #and get a strange error `Warning: Error in modifyList: is.list(val) is not
   #TRUE` so leaving here for now
 
-  treePlot <- function(input_file) {
+  tree_plot <- function(input_file) {
     label <- NULL
     ggtree::ggtree(input_file, layout = tree_format()) +
       ggplot2::xlim(NA, lim()) +
@@ -80,12 +80,12 @@ mod_displayTree_server <- function(input, output, session,
   #major plotting reactive using an S4 object called above (gandTS4) or the
   #base mid_tree reactive made from import of treeFileOut and the  Upload data
   #module 
-  makeTree <- reactive({
+  make_tree <- reactive({
 
     # this disconnects the need for genetic distance file to be uploaded for
     #the tree viz to happen
-    if(is.null(input$gandTS4)){
-      treePlot(mid_tree())
+    if (is.null(input$gandTS4)) {
+      tree_plot(mid_tree())
 
       #what the call should look like if treePlot function was in the
       #golem_utils_server.R file
@@ -94,7 +94,7 @@ mod_displayTree_server <- function(input, output, session,
       #nudge_x = bootPos())
 
     } else{
-      treePlot(g_and_t_s4())
+      tree_plot(g_and_t_s4())
 
       #what the call should look like if treePlot function was in the
       #golem_utils_server.R file
@@ -107,6 +107,6 @@ mod_displayTree_server <- function(input, output, session,
   #return display tree reactive to be used in cladeAnnotator module 
   return(
     list(
-      makeTreeOut = reactive(makeTree())
+      make_tree_out = reactive(make_tree())
     ))
 }
