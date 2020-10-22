@@ -112,6 +112,6 @@ error pops up if user then tries to upload a meta data file.
 - In the example data, the add annotation and remove annnotation button if 
 clicked without the associated data, an error occurs. 
 
-**Please see this (link)[https://github.com/jennahamlin/Tinsel/issues/4]
+**Please see this [link](https://github.com/jennahamlin/Tinsel/issues/4)
 for all packages and versions that were installed on a windows machine that 
 successfully runs Tinsel.** 
