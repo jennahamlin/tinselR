@@ -19,7 +19,7 @@ If you have any the above, please submit an *issue* on github located
  see the quick start for how to install ggtree. 
  - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); 
  which will install with ggtree.
- -R version >= 3.5
+ - R version >= 3.5
 
 
 <!-- badges: start -->
@@ -67,7 +67,7 @@ a tsv/txt/csv file - see below for image of genetic distance matrix
 <p>
 
 <h4> genetic Distance screenshot </h4>
-    <img src="man/figures/geneDistanceExample.png" />
+    <img src="man/figures/geneDistanceExample.PNG" />
 </p>
 
 * **Metadata** - optional for easy correction of tip labels or adding a heatmap;
@@ -77,14 +77,14 @@ See image below for a csv file example
 <p>
 
 <h4> meta Data screenshot </h4>
-    <img src="man/figures/metaDataExample.png" />
+    <img src="man/figures/metaDataExample.PNG" />
 </p>
 
 #### Once the phylogenetic tree is uploaded you can -
 * Alter visualization parameters. See below for tree with aligned tips.  
 
 <p>
-    <img src="man/figures/treeWAlignedTips.png" />
+    <img src="man/figures/treeWAlignedTips.PNG" />
 </p>
 
 #### Once the genetic distance file is uploaded you can -
@@ -92,7 +92,7 @@ See image below for a csv file example
 with annotated clades including the range of SNPs. 
 
 <p>
-    <img src="man/figures/treeWAnno.png" />
+    <img src="man/figures/treeWAnno.PNG" />
 </p>
 
 #### If column for heatmap included in meta data file you  can -
@@ -100,7 +100,7 @@ with annotated clades including the range of SNPs.
 with annotated clades and a heatmap. 
 
 <p>
-    <img src="man/figures/treeWAnnoAndHeatmap.png" />
+    <img src="man/figures/treeWAnnoAndHeatmap.PNG" />
 </p>
 
 
