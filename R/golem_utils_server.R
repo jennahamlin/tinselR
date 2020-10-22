@@ -159,8 +159,9 @@ not_columns <- function(file) {
 
 #this combines the genetic distance file and the tree data by the 'label'
 combine_g_and_t <- function(tree_file, gene_file) {
-  dplyr::full_join(tree_file, gene_file, by = "label") %>%
-    treeio::as.treedata()
+  dplyr::full_join(tree_file, gene_file, by = "label")
+  #%>%
+  #  treeio::as.treedata()
 }
 
 # treePlot <- function(inputFile, align, layout, fontface, width, node,

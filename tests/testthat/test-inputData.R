@@ -1,3 +1,4 @@
+##############################################################################
 context("testing distance matrix")
 
 set.seed(12345)
@@ -33,9 +34,10 @@ test_that("confirm genetic distance swithces - or 0", {
 })
 
 test_that("make distance matrix into a 3 column file", {
-  expect_silent(geneObjectOut(testing_genetic))
+  expect_silent(gene_object_out(testing_genetic))
 })
 
+##############################################################################
 context("connecting genetic distance with tree data")
 
 # make random tree with 5 tips to match the 5 labels in genetic distance up
@@ -52,14 +54,16 @@ test_that("data types correct before combining tree", {
 # this test returns an error 'cannot coerce class '"phylo"' to a data.frame'
 testing_tree <- tibble::as_tibble(testing_tree)
 
+
  test_that("confirm tree and genetic distance can be combined", {
-   expect_silent(combineGandT(testing_tree, testing_genetic))
+   expect_silent(combine_g_and_t(testing_tree, testing_genetic))
  })
 
  test_that("data types correct after combing tree", {
-   expect_is(combineGandT(testing_tree, testing_genetic), "treedata")
+   expect_is(combine_g_and_t(testing_tree, testing_genetic), "tbl_tree")
  })
 
+###############################################################################
 context("testing meta data")
 
 # building example meta data file
@@ -71,5 +75,5 @@ testing_meta <- data.frame("Tip.labels" = c("Label_1_Ugly", "Label_2_Ugly",
  
 
 test_that("Converts meta data correctly for matrix visualization", {
-  expect_equal(ncol(mFileConversion(testing_meta)), 1)
+  expect_equal(ncol(m_file_conversion(testing_meta)), 1)
 })
