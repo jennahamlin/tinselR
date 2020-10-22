@@ -40,28 +40,25 @@ test_that("make distance matrix into a 3 column file", {
 ##############################################################################
 context("connecting genetic distance with tree data")
 
-# make random tree with 5 tips to match the 5 labels in genetic distance up
-# above
-testing_tree <- ape::rtree(4)
+data(tree1)
+data(gene1)
 
-new_tiplabels <- c("A", "B", "C", "D")
-testing_tree$tip.label <- new_tiplabels
-
-test_that("data types correct before combining tree", {
-  expect_is(testing_tree, "phylo")
-})
-
-# this test returns an error 'cannot coerce class '"phylo"' to a data.frame'
+testing_tree <- tree1
 testing_tree <- tibble::as_tibble(testing_tree)
 
+testing_gene <- replace_h_with_zeros(gene1)
 
- test_that("confirm tree and genetic distance can be combined", {
-   expect_silent(combine_g_and_t(testing_tree, testing_genetic))
- })
+test_that("data types correct before combining tree", {
+  expect_is(testing_tree, "tbl_tree")
+})
 
- test_that("data types correct after combing tree", {
-   expect_is(combine_g_and_t(testing_tree, testing_genetic), "tbl_tree")
- })
+test_that("confirm tree and genetic distance can be combined", {
+  expect_silent(combine_g_and_t(testing_tree, testing_gene))
+})
+
+test_that("data types correct after combing tree", {
+  expect_is(combine_g_and_t(testing_tree, testing_genetic), "tbl_tree")
+})
 
 ###############################################################################
 context("testing meta data")
@@ -72,7 +69,7 @@ testing_meta <- data.frame("Tip.labels" = c("Label_1_Ugly", "Label_2_Ugly",
                            "Display,labels" = c("Label_1", "Label_2",
                                                 "Label_3", "Label_4"),
                            "Source" = c("Tree", "Tree", "Stream", "Flower"))
- 
+
 
 test_that("Converts meta data correctly for matrix visualization", {
   expect_equal(ncol(m_file_conversion(testing_meta)), 1)
