@@ -57,7 +57,7 @@ app_server <- function(input, output, session) {
 
   example_params <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
 
-  example_buttons <- callModule(mod_pushButtons_server, "pushButtons_ui_example")
+  example_buttons <- callModule(mod_pushButtons_server,"pushButtons_ui_example")
 
   callModule(mod_relaunchApp_server, "relaunchApp_ui_example")
 

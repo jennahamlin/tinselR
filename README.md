@@ -12,10 +12,15 @@ the tree.
 If you have any the above, please file an *issue* on github located [here](https://github.com/jennahamlin/Tinsel/issues).
 
 ### Requires - 
- - tibble_2.1.3; problems arise if you use tibble_3.0.3 `devtools::install_version("tibble", version = "2.1.3")`
- - stringi_1.4.3; problems arise if you use stringi_1.5.3 `devtools::install_version("stringi", version = "1.4.3")`
  - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) 
- - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); which should install if you install ggtree first
+ - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); which will install with ggtree
+
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ggtree")
+```
 
 
 <!-- badges: start -->

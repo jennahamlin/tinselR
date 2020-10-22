@@ -22,9 +22,7 @@ Imports:
     ggplot2,
     ggtree,
     golem,
-    gtools,
     magrittr,
-    markdown,
     phylotools,
     phytools,
     readr,
@@ -35,7 +33,6 @@ Imports:
     tibble,
     tidyr,
     treeio,
-    utils
 Suggests: 
     assertthat,
     attempt,
@@ -48,9 +45,11 @@ Suggests:
     pkgload,
     processx,
     purrr,
-    rmarkdown,
     testthat (>= 2.1.0),
-    xfun
+    xfun,
+    gtools,
+    markdown,
+    rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

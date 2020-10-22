@@ -35,12 +35,10 @@ golem::add_module(name = "relaunchApp")
 usethis::use_package("ape")
 usethis::use_package("config")
 usethis::use_package("dplyr") #for manipulating input files
-usethis::use_package("gtools")
 usethis::use_package("ggplot2")
 usethis::use_package("ggtree") #for tree viz
 usethis::use_package("golem")
 usethis::use_package("magrittr") #for %>% essentially a pipe
-usethis::use_package("markdown") #for the documentation page
 usethis::use_package("phytools") #for the find MRCA function
 usethis::use_package("phylotools")
 usethis::use_package("shinythemes")
@@ -51,7 +49,6 @@ usethis::use_package("shinyjs")
 usethis::use_package("tibble")
 usethis::use_package("tidyr")
 usethis::use_package("treeio")
-usethis::use_package("utils")
 
 usethis::use_pipe()
 
@@ -60,14 +57,17 @@ usethis::use_package("attempt", type = "Suggests")
 usethis::use_package("colorspace", type = "Suggests")
 usethis::use_package("DT", type = "Suggests")
 usethis::use_package("glue", type = "Suggests")
+usethis::use_package("gtools", type = "Suggests")
 usethis::use_package("here", type = "Suggests")
 usethis::use_package("htmltools", type = "Suggests")
 usethis::use_package("knitr", type = "Suggests")
+usethis::use_package("markdown", type = "Suggests") #for the documentation page
 usethis::use_package("pkgload", type = "Suggests")
 usethis::use_package("processx", type = "Suggests")
 usethis::use_package("purrr", type = "Suggests")
 usethis::use_package("rmarkdown", type = "Suggests")
 usethis::use_package("testthat", type = "Suggests", min_version = "2.1.0")
+usethis::use_package("utils", type = "Suggests")
 usethis::use_package("xfun", type = "Suggests")
 
 ## 2.3 Add tests
