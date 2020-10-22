@@ -1,9 +1,9 @@
 #' displayTree UI Function
-#' 
+#'
 #'   @title   mod_displayTree_ui and mod_displayTree_server
 #' @description  A shiny Module. This module combines the tree with genetic
-#'  distance as an S4 object that allows tree plotting and accessing the 
-#'  combined data. 
+#'  distance as an S4 object that allows tree plotting and accessing the
+#'  combined data.
 #'
 #' @param id shiny id
 #' @param input internal
@@ -13,9 +13,9 @@
 #' @rdname mod_displayTree
 #'
 #' @keywords internal
-#' @export 
+#' @export
 #' @importFrom shiny NS tagList 
-mod_displayTree_ui <- function(id){
+mod_displayTree_ui <- function(id) {
   ns <- NS(id)
   tagList(
   )
@@ -43,7 +43,7 @@ mod_displayTree_server <- function(input, output, session,
 
   #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree
   #and genetic distance matrix
-  tree_object<-reactive({
+  tree_object <- reactive({
     tibble::as_tibble(mid_tree())
   })
 
@@ -52,11 +52,10 @@ mod_displayTree_server <- function(input, output, session,
   g_and_t_s4 <- reactive({
     combine_g_and_t(tree_object(), geneObjectOutForSNP())
   })
-  
+
   ########additional reactive tree parameters to possibly include
   #these could be parameters to increase/decrease how far tree fills
   #to the margins
-  #ggplot2::theme(plot.margin=ggplot2::margin(10,10,10,10))
 
   ## displayTree server function. In theory this function should be able to be
   #moved over to the golem_utils_server.R script and updating the function to
@@ -69,9 +68,9 @@ mod_displayTree_server <- function(input, output, session,
     ggtree::ggtree(input_file, layout = tree_format()) +
       ggplot2::xlim(NA, lim()) +
       ggtree::geom_tiplab(align = align(), fontface = font(),
-                          family="Helvetica", size = 3) +
-      ggtree::geom_treescale(width = num_scale(), x = 0.005, y = -3 ) +
-      ggtree::geom_text2(ggplot2::aes(label=label, 
+                          family = "Helvetica", size = 3) +
+      ggtree::geom_treescale(width = num_scale(), x = 0.005, y = -3) +
+      ggtree::geom_text2(ggplot2::aes(label=label,
                                       subset = !is.na(as.numeric(label)) &
                                         as.numeric(label) > node()),
                          nudge_x = boot_pos())
@@ -79,7 +78,7 @@ mod_displayTree_server <- function(input, output, session,
 
   #major plotting reactive using an S4 object called above (gandTS4) or the
   #base mid_tree reactive made from import of treeFileOut and the  Upload data
-  #module 
+  #module
   make_tree <- reactive({
 
     # this disconnects the need for genetic distance file to be uploaded for
@@ -104,7 +103,7 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
 
-  #return display tree reactive to be used in cladeAnnotator module 
+  #return display tree reactive to be used in cladeAnnotator module
   return(
     list(
       make_tree_out = reactive(make_tree())

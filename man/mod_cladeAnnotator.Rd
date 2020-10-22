@@ -34,8 +34,8 @@ mod_cladeAnnotator_server(
 \item{session}{internal}
 }
 \description{
-A shiny Module. This module allows the user to add or 
-remove annotations and checks for overlap between those annotations and 
+A shiny Module. This module allows the user to add or
+remove annotations and checks for overlap between those annotations and
 allows the addition of the heatmap.
 }
 \details{
