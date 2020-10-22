@@ -5,22 +5,20 @@ phylogenetic trees and as an application for producing publication-ready
 figures. The **power** of Tinsel comes with combining a genetic distance matrix 
 for annotating a tree for epidemiological outbreak analyses. A genetic distance
 matrix contains snp differences for all pairwise comparisons for the tips on 
-the tree.  
+the tree. One can also include a 
+[heatmap](https://yulab-smu.top/treedata-book/chapter7.html) when that data is
+provided in the meta data file.
 
 ### Issues, problems, suggestions, thoughts
 
-If you have any the above, please file an *issue* on github located [here](https://github.com/jennahamlin/Tinsel/issues).
+If you have any the above, please submit an *issue* on github located 
+[here](https://github.com/jennahamlin/Tinsel/issues).
 
 ### Requires - 
- - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) 
- - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); which will install with ggtree
-
-```
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("ggtree")
-```
+ - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html); 
+ see the quick start for how to install ggtree. 
+ - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); 
+ which will install with ggtree.
 
 
 <!-- badges: start -->
@@ -34,7 +32,15 @@ BiocManager::install("ggtree")
 
 `install.packages("devtools", dep=T)`
 
-**2). Launching the Tinsel shiny application**
+**2). Install ggtree and treeio**
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ggtree")
+```
+
+**3). Install and launch the Tinsel shiny application**
 
 Run this code in your R console -     
 
@@ -42,10 +48,12 @@ Run this code in your R console -
 devtools::install_github("jennahamlin/Tinsel")
 Library(Tinsel)
 run_app()
-```  
-**3). Load your data or use the example data**  
+```
 
-*Please click on the 'Data Upload' pane, where you will be able to upload your files or access example data on the 'Example Data' pane.* 
+**4). Load your data or use the example data**  
+
+*Please click on the 'Data Upload' pane, where you will be able to upload your
+files or access example data on the 'Example Data' pane.* 
 
 * **Phylogenetic Tree** - required; a [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 * **Genetic Distance data** - optional for use with the annotation function; a tsv/txt/csv file - see below for image of genetic distance matrix, requires column headers
