@@ -5,9 +5,9 @@
 \alias{gene3}
 \title{Example Gene 3
 
-This is a genetic distance matrix of SNPs for 19 isolates of Salmonella 
-enterica to be used with the newick phylogenetic tree (example tree 3) and 
-the optional meta data file (example meta 3)}
+This is a genetic distance matrix of SNPs for 19 isolates of Salmonella
+enterica to be used with the newick phylogenetic tree (example tree 3) and
+the optional meta data file (example meta 3).}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 16 rows and 17 columns.
 }
@@ -17,16 +17,16 @@ data(gene3)
 \description{
 Example Gene 3
 
-This is a genetic distance matrix of SNPs for 19 isolates of Salmonella 
-enterica to be used with the newick phylogenetic tree (example tree 3) and 
-the optional meta data file (example meta 3)
+This is a genetic distance matrix of SNPs for 19 isolates of Salmonella
+enterica to be used with the newick phylogenetic tree (example tree 3) and
+the optional meta data file (example meta 3).
 }
 \examples{
 data(gene3)
 #convert to three column tibble by  label column and remove self comparisons
-gene3 <- gene3 \%>\% dplyr::rename( label = 1)\%>\%
- tidyr::pivot_longer(-label)\%>\%
- .[which(.$label != .$name),]\%>\%
+gene3 <- gene3 \%>\% dplyr::rename( label = 1) \%>\%
+ tidyr::pivot_longer(-label )\%>\%
+ .[which(.$label != .$name),] \%>\%
  dplyr::mutate(value=ifelse(value=="-", 0,value))
 
 }

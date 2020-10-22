@@ -8,10 +8,10 @@
 #filePath is the path to the location of the file you want to read in
 #sep is the specified delimiter, probably either a tab ("\t") or comma (",")
 #the other bits here help with reading in the file: trim whitespace, skip
-#empty row, column names, and how to read in the data; default is set at column 
+#empty row, column names, and how to read in the data; default is set at column
 #as characters
-read_data<-function(filePath, sep) {
-  readr::read_delim(filePath,
+read_data <- function(file_path, sep) {
+  readr::read_delim(file_path,
                     sep,
                     trim_ws = TRUE,
                     skip_empty_rows = TRUE,
@@ -19,12 +19,12 @@ read_data<-function(filePath, sep) {
                     col_types = readr::cols(.default = readr::col_character()))
 }
 
-#function which maps the type of file uploaded based on user selection. For 
+#function which maps the type of file uploaded based on user selection. For
 #example, inVar could be input$genesep
 file_type <- function(in_var) {
-  if(in_var == "\t") {
-    return("\t") }
-  else if (in_var == ",") {
+  if (in_var == "\t") {
+    return("\t") 
+    } else if (in_var == ",") {
     return(",") }
 }
 
@@ -47,7 +47,7 @@ file_check <- function(file_up, file_type, file_sep) {
       paste("Error: the delimiter chosen does not match the file type uploaded:
             ", file_up[1], sep = "")))
   if (is.null(file_chk) == TRUE) {
-    file_name <- read_data(filePath = file_up$datapath, sep = file_sep)
+    file_name <- read_data(file_path = file_up$datapath, sep = file_sep)
   } else {
     return(file_chk)
   }
@@ -64,7 +64,7 @@ replace_h_with_zeros <- function(gene_file_in) {
 #additional manipulation of genetic distance matrix for ultimately getting the
 #mean number of SNPs
 
-gene_object_out  <- function (gene_file) {
+gene_object_out  <- function(gene_file) {
   label <- . <- value <- NULL
   gene_file %>%
     #remove na
@@ -75,7 +75,7 @@ gene_object_out  <- function (gene_file) {
     #calculation.
     .[which(.$label != .$name), ] %>%
     ##replace - with zero in the file; if zeros already infile, still works
-    dplyr::mutate(value = ifelse(value=="-", 0, value))
+    dplyr::mutate(value = ifelse(value == "-", 0, value))
 }
 
 ######################################
@@ -86,28 +86,28 @@ gene_object_out  <- function (gene_file) {
 # Function to check imported data files for tip label agreement. If no tip label
 #agreement, tells user what is problematic
 sanity <- function(m_file, g_file, t_file) {
-  
+
   #meta data get tips
   m_file_tips <- m_file %>% dplyr::pull(1) %>% sort
-  
+
   #genetic data get tips
   g_file_tips <- g_file %>% dplyr::pull(1) %>% sort
-  
+
   #tree file get tips
   t_file_hold <- treeio::read.newick(file = t_file$datapath)
   t_file_tips <- sort(t_file_hold$tip.label)
-  
+
   # Check for required column names in meta data file
   if ("Tip.labels" %in% colnames(m_file) != TRUE) {
     return(HTML('<span style = "color:gray">Your metadata file does not contain
                 the correct column headers. Please correct and try again.
                 </span>'))
-  } else if("Display.labels" %in% colnames(m_file) != TRUE) {
+  } else if ("Display.labels" %in% colnames(m_file) != TRUE) {
     return(HTML('<span style = "color:gray">Your metadata file does not contain
                 the correct column headers. Please correct and try again.
                 </span>'))
   }
-  
+
   # Check for the same number of tips for all three files
   if (length(t_file_tips) != length(g_file_tips) |
      length(t_file_tips) != length(m_file_tips) |
@@ -128,23 +128,23 @@ sanity <- function(m_file, g_file, t_file) {
 }
 
 #function to read in the meta data file; transform and determine if there is a
-#column that can be plotted for a matrix 
+#column that can be plotted for a matrix
 m_file_conversion <- function(m_file) {
   Tip.labels <- NULL
-  meta <-m_file %>%
+  meta <- m_file %>%
     #convert the column Display labels to the row name
-    tibble::column_to_rownames(var = "Display.labels") %>% 
+    tibble::column_to_rownames(var = "Display.labels") %>%
     #do not include the column of 'ugly' tip labels
     dplyr::select(-Tip.labels)
 }
 
 #get the number of columns of the meta data file. Here columns should be 1 or
 #more after transformation of meta data
-not_columns <- function (file){
-  col_n_file<- ncol(file)
+not_columns <- function(file) {
+  col_n_file <- ncol(file)
   #colHFile <- colnames(file) #could include what the column headers are
 
-  if (col_n_file < 1 ) {
+  if (col_n_file < 1) {
     return("And looks like there is not a column for matrix plotting")
   } else {
     return(
@@ -157,14 +157,14 @@ not_columns <- function (file){
 #### displayData server functions ####
 ######################################
 
-#this combines the genetic distance file and the tree data by the 'label' 
-combine_g_and_t <- function(tree_file, gene_file){
-  dplyr::full_join(tree_file, gene_file, by = "label")%>%
+#this combines the genetic distance file and the tree data by the 'label'
+combine_g_and_t <- function(tree_file, gene_file) {
+  dplyr::full_join(tree_file, gene_file, by = "label") %>%
     treeio::as.treedata()
 }
 
 # treePlot <- function(inputFile, align, layout, fontface, width, node,
-# limit, nudge_x){
+# limit, nudge_x) {
 #   label <- NULL
 #   ggtree::ggtree(inputFile, layout)+
 #     ggplot2::xlim(NA, limit)+
@@ -189,9 +189,9 @@ snp_anno <- function(gene_file, tips) {
   snp_vector <- c()
   for (i in 1:(length(tips) - 1)) {
     for (j in (i + 1):length(tips)) {
-      if(tips[i] == tips[j]) 
+      if (tips[i] == tips[j]) 
         next
-      snp_vector<-append(snp_vector, gene_file %>%
+      snp_vector <- append(snp_vector, gene_file %>%
                           dplyr::filter(label == tips[i] & name == tips[j]) %>%
                           dplyr::pull(value)
       )
@@ -200,7 +200,7 @@ snp_anno <- function(gene_file, tips) {
   return(as.numeric(snp_vector))
 }
 
-#function to add layer, uses findMRCA to get the MRCA (node) for the 
+#function to add layer, uses findMRCA to get the MRCA (node) for the
 #selected tips
 make_layer <- function(tree, tips, label, color, offset) {
   ggtree::geom_cladelabel(

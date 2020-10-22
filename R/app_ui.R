@@ -1,23 +1,23 @@
 #' @import shiny
 app_ui <- function() {
   tagList(
-    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes 
+    #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    # List the first level UI elements here 
+    # List the first level UI elements here
     fluidPage(
-      theme = shinythemes::shinytheme('yeti'),
+      theme = shinythemes::shinytheme("yeti"),
       navbarPage("Tinsel - a tree visulization and annotation tool",
                  tabPanel("About", mod_about_ui("about_ui_1")),
                  tabPanel("Data Upload",
                           sidebarLayout(
                             sidebarPanel(
                               mod_uploadData_ui("uploadData_ui_1"),
-                              br(), 
+                              br(),
                               mod_pushButtons_ui(
                                 "pushButtons_ui_data"),
                               mod_relaunchApp_ui(
-                                "relaunchApp_ui_data"), 
+                                "relaunchApp_ui_data"),
                               width = 3),
                             mainPanel(
                               mod_tipCheck_ui(
@@ -25,7 +25,7 @@ app_ui <- function() {
                               mod_paramsTree_ui(
                                 "paramsTree_ui_data"),
                               mod_displayTree_ui(
-                                "displayTree_ui_data"),                              
+                                "displayTree_ui_data"),
                               mod_cladeAnnotator_ui(
                                 "cladeAnnotator_ui_data"),
                               br(),
@@ -52,10 +52,10 @@ app_ui <- function() {
 }
 
 #' @import shiny
-golem_add_external_resources <- function(){
-  
+golem_add_external_resources <- function() {
+
   addResourcePath(
-    'www', system.file('app/www', package = 'Tinsel')
+    "www", system.file("app/www", package = "Tinsel")
   )
   
   tags$head(
@@ -64,6 +64,6 @@ golem_add_external_resources <- function(){
     # Add here all the external resources
     # If you have a custom.css in the inst/app/www
     # Or for example, you can add shinyalert::useShinyalert() here
-    tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "www/custom.css")
   )
 }

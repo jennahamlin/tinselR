@@ -3,7 +3,7 @@
 ##uploadData ui functions
 
 #function to upload a file
-file_upload <- function(file_id, file_label){
+file_upload <- function(file_id, file_label) {
   fileInput(file_id,
             file_label,
             multiple = FALSE,
