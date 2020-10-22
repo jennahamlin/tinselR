@@ -13,9 +13,9 @@ mod_about_server(input, output, session)
 \item{id, input, output, session}{Internal parameters for {shiny}.}
 }
 \description{
-A shiny Module. This module generates the landing page for the 
+A shiny Module. This module generates the landing page for the
 application and provides a link to the github repo where users may file
-an issue
+an issue.
 }
 \details{
 about UI Function

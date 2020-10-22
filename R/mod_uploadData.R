@@ -29,7 +29,7 @@ mod_uploadData_ui <- function(id) {
                                              style = "color:#afafae")),
 
     #upload genetic distance file using a function
-    fileUpload(ns("gene_file"), fileLabel =
+    file_upload(ns("gene_file"), file_label =
                  tags$b("2. Upload a genetic distance file",
                         style = "color:#afafae")),
 
@@ -37,14 +37,14 @@ mod_uploadData_ui <- function(id) {
     div(style = "margin-top:-2em",
 
     #specify the type of separator for the genetic distance file uploaded
-        inputSeparator(ns("gene_sep"), fileLabel = tags$em(
+        input_separator(ns("gene_sep"), file_label = tags$em(
           "Separator for genetic distance file", style = "color:#afafae"))),
 
-    fileUpload(ns("meta_file"), fileLabel = tags$b(
+    file_upload(ns("meta_file"), file_label = tags$b(
       "3. Upload an optional meta data file", style = "color:#afafae")),
 
     div(style = "margin-top:-2em",
-        inputSeparator(ns("meta_sep"), fileLabel = tags$em(
+        input_separator(ns("meta_sep"), file_label = tags$em(
           "Separator for optional meta data file", style = "color:#afafae"))
     ),
     tags$hr(style = "border-color: #99b6d8;")
@@ -112,7 +112,7 @@ mod_uploadData_server <- function(input, output, session) {
   ##############
   ### TREES ###
   ##############
-  
+
   #reactive expression that uploads the newick tree and allows the optional
   #upload of meta data to correct tree tip labels
   tree_file_up  <- reactive({

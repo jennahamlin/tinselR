@@ -1,7 +1,7 @@
-#' cladeAnnotator UI Function 
-#' 
+#' cladeAnnotator UI Function
+#'
 #' @title   mod_cladeAnnotator_ui and mod_cladeAnnotator_server
-#' 
+#'
 #' @description  A shiny Module. This module allows the user to add or
 #' remove annotations and checks for overlap between those annotations and
 #' allows the addition of the heatmap.
@@ -15,7 +15,7 @@
 #'
 #' @keywords internal
 #' @export
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -30,9 +30,9 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @export
 #' @keywords internal
 mod_cladeAnnotator_server <-
-  function(input, output, session, mFileMatOut, make_tree_out, add_tree, add_anno, 
-           remove_anno, add_matrix, remove_matrix, geneObjectForSNP, label_off, 
-           lab_color, mat_off) {
+  function(input, output, session, mFileMatOut, make_tree_out, add_tree, 
+           add_anno, remove_anno, add_matrix, remove_matrix, geneObjectForSNP,
+           label_off, lab_color, mat_off) {
 
     #add other tree viz parameters above
     ns <- session$ns
@@ -89,7 +89,7 @@ mod_cladeAnnotator_server <-
 
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),
-                                       tip_vector_in =  tips ),
+                                       tip_vector_in =  tips),
                  metaFile = mFileMatOut())
         })
       }
@@ -103,14 +103,14 @@ mod_cladeAnnotator_server <-
         #skip
       } else {
 
-        if(Values[["n"]] > 0) {
+        if (Values[["n"]] > 0) {
 
           Values[["n"]] <- Values[["n"]] - 1
 
-          tempTip <-Values[["tip_vec"]]
+          tempTip <- Values[["tip_vec"]]
 
           #remove the last set of tips that the user selected
-          Values[["tip_vec"]] <- tempTip[-length(tempTip)] 
+          Values[["tip_vec"]] <- tempTip[-length(tempTip)]
           }
 
         tips <- create_tip_list()
@@ -130,11 +130,10 @@ mod_cladeAnnotator_server <-
       Values[["show_map"]] <-  1
       output$tree_display <- renderPlot({
 
-        #render the plot using the  current_tree_out function. 
+        #render the plot using the  current_tree_out function.
          current_tree_out()
       })
     })
-    
 
     #as above with add matrix but this allows the removal of the matrix by
     #setting show_map to 0
@@ -160,7 +159,7 @@ mod_cladeAnnotator_server <-
                                  colnames_offset_y = -1,
                                  hjust = 0.5)
         #+
-        #  ggplot2::scale_color_viridis_d(option = matCol()) #ideally,
+        #  ggplot2::scale_color_viridis_d(option = matCol())
         #will add in this option to change the color
 
       }
@@ -189,7 +188,7 @@ mod_cladeAnnotator_server <-
       if (Values[["n"]] > 0) {
         #this is the i'th list, for which we are calculating the offset
         for (i in seq_along(tip_vector_in)) {
-          currentTips <- Values[["tip_vec"]][[i]]
+          current_tips <- Values[["tip_vec"]][[i]]
 
           n_overlap <- 0     # start by assuming no overlap
           if (i > 1) {         # for the first set of tips no comparisons needed
@@ -197,11 +196,11 @@ mod_cladeAnnotator_server <-
 
             #this is the j'th list, against which we need to compare if i
             #overlaps it
-            for (j in 1:(i-1)) {  
-              compareTips <- Values[["tip_vec"]][[j]]  #tips to compare to
+            for (j in 1:(i - 1)) {
+              compare_tips <- Values[["tip_vec"]][[j]]  #tips to compare to
 
               # for every match, count it
-              n_overlap <- n_overlap + any(currentTips %in% compareTips)
+              n_overlap <- n_overlap + any(current_tips %in% compare_tips)
             }
           }
 
@@ -211,10 +210,10 @@ mod_cladeAnnotator_server <-
           label_offset <- label_off() + n_overlap * 0.004
 
           #uses the snpAnno function to calculate the mean # of snps for 
-          #brushed tips 
+          #brushed tips
           snp_mean <-
             snp_anno(gene_file = geneObjectForSNP(),
-                    tips = currentTips)
+                    tips = current_tips)
 
           #generates the layer for the set of brushed tips
           g <- g +

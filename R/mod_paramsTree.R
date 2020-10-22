@@ -25,7 +25,7 @@ mod_paramsTree_ui <- function(id) {
 
     column(
       numericInput(ns("numScale"), tags$b("Size of Scale Bar - ",
-                                          style = "color:#afafae"), 
+                                          style = "color:#afafae"),
                    value = 0.001, step = 0.001),
       numericInput(ns("nodeDisplay"), tags$b("Min. Value of Bootstrap -",
                                              style = "color:#afafae"), value =

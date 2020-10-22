@@ -15,7 +15,7 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
-mod_exampleData_ui <- function(id){
+mod_exampleData_ui <- function(id) {
   ns <- NS(id)
 
   tagList(
@@ -76,11 +76,14 @@ mod_exampleData_server <- function(input, output, session) {
 
   ex_meta_file_in <- reactive({
     if (input$ex_meta_file == "example Meta Data 1") {
-      Tinsel::meta1}
+      Tinsel::meta1
+      }
     else if (input$ex_meta_file == "example Meta Data 2") {
-      Tinsel::meta2}
+      Tinsel::meta2
+      }
     else if (input$ex_meta_file == "example Meta Data 3") {
-      Tinsel::meta3}
+      Tinsel::meta3
+      }
   })
 
   ###############
@@ -89,11 +92,14 @@ mod_exampleData_server <- function(input, output, session) {
   
   ex_gene_file_in <- reactive({
     if (input$ex_gene_file == "example Genetic Distance 1") {
-      Tinsel::gene1}
+      Tinsel::gene1
+      }
     else if (input$ex_gene_file == "example Genetic Distance 2") {
-      Tinsel::gene2}
+      Tinsel::gene2
+      }
     else if (input$ex_gene_file == "example Genetic Distance 3") {
-      Tinsel::gene3}
+      Tinsel::gene3
+      }
   })
 
   ##############
@@ -102,13 +108,16 @@ mod_exampleData_server <- function(input, output, session) {
 
   ex_tree_file_in <- reactive({
     if (input$ex_tree_file == "example Tree 1") {
-      Tinsel::tree1}
+      Tinsel::tree1
+      }
     else if (input$ex_tree_file == "example Tree 2") {
-      Tinsel::tree2}
+      Tinsel::tree2
+      }
     else if (input$ex_tree_file == "example Tree 3") {
-      Tinsel::tree3}
+      Tinsel::tree3
+      }
   })
-  
+
   #reactive expression that uploads the newick tree and allows the optional
   #upload of meta data to correct tree tip labels
   ex_tree_file_up <- reactive({
@@ -120,7 +129,7 @@ mod_exampleData_server <- function(input, output, session) {
       ex_tree_file_in()
     } else {
       ex_tree_file_in() %>%
-        #this line converts tip labels to pretty labels based on user upload 
+        #this line converts tip labels to pretty labels based on user upload
         phylotools::sub.taxa.label(., as.data.frame(ex_meta_file_in()))
     }
   })
@@ -138,7 +147,7 @@ mod_exampleData_server <- function(input, output, session) {
       ex_meta_file_comb <- ex_meta_file_in()
       ex_gene_file_corrected <- ex_gene_file_in()
 
-      colnames(ex_gene_file_corrected)[2:ncol(ex_gene_file_corrected)] <- 
+      colnames(ex_gene_file_corrected)[2:ncol(ex_gene_file_corrected)] <-
         ex_meta_file_comb$Display.labels[which(
           ex_meta_file_comb$Tip.labels %in% colnames(ex_gene_file_corrected)
                                                [2:ncol(

@@ -32,8 +32,8 @@ golem::set_golem_options()
 
 usethis::use_mit_license(name = "Jenna Hamlin")
 usethis::use_readme_rmd(open = FALSE)
-# usethis::use_code_of_conduct()
-# usethis::use_lifecycle_badge("Experimental")
+usethis::use_code_of_conduct()
+usethis::use_lifecycle_badge("Experimental")
 usethis::use_news_md(open = FALSE)
 usethis::use_git()
 
@@ -62,8 +62,8 @@ golem::remove_favicon()
 golem::use_favicon("~/Desktop/Tinsel/favicon/favicon.ico")
 
 # Add helper functions
-# golem::use_utils_ui()
-# golem::use_utils_server()
+golem::use_utils_ui()
+golem::use_utils_server()
 
 # You're now set!
 # go to dev/02_dev.R

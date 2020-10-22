@@ -14,7 +14,7 @@
 #'
 #' @keywords internal
 #' @export
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_displayTree_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -70,7 +70,7 @@ mod_displayTree_server <- function(input, output, session,
       ggtree::geom_tiplab(align = align(), fontface = font(),
                           family = "Helvetica", size = 3) +
       ggtree::geom_treescale(width = num_scale(), x = 0.005, y = -3) +
-      ggtree::geom_text2(ggplot2::aes(label=label,
+      ggtree::geom_text2(ggplot2::aes(label = label,
                                       subset = !is.na(as.numeric(label)) &
                                         as.numeric(label) > node()),
                          nudge_x = boot_pos())

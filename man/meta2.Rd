@@ -7,7 +7,7 @@
 
 This is a meta data file for tip correction for 19 isolates of Salmonella
 enterica sub species enterica to be used with the newick phylogenetic tree
-(example tree 2) and the optional genetic distance file (example gene 2)}
+(example tree 2) and the optional genetic distance file (example gene 2).}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14 rows and 7 columns.
 }
@@ -19,7 +19,7 @@ Example Meta 2
 
 This is a meta data file for tip correction for 19 isolates of Salmonella
 enterica sub species enterica to be used with the newick phylogenetic tree
-(example tree 2) and the optional genetic distance file (example gene 2)
+(example tree 2) and the optional genetic distance file (example gene 2).
 }
 \examples{
 data(meta2)
