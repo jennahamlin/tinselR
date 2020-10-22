@@ -19,6 +19,7 @@ If you have any the above, please submit an *issue* on github located
  see the quick start for how to install ggtree. 
  - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html); 
  which will install with ggtree.
+ -R version >= 3.5
 
 
 <!-- badges: start -->
@@ -53,8 +54,9 @@ run_app()
 
 **4). Load your data or use the example data**  
 
-*Please click on the 'Data Upload' pane, where you can upload your files*
-*Example data is availale for playing with Tinsel in the 'Example Data' pane.* 
+*Please click on the 'Data Upload' pane, where you can upload your files.*
+*Example data is availale for playing with Tinsel in the 'Example Data' pane of* 
+*the application.* 
 
 * **Phylogenetic Tree** - required; a 
 [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
@@ -62,50 +64,54 @@ run_app()
 * **Genetic Distance data** - optional for use with the annotation function;
 a tsv/txt/csv file - see below for image of genetic distance matrix
 
+<p>
+
+<h4> genetic Distance screenshot </h4>
+    <img src="man/figures/geneDistanceExample.png" />
+</p>
+
 * **Metadata** - optional for easy correction of tip labels or adding a heatmap;
 a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels.
 See image below for a csv file example 
 
 <p>
 
-<h4> genetic Distance screenshot </h4>
-    <img src="man/figures/geneticDistanceScreenshot.png" />
-</p>
-
-
-
-<p>
-
 <h4> meta Data screenshot </h4>
-    <img src="man/figures/metaDataScreenshot.png" />
+    <img src="man/figures/metaDataExample.png" />
 </p>
 
 #### Once the phylogenetic tree is uploaded you can -
-* Alter additional visualization parameters in the sidebar panel on the left. See below for tree with aligned tips.  
+* Alter visualization parameters. See below for tree with aligned tips.  
 
 <p>
-    <img src="man/figures/treeWSomeViz.png" />
+    <img src="man/figures/treeWAlignedTips.png" />
 </p>
 
 #### Once the genetic distance file is uploaded you can -
-* add annotation to the visual representation of the tree. See below for a tree with annotated clades including the range of SNPs. 
+* add annotation to the visual representation of the tree. See below for a tree
+with annotated clades including the range of SNPs. 
 
 <p>
-    <img src="man/figures/treeWSomeAnn.png" />
+    <img src="man/figures/treeWAnno.png" />
 </p>
 
-#### Tinsel Flow Control diagram 
+#### If column for heatmap included in meta data file you  can -
+* add the heatmap on to a tree with or without annotations. See below for a tree
+with annotated clades and a heatmap. 
 
 <p>
-    <img src="man/figures/tinselFlowControl.png" />
+    <img src="man/figures/treeWAnnoAndHeatmap.png" />
 </p>
 
-**Known issues as September 23, 2020**
 
-- If user uploads tree and genetic distance matrix and then annotates the tree, error pops up if user then tries to upload a meta data file. 
+**Known issues as October 23, 2020**
 
+- If user uploads tree and genetic distance matrix and then annotates the tree, 
+error pops up if user then tries to upload a meta data file. 
 
-**Tinsel has been tested with**
-* R version 3.6.0 
+- In the example data, the add annotation and remove annnotation button if 
+clicked without the associated data, an error occurs. 
 
-
+**Please see this (link)[https://github.com/jennahamlin/Tinsel/issues/4]
+for all packages and versions that were installed on a windows machine that 
+successfully runs Tinsel. 
