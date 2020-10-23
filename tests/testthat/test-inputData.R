@@ -63,7 +63,7 @@ new_tiplabels <- c("A", "B", "C", "D")
 testing_tree$tip.label <- new_tiplabels
 
 
-testing_tree <- tibble::as_tibble(testing_tree)
+testing_tree <- tidytree::as_tibble(testing_tree)
 testing_genetic <- dplyr::rename(testing_genetic, label = 1)
 
 
@@ -76,7 +76,7 @@ testing_genetic <- dplyr::rename(testing_genetic, label = 1)
 # testing_gene <- dplyr::rename(gene1, label = 1)
 
 test_that("data types correct before combining tree", {
-  expect_is(testing_tree, "tibble")
+  expect_is(testing_tree, "tbl_tree")
 })
 
  test_that("confirm tree and genetic distance can be combined", {
