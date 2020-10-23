@@ -85,7 +85,8 @@ mod_cladeAnnotator_server <-
           data_with_selection2()
 
         #add to variable called tips
-        tips <- create_tip_list(r_n_values = Values[["n"]], r_tip_vec = Values[["tip_vec"]])
+        tips <- create_tip_list(r_n_values = Values[["n"]],
+                                r_tip_vec = Values[["tip_vec"]])
 
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),

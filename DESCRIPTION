@@ -1,11 +1,15 @@
 Package: tinselR
-Title: An R Shiny Application for annotating outbreak phylogenetic
-  trees
+Title: An R Shiny Application for Annotating Outbreak
+    Phylogenetic Trees
 Version: 0.0.0.9000
-Authors@R: person('Jenna', 'Hamlin', email = 'ptx4@cdc.gov', role = c('cre', 'aut'))
+Authors@R: 
+    person(given = "Jenna",
+           family = "Hamlin",
+           role = c("cre", "aut"),
+           email = "ptx4@cdc.gov")
 Description: This is a phylogenetic tree application for adding
-  additional information to trees. Additional information could come from a
-  genetic distance file or meta data file.
+    additional information to trees. Additional information could come
+    from a genetic distance file or meta data file.
 License: MIT + file LICENSE
 URL: https://github.com/jennahamlin/tinselR
 BugReports: https://github.com/jennahamlin/tinselR/issues
@@ -28,25 +32,25 @@ Imports:
     stats,
     tibble,
     tidyr,
-    treeio,
-    tidytree
+    tidytree,
+    treeio
 Suggests: 
     assertthat,
     attempt,
     colorspace,
     DT,
     glue,
+    gtools,
     here,
     htmltools,
     knitr,
+    markdown,
     pkgload,
     processx,
     purrr,
+    rmarkdown,
     testthat (>= 2.1.0),
-    xfun,
-    gtools,
-    markdown,
-    rmarkdown
+    xfun
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

@@ -1,8 +1,8 @@
-### What is Tinsel?
+### What is tinselR?
 
-Tinsel at its' most basic level is a graphical viewer of newick-formatted 
+tinselR at its' most basic level is a graphical viewer of newick-formatted 
 phylogenetic trees and as an application for producing publication-ready 
-figures. The **power** of Tinsel comes with combining a genetic distance matrix 
+figures. The **power** of tinselR comes with combining a genetic distance matrix 
 for annotating a tree for epidemiological outbreak analyses. A genetic distance
 matrix contains snp differences for all pairwise comparisons for the tips on 
 the tree. One can also include a 
@@ -12,7 +12,7 @@ provided in the meta data file.
 ### Issues, problems, suggestions, thoughts
 
 If you have any the above, please submit an *issue* on github located 
-[here](https://github.com/jennahamlin/Tinsel/issues).
+[here](https://github.com/jennahamlin/tinselR/issues).
 
 ### Requires - 
  - [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html); 
@@ -23,7 +23,7 @@ If you have any the above, please submit an *issue* on github located
 
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/jennahamlin/Tinsel.svg?branch=master)](https://travis-ci.com/jennahamlin/Tinsel)
+[![Travis build status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=master)](https://travis-ci.com/jennahamlin/tinselR)
 <!-- badges: end -->
 <hr>
 
@@ -43,19 +43,19 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("ggtree")
 ```
 
-**3). Install and launch the Tinsel shiny application**
+**3). Install and launch the tinselR shiny application**
 
 
 ```
-devtools::install_github("jennahamlin/Tinsel")
-Library(Tinsel)
+devtools::install_github("jennahamlin/tinselR")
+library(tinselR)
 run_app()
 ```
 
 **4). Load your data or use the example data**  
 
 *Please click on the 'Data Upload' pane, where you can upload your files.*
-*Example data is availale for playing with Tinsel in the 'Example Data' pane of* 
+*Example data is availale for playing with tinselR in the 'Example Data' pane of* 
 *the application.* 
 
 * **Phylogenetic Tree** - required; a 
@@ -112,6 +112,6 @@ error pops up if user then tries to upload a meta data file.
 - In the example data, the add annotation and remove annnotation button if 
 clicked without the associated data, an error occurs. 
 
-**Please see this [link](https://github.com/jennahamlin/Tinsel/issues/4)
+**Please see this [link](https://github.com/jennahamlin/tinselR/issues/4)
 for all packages and versions that were installed on a windows machine that 
-successfully runs Tinsel.** 
+successfully runs tinselR.** 
