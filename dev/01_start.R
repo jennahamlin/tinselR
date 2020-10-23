@@ -9,7 +9,7 @@
 ## Add information about the package that will contain your app
 
 golem::fill_desc(
-  pkg_name = "Tinsel", # The Name of the package containing the App
+  pkg_name = "tinselR", # The Name of the package containing the App
   pkg_title = "An R Shiny Application for annotating outbreak phylogenetic
   trees",
   pkg_description = "This is a phylogenetic tree application for adding
@@ -18,7 +18,7 @@ golem::fill_desc(
   author_first_name = "Jenna", # Your First Name
   author_last_name = "Hamlin",  # Your Last Name
   author_email = "ptx4@cdc.gov",      # Your Email
-  repo_url = "https://github.com/jennahamlin/Tinsel" # URL of the GitHub Repo
+  repo_url = "https://github.com/jennahamlin/tinselR" # URL of the GitHub Repo
 )
 
 ## Use this desc to set {golem} options
@@ -59,7 +59,7 @@ golem::use_recommended_deps()
 # If you want to change the favicon (default is golem's one)
 # can make my own https://favicon.io/favicon-generator/
 golem::remove_favicon()
-golem::use_favicon("~/Desktop/Tinsel/favicon/favicon.ico")
+golem::use_favicon("~/Desktop/tinselR/favicon/favicon.ico")
 
 # Add helper functions
 golem::use_utils_ui()

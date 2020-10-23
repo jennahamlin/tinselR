@@ -15,12 +15,12 @@ mod_about_ui <- function(id) {
   ns <- NS(id)
   tagList(
     fluidRow(column(12, offset = 0,
-                    mainPanel(h1(strong("Getting started with Tinsel")),
+                    mainPanel(h1(strong("Getting started with tinselR")),
                               tags$br(),
-                              p("Tinsel at its' most basic level is a graphical
+                              p("tinselR at its' most basic level is a graphical
                               viewer of newick phylogenetic trees and as a
                               program for producing publication-ready figures.",
-                                "The", em("power"), "of Tinsel comes with
+                                "The", em("power"), "of tinselR comes with
                                 combining a genetic distance matrix for
                                 annotating a tree for epidemological outbreak
                                 analyses.", "A genetic distance matrix contains
@@ -32,7 +32,7 @@ mod_about_ui <- function(id) {
                                 bottom; enter your name and press Download"),
                               tags$p("If you have any problems, please file an",
                                      a("issue", href =
-                                         "https://github.com/jennahamlin/Tinsel/issues"
+                                         "https://github.com/jennahamlin/tinselR/issues"
                                      )),
                               tags$br(),
                               tags$h4(strong("Data Upload")),
