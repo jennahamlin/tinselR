@@ -53,15 +53,21 @@ mod_displayTree_server <- function(input, output, session,
     combine_g_and_t(tree_object(), geneObjectOutForSNP())
   })
 
-  ########additional reactive tree parameters to possibly include
-  #these could be parameters to increase/decrease how far tree fills
-  #to the margins
+  #major plotting reactive using an S4 object called above (gandTS4) or the
+  #base mid_tree reactive made from import of treeFileOut and the  Upload data
+  #module
+  make_tree <- reactive({
 
-  ## displayTree server function. In theory this function should be able to be
-  #moved over to the golem_utils_server.R script and updating the function to
-  #take all of the reactive values but I have been unsuccessful at doing that
-  #and get a strange error `Warning: Error in modifyList: is.list(val) is not
-  #TRUE` so leaving here for now
+    # this disconnects the need for genetic distance file to be uploaded for
+    #the tree viz to happen
+    if (is.null(input$gandTS4)) {
+      tree_plot(mid_tree())
+    } else{
+      tree_plot(g_and_t_s4())
+    }
+  })
+
+  ########additional reactive tree parameters to possibly include are:
 
   tree_plot <- function(input_file) {
     label <- NULL
@@ -75,33 +81,6 @@ mod_displayTree_server <- function(input, output, session,
                                         as.numeric(label) > node()),
                          nudge_x = boot_pos())
   }
-
-  #major plotting reactive using an S4 object called above (gandTS4) or the
-  #base mid_tree reactive made from import of treeFileOut and the  Upload data
-  #module
-  make_tree <- reactive({
-
-    # this disconnects the need for genetic distance file to be uploaded for
-    #the tree viz to happen
-    if (is.null(input$gandTS4)) {
-      tree_plot(mid_tree())
-
-      #what the call should look like if treePlot function was in the
-      #golem_utils_server.R file
-      #treePlot(inputFile = mid_tree(), align = align(), layout = treeformat(),
-      #fontface = font(), width = numscale(), node = node(), limit = lim(),
-      #nudge_x = bootPos())
-
-    } else{
-      tree_plot(g_and_t_s4())
-
-      #what the call should look like if treePlot function was in the
-      #golem_utils_server.R file
-      #treePlot(inputFile = gandTS4(), align = align(), layout = treeformat(),
-      #fontface = font(), width = numscale(), node = node(), limit = lim(),
-      #nudge_x = bootPos())
-    }
-  })
 
   #return display tree reactive to be used in cladeAnnotator module
   return(

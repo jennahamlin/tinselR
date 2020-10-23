@@ -20,20 +20,20 @@ mod_about_ui <- function(id) {
                               p("Tinsel at its' most basic level is a graphical
                               viewer of newick phylogenetic trees and as a
                               program for producing publication-ready figures.",
-                                "The", em("power"),"of Tinsel comes with
+                                "The", em("power"), "of Tinsel comes with
                                 combining a genetic distance matrix for
                                 annotating a tree for epidemological outbreak
                                 analyses.", "A genetic distance matrix contains
                                 the number of snp differences for all pairwise
                                 comparisons. Note that the data you upload is
                                 only held within the application while on the
-                                site (i.e. no data is stored.) When you are 
-                                happy with the way your tree scroll to the 
+                                site (i.e. no data is stored.) When you are
+                                happy with the way your tree looks scroll to the
                                 bottom; enter your name and press Download"),
                               tags$p("If you have any problems, please file an",
                                      a("issue", href =
                                          "https://github.com/jennahamlin/Tinsel/issues"
-                                     )), 
+                                     )),
                               tags$br(),
                               tags$h4(strong("Data Upload")),
                               tags$p("Please click on the 'Data Upload' pane
@@ -46,54 +46,54 @@ mod_about_ui <- function(id) {
                                       a("newick",
                                         href =
                                           "https://en.wikipedia.org/wiki/
-                                        Newick_format"),"generated tree"),
+                                        Newick_format"), "generated tree"),
                               tags$br(),
                               tags$div(tags$li(em("Genetic Distance Data"),
-                                               "- optional for use with the 
+                                               "- optional for use with the
                                                annotation function.",
                                                tags$br(), "A tsv/txt/csv file of
-                                      SNP differences. See image below for 
+                                      SNP differences. See image below for
                                                example."),
                                        tags$br(),
-                                       tags$img(src = 
+                                       tags$img(src =
                                                   "www/geneDistanceExample.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
-                              tags$div(tags$li(em("Meta Data"), "- optional for 
+                              tags$div(tags$li(em("Meta Data"), "- optional for
                               easy correction of tip labels;",
-                                               tags$br(), 
-                                               "a tsv/txt/csv file - requires 
+                                               tags$br(),
+                                               "a tsv/txt/csv file - requires
                                                column headers of Display.labels
-                                               and Tip.labels. See image below 
+                                               and Tip.labels. See image below
                                                for example."),
                                        tags$br(),
                                        tags$img(src = "www/metaDataExample.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
-                              tags$div(tags$li(tags$em("Once the phylogenetic 
+                              tags$div(tags$li(tags$em("Once the phylogenetic
                               tree is uploaded you can -")),
                                        "Alter visualization parameters",
                                        tags$br(),
-                                       tags$img(src = 
+                                       tags$img(src =
                                                   "www/treeWAlignedTips.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
                               
-                              tags$div(tags$li(tags$em("Once the genetic 
-                              distance file is uploaded you can -")), "Add 
-                              annotation to the visual representation of the 
+                              tags$div(tags$li(tags$em("Once the genetic
+                              distance file is uploaded you can -")), "Add
+                              annotation to the visual representation of the
                               tree. If you want to add annotations then
-                              highlight the tip labels to their most recent 
-                                       common ancestor,", tags$a("MRCA", href = 
+                              highlight the tip labels to their most recent
+                                       common ancestor,", tags$a("MRCA", href =
                                               "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),"
                                               , and press the 'Add Annotations'
-                                              button. Repeat until you are 
+                                              button. Repeat until you are
                                        satisfied.",
                                        tags$br(),
                                        tags$img(src = "www/treeWAnno.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
-                              tags$div(tags$li(tags$em("If column for heatmap 
+                              tags$div(tags$li(tags$em("If column for heatmap
                                                        included in meta data
                                                        file you  can")), "add
                                        a heatmap with or without annotatios",

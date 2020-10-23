@@ -47,7 +47,6 @@ app_ui <- function() {
                               br(),
                               mod_downloadImage_ui("downloadImage_ui_1")
                             )))
-                 
       )
     )
   )

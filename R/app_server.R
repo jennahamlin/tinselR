@@ -33,8 +33,8 @@ app_server <- function(input, output, session) {
 
   #annotates tree with incorporated tree viz parameters and allows user to
   #add visual matrix
-  tree_w_layers <- callModule(mod_cladeAnnotator_server, 
-                              "cladeAnnotator_ui_data", 
+  tree_w_layers <- callModule(mod_cladeAnnotator_server,
+                              "cladeAnnotator_ui_data",
                               data_display$mFileMatOut, plot$make_tree_out,
                               buttons$add_tree, buttons$add_anno,
                               buttons$remove_anno, buttons$add_matrix,
@@ -44,7 +44,7 @@ app_server <- function(input, output, session) {
 
   #allows tree with annotation and viz parameters to be donwloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_1", tree_w_layers)
-  
+
   ####################
   ### EXAMPLE DATA ###
   ####################
@@ -78,5 +78,5 @@ app_server <- function(input, output, session) {
              example_buttons$remove_matrix,
              example_data  $exGeneObjectForSNP, example_params$label_off,
              example_params$lab_color, example_params$mat_off)
-  
+
 }
