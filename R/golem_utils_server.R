@@ -187,6 +187,20 @@ snp_anno <- function(gene_file, tips) {
   return(as.numeric(snp_vector))
 }
 
+
+#function to create the tip list. list apply over the counter('n') and
+#paste the values in the tip vector to the variable tips
+create_tip_list <- function(r_n_values, r_tip_vec) {
+  tips <- c()
+  if (r_n_values < 1) {
+    #skip
+  } else {
+    tips <- lapply(1:r_n_values, function(i)
+      r_tip_vec[[paste0("tips", i)]])
+  }
+  return(tips)
+}
+
 #function to add layer, uses findMRCA to get the MRCA (node) for the
 #selected tips
 make_layer <- function(tree, tips, label, color, offset) {
@@ -214,7 +228,6 @@ add_map <- function(tree, metaFile, r_value, matOff) {
     #+
     #  ggplot2::scale_color_viridis_d(option = matCol())
     #will add in this option to change the color
-    
   }
   return(tree)
 }

@@ -24,7 +24,7 @@ mod_tipCheck_ui <- function(id) {
                tags$th("File Check Output", colspan = "3",
                        style = "font-size:20px; color:#444444;")),
 
-    # this output info about if tip labels are not concordant between all
+    # this outputs info about if tip labels are not concordant between all
     #three files
     htmlOutput(ns("file_checking")),
 
@@ -70,7 +70,8 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
     }
   })
 
-  #displays number of columns that are available for adding a matrix to the tree
+  #displays number of columns that are available for adding a matrix to the 
+  #tree via a message to the user
   output$file_checking_mat <- renderUI({
     ns <- session$ns
     if (is.null(m_file_out())) {

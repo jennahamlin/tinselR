@@ -85,7 +85,7 @@ mod_cladeAnnotator_server <-
           data_with_selection2()
 
         #add to variable called tips
-        tips <- create_tip_list()
+        tips <- create_tip_list(r_n_values = Values[["n"]], r_tip_vec = Values[["tip_vec"]])
 
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),
@@ -114,7 +114,7 @@ mod_cladeAnnotator_server <-
           Values[["tip_vec"]] <- temp_tip[-length(temp_tip)]
           }
 
-        tips <- create_tip_list()
+        tips <- create_tip_list(r_n_values = Values[["n"]], r_tip_vec = Values[["tip_vec"]])
 
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),
@@ -147,21 +147,6 @@ mod_cladeAnnotator_server <-
          current_tree_out()
       })
     })
-
-    
-
-    #function to create the tip list. list apply over the counter('n') and
-    #paste the values in the tip vector to the variable tips
-    create_tip_list <- function() {
-      tips <- c()
-      if (Values[["n"]] < 1) {
-        #skip
-      } else {
-        tips <- lapply(1:Values[["n"]], function(i)
-          Values[["tip_vec"]][[paste0("tips", i)]])
-      }
-      return(tips)
-    }
 
     #this functions calculates the mean # snps and adds that layer as
     #annotation. Additionally, it checks for overlap in annotations and adjusts
@@ -217,7 +202,10 @@ mod_cladeAnnotator_server <-
     #function to create the tree.
      current_tree_out <- function() {
       add_map(tree = add_annotations(tree_plot = make_tree_out(),
-                                   tip_vector_in =  create_tip_list()),
+                                   tip_vector_in =
+                                     create_tip_list(r_n_values = Values[["n"]],
+                                                     r_tip_vec = 
+                                                       Values[["tip_vec"]])),
              metaFile = mFileMatOut(), r_value = Values[["show_map"]], 
              matOff = mat_off())
     }

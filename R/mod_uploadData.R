@@ -3,7 +3,9 @@
 #' @title   mod_uploadData_ui and mod_uploadData_server
 #' @description  A shiny Module. This module allows the user to upload three
 #'  different types of files and does file checking to confirm the correct
-#'  delimiter is selected
+#'  delimiter is selected. The output from this module is sent to three
+#'  different modules (tipCheck, displayTree, and cladeAnnotator). 
+#'  
 #'
 #' @param id shiny id
 #' @param input internal
@@ -58,11 +60,12 @@ mod_uploadData_ui <- function(id) {
 #' @keywords internal
 mod_uploadData_server <- function(input, output, session) {
   ns <- session$ns
+  
   ############
   ### META ###
   ############
 
-  #1. reactive expression that holds meta data file and sends tipcheck message
+  #1. reactive expression that holds meta data file and sends tipCheck message
   meta_file_up <- reactive({
     input$meta_file
   })
@@ -79,13 +82,11 @@ mod_uploadData_server <- function(input, output, session) {
   })
 
   #this performs file conversion for the meta file if there is matrix data,
-  #and is a reactive that is ultimately send to the cladeAnnotator
+  #and is a reactive that is ultimately sent to the cladeAnnotator
   m_file_mat <- reactive({
     if (!is.null(meta_file_up())) { #if not; then will complain w/button push
       m_file_conversion(m_file = meta_file())
-    } else {
-      #skip
-    }
+    } 
   })
 
   ###############
@@ -125,7 +126,7 @@ mod_uploadData_server <- function(input, output, session) {
     if (is.null(meta_file_up()$datapath)) { #if no meta  still upload the tree
       treeio::read.newick(input$tree_file$datapath)
     } else {
-      meta_file_seperate <- meta_file()
+      meta_file_seperate <- meta_file() #pass in the file read above
 
       treeio::read.newick(input$tree_file$datapath) %>%
         phylotools::sub.taxa.label(., as.data.frame(meta_file_seperate))
@@ -151,7 +152,7 @@ mod_uploadData_server <- function(input, output, session) {
       #the next two lines essentially map the preferred tip lab display in the
       #meta data file to that in the genetic distance file, which has the long
       #tip display names so essentially replacing the long tip labels with
-      #whatever the user prefers.
+      #whatever the user prefers and is included in the meta data file.
 
       colnames(gene_file_corrected)[2:ncol(gene_file_corrected)] <-
         meta_file_comb$Display.labels[which(meta_file_comb$Tip.labels %in%

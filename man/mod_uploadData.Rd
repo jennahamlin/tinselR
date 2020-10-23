@@ -21,7 +21,8 @@ mod_uploadData_server(input, output, session)
 \description{
 A shiny Module. This module allows the user to upload three
  different types of files and does file checking to confirm the correct
- delimiter is selected
+ delimiter is selected. The output from this module is sent to three
+ different modules (tipCheck, displayTree, and cladeAnnotator).
 }
 \details{
 uploadData UI Function
