@@ -1,3 +1,7 @@
+#####################################
+## cladeAnnotator server functions ##
+#####################################
+
 #function to create the tip list. list apply over the counter('n') and
 #paste the values in the tip vector to the variable tips. The input in this 
 #function is two reactive values (r_n_values and r_tip_vec); r_n_values is a 

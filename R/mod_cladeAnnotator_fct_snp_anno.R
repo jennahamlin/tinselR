@@ -1,3 +1,7 @@
+#####################################
+## cladeAnnotator server functions ##
+#####################################
+
 #this function takes in the genetic distance matrix which has been transformed
 #to three columns with all pairwise comparisons listed. The tips parameter is
 #tips that have been selected/brushed by the user and the output is a vector

@@ -1,3 +1,7 @@
+#####################################
+## cladeAnnotator server functions ##
+#####################################
+
 #add map function; takes in a tree and the converted meta data file, along with
 #two reactive values (r_value and matoff) which are initialized on start of the
 #application. Only allows the inclusion of the map if the value of show_map is
