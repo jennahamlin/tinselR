@@ -16,7 +16,6 @@ BugReports: https://github.com/jennahamlin/Tinsel/issues
 Depends: 
     R (>= 2.10)
 Imports: 
-    tidytree,
     ape,
     config,
     dplyr,
@@ -35,6 +34,7 @@ Imports:
     tidyr,
     treeio
 Suggests: 
+    tidytree,
     assertthat,
     attempt,
     colorspace,
