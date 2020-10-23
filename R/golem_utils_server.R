@@ -198,3 +198,23 @@ make_layer <- function(tree, tips, label, color, offset) {
     offset = offset
   )
 }
+
+#add map funciton takes in a tree and the converted meta data file.
+#only allows the inclusion of the mapk if the value of show_map is
+#greater than 0
+add_map <- function(tree, metaFile, r_value, matOff) {
+  if (r_value > 0 & !is.null(metaFile)) {
+    tree <- ggtree::gheatmap(tree,
+                             metaFile,
+                             offset = matOff,
+                             width = 0.2,
+                             colnames_angle = 45,
+                             colnames_offset_y = -1,
+                             hjust = 0.5)
+    #+
+    #  ggplot2::scale_color_viridis_d(option = matCol())
+    #will add in this option to change the color
+    
+  }
+  return(tree)
+}

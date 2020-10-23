@@ -90,7 +90,8 @@ mod_cladeAnnotator_server <-
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),
                                        tip_vector_in =  tips),
-                 metaFile = mFileMatOut())
+                 metaFile = mFileMatOut(), r_value = Values[["show_map"]],
+                 matOff = mat_off())
         })
       }
     })
@@ -118,7 +119,8 @@ mod_cladeAnnotator_server <-
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),
                                        tip_vector_in =  tips),
-                 metaFile = mFileMatOut())
+                 metaFile = mFileMatOut(), r_value = Values[["show_map"]], 
+                 matOff = mat_off())
         })
       }
     })
@@ -146,25 +148,7 @@ mod_cladeAnnotator_server <-
       })
     })
 
-    #add map funciton takes in a tree and the converted meta data file.
-    #only allows the inclusion of the mapk if the value of show_map is
-    #greater than 0
-    add_map <- function(tree, metaFile) {
-      if (Values[["show_map"]] > 0 & !is.null(metaFile)) {
-        tree <- ggtree::gheatmap(tree,
-                                 metaFile,
-                                 offset = mat_off(),
-                                 width = 0.2,
-                                 colnames_angle = 45,
-                                 colnames_offset_y = -1,
-                                 hjust = 0.5)
-        #+
-        #  ggplot2::scale_color_viridis_d(option = matCol())
-        #will add in this option to change the color
-
-      }
-      return(tree)
-    }
+    
 
     #function to create the tip list. list apply over the counter('n') and
     #paste the values in the tip vector to the variable tips
@@ -234,7 +218,8 @@ mod_cladeAnnotator_server <-
      current_tree_out <- function() {
       add_map(tree = add_annotations(tree_plot = make_tree_out(),
                                    tip_vector_in =  create_tip_list()),
-             metaFile = mFileMatOut())
+             metaFile = mFileMatOut(), r_value = Values[["show_map"]], 
+             matOff = mat_off())
     }
 
     #reactive to send tree to downloadImage module
