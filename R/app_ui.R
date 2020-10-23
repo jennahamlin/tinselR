@@ -21,7 +21,11 @@ app_ui <- function() {
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_example"),
                               mod_displayTree_ui("displayTree_ui_example"),
-                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example")
+                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example"),
+                              br(),
+                              br(),
+                              br(),
+                              mod_downloadImage_ui("downloadImage_ui_example")
                             ))),
                  tabPanel("Data Upload",
                           sidebarLayout(
@@ -45,7 +49,7 @@ app_ui <- function() {
                               br(),
                               br(),
                               br(),
-                              mod_downloadImage_ui("downloadImage_ui_1")
+                              mod_downloadImage_ui("downloadImage_ui_data")
                             )))
       )
     )

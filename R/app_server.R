@@ -43,7 +43,7 @@ app_server <- function(input, output, session) {
                               params$lab_color, params$mat_off)
 
   #allows tree with annotation and viz parameters to be donwloaded
-  callModule(mod_downloadImage_server, "downloadImage_ui_1", tree_w_layers)
+  callModule(mod_downloadImage_server, "downloadImage_ui_data", tree_w_layers)
 
   ####################
   ### EXAMPLE DATA ###
@@ -64,19 +64,22 @@ app_server <- function(input, output, session) {
   callModule(mod_relaunchApp_server, "relaunchApp_ui_example")
 
   example_plot <- callModule(mod_displayTree_server, "displayTree_ui_example",
-                            example_data   $extreeFileOut,
-                            example_data   $exGeneFileCorOrUnOut,
+                            example_data$extreeFileOut,
+                            example_data$exGeneFileCorOrUnOut,
                             example_params$align, example_params$tree_format,
                             example_params$font, example_params$num_scale,
                             example_params$node, example_params$lim,
                             example_params$boot_pos, example_params$mid_p)
 
-  callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example",
-             example_data  $exMetaFileOut, example_plot$make_tree_out,
+  example_tree <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example",
+             example_data$exMetaFileOut, example_plot$make_tree_out,
              example_buttons$add_tree, example_buttons$add_anno,
              example_buttons$remove_anno, example_buttons$add_matrix,
              example_buttons$remove_matrix,
-             example_data  $exGeneObjectForSNP, example_params$label_off,
+             example_data$exGeneObjectForSNP, example_params$label_off,
              example_params$lab_color, example_params$mat_off)
+  
+  callModule(mod_downloadImage_server, "downloadImage_ui_example", example_tree)
+  
 
 }
