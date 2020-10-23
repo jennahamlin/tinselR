@@ -76,13 +76,13 @@ mod_exampleData_server <- function(input, output, session) {
 
   ex_meta_file_in <- reactive({
     if (input$ex_meta_file == "example Meta Data 1") {
-      Tinsel::meta1
+      tinselR::meta1
       }
     else if (input$ex_meta_file == "example Meta Data 2") {
-      Tinsel::meta2
+      tinselR::meta2
       }
     else if (input$ex_meta_file == "example Meta Data 3") {
-      Tinsel::meta3
+      tinselR::meta3
       }
   })
 
@@ -92,13 +92,13 @@ mod_exampleData_server <- function(input, output, session) {
 
   ex_gene_file_in <- reactive({
     if (input$ex_gene_file == "example Genetic Distance 1") {
-      Tinsel::gene1
+      tinselR::gene1
       }
     else if (input$ex_gene_file == "example Genetic Distance 2") {
-      Tinsel::gene2
+      tinselR::gene2
       }
     else if (input$ex_gene_file == "example Genetic Distance 3") {
-      Tinsel::gene3
+      tinselR::gene3
       }
   })
 
@@ -108,13 +108,13 @@ mod_exampleData_server <- function(input, output, session) {
 
   ex_tree_file_in <- reactive({
     if (input$ex_tree_file == "example Tree 1") {
-      Tinsel::tree1
+      tinselR::tree1
       }
     else if (input$ex_tree_file == "example Tree 2") {
-      Tinsel::tree2
+      tinselR::tree2
       }
     else if (input$ex_tree_file == "example Tree 3") {
-      Tinsel::tree3
+      tinselR::tree3
       }
   })
 
