@@ -10,4 +10,4 @@ $run_dev.*
 ^tinselUserCount.txt$
 ^tinselStructure.png
 ^metaDataScreenshot.png
-^geneticDistanceScreenshot.png
+^.github$

@@ -56,7 +56,7 @@ file_check <- function(file_up, file_type, file_sep) {
 
 #change column1, row1 to the id of label and replace - with a 0 within the file
 #necessary for downstream steps
-replace_h_with_zeros <- function(gene_file_in) {
+replace_column_header <- function(gene_file_in) {
   . <- NULL
   dplyr::rename(gene_file_in, label = 1)
   #rename column 1 to label for joining of data sets later
@@ -79,7 +79,6 @@ gene_object_out  <- function(gene_file) {
     dplyr::mutate(value = ifelse(value == "-", 0, value))
 }
 
-
 ######################################
 ###### tipCheck server function ######
 ######################################
@@ -96,8 +95,8 @@ sanity <- function(m_file, g_file, t_file) {
   g_file_tips <- g_file %>% dplyr::pull(1) %>% sort
   
   #tree file get tips
-  t_file_hold <- treeio::read.newick(file = t_file$datapath)
-  t_file_tips <- sort(t_file_hold$tip.label)
+  #t_file_hold <- treeio::read.newick(file = t_file$datapath)
+  t_file_tips <- sort(t_file$tip.label)
   
   # Check for required column names in meta data file
   if ("Tip.labels" %in% colnames(m_file) != TRUE) {
@@ -160,8 +159,6 @@ not_columns <- function(file) {
 #this combines the genetic distance file and the tree data by the 'label'
 combine_g_and_t <- function(tree_file, gene_file) {
   dplyr::full_join(tree_file, gene_file, by = "label")
-  #%>%
-  #  treeio::as.treedata()
 }
 
 #####################################

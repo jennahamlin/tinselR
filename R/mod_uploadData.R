@@ -171,7 +171,7 @@ mod_uploadData_server <- function(input, output, session) {
   #description of those functions within.
   gene_object <- reactive({
     label <- NULL
-    gene_object_out(replace_h_with_zeros(gene_file_cor_or_un()))
+    gene_object_out(replace_column_header(gene_file_cor_or_un()))
   })
 
   #return these reactive objects to be used in particular modules
@@ -200,7 +200,10 @@ mod_uploadData_server <- function(input, output, session) {
       tree_file_out = reactive(tree_file_up()),
 
       #require tree file for concordant tip checking; send to tipCheck
+      #holds tree does not read it in. 
       t_file_out = reactive({
-        req(input$tree_file)})
+        req(input$tree_file)
+        treeio::read.newick(input$tree_file$datapath)
+        })
     ))
 }
