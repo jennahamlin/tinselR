@@ -7,7 +7,7 @@ app_ui <- function() {
     # List the first level UI elements here
     fluidPage(
       theme = shinythemes::shinytheme("yeti"),
-      navbarPage("Tinsel - a tree visulization and annotation tool",
+      navbarPage("tinselR - a tree visulization and annotation tool",
                  tabPanel("About", mod_about_ui("about_ui_1")),
                  tabPanel("About Example Data",
                        mod_aboutExample_ui("aboutExample_ui_1")),
