@@ -44,7 +44,7 @@ mod_displayTree_server <- function(input, output, session,
   #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree
   #and genetic distance matrix
   tree_object <- reactive({
-    tibble::as_tibble(mid_tree())
+    tidytree::as_tibble(mid_tree())
   })
 
   #join the treeobject and updated genetic distance file by label and

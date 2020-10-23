@@ -49,6 +49,7 @@ usethis::use_package("stats")
 usethis::use_package("shinyjs")
 usethis::use_package("tibble")
 usethis::use_package("tidyr")
+usethis::use_package("tidytree")
 usethis::use_package("treeio")
 
 usethis::use_pipe()

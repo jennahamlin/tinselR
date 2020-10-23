@@ -32,9 +32,9 @@ Imports:
     stats,
     tibble,
     tidyr,
-    treeio
+    treeio,
+    tidytree
 Suggests: 
-    tidytree,
     assertthat,
     attempt,
     colorspace,
