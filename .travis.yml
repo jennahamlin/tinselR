@@ -41,7 +41,7 @@ addons:
 os:
   - linux
   - osx
-#  - windows
+  - windows
 
 script:
 - R CMD build .

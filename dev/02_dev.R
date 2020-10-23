@@ -92,7 +92,7 @@ golem::use_external_css_file(url = "where", name = "filename")
 # 3. Documentation
 
 ## 3.1 Vignette
-usethis::use_vignette("Tinsel")
+usethis::use_vignette("tinselR")
 devtools::build_vignettes()
 
 ## 3.2 Code coverage

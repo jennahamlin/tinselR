@@ -1,4 +1,4 @@
 library(testthat)
-library(Tinsel)
+library(tinselR)
 
-test_check("Tinsel")
+test_check("tinselR")

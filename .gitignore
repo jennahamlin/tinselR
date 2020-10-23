@@ -2,3 +2,4 @@
 .RData
 .Rproj.user
 tinselUsersCount.txt
+inst/doc
