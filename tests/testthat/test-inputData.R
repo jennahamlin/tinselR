@@ -102,5 +102,34 @@ test_that("Check to see if tip check gives an error message", {
 data(gene1)
 g_1 <- gene1
 test_that("Message to check number of columns", {
-  expect_match(not_columns(g_1), "And looks like the number of columns for matrix plotting is:  20")
+  expect_length(ncol(g_1), 1)
   })
+
+##############################################################################
+context("connecting genetic distance with meta data")
+
+data(meta2)
+data(gene2)
+
+m_2 <- meta2 
+g_2 <-gene2
+
+g_2 <- g_2 %>% dplyr::rename(center = 1) 
+
+test_that("Length of genetic data 2", {
+  expect_length(g_2, 15)
+})
+
+
+colnames(g_2)[2:ncol(g_2)] <-
+  m_2$Display.labels[which(m_2$Tip.labels %in%
+                                        colnames(g_2)
+                                      [2:ncol(g_2)])]
+
+g_2$center <-
+  m_2$Display.labels[which(m_2$Tip.labels
+                                      %in% g_2$center)]
+
+test_that("Confirm type of the combined data", {
+  expect_type(g_2, "list" )
+})

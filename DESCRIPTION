@@ -23,7 +23,6 @@ Imports:
     ggtree,
     golem,
     magrittr,
-    phylotools,
     phytools,
     readr,
     shiny,

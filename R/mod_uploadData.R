@@ -17,6 +17,7 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
+#' @importFrom phylotools sub.taxa.label
 mod_uploadData_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -156,12 +157,12 @@ mod_uploadData_server <- function(input, output, session) {
 
       colnames(gene_file_corrected)[2:ncol(gene_file_corrected)] <-
         meta_file_comb$Display.labels[which(meta_file_comb$Tip.labels %in%
-                                            colnames(gene_file_corrected)
-                                          [2:ncol(gene_file_corrected)])]
-
+                                              colnames(gene_file_corrected)
+                                            [2:ncol(gene_file_corrected)])]
+      
       gene_file_corrected$center <-
         meta_file_comb$Display.labels[which(meta_file_comb$Tip.labels
-                                          %in% gene_file_corrected$center)]
+                                            %in% gene_file_corrected$center)]
       return(gene_file_corrected)
     }
   })
