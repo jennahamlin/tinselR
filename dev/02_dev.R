@@ -67,7 +67,6 @@ usethis::use_package("phylotools")
 usethis::use_package("shinythemes")
 usethis::use_package("readr") # for reading in files
 usethis::use_package("shiny")
-usethis::use_package("stats")
 usethis::use_package("shinyjs")
 usethis::use_package("tibble")
 usethis::use_package("tidyr")

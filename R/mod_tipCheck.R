@@ -16,6 +16,7 @@
 #' @param m_file_out imported meta data file for tip checking
 #'
 #' @importFrom shiny NS tagList
+#' @importFrom tibble column_to_rownames
 mod_tipCheck_ui <- function(id) {
   ns <- NS(id)
   tagList(

@@ -15,6 +15,8 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
+#' @importFrom phytools midpoint.root
+#' @importFrom tidytree as_tibble
 mod_displayTree_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -40,7 +42,7 @@ mod_displayTree_server <- function(input, output, session,
     }
   })
 
-  #convert phylogenetic tree (midpoint rooted or not) to tibble to join tree
+  #convert phylogenetic tree (midpoint rooted or not) to tidytree to join tree
   #and genetic distance matrix
   tree_object <- reactive({
     tidytree::as_tibble(mid_tree())
@@ -58,7 +60,6 @@ mod_displayTree_server <- function(input, output, session,
   make_tree <- reactive({
 
     # this disconnects the need for genetic distance file to be uploaded for
-    #the tree viz to happen
     if (is.null(input$gandTS4)) {
       tree_plot(mid_tree())
     } else{

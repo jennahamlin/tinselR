@@ -28,11 +28,11 @@ Imports:
     shiny,
     shinyjs,
     shinythemes,
-    stats,
     tibble,
     tidyr,
     tidytree,
     treeio,
+    phylotools
 Suggests: 
     assertthat,
     attempt,

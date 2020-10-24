@@ -17,6 +17,7 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
+#' @importFrom readr read_delim
 #' @importFrom phylotools sub.taxa.label
 mod_uploadData_ui <- function(id) {
   ns <- NS(id)

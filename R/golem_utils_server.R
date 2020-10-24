@@ -89,7 +89,7 @@ gene_object_out  <- function(gene_file) {
   label <- . <- value <- NULL
   gene_file %>%
     #remove na
-    stats::na.omit() %>%
+    tidyr::drop_na() %>%
     #convert to a three column data frame
     tidyr::pivot_longer(-label) %>%
     #remove self comparisons for this table - necessary for snp mean/median

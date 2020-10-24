@@ -16,6 +16,7 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
+#' @importFrom ape as.phylo
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(

@@ -15,6 +15,7 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
+#' @importFrom tibble column_to_rownames
 mod_exampleData_ui <- function(id) {
   ns <- NS(id)
 
