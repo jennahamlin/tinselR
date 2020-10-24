@@ -21,7 +21,8 @@ app_ui <- function() {
                             mainPanel(
                               mod_paramsTree_ui("paramsTree_ui_example"),
                               mod_displayTree_ui("displayTree_ui_example"),
-                              mod_cladeAnnotator_ui("cladeAnnotator_ui_example"),
+                              mod_cladeAnnotator_ui(
+                                "cladeAnnotator_ui_example"),
                               br(),
                               br(),
                               br(),
