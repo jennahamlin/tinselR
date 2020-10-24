@@ -229,31 +229,6 @@ mod_uploadData_server <- function(input, output, session) {
     }
   }
   
-  #change column1, row1 to the id of label
-  #necessary for downstream steps
-  replace_column_header <- function(gene_file_in) {
-    . <- NULL
-    dplyr::rename(gene_file_in, label = 1)
-    #rename column 1 to label for joining of data sets later
-  }
-  
-  #additional manipulation of genetic distance matrix for ultimately getting the
-  #mean number of SNPs
-  
-  gene_object_out  <- function(gene_file) {
-    label <- . <- value <- NULL
-    gene_file %>%
-      #remove na
-      stats::na.omit() %>%
-      #convert to a three column data frame
-      tidyr::pivot_longer(-label) %>%
-      #remove self comparisons for this table - necessary for snp mean/median
-      #calculation.
-      .[which(.$label != .$name), ] %>%
-      ##replace - with zero in the file; if zeros already infile, still works
-      dplyr::mutate(value = ifelse(value == "-", 0, value))
-  }
-  
   ##################################
   #### uploadData server output ####
   ##################################
