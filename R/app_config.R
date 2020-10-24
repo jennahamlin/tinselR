@@ -5,7 +5,7 @@
 #'
 #' @noRd
 app_sys <- function(...) {
-  system.file(..., package = "Tinsel")
+  system.file(..., package = "tinselR")
 }
 
 #' Read App Config

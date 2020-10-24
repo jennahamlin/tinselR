@@ -41,7 +41,8 @@ addons:
 os:
   - linux
   - osx
-  - windows
+#  - windows #windows build are in early access stage and r is not supported
+#on the windows build environment
 
 script:
 - R CMD build .

@@ -6,7 +6,7 @@
 #'
 #' @noRd 
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_aboutExample_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -35,10 +35,10 @@ mod_aboutExample_ui <- function(id) {
                                      tags$br(),
                                      "If you want to add annotations then
                                      highlight the tip labels to their
-                                     most recent common ancestor," ,
+                                     most recent common ancestor,",
                                      tags$a("MRCA", href =
                                               "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),
-                                     ", and press the 'Add Annotations' button. 
+                                     ", and press the 'Add Annotations' button.
                                      Repeat until you are satisfied."),
                               "If you want to remove previously placed
                               annotations, just press the 'Remove Annotations'
@@ -111,5 +111,5 @@ mod_aboutExample_ui <- function(id) {
 #' @noRd 
 mod_aboutExample_server <- function(input, output, session) {
   ns <- session$ns
-  
+
 }

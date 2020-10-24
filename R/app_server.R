@@ -71,15 +71,18 @@ app_server <- function(input, output, session) {
                             example_params$node, example_params$lim,
                             example_params$boot_pos, example_params$mid_p)
 
-  example_tree <- callModule(mod_cladeAnnotator_server, "cladeAnnotator_ui_example",
-             example_data$exMetaFileOut, example_plot$make_tree_out,
-             example_buttons$add_tree, example_buttons$add_anno,
-             example_buttons$remove_anno, example_buttons$add_matrix,
-             example_buttons$remove_matrix,
-             example_data$exGeneObjectForSNP, example_params$label_off,
-             example_params$lab_color, example_params$mat_off)
+  example_tree <- callModule(mod_cladeAnnotator_server, 
+                             "cladeAnnotator_ui_example",
+                             example_data$exMetaFileOut, 
+                             example_plot$make_tree_out, 
+                             example_buttons$add_tree, example_buttons$add_anno,
+                             example_buttons$remove_anno,
+                             example_buttons$add_matrix,
+                             example_buttons$remove_matrix,
+                             example_data$exGeneObjectForSNP,
+                             example_params$label_off, example_params$lab_color,
+                             example_params$mat_off)
   
   callModule(mod_downloadImage_server, "downloadImage_ui_example", example_tree)
-  
 
 }

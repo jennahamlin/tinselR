@@ -174,7 +174,90 @@ mod_uploadData_server <- function(input, output, session) {
     label <- NULL
     gene_object_out(replace_column_header(gene_file_cor_or_un()))
   })
-
+  
+  #####################################
+  #### uploadData server functions ####
+  #####################################
+  
+  #function to read in the data using readr::read_delim
+  #filePath is the path to the location of the file you want to read in
+  #sep is the specified delimiter, probably either a tab ("\t") or comma (",")
+  #the other bits here help with reading in the file: trim whitespace, skip
+  #empty row, column names, and how to read in the data; default is set at column
+  #as characters
+  read_data <- function(file_path, sep) {
+    readr::read_delim(file_path,
+                      sep,
+                      trim_ws = TRUE,
+                      skip_empty_rows = TRUE,
+                      col_names = TRUE,
+                      col_types = readr::cols(.default = readr::col_character()))
+  }
+  
+  #function which maps the type of file uploaded based on user selection. For
+  #example, in_var could be input$gene_sep
+  file_type <- function(in_var) {
+    if (in_var == "\t") {
+      return("\t")
+    } else if (in_var == ",") {
+      return(",")
+    }
+  }
+  
+  #function to confirm the type of file uploaded, matches the selected type
+  #this uses the fill uploaded (file_up), the type of file delimited selected
+  #(file_type - either a csv or tsv), and the file separate from input$sep, which
+  #the user specifies on the interface -so this is ultimately a reactive
+  file_check <- function(file_up, file_type, file_sep) {
+    my_file <- req(file_up$datapath)
+    my_lines <- readLines(con = my_file, n = 3)
+    file_chk <- validate(
+      need(
+        length(strsplit(my_lines[2],
+                        file_type)[[1]]) ==
+          length(strsplit(my_lines[3], file_type)[[1]]),
+        paste("Error: the delimiter chosen does not match the file type uploaded:
+            ", file_up[1], sep = "")),
+      need(
+        length(strsplit(my_lines[2], file_type)[[1]]) > 1,
+        paste("Error: the delimiter chosen does not match the file type uploaded:
+            ", file_up[1], sep = "")))
+    if (is.null(file_chk) == TRUE) {
+      file_name <- read_data(file_path = file_up$datapath, sep = file_sep)
+    } else {
+      return(file_chk)
+    }
+  }
+  
+  #change column1, row1 to the id of label
+  #necessary for downstream steps
+  replace_column_header <- function(gene_file_in) {
+    . <- NULL
+    dplyr::rename(gene_file_in, label = 1)
+    #rename column 1 to label for joining of data sets later
+  }
+  
+  #additional manipulation of genetic distance matrix for ultimately getting the
+  #mean number of SNPs
+  
+  gene_object_out  <- function(gene_file) {
+    label <- . <- value <- NULL
+    gene_file %>%
+      #remove na
+      stats::na.omit() %>%
+      #convert to a three column data frame
+      tidyr::pivot_longer(-label) %>%
+      #remove self comparisons for this table - necessary for snp mean/median
+      #calculation.
+      .[which(.$label != .$name), ] %>%
+      ##replace - with zero in the file; if zeros already infile, still works
+      dplyr::mutate(value = ifelse(value == "-", 0, value))
+  }
+  
+  ##################################
+  #### uploadData server output ####
+  ##################################
+  
   #return these reactive objects to be used in particular modules
   return(
     list(

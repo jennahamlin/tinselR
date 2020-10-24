@@ -78,14 +78,13 @@ mod_about_ui <- function(id) {
                                                   "www/treeWAlignedTips.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
-                              
                               tags$div(tags$li(tags$em("Once the genetic
                               distance file is uploaded you can -")), "Add
                               annotation to the visual representation of the
                               tree. If you want to add annotations then
                               highlight the tip labels to their most recent
                                        common ancestor,", tags$a("MRCA", href =
-                                              "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),"
+                                              "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"), "
                                               , and press the 'Add Annotations'
                                               button. Repeat until you are
                                        satisfied.",

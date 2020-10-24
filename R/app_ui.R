@@ -60,7 +60,7 @@ app_ui <- function() {
 golem_add_external_resources <- function() {
 
   addResourcePath(
-    "www", system.file("app/www", package = "Tinsel")
+    "www", system.file("app/www", package = "tinselR")
   )
 
   tags$head(
