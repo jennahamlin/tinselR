@@ -5,9 +5,9 @@
 #' @description A shiny Module. This module generates information for the 
 #' example data that is pre-loaded when the application launches. 
 #'
-#' @rdname mod_aboutExample
+#'@param id,input,output,session Internal parameters for {shiny}.#'
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#'@noRd
 #'
 #' @importFrom shiny NS tagList
 mod_aboutExample_ui <- function(id) {
@@ -111,7 +111,7 @@ mod_aboutExample_ui <- function(id) {
 
 #' aboutExample Server Function
 #'
-#' @noRd 
+#' @noRd
 mod_aboutExample_server <- function(input, output, session) {
   ns <- session$ns
 

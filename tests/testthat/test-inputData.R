@@ -102,5 +102,5 @@ test_that("Check to see if tip check gives an error message", {
 data(gene1)
 g_1 <- gene1
 test_that("Message to check number of columns", {
-  expect_match(not_columns(g_1),"And looks like the number of columns for matrix plotting is:  20")
-})
+  expect_match(not_columns(g_1), "And looks like the number of columns for matrix plotting is:  20")
+  })

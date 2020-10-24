@@ -34,7 +34,7 @@ golem::add_module(name = "paramsTree")
 golem::add_module(name = "displayTree")
 golem::add_module(name = "exampleDisplay")
 
-#tree parameters and display functions 
+#tree parameters and display functions
 golem::add_fct("combine_g_and_t", module = "displayTree")
 
 #annotation module

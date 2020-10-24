@@ -4,8 +4,8 @@
 #' @description  A shiny Module. This module allows the user to upload three
 #'  different types of files and does file checking to confirm the correct
 #'  delimiter is selected. The output from this module is sent to three
-#'  different modules (tipCheck, displayTree, and cladeAnnotator). 
-#'  
+#'  different modules (tipCheck, displayTree, and cladeAnnotator).
+#'
 #'
 #' @param id shiny id
 #' @param input internal
@@ -60,7 +60,7 @@ mod_uploadData_ui <- function(id) {
 #' @keywords internal
 mod_uploadData_server <- function(input, output, session) {
   ns <- session$ns
-  
+
   ############
   ### META ###
   ############
@@ -86,7 +86,7 @@ mod_uploadData_server <- function(input, output, session) {
   m_file_mat <- reactive({
     if (!is.null(meta_file_up())) { #if not; then will complain w/button push
       m_file_conversion(m_file = meta_file())
-    } 
+    }
   })
 
   ###############
@@ -174,26 +174,27 @@ mod_uploadData_server <- function(input, output, session) {
     label <- NULL
     gene_object_out(replace_column_header(gene_file_cor_or_un()))
   })
-  
+
   #####################################
   #### uploadData server functions ####
   #####################################
-  
+
   #function to read in the data using readr::read_delim
   #filePath is the path to the location of the file you want to read in
   #sep is the specified delimiter, probably either a tab ("\t") or comma (",")
   #the other bits here help with reading in the file: trim whitespace, skip
-  #empty row, column names, and how to read in the data; default is set at column
-  #as characters
+  #empty row, column names, and how to read in the data; default is
+  #set at column as characters
   read_data <- function(file_path, sep) {
     readr::read_delim(file_path,
                       sep,
                       trim_ws = TRUE,
                       skip_empty_rows = TRUE,
                       col_names = TRUE,
-                      col_types = readr::cols(.default = readr::col_character()))
+                      col_types =
+                        readr::cols(.default = readr::col_character()))
   }
-  
+
   #function which maps the type of file uploaded based on user selection. For
   #example, in_var could be input$gene_sep
   file_type <- function(in_var) {
@@ -203,11 +204,11 @@ mod_uploadData_server <- function(input, output, session) {
       return(",")
     }
   }
-  
+
   #function to confirm the type of file uploaded, matches the selected type
   #this uses the fill uploaded (file_up), the type of file delimited selected
-  #(file_type - either a csv or tsv), and the file separate from input$sep, which
-  #the user specifies on the interface -so this is ultimately a reactive
+  #(file_type - either a csv or tsv), and the file separate from input$sep,
+  #which the user specifies on the interface -so this is ultimately a reactive
   file_check <- function(file_up, file_type, file_sep) {
     my_file <- req(file_up$datapath)
     my_lines <- readLines(con = my_file, n = 3)
@@ -216,23 +217,25 @@ mod_uploadData_server <- function(input, output, session) {
         length(strsplit(my_lines[2],
                         file_type)[[1]]) ==
           length(strsplit(my_lines[3], file_type)[[1]]),
-        paste("Error: the delimiter chosen does not match the file type uploaded:
-            ", file_up[1], sep = "")),
+        paste(
+        "Error: the delimiter chosen does not match the file type uploaded:",
+        file_up[1], sep = "")),
       need(
         length(strsplit(my_lines[2], file_type)[[1]]) > 1,
-        paste("Error: the delimiter chosen does not match the file type uploaded:
-            ", file_up[1], sep = "")))
+        paste(
+        "Error: the delimiter chosen does not match the file type uploaded:",
+        file_up[1], sep = "")))
     if (is.null(file_chk) == TRUE) {
       file_name <- read_data(file_path = file_up$datapath, sep = file_sep)
     } else {
       return(file_chk)
     }
   }
-  
+
   ##################################
   #### uploadData server output ####
   ##################################
-  
+
   #return these reactive objects to be used in particular modules
   return(
     list(
@@ -259,7 +262,7 @@ mod_uploadData_server <- function(input, output, session) {
       tree_file_out = reactive(tree_file_up()),
 
       #require tree file for concordant tip checking; send to tipCheck
-      #holds tree does not read it in. 
+      #holds tree does not read it in.
       t_file_out = reactive({
         req(input$tree_file)
         treeio::read.newick(input$tree_file$datapath)
