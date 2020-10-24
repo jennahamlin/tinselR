@@ -17,6 +17,12 @@
 #' @importFrom shiny NS tagList
 #' @importFrom phytools midpoint.root
 #' @importFrom tidytree as_tibble
+#' @importFrom ggplot2 xlim
+#' @importFrom ggplot2 aes
+#' @importFrom ggtree ggtree
+#' @importFrom ggtree geom_tiplab
+#' @importFrom ggtree geom_treescale
+#' @importFrom ggtree geom_text2
 mod_displayTree_ui <- function(id) {
   ns <- NS(id)
   tagList(

@@ -16,6 +16,8 @@
 #' @export
 #' @importFrom shiny NS tagList
 #' @importFrom tibble column_to_rownames
+#' @importFrom tidyr drop_na
+#' @importFrom tidyr pivot_longer
 mod_exampleData_ui <- function(id) {
   ns <- NS(id)
 

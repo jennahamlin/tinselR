@@ -17,6 +17,8 @@
 #' @export
 #' @importFrom shiny NS tagList
 #' @importFrom ape as.phylo
+#' @importFrom ggtree geom_cladelabel
+#' @importFrom ggtree gheatmap
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(

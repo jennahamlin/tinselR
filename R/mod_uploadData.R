@@ -18,7 +18,10 @@
 #' @export
 #' @importFrom shiny NS tagList
 #' @importFrom readr read_delim
+#' @importFrom treeio read.newick
 #' @importFrom phylotools sub.taxa.label
+#' @importFrom tidyr drop_na
+#' @importFrom tidyr pivot_longer
 mod_uploadData_ui <- function(id) {
   ns <- NS(id)
   tagList(

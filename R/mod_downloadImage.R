@@ -15,6 +15,9 @@
 #' @keywords internal
 #' @export
 #' @importFrom shiny NS tagList
+#' @importFrom ggplot2 ggsave
+#' @importFrom shinyjs hide
+#' @importFrom shinyjs show
 mod_downloadImage_ui <- function(id) {
   ns <- NS(id)
   tagList(

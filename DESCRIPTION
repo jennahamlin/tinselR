@@ -24,6 +24,7 @@ Imports:
     golem,
     magrittr,
     phytools,
+    phylotools,
     readr,
     shiny,
     shinyjs,
@@ -31,8 +32,7 @@ Imports:
     tibble,
     tidyr,
     tidytree,
-    treeio,
-    phylotools
+    treeio
 Suggests: 
     assertthat,
     attempt,

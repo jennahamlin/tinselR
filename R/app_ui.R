@@ -1,4 +1,5 @@
 #' @import shiny
+#' @importFrom shinythemes shinytheme
 app_ui <- function() {
   tagList(
     #::themeSelector(),  # <--- Add this somewhere in the UI to test out themes
