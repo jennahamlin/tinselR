@@ -176,8 +176,11 @@ mod_uploadData_server <- function(input, output, session) {
   #description of those functions within.
   gene_object <- reactive({
     label <- NULL
-      gene_object_out(replace_column_header(gene_file = gene_file_cor_or_un(),
-                                            meta_file = meta_file_up()$datapath))
+    #if (is.null(is.null(meta_file()))) {
+      gene_object_out(replace_column_header(gene_file = gene_file_cor_or_un())) 
+    #} else {
+    #  validate(need(input$meta_file !="", "Please relaunch the app."))
+    #}
   })
 
   #####################################
