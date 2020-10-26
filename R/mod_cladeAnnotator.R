@@ -77,10 +77,8 @@ mod_cladeAnnotator_server <-
 
       #this acts as a control for if the user accidentally presses the
       #add_anno button without the file loaded
-      if (is.null(geneObjectForSNP())) {
-        #skip
-      } else {
-
+      if (!is.null(geneObjectForSNP())) {
+  
         Values[["n"]] <- Values[["n"]] + 1
 
         #add the tip vector (aka label) to the annotation reactive value
@@ -226,7 +224,7 @@ mod_cladeAnnotator_server <-
     add_annotations <- function(tree_plot, tip_vector_in) {
       g <- tree_plot
 
-      if (Values[["n"]] > 0) {
+      if (Values[["n"]] > 0 ) {
         #this is the i'th list, for which we are calculating the offset
         for (i in seq_along(tip_vector_in)) {
           current_tips <- Values[["tip_vec"]][[i]]
