@@ -23,8 +23,8 @@ Imports:
     ggtree,
     golem,
     magrittr,
-    phytools,
     phylotools,
+    phytools,
     readr,
     shiny,
     shinyjs,
@@ -41,6 +41,7 @@ Suggests:
     glue,
     gtools,
     here,
+    htmltools,
     knitr,
     markdown,
     pkgload,
@@ -48,8 +49,7 @@ Suggests:
     purrr,
     rmarkdown,
     testthat (>= 2.1.0),
-    xfun,
-    htmltools
+    xfun
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

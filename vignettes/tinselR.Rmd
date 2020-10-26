@@ -14,6 +14,81 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, results='hide', message=FALSE, warning=FALSE}
 library(tinselR)
 ```
+
+### Why tinselR
+
+Across the United States, public health laboratories at the state-level now
+perform whole-genome sequencing for foodborne pathogens, a milestone for
+protecting our food sources by identifying bacterial contamination at a higher
+resolution than previous methods. To understand organismal relationships in
+response to potential outbreak investigations, building and interpreting
+phylogenetic trees is essential for this public health workflow. Data produced
+from whole-genome sequencing via high-quality single nucleotide polymorphisms
+(SNPs) or alleles create phylogenetic trees that describe organisms'
+evolutionary relationships. The combined data from phylogenetic trees and
+epidemiological data helps identify the potential source in outbreaks across
+temporal and spatial scales. As evaluating the genetic similarity for isolates
+is required for outbreak and surveillance work, informative, clear tree
+visualization and annotation is essential. *Our goal was to develop an
+open-source phylogenetic tree visualization and annotation graphical user
+interface, which will be made available for state public health laboratories.*
+To accomplish this goal, we developed an R shiny application called **tinselR**
+(pronounced tinsel-er). We choose to build this application in R because of R's
+base graphics and additional phylogenetic packages that are the gold standard
+for phylogenetic tree graphics. Our tool's minimum input requirements are a
+Newick generated phylogenetic tree in which user inputs change the visualized
+tree. With either the genetic distance matrix and the metadata file, the user
+can include annotations on the image, quickly adjust tip labels, and add a
+heatmap to the phylogenetic tree. These modified phylogenetic tree images are
+downloadable in various formats for presentations or publications. These images
+help public health officials and stakeholders when discussing the differences or
+similarities between isolates in response to outbreaks. Below we will detail
+and outline how to use the application, using two example datasets.
+br(),
+br(),
+
+### Getting started
+*Testing with example data*
+
+When the application is launched, the user can test out the application by
+using one of the pre-loaded datasets located in the 'Example Data' tab. We 
+provide three complete datasets (i.e. Newick tree, genetic distance matrix, 
+and metadata file) with the number of isolates ranging from 14 - 19. After
+clicking on the 'Example Data' tab (insert image for this), the user selects
+from the drop down menu for the three data types; the concordant files (e.g.
+example tree 1, example genetic 1, and example meta 1). 
+br(),
+br(),
+
+```{r exampleDataPane1, echo = F, out.width = "85%", fig.cap = "Figure - Example data pane is circled in blue "}
+knitr::include_graphics(here::here("vignettes/images/slide1.png"))
+```
+
+
+```{r exampleDataPane2, echo = F, out.width = "85%", fig.cap = "Figure - "}
+knitr::include_graphics(here::here("vignettes/images/slide2.png"))
+```
+
+```{r exampleDataPane3, echo = F, out.width = "85%", fig.cap = "Figure - "}
+knitr::include_graphics(here::here("vignettes/images/slide3.png"))
+```
+
+```{r exampleDataPane4, echo = F, out.width = "85%", fig.cap = "Figure - "}
+knitr::include_graphics(here::here("vignettes/images/slide4.png"))
+```
+
+```{r exampleDataPane5, echo = F, out.width = "85%", fig.cap = "Figure - "}
+knitr::include_graphics(here::here("vignettes/images/slide5.png"))
+```
+
+```{r exampleDataPane6, echo = F, out.width = "85%", fig.cap = "Figure - "}
+knitr::include_graphics(here::here("vignettes/images/slide6.png"))
+```
+
+```{r exampleDataPane7, echo = F, out.width = "85%", fig.cap = "Figure - "}
+knitr::include_graphics(here::here("vignettes/images/slide7.png"))
+```
+

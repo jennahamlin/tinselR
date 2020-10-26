@@ -13,11 +13,13 @@ testing_genetic <- droplevels(testing_genetic)
 testing_genetic <- data.frame(lapply(testing_genetic, as.character),
                               stringsAsFactors = FALSE)
 testing_genetic <- tibble::rownames_to_column(testing_genetic, var = ".")
-# rename this column to make a matrix with both
+
+# rename this column to make
 testing_genetic[1, 1] <- "A"
 testing_genetic[2, 1] <- "B"
 testing_genetic[3, 1] <- "C"
 testing_genetic[4, 1] <- "D"
+
 testing_genetic <- replace_column_header(testing_genetic)
 
 test_that("no missing values", {
@@ -29,7 +31,7 @@ test_that("data types correct", {
   expect_type(testing_genetic$A, "character")
 })
 
-test_that("confirm genetic distance swithces - or 0", {
+test_that("confirm genetic distance swithces column 1 and row 1 header", {
   expect_silent(replace_column_header(testing_genetic))
 })
 
@@ -37,13 +39,13 @@ test_that("make distance matrix into a 3 column file", {
   expect_silent(gene_object_out(testing_genetic))
 })
 
-data("gene2")
-testing_gene2 <- gene2
-testing_gene2 <- replace_column_header(testing_gene2)
-testing_gene2 <- gene_object_out(testing_gene2)
+data("gene3")
+testing_gene3 <- gene3
+testing_gene3 <- replace_column_header(testing_gene3)
+testing_gene3 <- gene_object_out(testing_gene3)
 
-test_that("Converts meta data correctly for matrix visualization", {
-  expect_equal(ncol(testing_gene2), 3)
+test_that("Determine the number of columns before meta data conversion", {
+  expect_equal(ncol(testing_gene3), 3)
 })
 
 ##############################################################################
@@ -95,7 +97,7 @@ t_3 <- tree3
 g_3 <- gene3
 m_3 <- meta3
 
-test_that("Check to see if tip check gives an error message", {
+test_that("Check to see if tip check gives an error message; this should not", {
   expect_silent(sanity(m_file = m_3, g_file = g_3, t_file = t_3))
 })
 
@@ -116,7 +118,7 @@ g_2 <-gene2
 
 g_2 <- g_2 %>% dplyr::rename(center = 1) 
 
-test_that("Length of genetic data 2", {
+test_that("Length of genetic data 2 or number of unique isolates", {
   expect_length(g_2, 15)
 })
 
