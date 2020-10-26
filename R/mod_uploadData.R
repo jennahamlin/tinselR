@@ -141,7 +141,6 @@ mod_uploadData_server <- function(input, output, session) {
 
   #reactive expression that uploads the genetic distance file and allows the
   #optional upload of meta data to correct tip labels
-
   gene_file_cor_or_un <- reactive({
     if (is.null(meta_file_up()$datapath)) {
       gene_file_uncorrected <- gene_file()
@@ -151,8 +150,8 @@ mod_uploadData_server <- function(input, output, session) {
 
       meta_file_comb <- meta_file()
 
-      gene_file_corrected <- gene_file() %>% dplyr::rename(center = 1)
       #rename column to center; necessary for next step.
+      gene_file_corrected <- gene_file() %>% dplyr::rename(center = 1)
 
       #the next two lines essentially map the preferred tip lab display in the
       #meta data file to that in the genetic distance file, which has the long
