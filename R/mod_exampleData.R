@@ -67,7 +67,7 @@ mod_exampleData_server <- function(input, output, session) {
   ####################
 
   #reactive expressions that loads and allows to user to select from three
-  #different datasets (e.g tree1, gene1, meta1) example data are made via
+  #different datasets (e.g tree1, gene1, meta1). Example data are made via
   #reading in the data, usethis::use_data(), and finally documenting the data
   #like so - usethis::use_data(tree2, tree2)
   #no need to provide option to select input delimiter as this is done when
@@ -89,6 +89,14 @@ mod_exampleData_server <- function(input, output, session) {
       }
   })
 
+  #reactive that allows for the matrix visualization on phylogenetic trees
+  #specific to example data set 3
+  ex_meta <- reactive({
+    if (!is.null(ex_meta_file_in())) {
+      m_file_conversion(ex_meta_file_in())
+    }
+  })
+  
   ###############
   ### GENETIC ###
   ###############
@@ -124,8 +132,10 @@ mod_exampleData_server <- function(input, output, session) {
   #reactive expression that uploads the newick tree and allows the optional
   #upload of meta data to correct tree tip labels
   ex_tree_file_up <- reactive({
+    
+    . <- NULL 
 
-    validate(need(input$ex_tree_file != "", "Please import newick tree file"))
+    validate(need(input$ex_tree_file != "", "Please select newick tree file"))
     req(ex_tree_file_in())
 
     if (is.null(ex_meta_file_in())) { #if no meta file still upload the tree
@@ -140,11 +150,13 @@ mod_exampleData_server <- function(input, output, session) {
   #reactive expression that uploads the genetic distance file and allows the
   #optional upload of meta data to correct tree tip labels
   ex_gene_file_cor_or_un <- reactive({
-    #if no meta file, error check delimiter chosen for genetic distance file
-    #uploaded to be able to use clade annotator function
+
+    #if no meta file, uploaded to be able to use clade annotator function
     if (is.null(ex_meta_file_in())) {
-      ex_gene_file_in()
-    } else { #if meta file uploaded correct the distance file to match
+      
+      req(ex_gene_file_in())
+      
+    } else { #if meta file uploaded, correct the distance file to match
       #meta file tip labels
       . <- NULL
       ex_meta_file_comb <- ex_meta_file_in()
@@ -162,29 +174,24 @@ mod_exampleData_server <- function(input, output, session) {
     }
   })
 
-  #reactive that allows for the matrix visualization on phylogenetic trees
-  #specific to example data set 3
-  ex_meta <- reactive({
-    if (is.null(ex_meta_file_in())) {
-      #skip
-    } else {
-      m_file_conversion(ex_meta_file_in())
-    }
-  })
-
   #additional manipulation of genetic distance matrix for ultimately getting
-  #the mean number of SNPs geneObjectOut is a function that is applied to
+  #the mean number of SNPs. geneObjectOut is a function that is applied to
   #another function (replaceHwithZeros) for the reactive exGeneFileCorOrU
   ex_gene_object <- reactive({
     label <- NULL
     gene_object_out(replace_column_header(ex_gene_file_cor_or_un()))
   })
 
+  
+  ###################################
+  #### exampleData server output ####
+  ###################################
+  
   #return these reactive objects to be used in tree display module
   return(
     list(
-      exMetaFileOut = reactive(ex_meta()),
-      extreeFileOut = reactive(ex_tree_file_up()), #for data display
+      exMetaFileOut = reactive(ex_meta()), #for clade annotator module
+      extreeFileOut = reactive(ex_tree_file_up()), #for data display module
       exGeneObjectOutForS4 = reactive(gene_object_out()), #for data display
       exGeneObjectForSNP = reactive(ex_gene_object()) #for clade annotator
     ))
