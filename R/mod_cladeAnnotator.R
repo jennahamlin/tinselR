@@ -53,7 +53,7 @@ mod_cladeAnnotator_server <-
     data_with_selection <- reactive({
       brushedPoints(make_tree_out()$data, input$plot_brush)
     })
-
+    
     #add label to tipVector if isTip == True
     data_with_selection2 <- eventReactive(input$plot_brush, {
       label <- NULL
@@ -78,7 +78,7 @@ mod_cladeAnnotator_server <-
       #this acts as a control for if the user accidentally presses the
       #add_anno button without the file loaded
       if (!is.null(geneObjectForSNP())) {
-  
+
         Values[["n"]] <- Values[["n"]] + 1
 
         #add the tip vector (aka label) to the annotation reactive value

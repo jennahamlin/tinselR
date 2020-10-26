@@ -85,8 +85,10 @@ replace_column_header <- function(gene_file_in) {
 #additional manipulation of genetic distance matrix for ultimately getting the
 #mean number of SNPs
 
-gene_object_out  <- function(gene_file) {
+gene_object_out  <- function(gene_file, meta_file) {
   label <- . <- value <- NULL
+  print("L90 utils")
+  if (is.null(meta_file)){
   gene_file %>%
     #remove na
     tidyr::drop_na() %>%
@@ -97,6 +99,10 @@ gene_object_out  <- function(gene_file) {
     .[which(.$label != .$name), ] %>%
     ##replace - with zero in the file; if zeros already infile, still works
     dplyr::mutate(value = ifelse(value == "-", 0, value))
+  } else {
+    print("please upload")
+  }
+
 }
 
 ######################################################
