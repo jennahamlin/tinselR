@@ -1,6 +1,6 @@
 ---
 title: "tinselR"
-output: rmarkdown::html_vignette
+output: bookdown::html_document2
 vignette: >
   %\VignetteIndexEntry{tinselR}
   %\VignetteEngine{knitr::rmarkdown}
@@ -47,48 +47,97 @@ downloadable in various formats for presentations or publications. These images
 help public health officials and stakeholders when discussing the differences or
 similarities between isolates in response to outbreaks. Below we will detail
 and outline how to use the application, using two example datasets.
-br(),
-br(),
 
 ### Getting started
+
 *Testing with example data*
+
+**Choosing example data**
 
 When the application is launched, the user can test out the application by
 using one of the pre-loaded datasets located in the 'Example Data' tab. We 
-provide three complete datasets (i.e. Newick tree, genetic distance matrix, 
+provide three datasets (i.e. Newick tree, genetic distance matrix, 
 and metadata file) with the number of isolates ranging from 14 - 19. After
-clicking on the 'Example Data' tab (insert image for this), the user selects
-from the drop down menu for the three data types; the concordant files (e.g.
-example tree 1, example genetic 1, and example meta 1). 
-br(),
-br(),
+clicking on the 'Example Data' tab (Figure \@ref(fig:exampleDataPane1)), 
+the user selects from the drop down menu for the three data types
+the concordant files (e.g. example tree 1, example genetic 1, and 
+example meta 1; (see Figure \@ref(fig:exampleDataPane2)). 
 
-```{r exampleDataPane1, echo = F, out.width = "85%", fig.cap = "Figure - Example data pane is circled in blue "}
+```{r exampleDataPane1, echo = F, out.width = "85%", fig.cap = "Example data pane is circled in blue"}
 knitr::include_graphics(here::here("vignettes/images/slide1.png"))
 ```
 
 
-```{r exampleDataPane2, echo = F, out.width = "85%", fig.cap = "Figure - "}
+```{r exampleDataPane2, echo = F, out.width = "85%", fig.cap = "Pre-loaded example dataset 3 is selected for all three data uploads subsections "}
 knitr::include_graphics(here::here("vignettes/images/slide2.png"))
 ```
 
-```{r exampleDataPane3, echo = F, out.width = "85%", fig.cap = "Figure - "}
+**Displaying example tree and genetic distance data**
+
+Once you have selected the three files, to begin using the application, press
+the 'Visualize Tree' button. At this point all potential tree visual parameters 
+you want to alter are available using drop down menus (e.g. annotation label 
+color), user input (e.g. size of scale bar), or users selection
+(e.g. midpoint root). All tree visual parameters that a user can adjust are 
+displayed in Figure \@ref(fig:exampleDataPane3).
+
+With the genetic distance file uploaded, a user can highlight clades to 
+add annotations which will display the range of snps for tips that are 
+included in the highlighted selection (Figure \@ref(fig:exampleDataPane4) and 
+Figure \@ref(fig:exampleDataPane5)). To correctly display the annotation, 
+the user should highlight the tips of interest and include within the 
+highlighted section their most recent common ancestor, [MRCA](https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02),
+(Figure \@ref(fig:exampleDataPane4) and Figure \@ref(fig:exampleDataPane5)). In 
+theory, one can add as many annotations as you want, though at some point the
+annotations may run off the plot area and thus you may need to add more
+space to plot. The ability to change spacing to the plot is one of the tree 
+visual parameters that can be adjusted (Figure \@ref(fig:exampleDataPane3) We 
+would also recommend only include those that help describe the outbreak clades
+of interest as with more annotations. Any annotation placed on the plot can 
+be removed by pushing the 'Remove Annotations' button. Unlike with the 'Add
+Annotation' button, you do not need to highlight which annotation you would like
+to remove. Because of this, the remove annotations works by removing the last 
+placed annotation until there are no more. 
+```{r exampleDataPane3, echo = F, out.width = "85%", fig.cap = "Example data pane with tree visual parameters circled in blue."}
 knitr::include_graphics(here::here("vignettes/images/slide3.png"))
 ```
 
-```{r exampleDataPane4, echo = F, out.width = "85%", fig.cap = "Figure - "}
+```{r exampleDataPane4, echo = F, out.width = "85%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. "}
 knitr::include_graphics(here::here("vignettes/images/slide4.png"))
 ```
 
-```{r exampleDataPane5, echo = F, out.width = "85%", fig.cap = "Figure - "}
+```{r exampleDataPane5, echo = F, out.width = "85%", fig.cap = "Within tips of interested highlight, pressing the 'Add Annotations' button will add annotations to the tree image which indicate the range of snps found for these tips of interest. "}
 knitr::include_graphics(here::here("vignettes/images/slide5.png"))
 ```
 
-```{r exampleDataPane6, echo = F, out.width = "85%", fig.cap = "Figure - "}
+
+**Including a metadata for tip correction and heatmap**
+
+Figure \@ref(fig:exampleDataPane6) provides an example metadata file with 
+three columns: tip labels in the tree, what you would like the tip labels to 
+be changed to, and a source column. When the meta data is included and a user 
+pushed the 'Visualize Tree' button, automatic tip correction occurs, meaning
+that the tips within the Newick tree convert to what you the user decide. The 
+ability to include a [heatmap](https://yulab-smu.top/treedata-book/chapter7.html),
+allows the user to include either categorical or numerical data for their tree
+image (Figure \@ref(fig:exampleDataPane7)). 
+
+```{r exampleDataPane6, echo = F, out.width = "85%", fig.cap = "Example meta data 3 with the third column highlighted in blue indicating information used for adding a heatmap. "}
 knitr::include_graphics(here::here("vignettes/images/slide6.png"))
 ```
 
-```{r exampleDataPane7, echo = F, out.width = "85%", fig.cap = "Figure - "}
+```{r exampleDataPane7, echo = F, out.width = "85%", fig.cap = "Tree image with annotations and a heatmap of collection source with the donwload image section highlight in below and the add/remove heatmap also highlighted in blue."}
 knitr::include_graphics(here::here("vignettes/images/slide7.png"))
 ```
+
+
+**Downloading your image**
+
+Once you are happy with the way your tree looks, you can download the image 
+in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane7)). Make 
+sure you adjust the height and width. To activate the ability to download the 
+image, just enter your name in the text box and the 'Download' button will pop
+up. Also, note that once the image has downloaded, if you want to re-download 
+with anything changed, just adjust as you wish and select the 'Download' button
+again. 
 

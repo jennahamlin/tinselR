@@ -77,6 +77,7 @@ usethis::use_pipe()
 
 usethis::use_package("assertthat", type = "Suggests")
 usethis::use_package("attempt", type = "Suggests")
+usethis::use_package("bookdown", type = "Suggests")
 usethis::use_package("colorspace", type = "Suggests")
 usethis::use_package("DT", type = "Suggests")
 usethis::use_package("glue", type = "Suggests")
