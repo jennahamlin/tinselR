@@ -109,9 +109,8 @@ with annotated clades and a heatmap.
 - If user uploads tree and genetic distance matrix and then annotates the tree, 
 error pops up if user then tries to upload a meta data file. 
 
-- In the example data, the add annotation and remove annnotation button if 
-clicked without the associated data, an error occurs. 
-
-**Please see this [link](https://github.com/jennahamlin/tinselR/issues/4)
-for all packages and versions that were installed on a windows machine that 
-successfully runs tinselR.** 
+If you are interested in seeing the session info for the computer that developed
+this application please visit this 
+[link](https://github.com/jennahamlin/tinselR/issues/4). Here all packages and
+versions that were installed on a windows machine are listed and successfully
+runs tinselR.** 
