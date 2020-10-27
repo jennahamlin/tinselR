@@ -16,7 +16,8 @@ app_server <- function(input, output, session) {
   #the three files and tells user if they can use matrix button
   callModule(mod_tipCheck_server, "tipCheck_ui_1", data_display$meta_file_out,
              data_display$m_file_out, data_display$gene_file_out,
-             data_display$g_file_out, data_display$t_file_out)
+             data_display$g_file_out, data_display$t_file_out,
+             data_display$tree_file_out)
 
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")

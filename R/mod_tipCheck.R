@@ -22,7 +22,7 @@ mod_tipCheck_ui <- function(id) {
   tagList(
 
     tags$table(width = "100%",
-               tags$th("File Check Output", colspan = "3",
+               tags$th("File Check Output - please upload files", colspan = "3",
                        style = "font-size:20px; color:#444444;")),
 
     # this outputs info about if tip labels are not concordant between all
@@ -42,7 +42,7 @@ mod_tipCheck_ui <- function(id) {
 #'
 mod_tipCheck_server <- function(input, output, session, meta_file_out,
                                 m_file_out, gene_file_out, g_file_out,
-                                t_file_out) {
+                                t_file_out, tree_file_out) {
   ns <- session$ns
 
   #this will render the output from the sanity function found in the
@@ -52,8 +52,8 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
   output$file_checking <- renderUI({
     ns <- session$ns
 
-    if (is.null(t_file_out())) {
-      return(HTML('<span style="color:gray">Please upload a tree file</span>'))
+    if (is.null(tree_file_out())) {
+      #returns messge from uploadData - "Please import newick tree"
     } else if (is.null(gene_file_out())) {
       return(HTML(
         '<span style="color:gray">Please upload a genetic distance file</span>')

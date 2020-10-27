@@ -156,8 +156,8 @@ mod_exampleData_server <- function(input, output, session) {
       
       req(ex_gene_file_in())
       
-    } else { #if meta file uploaded, correct the distance file to match
-      #meta file tip labels
+      #if meta file uploaded, correct the distance file to match meta tip labels
+    } else if (!is.null(ex_meta_file_in())){ 
       . <- NULL
       ex_meta_file_comb <- ex_meta_file_in()
       ex_gene_file_corrected <- ex_gene_file_in()
@@ -179,11 +179,11 @@ mod_exampleData_server <- function(input, output, session) {
   #another function (replaceHwithZeros) for the reactive exGeneFileCorOrU
   ex_gene_object <- reactive({
     label <- NULL
-    if(is.null(ex_meta_file_in())) {
+    #if (is.null(ex_meta_file_in()) | !is.null(ex_meta_file_in())) {
     gene_object_out(replace_column_header(ex_gene_file_cor_or_un()))
-    } else {
-    validate(need(input$ex_meta_file_in !="", "Please relaunch the app."))
-      }
+    #} else {
+    #validate(need(input$ex_meta_file_in !="", "Please relaunch the app."))
+    #  }
   })
 
   

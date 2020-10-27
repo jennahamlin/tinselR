@@ -15,7 +15,8 @@ mod_tipCheck_server(
   m_file_out,
   gene_file_out,
   g_file_out,
-  t_file_out
+  t_file_out,
+  tree_file_out
 )
 }
 \arguments{
