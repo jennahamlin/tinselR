@@ -1,6 +1,7 @@
 ---
 title: "tinselR"
 output: bookdown::html_document2
+
 vignette: >
   %\VignetteIndexEntry{tinselR}
   %\VignetteEngine{knitr::rmarkdown}
@@ -24,51 +25,48 @@ Across the United States, public health laboratories at the state-level now
 perform whole-genome sequencing for foodborne pathogens, a milestone for
 protecting our food sources by identifying bacterial contamination at a higher
 resolution than previous methods. To understand organismal relationships in
-response to potential outbreak investigations, building and interpreting
-phylogenetic trees is essential for this public health workflow. Data produced
-from whole-genome sequencing via high-quality single nucleotide polymorphisms
-(SNPs) or alleles create phylogenetic trees that describe organisms'
-evolutionary relationships. The combined data from phylogenetic trees and
-epidemiological data helps identify the potential source in outbreaks across
-temporal and spatial scales. As evaluating the genetic similarity for isolates
-is required for outbreak and surveillance work, informative, clear tree
-visualization and annotation is essential. *Our goal was to develop an
-open-source phylogenetic tree visualization and annotation graphical user
-interface, which will be made available for state public health laboratories.*
-To accomplish this goal, we developed an R shiny application called **tinselR**
-(pronounced tinsel-er). We choose to build this application in R because of R's
-base graphics and additional phylogenetic packages that are the gold standard
-for phylogenetic tree graphics. Our tool's minimum input requirements are a
-Newick generated phylogenetic tree in which user inputs change the visualized
-tree. With either the genetic distance matrix and the metadata file, the user
-can include annotations on the image, quickly adjust tip labels, and add a
-heatmap to the phylogenetic tree. These modified phylogenetic tree images are
-downloadable in various formats for presentations or publications. These images
-help public health officials and stakeholders when discussing the differences or
-similarities between isolates in response to outbreaks. Below we will detail
-and outline how to use the application, using two example datasets.
+response to potential outbreak investigations from whole-genome data, building
+and interpreting phylogenetic trees is essential for this public health
+workflow. When data is combined from phylogenetic trees and epidemiology, potential
+sources in outbreaks link across temporal and spatial scales. *Our goal was to 
+develop an open-source phylogenetic tree visualization and annotation graphical
+user interface, which will be made available for state public health 
+laboratories.* To accomplish this goal, we developed  **tinselR** (pronounced
+tinsel-er) using the R shiny framework. We choose to build this application in 
+because of R's base graphics and additional phylogenetic packages that are the 
+gold standard for phylogenetic tree graphics. Our tool's minimum input
+requirements are a Newick generated phylogenetic tree in which user inputs
+change parameters of the visualized tree. With either or both the genetic distance
+matrix and the metadata file, the user can include annotations on the image,
+quickly adjust tip labels, and add a heatmap to the phylogenetic tree. These
+modified phylogenetic tree images are downloadable in various formats for
+presentations or publications. These images help public health officials and
+stakeholders discuss the differences or similarities between isolates in
+response to outbreaks. Below we will detail and outline how to use the 
+application, using two example datasets.
 
 ### Getting started
 
 #### *Testing with example data*
 
-**Choosing example data**
+**Example data**
 
 When the application is launched, the user can test out the application by
-using one of the pre-loaded datasets located in the 'Example Data' tab. We 
-provide three datasets (i.e. Newick tree, genetic distance matrix, 
-and metadata file) with the number of isolates ranging from 14 - 19. After
-clicking on the 'Example Data' tab (Figure \@ref(fig:exampleDataPane1)), 
-the user selects from the drop down menu for the three data types
-the concordant files (e.g. example tree 1, example genetic 1, and 
-example meta 1; (see Figure \@ref(fig:exampleDataPane2)). 
+using one of the pre-loaded datasets located in the 'Example Data' tab (Figure
+\@ref(fig:exampleDataPane1)). We provide three datasets (i.e. Newick tree,
+genetic distance matrix, and metadata file) with the number of isolates ranging
+from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
+PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: PRJNA230403). After 
+clicking on the 'Example Data' tab (Figure \@ref(fig:exampleDataPane1)), the
+user selects from the drop down menu for the three data types, the concordant
+files (e.g. example tree 1, example genetic 1, and example meta 1; (see Figure \@ref(fig:exampleDataPane2)). 
 
-```{r exampleDataPane1, echo = F, out.width = "50%", fig.cap = "Example data pane is circled in blue"}
+```{r exampleDataPane1, echo = F, out.width = "75%", fig.cap = "Example data pane is circled in blue"}
 knitr::include_graphics(here::here("vignettes/images/slide1.png"))
 ```
 
 
-```{r exampleDataPane2, echo = F, out.width = "50%", fig.cap = "Pre-loaded example dataset 3 is selected for all three data uploads subsections "}
+```{r exampleDataPane2, echo = F, out.width = "75%", fig.cap = "Pre-loaded example dataset 3 is selected for all three data uploads subsections and within in the blue box."}
 knitr::include_graphics(here::here("vignettes/images/slide2.png"))
 ```
 
@@ -91,42 +89,46 @@ highlighted section their most recent common ancestor, [MRCA](https://evolution.
 theory, one can add as many annotations as you want, though at some point the
 annotations may run off the plot area and thus you may need to add more
 space to plot. The ability to change spacing to the plot is one of the tree 
-visual parameters that can be adjusted (Figure \@ref(fig:exampleDataPane3) We 
-would also recommend only include those that help describe the outbreak clades
-of interest as with more annotations. Any annotation placed on the plot can 
-be removed by pushing the 'Remove Annotations' button. Unlike with the 'Add
-Annotation' button, you do not need to highlight which annotation you would like
-to remove. Because of this, the remove annotations works by removing the last 
-placed annotation until there are no more. 
-```{r exampleDataPane3, echo = F, out.width = "50%", fig.cap = "Example data pane with tree visual parameters circled in blue."}
+visual parameters that can be adjusted (Figure \@ref(fig:exampleDataPane3)). We 
+would also recommend to only include those that help describe the outbreak 
+clades of interest. Any annotation placed on the plot can be removed by pushing
+the 'Remove Annotations' button. Unlike with the 'Add Annotation' button, you
+do not need to highlight which annotation you would like to remove. Because of
+this, the remove annotations works by removing the last placed annotation until
+there are no more. 
+
+```{r exampleDataPane3, echo = F, out.width = "75%", fig.cap = "Example data pane with tree visual parameters enclosed in blue box."}
 knitr::include_graphics(here::here("vignettes/images/slide3.png"))
 ```
 
-```{r exampleDataPane4, echo = F, out.width = "50%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. "}
+```{r exampleDataPane4, echo = F, out.width = "75%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. "}
 knitr::include_graphics(here::here("vignettes/images/slide4.png"))
 ```
 
-```{r exampleDataPane5, echo = F, out.width = "50%", fig.cap = "Within tips of interested highlight, pressing the 'Add Annotations' button will add annotations to the tree image which indicate the range of snps found for these tips of interest. "}
+```{r exampleDataPane5, echo = F, out.width = "75%", fig.cap = "With tips of interested highlight, pressing the 'Add Annotations' button will add annotations to the tree image, which indicate the range of SNPs found for these tips of interest. "}
 knitr::include_graphics(here::here("vignettes/images/slide5.png"))
 ```
 
 
-**Including a metadata for tip correction and heatmap**
+**Including metadata for tip correction and heatmap**
 
 Figure \@ref(fig:exampleDataPane6) provides an example metadata file with 
-three columns: tip labels in the tree, what you would like the tip labels to 
-be changed to, and a source column. When the meta data is included and a user 
-pushed the 'Visualize Tree' button, automatic tip correction occurs, meaning
-that the tips within the Newick tree convert to what you the user decide. The 
-ability to include a [heatmap](https://yulab-smu.top/treedata-book/chapter7.html),
-allows the user to include either categorical or numerical data for their tree
-image (Figure \@ref(fig:exampleDataPane7)). 
+three columns: 1) 'Tip.labels'; those tip labels within in the Newick tree, 2)
+'Display.labels'; what you would like the tip labels in the tree to be changed
+to, and 3) a third column called what ever you additional metadata of interest
+is. Here, the third column is called 'SourceSite' indicating the collection site
+of the isolates. When the meta data is included and a user pushes the 'Visualize
+Tree' button, automatic tip correction occurs, meaning that the tips within the
+Newick tree convert to what you the user decide ('Display.labels'). The ability 
+to include a [heatmap](https://yulab-smu.top/treedata-book/chapter7.html),
+allows the user to include either categorical or numerical data for their tree 
+image either with or without annotations (Figure \@ref(fig:exampleDataPane7)). 
 
-```{r exampleDataPane6, echo = F, out.width = "75%", fig.cap = "Example meta data 3 with the third column highlighted in blue indicating information used for adding a heatmap. "}
+```{r exampleDataPane6, echo = F, out.width = "75%", fig.cap = "Example metadata 3 with the third column highlighted in blue indicating information used for adding a heatmap. "}
 knitr::include_graphics(here::here("vignettes/images/slide6.png"))
 ```
 
-```{r exampleDataPane7, echo = F, out.width = "50%", fig.cap = "Tree image with annotations and a heatmap of collection source with the donwload image section highlight in below and the add/remove heatmap also highlighted in blue."}
+```{r exampleDataPane7, echo = F, out.width = "75%", fig.cap = "Tree image with annotations and a heatmap of collection source with the donwload image section enclosed in blue box at the bottom of the image and the add/remove heatmap also highlighted in blue."}
 knitr::include_graphics(here::here("vignettes/images/slide7.png"))
 ```
 
@@ -138,7 +140,7 @@ in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane7)). Make
 sure you adjust the height and width. To activate the ability to download the 
 image, just enter your name in the text box and the 'Download' button will pop
 up. Also, note that once the image has downloaded, if you want to re-download 
-with anything changed, just adjust as you wish and select the 'Download' button
+with anything changed, just adjust as you wish and push the 'Download' button
 again. 
 
 #### *Using your data*
@@ -146,22 +148,21 @@ again.
 The only difference between the 'Example Data' and the 'Data Upload' tabs is 
 that the example data tab has pre-loaded data, while the data upload tab is 
 where you, the user, can upload your own files (i.e. tree, genetic distance, 
-and metadata). Beyond that the application is exactly the same, thus we highly
-encourage users to play with the example data first just to familiarize yourself
-with the application. We have only tested the application using trees with 
-~ 30 tips with success, beyond that we are interested to see how the application
-does. If you are successful in including larger trees, please let us know. 
-Below we will describe the types of data you can upload. 
+and metadata). Beyond that the application is exactly the same, thus why we 
+highly encourage users to play with the example data first just to familiarize yourself with the application. Note, we have only tested the application using
+trees with ~ 30 tips with success, beyond that we are interested to see how the
+application does. Below we will describe the types of data you can upload. 
 
 The application relies on treeio's function read.newick (`treeio::read.newick`), 
-to read in a Newick tree. In theory any application that can produce a Newick
-formatted tree should be able to be uploaded. 
+to read in a Newick tree. treeio is associated with the package ggtree, which 
+extends the ggplot2 plot system to phylogenetic trees. In theory any application 
+that can produce a Newick formatted tree should be able to be uploaded. 
 
 Currently, our application only supports a genetic distance matrix of SNP 
 differences (Figure \@ref(fig:userData1)). Your distance matrix can be in either
 csv, tsv, or txt formats. The metadata file should be in one of these formats 
 as well (csv, tsv, or txt). However, the metadata file requires specific column
-headers (Tip.labels, and Display.labels; Figure \@ref(fig:exampleDataPane6), but
+headers (Tip.labels, and Display.labels; Figure \@ref(fig:exampleDataPane6)), but
 the third column, if you choose to include it can be titled whatever. 
 
 ```{r userData1, echo = F, out.width = "50%", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
@@ -171,6 +172,8 @@ knitr::include_graphics(here::here("man/figures/geneDistanceExample.PNG"))
 ```{r userData2, echo = F, out.width = "50%", fig.cap = "Meta data example without the heatmap column."}
 knitr::include_graphics(here::here("man/figures/metaDataExample.PNG"))
 ```
+
+### Getting Help
 
 If you have problems, requests, or thoughts, please file an 
 [issue](https://github.com/jennahamlin/tinselR/issues).
