@@ -3,7 +3,7 @@
 #' @title mod_relaunchApp_ui mod_relaunchApp_server
 #'
 #' @description A shiny Module. This module will relaunch the application
-#' and clear out any existing data sets
+#' and clear out any existing data sets. 
 #'
 #' @rdname mod_relaunchApp
 #'
@@ -24,7 +24,7 @@ mod_relaunchApp_ui <- function(id) {
 mod_relaunchApp_server <- function(input, output, session) {
   ns <- session$ns
 
-  #this will reload the session and clear exisiting info -
+  #this will reload the session and clear existing info -
   #good if you want to start TOTALLY new
   observeEvent(input$reload_session, {
     session$reload()

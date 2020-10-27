@@ -64,7 +64,12 @@ mod_downloadImage_server <- function(input, output, session, treeOut) {
     }
   )
 
-  #these essentially serves as a count for number of downloads
+  #the file 'tinseUserCount.txt' serves as an approximation for user count
+  #based on the number of downloads. Please note this is a very rough 
+  #approximation. If someone does not want to include this; then comment
+  #the below code out (L71 - 78) and make sure to remove the line 
+  #`shinyjs::hidden` in the UI above. Once those things are done, then the 
+  #download button is automatically distplayed. 
   observeEvent(input$text, {
     if (input$text == "") {
       shinyjs::hide("download_plot")

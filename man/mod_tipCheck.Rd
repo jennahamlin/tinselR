@@ -31,6 +31,8 @@ mod_tipCheck_server(
 \item{g_file_out}{imported genetic distance file for tip checking}
 
 \item{t_file_out}{imported tree for tip checking}
+
+\item{tree_file_out}{imported tree file to confirm file is uploaded}
 }
 \description{
 A shiny Module. This module generates the landing page for the

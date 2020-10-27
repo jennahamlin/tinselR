@@ -44,10 +44,6 @@ mod_paramsTree_ui <- function(id) {
       numericInput(ns("matOffset"), tags$b("Move Matrix -",
                                            style = "color:#afafae"),
                    value = 0.05, step = 0.01), width = 3),
-
-    #numericInput(ns('overlapAdjust'), tags$b("Adjust overlap - ",
-    #style="color:#afafae"), value = 0.004, max =1, step = 0.01),
-
     column(
       checkboxInput(ns("midPoint"), tags$b("Midpoint Root",
                                            style = "color:#afafae"), TRUE),

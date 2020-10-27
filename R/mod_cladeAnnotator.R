@@ -34,12 +34,24 @@ mod_cladeAnnotator_ui <- function(id) {
 #' @keywords internal
 mod_cladeAnnotator_server <-
   function(input, output, session, mFileMatOut, make_tree_out, add_tree,
-           add_anno, remove_anno, add_matrix, remove_matrix, geneObjectForSNP,
+           add_anno, remove_anno, add_heatmap, remove_heatmap, geneObjectForSNP,
            label_off, lab_color, mat_off) {
 
-    #add other tree viz parameters above
     ns <- session$ns
 
+    #inputs 
+    #mFileMatOut - from dataDisplay module; is a dataframe
+    #make_tree_out - from dataDisplay module; is a ggtree object 
+    #add_tree - from pushButtons module; is an action button (Y or N)
+    #add_anno - from pushButtons module; is an action button (Y or N)
+    #remove_anno - from pushButtons module; is an action button (Y or N)
+    #add_heatmap - from pushButtons module; is an action button (Y or N)
+    #remove_heatmap - from pushButtons module; is an action button (Y or N)
+    #geneObjectForSNP - from upload/example Data module. Is a tibble
+    #label_off- from paramsTree module; this is numeric input from user
+    #lab_color - from paramsTree; select input from user (multiple choice)
+    #mat_off - from paramsTree module; this is numeric input from user
+    
     # Initialize a reactive value and set to zero (count) and an empty
     #list for tip vector input
     Values <- reactiveValues()
@@ -54,8 +66,8 @@ mod_cladeAnnotator_server <-
       brushedPoints(make_tree_out()$data, input$plot_brush)
     })
     
-    #add label to tipVector if isTip == True
-    data_with_selection2 <- eventReactive(input$plot_brush, {
+    #add label to tipVector if isTip == True; so subsets the data
+    data_with_selection_subset <- eventReactive(input$plot_brush, {
       label <- NULL
       tip_vector <- c()
 
@@ -79,15 +91,22 @@ mod_cladeAnnotator_server <-
       #add_anno button without the file loaded
       if (!is.null(geneObjectForSNP())) {
 
+        #increased the reactive by 1
         Values[["n"]] <- Values[["n"]] + 1
 
-        #add the tip vector (aka label) to the annotation reactive value
+        #add the tip vector (aka label) to the annotation reactive value 
+        #which is called Values[["tip_vec]]. The paste0 basically allows the 
+        #brushed tips to be placed together in lists (tips1, tips2, tips3, etc)
         Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <-
-          data_with_selection2()
+          data_with_selection_subset()
 
-        #add to variable called tips
+        #add to variable called tips; from the function create_tip_list
         tips <- create_tip_list()
 
+        #render the plot using tips, make_tree_out reactive and if there is the
+        #heatmap. The make_tree_out reactive allows for tree viz parameters
+        #to still be changed reactively even with the placement of either 
+        #annotations or heatmap
         output$tree_display <- renderPlot({
           add_map(tree = add_annotations(tree_plot = make_tree_out(),
                                          tip_vector_in =  tips),
@@ -105,9 +124,12 @@ mod_cladeAnnotator_server <-
       } else {
 
         if (Values[["n"]] > 0) {
+          
+          #increment by -1 the values[["n"]] reactive
 
           Values[["n"]] <- Values[["n"]] - 1
 
+          #assign tips in the Values[["tip_vec"]] to a temp place holder      
           temp_tip <- Values[["tip_vec"]]
 
           #remove the last set of tips that the user selected
@@ -124,10 +146,12 @@ mod_cladeAnnotator_server <-
       }
     })
 
-    #allow the user to add a matrix to a tree; change show_map to the value of 1
-    observeEvent(add_matrix(), {
+    #allow the user to add a heatmap to a tree; change show_map to the value 
+    #of 1
+    observeEvent(add_heatmap(), {
 
-      #display that layer onto the tree
+      #display that layer onto the tree; as Values[["show_map"]] > 0 is a 
+      #requirement of add_map function
       Values[["show_map"]] <-  1
       output$tree_display <- renderPlot({
 
@@ -136,9 +160,9 @@ mod_cladeAnnotator_server <-
       })
     })
 
-    #as above with add matrix but this allows the removal of the matrix by
+    #as above with add heatmap but this allows the removal of the heatmap by
     #setting show_map to 0
-    observeEvent(remove_matrix(), {
+    observeEvent(remove_heatmap(), {
 
       #display that layer onto the tree
       Values[["show_map"]] <-  0
@@ -147,8 +171,13 @@ mod_cladeAnnotator_server <-
       })
     })
 
+    #####################################
+    ## cladeAnnotator server functions ##
+    #####################################
+
     #function to create the tip list. list apply over the counter('n') and
-    #paste the values in the tip vector to the variable tips
+    #paste the values in the tip vector (Values[["tip_vec"]]) to the 
+    #variable tips
     create_tip_list <- function() {
       tips <- c()
       if (Values[["n"]] < 1) {
@@ -160,23 +189,18 @@ mod_cladeAnnotator_server <-
       return(tips)
     }
 
-    #####################################
-    ## cladeAnnotator server functions ##
-    #####################################
-
-    ## cladeAnnotator server functions
     #function which gets the snps for two tips and puts them into the snpVector
-
+    #input is the manipulated genetic distance file and the user selected tips
     snp_anno <- function(gene_file, tips) {
       #adding this helps with devtools::check() note of 'no visible binding for
       #global variables
       label <- name <- value <- NULL
       snp_vector <- c()
-      for (i in 1:(length(tips) - 1)) {
-        for (j in (i + 1):length(tips)) {
-          if (tips[i] == tips[j])
+      for (i in 1:(length(tips) - 1)) { #this goes over a three column dataframe
+        for (j in (i + 1):length(tips)) { #i and j are the ids of tips
+          if (tips[i] == tips[j]) #don't include self comparisons
             next
-          snp_vector <- append(snp_vector, gene_file %>%
+          snp_vector <- append(snp_vector, gene_file %>% #add snps to vector 
                                  dplyr::filter(
                                    label == tips[i] & name == tips[j]) %>%
                                  dplyr::pull(value)
@@ -187,7 +211,9 @@ mod_cladeAnnotator_server <-
     }
 
     #function to add layer, uses findMRCA to get the MRCA (node) for the
-    #selected tips
+    #selected tips. The input is the base tree, user selected tips, label 
+    #is the bit that draws the annotation with range of snps, color and offset
+    #are reactive paramters that the user can adjust 
     make_layer <- function(tree, tips, label, color, offset) {
       ggtree::geom_cladelabel(
         node = phytools::findMRCA(ape::as.phylo(tree), tips),
@@ -198,8 +224,8 @@ mod_cladeAnnotator_server <-
       )
     }
 
-    #add map funciton takes in a tree and the converted meta data file.
-    #only allows the inclusion of the mapk if the value of show_map is
+    #add map function takes in a tree and the converted meta data file.
+    #only allows the inclusion of the map if the value of show_map is
     #greater than 0
     add_map <- function(tree, metaFile) {
       if (Values[["show_map"]]  > 0 & !is.null(metaFile)) {
@@ -220,7 +246,7 @@ mod_cladeAnnotator_server <-
 
     #this functions calculates the mean # snps and adds that layer as
     #annotation. Additionally, it checks for overlap in annotations and adjusts
-    #as necessary
+    #as necessary. The input is the tree and a newly brushed/highlighted region
     add_annotations <- function(tree_plot, tip_vector_in) {
       g <- tree_plot
 
@@ -244,7 +270,7 @@ mod_cladeAnnotator_server <-
           }
 
           # set the clade label offset based on how many sets of previous tips
-          #it overlaps and provide user #option to adjust the position of
+          #it overlaps and provide user option to adjust the position of
           #all annotations
           label_offset <- label_off() + n_overlap * 0.004
 

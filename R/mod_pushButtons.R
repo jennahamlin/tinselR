@@ -14,6 +14,7 @@
 mod_pushButtons_ui <- function(id) {
   ns <- NS(id)
   tagList(
+
     actionButton(ns("add_tree"),  "Visualize Tree",
                  style = "color: #fff; background-color:#334b38 ;
                  border-color: #334b38; width: 200px;",  icon("tree")),
@@ -26,11 +27,11 @@ mod_pushButtons_ui <- function(id) {
                  style = "color: #fff; background-color:#275a5c ;
                  border-color: #275a5c; width: 200px;"),
 
-    actionButton(ns("add_matrix"), "Add heatmap", icon("bars"),
+    actionButton(ns("add_heatmap"), "Add heatmap", icon("bars"),
                  style = "color: #fff; background-color: #a4b46b ;
                  border-color:#a4b46b; width: 200px;"),
 
-    actionButton(ns("remove_matrix"), "Remove heatmap", icon("bars"),
+    actionButton(ns("remove_heatmap"), "Remove heatmap", icon("bars"),
                  style = "color: #fff; background-color:#899097 ;
                  border-color:#899097 ; width: 200px;")
   )
@@ -47,7 +48,7 @@ mod_pushButtons_server <- function(input, output, session) {
     add_tree = reactive(input$add_tree),
     add_anno = reactive(input$add_annotation),
     remove_anno = reactive(input$remove_annotation),
-    add_matrix = reactive(input$add_matrix),
-    remove_matrix = reactive(input$remove_matrix)
+    add_heatmap = reactive(input$add_heatmap),
+    remove_heatmap = reactive(input$remove_heatmap)
   )
 }

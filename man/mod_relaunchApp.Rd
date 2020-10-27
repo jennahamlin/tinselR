@@ -14,7 +14,7 @@ mod_relaunchApp_server(input, output, session)
 }
 \description{
 A shiny Module. This module will relaunch the application
-and clear out any existing data sets
+and clear out any existing data sets.
 }
 \details{
 relaunchApp UI Function

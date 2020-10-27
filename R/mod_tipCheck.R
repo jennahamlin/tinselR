@@ -10,6 +10,7 @@
 #'
 #' @param id,input,output,session internal
 #' @param t_file_out imported tree for tip checking
+#' @param tree_file_out imported tree file to confirm file is uploaded
 #' @param g_file_out imported genetic distance file for tip checking
 #' @param gene_file_out imported gene file for confirming that file is uploaded
 #' @param meta_file_out imported meta file for confirming that file is uploaded
@@ -22,7 +23,7 @@ mod_tipCheck_ui <- function(id) {
   tagList(
 
     tags$table(width = "100%",
-               tags$th("File Check Output - please upload files", colspan = "3",
+               tags$th("Please upload files for file Checking", colspan = "3",
                        style = "font-size:20px; color:#444444;")),
 
     # this outputs info about if tip labels are not concordant between all
@@ -46,8 +47,11 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
   ns <- session$ns
 
   #this will render the output from the sanity function found in the
-  #golem_utils_server.R file and takes in 5 reactive files -
-  #tree, genetic distance, genetic distance file, meta data, and meta data file
+  #golem_utils_server.R file and takes in 6 reactive files -
+  #tree x2, genetic distance x2, meta data x2 - one file from each three sub
+  #sections just acts as a confirmation that the file has been uploaded to 
+  #display the user messages. The other 3 files are the ones that either
+  #sanity or not_columns funcdtions test. 
 
   output$file_checking <- renderUI({
     ns <- session$ns

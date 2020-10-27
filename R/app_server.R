@@ -13,7 +13,7 @@ app_server <- function(input, output, session) {
   buttons <- callModule(mod_pushButtons_server, "pushButtons_ui_data")
 
   #outputs directly a user message if the file tip labels are all the same for
-  #the three files and tells user if they can use matrix button
+  #the three files and tells user if they can use heatmap button
   callModule(mod_tipCheck_server, "tipCheck_ui_1", data_display$meta_file_out,
              data_display$m_file_out, data_display$gene_file_out,
              data_display$g_file_out, data_display$t_file_out,
@@ -33,13 +33,13 @@ app_server <- function(input, output, session) {
                      params$node, params$lim, params$boot_pos, params$mid_p)
 
   #annotates tree with incorporated tree viz parameters and allows user to
-  #add visual matrix
+  #add visual heatmap
   tree_w_layers <- callModule(mod_cladeAnnotator_server,
                               "cladeAnnotator_ui_data",
                               data_display$mFileMatOut, plot$make_tree_out,
                               buttons$add_tree, buttons$add_anno,
-                              buttons$remove_anno, buttons$add_matrix,
-                              buttons$remove_matrix,
+                              buttons$remove_anno, buttons$add_heatmap,
+                              buttons$remove_heatmap,
                               data_display$geneObjectForSNP, params$label_off,
                               params$lab_color, params$mat_off)
 
@@ -50,17 +50,16 @@ app_server <- function(input, output, session) {
   ### EXAMPLE DATA ###
   ####################
 
-  #repeated for preloaded data; no need to download so that module is not
-  #included below plodad the data (tree, genetic, and meta) and call that module
-  #data_display. This is the only module that is re-written, the rest of the
-  #same used in the above section and are called the same as above.
+  #repeated for preloaded data; uplodad the data (tree, genetic, and meta)
+  #and call that module example_data. This is the only module that is 
+  #re-written, the rest of the modules are the same as above. 
 
   example_data <- callModule(mod_exampleData_server, "exampleData_ui_1")
 
-  example_params <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
-
   example_buttons <- callModule(mod_pushButtons_server,
                                 "pushButtons_ui_example")
+  
+  example_params <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
 
   callModule(mod_relaunchApp_server, "relaunchApp_ui_example")
 
@@ -78,8 +77,8 @@ app_server <- function(input, output, session) {
                              example_plot$make_tree_out,
                              example_buttons$add_tree, example_buttons$add_anno,
                              example_buttons$remove_anno,
-                             example_buttons$add_matrix,
-                             example_buttons$remove_matrix,
+                             example_buttons$add_heatmap,
+                             example_buttons$remove_heatmap,
                              example_data$exGeneObjectForSNP,
                              example_params$label_off, example_params$lab_color,
                              example_params$mat_off)
