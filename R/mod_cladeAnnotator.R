@@ -35,7 +35,7 @@ mod_cladeAnnotator_ui <- function(id) {
 mod_cladeAnnotator_server <-
   function(input, output, session, mFileMatOut, make_tree_out, add_tree,
            add_anno, remove_anno, add_heatmap, remove_heatmap, geneObjectForSNP,
-           label_off, lab_color, mat_off) {
+           label_off, lab_color, mat_off, heat_col) {
 
     ns <- session$ns
 
@@ -51,6 +51,7 @@ mod_cladeAnnotator_server <-
     #label_off- from paramsTree module; this is numeric input from user
     #lab_color - from paramsTree; select input from user (multiple choice)
     #mat_off - from paramsTree module; this is numeric input from user
+    #heat_color - from paramsTree; select input from user (multiple choice)
     
     # Initialize a reactive value and set to zero (count) and an empty
     #list for tip vector input
@@ -235,11 +236,8 @@ mod_cladeAnnotator_server <-
                                  width = 0.2,
                                  colnames_angle = 45,
                                  colnames_offset_y = -1,
-                                 hjust = 0.5)
-        #+
-        #  ggplot2::scale_color_viridis_d(option = matCol())
-        #will add in this option to change the color
-
+                                 hjust = 0.5) +
+          ggplot2::scale_fill_viridis_d(option = heat_col())
       }
       return(tree)
     }

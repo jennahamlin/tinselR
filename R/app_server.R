@@ -41,9 +41,9 @@ app_server <- function(input, output, session) {
                               buttons$remove_anno, buttons$add_heatmap,
                               buttons$remove_heatmap,
                               data_display$geneObjectForSNP, params$label_off,
-                              params$lab_color, params$mat_off)
+                              params$lab_color, params$mat_off, params$heat_col)
 
-  #allows tree with annotation and viz parameters to be donwloaded
+  #allows tree with annotation and viz parameters to be downloaded
   callModule(mod_downloadImage_server, "downloadImage_ui_data", tree_w_layers)
 
   ####################
@@ -81,7 +81,7 @@ app_server <- function(input, output, session) {
                              example_buttons$remove_heatmap,
                              example_data$exGeneObjectForSNP,
                              example_params$label_off, example_params$lab_color,
-                             example_params$mat_off)
+                             example_params$mat_off, example_params$heat_col)
 
   callModule(mod_downloadImage_server, "downloadImage_ui_example", example_tree)
 

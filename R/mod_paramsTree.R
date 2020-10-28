@@ -24,44 +24,44 @@ mod_paramsTree_ui <- function(id) {
     tags$hr(style = "border-color: #99b6d8;"),
 
     column(
-      numericInput(ns("numScale"), tags$b("Size of Scale Bar - ",
+      numericInput(ns("number_scale"), tags$b("Size of Scale Bar - ",
                                           style = "color:#afafae"),
                    value = 0.001, step = 0.001),
-      numericInput(ns("nodeDisplay"), tags$b("Min. Value of Bootstrap -",
+      numericInput(ns("node_display"), tags$b("Min. Value of Bootstrap -",
                                              style = "color:#afafae"), value =
                      50, max = 100),
-      numericInput(ns("bootPosition"), tags$b("Bootstrap Positions - ",
+      numericInput(ns("boot_position"), tags$b("Bootstrap Positions - ",
                                               style = "color:#afafae"),
                    value = 0.00025, max = 1, step = 0.01), width = 3),
 
     column(
-      numericInput(ns("tipLim"), tags$b("Add Spacing to Plot - ",
+      numericInput(ns("tip_lim"), tags$b("Add Spacing to Plot - ",
                                         style  = "color:#afafae"), value = 0.02,
                    max = 1, step = 0.01),
-      numericInput(ns("labelOffset"), tags$b("Move All Annotations -",
+      numericInput(ns("label_offset"), tags$b("Move All Annotations -",
                                              style = "color:#afafae"),
                    value = 0.005, step = 0.01),
-      numericInput(ns("matOffset"), tags$b("Move Matrix -",
+      numericInput(ns("mat_offset"), tags$b("Move Matrix -",
                                            style = "color:#afafae"),
                    value = 0.05, step = 0.01), width = 3),
     column(
       checkboxInput(ns("midPoint"), tags$b("Midpoint Root",
                                            style = "color:#afafae"), TRUE),
-      checkboxInput(ns("alignTips"), tags$b("Align the tips",
+      checkboxInput(ns("align_tips"), tags$b("Align the tips",
                                             style = "color:#afafae"), FALSE),
       selectInput(ns("color"), tags$b("Annotation Label Color - ",
                                       style = "color:#afafae"),
-                  c("blue", "red", "black", "gray")), width = 3),
-    #selectInput(ns("matColor"), tags$b("Matrix Color Options - ",
-    #style="color:#afafae"), c("A", "B", "C", "D", "E")),
-
+                  c("blue", "red", "black", "gray")),
+      selectInput(ns("heatmap_color"), tags$b("Heatmap Color Options - ",
+                                         style="color:#afafae"),
+                  c("A", "B", "C", "D", "E")), width = 3),
     column(
-      radioButtons(ns("fontFormat"), tags$b("Font Format",
+      radioButtons(ns("font_format"), tags$b("Font Format",
                                             style = "color:#afafae"),
                    choices = list(
                      "bold" = "bold", "italic" = "italic",
                      "bold+italic" = "bold.italic"), selected = "bold"),
-      radioButtons(ns("treeFormat"), tags$b("Tree layout",
+      radioButtons(ns("tree_format"), tags$b("Tree layout",
                                             style = "color:#afafae"),
                    choices = list(
                      "rectangular" = "rectangular", "slanted" = "slanted",
@@ -90,18 +90,17 @@ mod_paramsTree_server <- function(input, output, session) {
   # add them to the ui above and return them here with name to be used in
   # data display module
   return(list(
-    align = reactive(input$alignTips),
-    tree_format = reactive(input$treeFormat),
-    font = reactive(input$fontFormat),
-    num_scale = reactive(input$numScale),
-    node = reactive(input$nodeDisplay),
-    lim = reactive(input$tipLim),
-    boot_pos = reactive(input$bootPosition),
+    align = reactive(input$align_tips),
+    tree_format = reactive(input$tree_format),
+    font = reactive(input$font_format),
+    num_scale = reactive(input$number_scale),
+    node = reactive(input$node_display),
+    lim = reactive(input$tip_lim),
+    boot_pos = reactive(input$boot_position),
     mid_p = reactive(input$midPoint),
-    label_off = reactive(input$labelOffset),
+    label_off = reactive(input$label_offset),
     lab_color = reactive(input$color),
-    mat_off = reactive(input$matOffset)
-    #,
-    #matCol = reactive(input$matColor)
+    mat_off = reactive(input$mat_offset),
+    heat_col = reactive(input$heatmap_color)
   ))
 }
