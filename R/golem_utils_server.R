@@ -87,7 +87,6 @@ replace_column_header <- function(gene_file_in) {
 
 gene_object_out  <- function(gene_file) {
   label <- . <- value <- NULL
-  print("L 90 utils")
   gene_file %>%
     #remove na
     tidyr::drop_na() %>%

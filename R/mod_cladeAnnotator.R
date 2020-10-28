@@ -87,11 +87,12 @@ mod_cladeAnnotator_server <-
 
     #display that user-brushed layer onto the tree
     observeEvent(add_anno(), {
-
+      if (is.null(data_with_selection_subset())) {
+        return(NULL)
+      } else if (!is.null(geneObjectForSNP())) {
       #this acts as a control for if the user accidentally presses the
       #add_anno button without the file loaded
-      if (!is.null(geneObjectForSNP())) {
-
+      
         #increased the reactive by 1
         Values[["n"]] <- Values[["n"]] + 1
 
