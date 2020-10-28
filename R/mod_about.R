@@ -40,15 +40,40 @@ mod_about_ui <- function(id) {
                               to upload your files. Alternatively, take a look
                               at the Example Data to test out the application.
                               A brief description about the example data is
-                              provided in the About the Example Data pane."),
+                              provided in the About the Example Data pane."), 
                               tags$br(),
-                              tags$li(em("Phylogenetic Tree"), "- required; a",
+                              tags$p("There are only two differences between the
+                              'Example Data' and the 'Data Upload' tabs: 1) is
+                              that the example data tab has pre-loaded data, 
+                              while the data upload tab is where you, the user, 
+                              can upload your own files (i.e. tree, genetic
+                              distance, and metadata). 2) Given this, we provide
+                              within the 'Data Upload' tab a section which 
+                              performs file checking and sends messages to the
+                              user regarding the files uploaded. For example, 
+                              it will tell the user if there is a difference
+                              between the number of labels when all three files
+                              are uploaded. However, this file checking happens
+                              independently of if the user wants the 
+                              information. By that, we mean a user can ignore
+                              the file check messages if they do not need them
+                              and proceed using the application. Beyond that
+                              the application is exactly the same, thus why we
+                              highly encourage users to play with the example
+                              data first just to familiarize yourself with
+                              the application. Below we describe the three files
+                              and  what can be done within the application  to
+                              alter your tree image. "),
+                              tags$br(),
+                              tags$h4(strong("Data files to upload")),
+                              tags$br(),
+                              tags$li(em("1. Phylogenetic Tree"), "- required; a",
                                       a("newick",
                                         href =
                                           "https://en.wikipedia.org/wiki/
                                         Newick_format"), "generated tree"),
                               tags$br(),
-                              tags$div(tags$li(em("Genetic Distance Data"),
+                              tags$div(tags$li(em("2. Genetic Distance Data"),
                                                "- optional for use with the
                                                annotation function.",
                                                tags$br(), "A tsv/txt/csv file of
@@ -59,7 +84,7 @@ mod_about_ui <- function(id) {
                                                   "www/geneDistanceExample.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
-                              tags$div(tags$li(em("Meta Data"), "- optional for
+                              tags$div(tags$li(em("3. Meta Data"), "- optional for
                               easy correction of tip labels;",
                                                tags$br(),
                                                "a tsv/txt/csv file - requires
@@ -69,6 +94,8 @@ mod_about_ui <- function(id) {
                                        tags$br(),
                                        tags$img(src = "www/metaDataExample.PNG",
                                                 height = "50%", width = "50%")),
+                              tags$br(),
+                              tags$h4(strong("Ways to alter your tree image")),
                               tags$br(),
                               tags$div(tags$li(tags$em("Once the phylogenetic
                               tree is uploaded you can -")),
@@ -84,7 +111,7 @@ mod_about_ui <- function(id) {
                               tree. If you want to add annotations then
                               highlight the tip labels to their most recent
                                        common ancestor,", tags$a("MRCA", href =
-                                              "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"), "
+                                                                   "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"), "
                                               , and press the 'Add Annotations'
                                               button. Repeat until you are
                                        satisfied.",
@@ -95,10 +122,10 @@ mod_about_ui <- function(id) {
                               tags$div(tags$li(tags$em("If column for heatmap
                                                        included in meta data
                                                        file you  can")), "add
-                                       a heatmap with or without annotatios",
+                                       a heatmap with or without annotations",
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/treeWAnnoAndHeatMap.PNG",
+                                                  "www/treeWAnnoAndHeatmap.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br()
                     )
