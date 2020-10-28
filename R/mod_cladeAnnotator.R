@@ -87,6 +87,7 @@ mod_cladeAnnotator_server <-
 
     #display that user-brushed layer onto the tree
     observeEvent(add_anno(), {
+      
       if (is.null(data_with_selection_subset())) {
         return(NULL)
       } else if (!is.null(geneObjectForSNP())) {
@@ -120,8 +121,10 @@ mod_cladeAnnotator_server <-
     # remove the annotations one by one, when number of values equals one,
     #then display tree without annotations.
     observeEvent(remove_anno(), {
-
-      if (is.null(geneObjectForSNP())) {
+      
+      if (is.null(data_with_selection_subset())) {
+        return(NULL)
+      } else if (is.null(geneObjectForSNP())) {
         #skip
       } else {
 
@@ -151,7 +154,9 @@ mod_cladeAnnotator_server <-
     #allow the user to add a heatmap to a tree; change show_map to the value 
     #of 1
     observeEvent(add_heatmap(), {
-
+      
+      if (ncol(mFileMatOut() == 0)) {
+  
       #display that layer onto the tree; as Values[["show_map"]] > 0 is a 
       #requirement of add_map function
       Values[["show_map"]] <-  1
@@ -159,7 +164,11 @@ mod_cladeAnnotator_server <-
 
         #render the plot using the  current_tree_out function.
         current_tree_out()
-      })
+      }) 
+      } else {
+        return(NULL)
+      }
+      
     })
 
     #as above with add heatmap but this allows the removal of the heatmap by

@@ -92,8 +92,11 @@ mod_exampleData_server <- function(input, output, session) {
   #reactive that allows for the matrix visualization on phylogenetic trees
   #specific to example data set 3
   ex_meta <- reactive({
+    print("L 95 example data")
     if (!is.null(ex_meta_file_in())) {
       m_file_conversion(ex_meta_file_in())
+    } else {
+      return(NULL)
     }
   })
   
