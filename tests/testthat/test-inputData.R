@@ -31,7 +31,7 @@ test_that("data types correct", {
   expect_type(testing_genetic$A, "character")
 })
 
-test_that("confirm genetic distance swithces column 1 and row 1 header", {
+test_that("confirm genetic distance switches column 1 and row 1 header", {
   expect_silent(replace_column_header(testing_genetic))
 })
 
@@ -118,7 +118,7 @@ g_2 <-gene2
 
 g_2 <- g_2 %>% dplyr::rename(center = 1) 
 
-test_that("Length of genetic data 2 or number of unique isolates", {
+test_that("Length of genetic data 2 for number of unique isolates", {
   expect_length(g_2, 15)
 })
 

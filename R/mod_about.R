@@ -47,11 +47,10 @@ mod_about_ui <- function(id) {
                               that the example data tab has pre-loaded data, 
                               while the data upload tab is where you, the user, 
                               can upload your own files (i.e. tree, genetic
-                              distance, and metadata). 2) Given this, we provide
-                              within the 'Data Upload' tab a section which 
-                              performs file checking and sends messages to the
-                              user regarding the files uploaded. For example, 
-                              it will tell the user if there is a difference
+                              distance, and metadata). 2) The other difference
+                              is an section which produces messages for the user
+                              about the file upload process. For example, it 
+                              will tell the user if there is a difference
                               between the number of labels when all three files
                               are uploaded. However, this file checking happens
                               independently of if the user wants the 

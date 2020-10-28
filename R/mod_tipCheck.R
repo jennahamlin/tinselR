@@ -23,7 +23,7 @@ mod_tipCheck_ui <- function(id) {
   tagList(
 
     tags$table(width = "100%",
-               tags$th("Please upload files for file Checking", colspan = "3",
+               tags$th("Please upload files for file checking", colspan = "3",
                        style = "font-size:20px; color:#444444;")),
 
     # this outputs info about if tip labels are not concordant between all
