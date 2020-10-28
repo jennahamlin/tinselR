@@ -9,7 +9,7 @@ app_ui <- function() {
     fluidPage(
       theme = shinythemes::shinytheme("yeti"),
       navbarPage("tinselR - a tree visulization and annotation tool",
-                 tabPanel("About", mod_about_ui("about_ui_1")),
+                 tabPanel("About tinselR", mod_about_ui("about_ui_1")),
                  tabPanel("About Example Data",
                        mod_aboutExample_ui("aboutExample_ui_1")),
                  tabPanel("About Tree Parameters", 

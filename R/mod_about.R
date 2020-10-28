@@ -17,17 +17,18 @@ mod_about_ui <- function(id) {
     fluidRow(column(12, offset = 0,
                     mainPanel(h1(strong("Getting started with tinselR")),
                               tags$br(),
-                              p("tinselR at its' most basic level is a graphical
-                              viewer of newick phylogenetic trees and as a
-                              program for producing publication-ready figures.",
-                                "The", em("power"), "of tinselR comes with
-                                combining a genetic distance matrix for
-                                annotating a tree for epidemological outbreak
-                                analyses.", "A genetic distance matrix contains
-                                the number of snp differences for all pairwise
-                                comparisons. Note that the data you upload is
-                                only held within the application while on the
-                                site (i.e. no data is stored.) When you are
+                              p("tinselR  (pronounced tinsel-er) at its' most 
+                              basic level is a graphical viewer of newick
+                              phylogenetic trees and as a program for producing
+                                publication-ready figures.", "The", em("power"),
+                                "of tinselR comes with combining a genetic
+                                distance matrix for annotating a tree for
+                                epidemological outbreak analyses.", "A genetic
+                                distance matrix contains the number of snp
+                                differences for all pairwise comparisons. Note
+                                that the data you upload is only held within
+                                the application while on the site
+                                (i.e. no data is stored.) When you are
                                 happy with the way your tree looks scroll to the
                                 bottom; enter your name and press Download"),
                               tags$p("If you have any problems, please file an",
@@ -126,7 +127,15 @@ mod_about_ui <- function(id) {
                                        tags$img(src =
                                                   "www/treeWAnnoAndHeatmap.PNG",
                                                 height = "50%", width = "50%")),
+                              tags$br(),
+                              tags$div(tags$li(tags$em("When you are happy
+                              with the image, you can donwlod it.")),
+                                       tags$br(),
+                                       tags$img(scr = 
+                                                  here::here(
+                                                    "vignettes/images/slide7.png"))), 
                               tags$br()
+                                    
                     )
     )
     )
