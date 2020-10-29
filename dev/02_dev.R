@@ -94,6 +94,7 @@ usethis::use_package("rmarkdown", type = "Suggests")
 usethis::use_package("testthat", type = "Suggests", min_version = "2.1.0")
 usethis::use_package("utils", type = "Suggests")
 usethis::use_package("xfun", type = "Suggests")
+usethis::use_package("stats", type = "Suggests")
 
 ## 2.3 Add tests
 

@@ -70,11 +70,10 @@ mod_about_ui <- function(id) {
                               tags$br(),
                               tags$h4(strong("Data files to upload")),
                               tags$br(),
-                              tags$li(em("1. Phylogenetic Tree"), "- required; a",
-                                      a("newick",
-                                        href =
-                                          "https://en.wikipedia.org/wiki/
-                                        Newick_format"), "generated tree"),
+                              tags$li(em("1. Phylogenetic Tree"), "- required; 
+                                      a", a("newick", href =
+                                              "https://en.wikipedia.org/wiki/Newick_format"),
+                                      "generated tree"),
                               tags$br(),
                               tags$div(tags$li(em("2. Genetic Distance Data"),
                                                "- optional for use with the
@@ -87,8 +86,8 @@ mod_about_ui <- function(id) {
                                                   "www/geneDistanceExample.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
-                              tags$div(tags$li(em("3. Meta Data"), "- optional for
-                              easy correction of tip labels;",
+                              tags$div(tags$li(em("3. Meta Data"), "- optional
+                              for easy correction of tip labels;",
                                                tags$br(),
                                                "a tsv/txt/csv file - requires
                                                column headers of Display.labels
@@ -137,7 +136,6 @@ mod_about_ui <- function(id) {
                                        tags$img(src = "www/Slide7.PNG",
                                                 height = "50%", width = "50%")), 
                               tags$br()
-                                    
                     )
     )
     )

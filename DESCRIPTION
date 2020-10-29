@@ -50,7 +50,8 @@ Suggests:
     rmarkdown,
     testthat (>= 2.1.0),
     xfun,
-    bookdown
+    bookdown,
+    stats
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

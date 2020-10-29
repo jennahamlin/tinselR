@@ -23,8 +23,8 @@
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
-
-      plotOutput(ns("tree_display"), brush = ns("plot_brush"))
+    
+    plotOutput(ns("tree_display"), brush = ns("plot_brush"))
   )
 }
 
@@ -58,11 +58,16 @@ mod_cladeAnnotator_server <-
     
     # Initialize a reactive value and set to zero (count) and an empty
     #list for tip vector input
-    Values <- reactiveValues()
-    observe({
+    
+    initialize_r_values <- function(){
       Values[["n"]]   <- 0
       Values[["tip_vec"]] <- list()
       Values[["show_map"]] <- 0
+    }
+    
+    Values <- reactiveValues()
+    observe({
+      initialize_r_values()
     })
     
     #reactive that holds the brushed points on a plot
@@ -174,9 +179,8 @@ mod_cladeAnnotator_server <-
       #only allow heatmap to be plotted if ncol > 0, which it should if user
       #includes a third column.
       if (is.null(mFileMatOut())){
-        
+        #skip
       } else if (ncol(mFileMatOut() > 0)) {
-        
         #display that layer onto the tree; as Values[["show_map"]] > 0 is a 
         #requirement of add_map function
         Values[["show_map"]] <-  1
@@ -189,7 +193,6 @@ mod_cladeAnnotator_server <-
       } else {
         return(NULL)
       }
-      
     })
     
     #as above with add heatmap but this allows the removal of the heatmap by
@@ -257,7 +260,6 @@ mod_cladeAnnotator_server <-
     #as necessary. The input is the tree and a newly brushed/highlighted region
     add_annotations <- function(tree_plot, tip_vector_in) {
       g <- tree_plot
-      
       if (Values[["n"]] > 0 ) {
         #this is the i'th list, for which we are calculating the offset
         for (i in seq_along(tip_vector_in)) {
@@ -281,26 +283,31 @@ mod_cladeAnnotator_server <-
           #it overlaps and provide user option to adjust the position of
           #all annotations
           label_offset <- label_off() + n_overlap * 0.004
-          
           #uses the snpAnno function to calculate the mean # of snps for
           #brushed tips
           snps <-
             snp_anno(gene_file = geneObjectForSNP(),
                      tips = current_tips)
-          
           #generates the layer for the set of brushed tips
-          g <- g +
-            make_layer(
-              tree_plot,
-              tips = tip_vector_in[[i]],
-              label = paste0(anno_text(), "\n",
-                             paste0(min(snps), sep = ",",
-                                    max(snps), "\n"),
-                             paste0(median_text(), "\n"),
-                             paste0(median(snps))),
-              color = lab_color(),
-              offset = label_offset
-            )
+          g <- tryCatch({
+            g +
+              make_layer(
+                tree_plot,
+                tips = tip_vector_in[[i]],
+                label = paste0(anno_text(), "\n",
+                               paste0(min(snps), sep = ",",
+                                      max(snps), "\n"),
+                               paste0(median_text(), "\n"),
+                               paste0(median(snps))),
+                color = lab_color(),
+                offset = label_offset
+              ) },
+            warning = function(war) { 
+              initialize_r_values() 
+            }, error = function(err) { 
+              initialize_r_values()
+            }
+          )
         }
       }
       return(g)
@@ -308,10 +315,12 @@ mod_cladeAnnotator_server <-
     
     #function to create the tree.
     current_tree_out <- function() {
-      add_map(tree = add_annotations(tree_plot = make_tree_out(),
-                                     tip_vector_in =  create_tip_list()),
-              metaFile = mFileMatOut())
+      g <- add_map(tree = add_annotations(tree_plot = make_tree_out(),
+                                          tip_vector_in =  create_tip_list()),
+                   metaFile = mFileMatOut())
+      return(g)
     }
+    
     
     ##################################
     ## cladeAnnotator server output ##
@@ -320,7 +329,7 @@ mod_cladeAnnotator_server <-
     #return(list( n_values = reactive(Values$n)))
     
     #reactive to send tree to downloadImage module
-    tree_out = reactive({
+    tree_out <- reactive({
       current_tree_out()
     })
     

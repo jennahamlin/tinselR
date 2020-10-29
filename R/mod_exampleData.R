@@ -166,7 +166,7 @@ mod_exampleData_server <- function(input, output, session, n_values) {
   #reactive expression that uploads the newick tree and allows the optional
   #upload of meta data to correct tree tip labels
   ex_tree_file_up <- reactive({
-    str(example_data_meta())
+    #str(example_data_meta())
     . <- NULL 
     
     #validate(need(input$ex_tree_file != "", "Please select newick tree file"))
