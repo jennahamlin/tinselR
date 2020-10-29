@@ -52,6 +52,8 @@ mod_cladeAnnotator_server <-
     #lab_color - from paramsTree; select input from user (multiple choice)
     #mat_off - from paramsTree module; this is numeric input from user
     #heat_color - from paramsTree; select input from user (multiple choice)
+    #anno_text - from paramsTree; user input text (can be blank or any word)
+    #median_text - from paramsTree; user input text (can be blank or any word)
     
     # Initialize a reactive value and set to zero (count) and an empty
     #list for tip vector input
@@ -218,29 +220,6 @@ mod_cladeAnnotator_server <-
       return(tips)
     }
     
-    #function which gets the snps for two tips and puts them into the snpVector
-    #input is the manipulated genetic distance file and the user selected tips
-    snp_anno <- function(gene_file, tips) {
-      #adding this helps with devtools::check() note of 'no visible binding for
-      #global variables
-      label <- name <- value <- NULL
-      snp_vector <- c()
-      for (i in 1:(length(tips) - 1)) { #this goes over a three column dataframe
-        for (j in (i + 1):length(tips)) { #i and j are the ids of tips
-          if (tips[i] == tips[j] | is.na(tips[i]) | is.na(tips[j])) 
-            #if (tips[i] == tips[j]) #don't include self comparisons
-            return(NULL)
-          #next
-          snp_vector <- append(snp_vector, gene_file %>% #add snps to vector 
-                                 dplyr::filter(
-                                   label == tips[i] & name == tips[j]) %>%
-                                 dplyr::pull(value)
-          )
-        }
-      }
-      return(as.numeric(snp_vector))
-    }
-    
     #function to add layer, uses findMRCA to get the MRCA (node) for the
     #selected tips. The input is the base tree, user selected tips, label 
     #is the bit that draws the annotation with range of snps, color and offset
@@ -304,7 +283,7 @@ mod_cladeAnnotator_server <-
           
           #uses the snpAnno function to calculate the mean # of snps for
           #brushed tips
-          snp_mean <-
+          snps <-
             snp_anno(gene_file = geneObjectForSNP(),
                      tips = current_tips)
           
@@ -314,10 +293,10 @@ mod_cladeAnnotator_server <-
               tree_plot,
               tips = tip_vector_in[[i]],
               label = paste0(anno_text(), "\n",
-                             paste0(min(snp_mean), sep = ",",
-                                    max(snp_mean), "\n"),
+                             paste0(min(snps), sep = ",",
+                                    max(snps), "\n"),
                              paste0(median_text(), "\n"),
-                             paste0(median(snp_mean))),
+                             paste0(median(snps))),
               color = lab_color(),
               offset = label_offset
             )

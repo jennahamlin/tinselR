@@ -71,7 +71,6 @@ mod_displayTree_server <- function(input, output, session,
   #join the treeobject and updated genetic distance file by label and
   #convert to s4 object
   g_and_t_s4 <- reactive({
-    
     combine_g_and_t(tree_object(), geneObjectOutForSNP())
   })
   

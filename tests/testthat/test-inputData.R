@@ -135,3 +135,37 @@ g_2$center <-
 test_that("Confirm type of the combined data", {
   expect_type(g_2, "list" )
 })
+
+##############################################################################
+context("confirm median and range calcuated correctly")
+
+data(gene3)
+data(tree3)
+
+testing_gene <- gene_object_out(replace_column_header(gene3))
+
+tips_in <- c("PNUSAS000901.cleaned", "PNUSAS000876.cleaned", 
+             "2015K-1169-M3235-15-050.cleaned",
+             "2015K-0966-M3235-15-044.cleaned")
+
+snps <-snp_anno(gene_file = testing_gene, tips = tips_in)
+
+min_snps <- min(snps)
+max_snps <- max(snps)
+median_snps <- median(snps)
+
+test_that("Confirm median is calculated correctly", {
+  expect_equal(median_snps, 4.5)
+})
+
+test_that("Confirm max of range is calculated correctly", {
+  expect_equal(max_snps, 7)
+})
+
+test_that("Confirm length of min snps", {
+  expect_length(min_snps, 1)
+})
+
+test_that("Confirm type for min snps", {
+  expect_type(min_snps, 'double')
+})

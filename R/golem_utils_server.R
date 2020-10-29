@@ -124,3 +124,31 @@ m_file_conversion <- function(m_file) {
 combine_g_and_t <- function(tree_file, gene_file) {
   dplyr::full_join(tree_file, gene_file, by = "label")
 }
+
+
+######################################################
+#### cladeAnnotator server and testthat functions ####
+######################################################
+
+#function which gets the snps for two tips and puts them into the snpVector
+#input is the manipulated genetic distance file and the user selected tips
+snp_anno <- function(gene_file, tips) {
+  #adding this helps with devtools::check() note of 'no visible binding for
+  #global variables
+  label <- name <- value <- NULL
+  snp_vector <- c()
+  for (i in 1:(length(tips) - 1)) { #this goes over a three column dataframe
+    for (j in (i + 1):length(tips)) { #i and j are the ids of tips
+      if (tips[i] == tips[j] | is.na(tips[i]) | is.na(tips[j])) 
+        #if (tips[i] == tips[j]) #don't include self comparisons
+        return(NULL)
+      #next
+      snp_vector <- append(snp_vector, gene_file %>% #add snps to vector 
+                             dplyr::filter(
+                               label == tips[i] & name == tips[j]) %>%
+                             dplyr::pull(value)
+      )
+    }
+  }
+  return(as.numeric(snp_vector))
+}
