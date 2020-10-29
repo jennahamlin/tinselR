@@ -77,7 +77,7 @@ See image below for a csv file example
 <p>
 
 <h4> meta Data screenshot </h4>
-    <img src = "www/metaDataExample.PNG" />
+    <img src = "inst/www/metaDataExample.PNG" />
 </p>
 
 #### Once the phylogenetic tree is uploaded you can -
