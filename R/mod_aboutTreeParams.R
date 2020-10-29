@@ -50,6 +50,20 @@ mod_aboutTreeParams_ui <- function(id){
                               'A - magma', 'B - inferno', 'C - plasma',
                               'D - viridis', or 'E - cividis'."),
                               tags$br(),
+                              tags$li(tags$em("Label for Annotation: Range -"),
+                              "If nothing is adjusted here, annotations will 
+                              include the word range above the displayed range 
+                              of SNP differences. If nothing is in the text box
+                              then a blank will be on the tree image above 
+                              the range of SNPs."),
+                              tags$br(),
+                              tags$li(tags$em("Label for Annotation: Median -"),
+                              "If nothing is adjusted here, annotations will 
+                              include the word median above the displayed median 
+                              of SNP differences. If nothing is in the text box
+                              then a blank will be on the tree image above 
+                              the median of SNPs."),
+                              tags$br(),
                               tags$li(tags$em("Midpoint Root -"), "This will
                                       either allow the tree to be midpoint
                                       rooted or not."),

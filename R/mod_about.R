@@ -30,7 +30,7 @@ mod_about_ui <- function(id) {
                                 the application while on the site
                                 (i.e. no data is stored.) When you are
                                 happy with the way your tree looks scroll to the
-                                bottom; enter your name and press Download"),
+                                bottom and press Download"),
                               tags$p("If you have any problems, please file an",
                                      a("issue", href =
                                          "https://github.com/jennahamlin/tinselR/issues"
@@ -43,27 +43,30 @@ mod_about_ui <- function(id) {
                               A brief description about the example data is
                               provided in the About the Example Data pane."), 
                               tags$br(),
-                              tags$p("There are only two differences between the
-                              'Example Data' and the 'Data Upload' tabs: 1) is
-                              that the example data tab has pre-loaded data, 
-                              while the data upload tab is where you, the user, 
-                              can upload your own files (i.e. tree, genetic
-                              distance, and metadata). 2) The other difference
-                              is an section which produces messages for the user
-                              about the file upload process. For example, it 
-                              will tell the user if there is a difference
-                              between the number of labels when all three files
-                              are uploaded. However, this file checking happens
-                              independently of if the user wants the 
-                              information. By that, we mean a user can ignore
-                              the file check messages if they do not need them
-                              and proceed using the application. Beyond that
-                              the application is exactly the same, thus why we
-                              highly encourage users to play with the example
-                              data first just to familiarize yourself with
-                              the application. Below we describe the three files
-                              and  what can be done within the application  to
-                              alter your tree image. "),
+                              tags$p("There is only one differences between the
+                              'Example Data' and the 'Data Upload' tabs: the 
+                              example data tab has pre-loaded data, while the
+                              data upload tab is where you, the user, can upload
+                              your own files (i.e. tree, genetic distance, and
+                              metadata). Both the 'Example Data' and 'Data 
+                              Upload' tabs provide error messages as a user 
+                              either uploads or selects all three files. Types
+                              of file checks that occur inform the user of the
+                              correctly selected delimiter, if the tips are
+                              concordant across all three files, or if there
+                              is a column to use the add heatmap functionality. 
+                              This file checking happens independently of if
+                              the user wants the information. By that, we mean
+                              a user can ignore the file check messages if they
+                              do not need them and proceed using the 
+                              application. Beyond that the application is
+                              exactly the same between user and example data,
+                              thus why we highly encourage users to play with
+                              the example data first just to familiarize
+                              yourself with the application. Below we describe
+                              the three example data file sets and what can be
+                              done within the application  to alter your tree
+                              image. "),
                               tags$br(),
                               tags$h4(strong("Data files to upload")),
                               tags$br(),

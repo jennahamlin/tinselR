@@ -33,7 +33,7 @@ mod_paramsTree_ui <- function(id) {
       numericInput(ns("boot_position"), tags$b("Bootstrap Positions - ",
                                                style = "color:#afafae"),
                    value = 0.00025, max = 1, step = 0.01),
-      textInput(ns("annotation_text"), tags$b("Label for Annotation Range", 
+      textInput(ns("annotation_text"), tags$b("Label for Annotation - Range", 
                                               style = "color:#afafae"),
                 "Range"), width = 3),
     
@@ -47,7 +47,7 @@ mod_paramsTree_ui <- function(id) {
       numericInput(ns("mat_offset"), tags$b("Move Heatmap -",
                                             style = "color:#afafae"),
                    value = 0.05, step = 0.01),
-      textInput(ns("median_text"), tags$b("Label for Annotation Median", 
+      textInput(ns("median_text"), tags$b("Label for Annotation - Median", 
                                               style = "color:#afafae"),
                 "Median"), width = 3),
     

@@ -50,7 +50,7 @@ mod_aboutExample_ui <- function(id) {
                               tags$br(),
                               tags$br(),
                               "If you want to see what the heatmap looks like
-                              this is only part of example data 3 and will
+                              this is only part of example data 2 and 3 and will
                               automatically load/unload if you press the
                               'Add Heatmap/Remove Heatmap' buttons.",
                               tags$br(),
@@ -93,8 +93,9 @@ mod_aboutExample_ui <- function(id) {
                                      tips in the example tree 2.",
                                      tags$li(tags$em("example meta 2")),
                                      "This is a meta data file used for
-                                     correcting the tip labels which contains
-                                     two columns and is a tsv file."),
+                                     correcting the tip labels, has two columns
+                                     for adding two columns of heatmap, and 
+                                     is a tsv file."),
                               tags$br(),
                               tags$br(),
                               tags$p((tags$h5(tags$strong("Data set 3"))),

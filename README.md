@@ -1,11 +1,11 @@
 ### What is tinselR?
 
-tinselR at its' most basic level is a graphical viewer of newick-formatted 
-phylogenetic trees and as an application for producing publication-ready 
-figures. The **power** of tinselR comes with combining a genetic distance matrix 
-for annotating a tree for epidemiological outbreak analyses. A genetic distance
-matrix contains snp differences for all pairwise comparisons for the tips on 
-the tree. One can also include a 
+tinselR (pronunced tinsel-er) at its' most basic level is a graphical viewer of
+newick-formatted phylogenetic trees and as an application for producing
+publication-ready figures. The **power** of tinselR comes with combining a
+genetic distance matrix for annotating a tree for epidemiological outbreak
+analyses. A genetic distance matrix contains snp differences for all pairwise
+comparisons for the tips on the tree. One can also include a 
 [heatmap](https://yulab-smu.top/treedata-book/chapter7.html) when that data is
 provided in the meta data file.
 
@@ -80,6 +80,8 @@ See image below for a csv file example
     <img src = "inst/app/www/metaDataExample.PNG" />
 </p>
 
+**5). Alter or annnotate your tree**  
+
 #### Once the phylogenetic tree is uploaded you can -
 * Alter visualization parameters. See below for tree with aligned tips.  
 
@@ -113,4 +115,4 @@ If you are interested in seeing the session info for the computer that developed
 this application please visit this 
 [link](https://github.com/jennahamlin/tinselR/issues/4). Here all packages and
 versions that were installed on a windows machine are listed and successfully
-runs tinselR.** 
+runs tinselR. 
