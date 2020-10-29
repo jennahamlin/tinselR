@@ -121,7 +121,7 @@ mod_about_ui <- function(id) {
                               tags$br(),
                               tags$div(tags$li(tags$em("If column for heatmap
                                                        included in meta data
-                                                       file you  can")), "add
+                                                       file you  can -")), "add
                                        a heatmap with or without annotations",
                                        tags$br(),
                                        tags$img(src =
@@ -129,11 +129,10 @@ mod_about_ui <- function(id) {
                                                 height = "50%", width = "50%")),
                               tags$br(),
                               tags$div(tags$li(tags$em("When you are happy
-                              with the image, you can donwlod it.")),
+                              with the image, you can download it.")),
                                        tags$br(),
-                                       tags$img(scr = 
-                                                  here::here(
-                                                    "vignettes/images/slide7.png"))), 
+                                       tags$img(src = "www/Slide7.PNG",
+                                                height = "50%", width = "50%")), 
                               tags$br()
                                     
                     )

@@ -92,11 +92,11 @@ gene_object_out  <- function(gene_file) {
     tidyr::drop_na() %>%
     #convert to a three column data frame
     tidyr::pivot_longer(-label) %>%
-    #remove self comparisons for this table - necessary for snp mean/median
-    #calculation.
-    .[which(.$label != .$name), ] %>%
-    ##replace - with zero in the file; if zeros already infile, still works
-    dplyr::mutate(value = ifelse(value == "-", 0, value))
+     #remove self comparisons for this table - necessary for snp mean/median
+     #calculation.
+     .[which(.$label != .$name), ] %>%
+     ##replace - with zero in the file; if zeros already infile, still works
+     dplyr::mutate(value = ifelse(value == "-", 0, value))
 }
 
 ######################################################

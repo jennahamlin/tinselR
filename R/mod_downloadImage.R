@@ -45,7 +45,7 @@ mod_downloadImage_ui <- function(id) {
   )
 }
 
-#' downloadImage Server Funciton
+#' downloadImage Server Function
 #'
 #' @rdname mod_downloadImage
 #' @export
@@ -69,7 +69,7 @@ mod_downloadImage_server <- function(input, output, session, treeOut) {
   #approximation. If someone does not want to include this; then comment
   #the below code out (L71 - 78) and make sure to remove the line 
   #`shinyjs::hidden` in the UI above. Once those things are done, then the 
-  #download button is automatically distplayed. 
+  #download button is automatically displayed. 
   observeEvent(input$text, {
     if (input$text == "") {
       shinyjs::hide("download_plot")

@@ -43,7 +43,7 @@ app_ui <- function() {
                               width = 3),
                             mainPanel(
                               mod_tipCheck_ui(
-                                "tipCheck_ui_1"),
+                                "tipCheck_ui_data"),
                               mod_paramsTree_ui(
                                 "paramsTree_ui_data"),
                               mod_displayTree_ui(
