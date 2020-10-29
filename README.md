@@ -67,7 +67,7 @@ a tsv/txt/csv file - see below for image of genetic distance matrix
 <p>
 
 <h4> genetic Distance screenshot </h4>
-    <img src = "app/www/geneDistanceExample.PNG" />
+    <img src = "inst/app/www/geneDistanceExample.PNG" />
 </p>
 
 * **Metadata** - optional for easy correction of tip labels or adding a heatmap;
@@ -77,7 +77,7 @@ See image below for a csv file example
 <p>
 
 <h4> meta Data screenshot </h4>
-    <img src = "inst/www/metaDataExample.PNG" />
+    <img src = "www/metaDataExample.PNG" />
 </p>
 
 #### Once the phylogenetic tree is uploaded you can -
