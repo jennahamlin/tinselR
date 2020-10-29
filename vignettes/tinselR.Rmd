@@ -145,40 +145,40 @@ again.
 
 #### *Using your data*
 
-There are only two differences between the 'Example Data' and the 'Data Upload'
-tabs: 1) is that the example data tab has pre-loaded data, while the data
+There is only two differences between the 'Example Data' and the 'Data Upload'
+tabs: the example data tab has pre-loaded data, while the data
 upload tab is where you, the user, can upload your own files (i.e. tree, 
-genetic distance, and metadata). 2) Given this, we provide within the 'Data
-Upload' tab a section which performs file checking and sends messages to the 
-user regarding the files uploaded. For example, it will tell the user if there
-is a difference between the number of labels when all three files are uploaded.
-However, this file checking happens independently of if the user wants the
-information. By that, we mean a user can ignore the file check messages if they
-do not need them and proceed using the application. Beyond that the application
-is exactly the same, thus why we highly encourage users to play with the example
-data first just to familiarize yourself with the application. Note, we have
-only tested the application using trees with ~ 30 tips with success, beyond
-that we are interested to see how the application does. Below we will describe
-the types of data you can upload. 
+genetic distance, and metadata). Given this, we believe that file upload error
+messages will help with checking that all three files are concordant and if not
+will send messages to the user regarding how the file tip labels differ. File
+checking happens independently of if the user wants the information. By that,
+we mean a user can ignore the file check messages if they do not need them and
+proceed using the application. Beyond the mechanism in which the user uploads or 
+selects data, the application is exactly the same, thus why we highly encourage
+users to play with the example data first just to familiarize yourself with the
+application. Note, we have only tested the application using trees with ~ 30
+tips with success, beyond that we are interested to see how the application
+does. Below we will describe the types of data you can upload. 
 
 The application relies on treeio's function read.newick (`treeio::read.newick`), 
 to read in a Newick tree. treeio is associated with the package ggtree, which 
-extends the ggplot2 plot system to phylogenetic trees. In theory any application 
-that can produce a Newick formatted tree should be able to be uploaded. 
+extends the ggplot2 plotting system to phylogenetic trees. In theory any
+application  that can produce a Newick formatted tree should be able to be
+uploaded. 
 
 Currently, our application only supports a genetic distance matrix of SNP 
 differences (Figure \@ref(fig:userData1)). Your distance matrix can be in either
 csv, tsv, or txt formats. The metadata file should be in one of these formats 
 as well (csv, tsv, or txt). However, the metadata file requires specific column
-headers (Tip.labels, and Display.labels; Figure \@ref(fig:exampleDataPane6)), but
-the third column, if you choose to include it can be titled whatever. 
+headers (Tip.labels, and Display.labels; Figure \@ref(fig:exampleDataPane6)),
+but the third column, if you choose to include it can be titled whatever. 
 
 ```{r userData1, echo = F, out.width = "50%", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
-knitr::include_graphics(here::here("man/figures/geneDistanceExample.PNG"))
+knitr::include_graphics(here::here("inst/app/www/geneDistanceExample.PNG"))
 ```
 
 ```{r userData2, echo = F, out.width = "50%", fig.cap = "Meta data example without the heatmap column."}
-knitr::include_graphics(here::here("man/figures/metaDataExample.PNG"))
+knitr::include_graphics(here::here("inst/app/www/metaDataExample.PNG"))
 ```
 
 ### Getting Help

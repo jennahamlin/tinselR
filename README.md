@@ -77,14 +77,14 @@ See image below for a csv file example
 <p>
 
 <h4> meta Data screenshot </h4>
-    <img src = "www/metaDataExample.PNG" />
+    <img src = "inst/app/www/metaDataExample.PNG" />
 </p>
 
 #### Once the phylogenetic tree is uploaded you can -
 * Alter visualization parameters. See below for tree with aligned tips.  
 
 <p>
-    <img src = "www/treeWAlignedTips.PNG" />
+    <img src = "inst/app/www/treeWAlignedTips.PNG" />
 </p>
 
 #### Once the genetic distance file is uploaded you can -
@@ -92,7 +92,7 @@ See image below for a csv file example
 with annotated clades including the range of SNPs. 
 
 <p>
-    <img src = "www/treeWAnno.PNG" />
+    <img src = "inst/app/www/treeWAnno.PNG" />
 </p>
 
 #### If column for heatmap included in meta data file you can -
@@ -100,7 +100,7 @@ with annotated clades including the range of SNPs.
 with annotated clades and a heatmap. 
 
 <p>
-    <img src ="www/treeWAnnoAndHeatmap.PNG" />
+    <img src ="inst/app/www/treeWAnnoAndHeatmap.PNG" />
 </p>
 
 
