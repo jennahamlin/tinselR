@@ -19,11 +19,12 @@
 #' @importFrom ape as.phylo
 #' @importFrom ggtree geom_cladelabel
 #' @importFrom ggtree gheatmap
+#' @importFrom stats median
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    mainPanel(
-      plotOutput(ns("tree_display"), brush = ns("plot_brush")))
+
+      plotOutput(ns("tree_display"), brush = ns("plot_brush"))
   )
 }
 
@@ -316,13 +317,11 @@ mod_cladeAnnotator_server <-
     ## cladeAnnotator server output ##
     ##################################
     
-    return(list( n_values = reactive(Values$n)))
+    #return(list( n_values = reactive(Values$n)))
     
     #reactive to send tree to downloadImage module
-    tree_out <- reactive({
+    tree_out = reactive({
       current_tree_out()
     })
-    
-    return(tree_out)
     
   }

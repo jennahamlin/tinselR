@@ -45,8 +45,7 @@ app_server <- function(input, output, session) {
                               params$anno_text, params$median_text)
 
   #allows tree with annotation and viz parameters to be downloaded
-  callModule(mod_downloadImage_server, "downloadImage_ui_data", 
-             tree_w_layers$tree_out)
+  callModule(mod_downloadImage_server, "downloadImage_ui_data", tree_w_layers)
 
   ####################
   ### EXAMPLE DATA ###
@@ -95,7 +94,6 @@ app_server <- function(input, output, session) {
                              example_params$anno_text, 
                              example_params$median_text)
 
-  callModule(mod_downloadImage_server, "downloadImage_ui_example",
-             example_tree$tree_out)
+  callModule(mod_downloadImage_server, "downloadImage_ui_example", example_tree)
 
 }
