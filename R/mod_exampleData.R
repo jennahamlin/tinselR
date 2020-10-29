@@ -27,6 +27,10 @@ mod_exampleData_ui <- function(id) {
                        style = "font-size:20px; color:#444444")),
     tags$hr(style = "border-color: #99b6d8;"),
     
+    selectInput(ns("example_data_set"), label = "Example Data", choices = c("example data 1",
+                                                    "example data 2", 
+                                                    "example data 3")),
+    
     #select tree file that is sourced using the UI function in app_ui.R file
     selectInput(ns("ex_tree_file"),
                 label = tags$b("1. Select example newick file",
@@ -73,28 +77,65 @@ mod_exampleData_server <- function(input, output, session, n_values) {
   #no need to provide option to select input delimiter as this is done when
   #reading in data to use with usethis::use_data()
   
-  
-  ############
-  ### META ###
-  ############
-  
-  ex_meta_file_in <- reactive({
-    if (input$ex_meta_file == "example Meta Data 1") {
-      tinselR::meta1
-    }
-    else if (input$ex_meta_file == "example Meta Data 2") {
-      tinselR::meta2
-    }
-    else if (input$ex_meta_file == "example Meta Data 3") {
-      tinselR::meta3
-    } 
+  # Initialize a reactive value and set to zero (count) and an empty
+  #list for tip vector input
+  files <- reactiveValues()
+  observe({
+    files[["tree"]]   <- c()
+    files[["gene"]] <- c()
+    files[["meta"]] <- c()
   })
+  
+  
+  example_data_meta <- reactive({
+    if (input$example_data_set == "example data 1") {
+      files[["meta"]] <- tinselR::meta1
+    } else if (input$example_data_set == "example data 2") {
+      files[["meta"]] <- tinselR::meta2
+    } else if (input$example_data_set == "example data 3") {
+      files[["meta"]] <- tinselR::meta3
+    }
+    
+  })
+  
+  example_data_gene <- reactive({
+    if (input$example_data_set == "example data 1") {
+      files[["gene"]] <- tinselR::gene1
+    } else if (input$example_data_set == "example data 2") {
+      files[["gene"]] <- tinselR::gene2
+    } else if (input$example_data_set == "example data 3") {
+      files[["gene"]] <- tinselR::gene3
+    }
+    
+  })
+  
+  example_data_tree <- reactive({
+    if (input$example_data_set == "example data 1") {
+      files[["tree"]] <- tinselR::tree1
+    } else if (input$example_data_set == "example data 2") {
+      files[["tree"]] <- tinselR::tree2
+    } else if (input$example_data_set == "example data 3") {
+      files[["tree"]] <- tinselR::tree3
+    }
+    
+  })
+  
+  # ############
+  # ### META ###
+  # ############
+  # 
+  # ex_meta_file_in <- reactive({
+  #   switch(input$ex_meta_file, 
+  #          "example Meta Data 1" = tinselR::meta1,
+  #          "example Meta Data 2" = tinselR::meta2,
+  #          "example Meta Data 3" = tinselR::meta3)
+  # })
   
   #reactive that allows for the matrix visualization on phylogenetic trees
   #specific to example data set 3
   ex_meta <- reactive({
-    if (!is.null(ex_meta_file_in())) {
-      m_file_conversion(ex_meta_file_in())
+    if (!is.null(example_data_meta())) {
+      m_file_conversion(example_data_meta())
     } else {
       return(NULL)
     }
@@ -104,49 +145,39 @@ mod_exampleData_server <- function(input, output, session, n_values) {
   ### GENETIC ###
   ###############
   
-  ex_gene_file_in <- reactive({
-    if (input$ex_gene_file == "example Genetic Distance 1") {
-      tinselR::gene1
-    }
-    else if (input$ex_gene_file == "example Genetic Distance 2") {
-      tinselR::gene2
-    }
-    else if (input$ex_gene_file == "example Genetic Distance 3") {
-      tinselR::gene3
-    }
-  })
-  
+  # ex_gene_file_in <- reactive({
+  #   switch(input$ex_gene_file, 
+  #          "example Genetic Distance 1" = tinselR::gene1,
+  #          "example Genetic Distance 2" = tinselR::gene2,
+  #          "example Genetic Distance 3" = tinselR::gene3)
+  # })
+
   ##############
   ### TREES ###
   ##############
   
-  ex_tree_file_in <- reactive({
-    if (input$ex_tree_file == "example Tree 1") {
-      tinselR::tree1
-    }
-    else if (input$ex_tree_file == "example Tree 2") {
-      tinselR::tree2
-    }
-    else if (input$ex_tree_file == "example Tree 3") {
-      tinselR::tree3
-    }
-  })
-  
+  # example_data_tree <- reactive({
+  #   switch(input$ex_tree_file, 
+  #          "example Tree 1" = tinselR::tree1,
+  #          "example Tree 2" = tinselR::tree2,
+  #          "example Tree 3" = tinselR::tree3)
+  # })
+  # 
   #reactive expression that uploads the newick tree and allows the optional
   #upload of meta data to correct tree tip labels
   ex_tree_file_up <- reactive({
-    
+    str(example_data_meta())
     . <- NULL 
     
-    validate(need(input$ex_tree_file != "", "Please select newick tree file"))
-    req(ex_tree_file_in())
+    #validate(need(input$ex_tree_file != "", "Please select newick tree file"))
+    req(example_data_tree())
     
-    if (is.null(ex_meta_file_in())) { #if no meta file still upload the tree
-      ex_tree_file_in()
+    if (is.null(example_data_meta())) { #if no meta file still upload the tree
+      example_data_tree()
     } else {
-      ex_tree_file_in() %>%
+      example_data_tree() %>%
         #this line converts tip labels to pretty labels based on user upload
-        phylotools::sub.taxa.label(., as.data.frame(ex_meta_file_in()))
+        phylotools::sub.taxa.label(., as.data.frame(example_data_meta()))
     }
   })
   
@@ -154,14 +185,14 @@ mod_exampleData_server <- function(input, output, session, n_values) {
   #optional upload of meta data to correct tree tip labels
   ex_gene_file_cor_or_un <- reactive({
     #if no meta file, uploaded to be able to use clade annotator function
-    if (is.null(ex_meta_file_in())) {
-      req(ex_gene_file_in())
+    if (is.null(example_data_meta())) {
+      req(example_data_gene())
       
       #if meta file uploaded, correct the distance file to match meta tip labels
     } else { 
       . <- NULL
-      ex_meta_file_comb <- ex_meta_file_in()
-      ex_gene_file_corrected <- ex_gene_file_in()
+      ex_meta_file_comb <- example_data_meta()
+      ex_gene_file_corrected <- example_data_gene()
       colnames(ex_gene_file_corrected)[2:ncol(ex_gene_file_corrected)] <-
         ex_meta_file_comb$Display.labels[which(
           ex_meta_file_comb$Tip.labels %in% colnames(ex_gene_file_corrected)
@@ -202,10 +233,10 @@ mod_exampleData_server <- function(input, output, session, n_values) {
       exMetaFileOut = reactive(ex_meta()),
 
       #checks for file and sends user message; sent to tipCheck
-      ex_m_file_out = reactive(ex_meta_file_in()),
+      ex_m_file_out = reactive(example_data_meta()),
 
       #checks for file and sends user message; sent to tipCheck
-      ex_g_file_out = reactive(ex_gene_file_in()),
+      ex_g_file_out = reactive(example_data_gene()),
 
       #checks for file and sends user message; sent to tipCheck
       #and for data display module
