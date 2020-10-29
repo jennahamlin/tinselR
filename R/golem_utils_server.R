@@ -62,10 +62,10 @@ not_columns <- function(file) {
   col_n_file <- ncol(file)
   
   if (col_n_file < 1) {
-    return("And looks like there is not a column for matrix plotting")
+    return("And looks like there is not a column for adding a heatmap")
   } else {
     return(
-      paste("And looks like the number of columns for matrix plotting is: ",
+      paste("And looks like the number of columns for adding a heatmap is: ",
             col_n_file))
   }
 }

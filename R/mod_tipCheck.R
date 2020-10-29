@@ -76,7 +76,7 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
     }
   })
 
-  #displays number of columns that are available for adding a matrix to the
+  #displays number of columns that are available for adding a heatmap to the
   #tree via a message to the user
   output$file_checking_mat <- renderUI({
     ns <- session$ns
