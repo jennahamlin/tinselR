@@ -35,7 +35,7 @@ mod_cladeAnnotator_ui <- function(id) {
 mod_cladeAnnotator_server <-
   function(input, output, session, mFileMatOut, make_tree_out, add_tree,
            add_anno, remove_anno, add_heatmap, remove_heatmap, geneObjectForSNP,
-           label_off, lab_color, mat_off, heat_col) {
+           label_off, lab_color, mat_off, heat_col, anno_text, median_text) {
     
     ns <- session$ns
     
@@ -68,11 +68,15 @@ mod_cladeAnnotator_server <-
     })
     
     #add label to tipVector if isTip == True; so subsets the data
+    #and don't include selections which have zero or one tip, because 
+    #this can not draw an annotation
     data_with_selection_subset <- eventReactive(input$plot_brush, {
       label <- NULL
-      if (length(data_with_selection()$label) == 0 | length(data_with_selection()$label) == 1) {
+      if (length(data_with_selection()$label) == 0 |
+          length(data_with_selection()$label) == 1) {
         return(NULL)
-      } 
+      }
+      
       tip_vector <- c()
       for (i in 1:length(data_with_selection()$label)) {
         if (data_with_selection()$isTip[i] == TRUE)
@@ -90,14 +94,18 @@ mod_cladeAnnotator_server <-
     #display that user-brushed layer onto the tree
     observeEvent(add_anno(), {
       
+      #both if statements (if and the else if) acts as a control for if the user
+      #accidentally presses the add_anno button without the file loaded or
+      #if there is no selected data in the data_with_selection_subset (a blank
+      #tibble)
       if (is.null(data_with_selection_subset())) {
-
-        #return(NULL)
-      } else if (!is.null(geneObjectForSNP())) {
-        #this acts as a control for if the user accidentally presses the
-        #add_anno button without the file loaded
         
-        #increased the reactive by 1
+        #skip
+        
+      } else if (!is.null(geneObjectForSNP())) {
+        
+        
+        #increase the reactive by 1
         Values[["n"]] <- Values[["n"]] + 1
         
         #add the tip vector (aka label) to the annotation reactive value 
@@ -106,6 +114,7 @@ mod_cladeAnnotator_server <-
         Values[["tip_vec"]][[paste0("tips", Values[["n"]])]] <-
           data_with_selection_subset()
       }
+      
       #add to variable called tips; from the function create_tip_list
       tips <- create_tip_list()
       
@@ -124,39 +133,46 @@ mod_cladeAnnotator_server <-
     # remove the annotations one by one, when number of values equals one,
     #then display tree without annotations.
     observeEvent(remove_anno(), {
+      
+      ##if there is no selected data in the data_with_selection_subset (a blank
+      #tibble) don't do anything.
+      if (is.null(geneObjectForSNP())) {
         
-        if (is.null(geneObjectForSNP())) {
         #skip
-      } else {
         
-        if (Values[["n"]] > 0) {
-          
-          #increment by -1 the values[["n"]] reactive
-          
-          Values[["n"]] <- Values[["n"]] - 1
-          
-          #assign tips in the Values[["tip_vec"]] to a temp place holder      
-          temp_tip <- Values[["tip_vec"]]
-          
-          #remove the last set of tips that the user selected
-          Values[["tip_vec"]] <- temp_tip[-length(temp_tip)]
-        }
+      } else if (Values[["n"]] > 0) {
         
-        tips <- create_tip_list()
+        #increment by -1 the values[["n"]] reactive
         
-        output$tree_display <- renderPlot({
-          add_map(tree = add_annotations(tree_plot = make_tree_out(),
-                                         tip_vector_in =  tips),
-                  metaFile = mFileMatOut())
-        })
+        Values[["n"]] <- Values[["n"]] - 1
+        
+        #assign tips in the Values[["tip_vec"]] to a temp place holder      
+        temp_tip <- Values[["tip_vec"]]
+        
+        #remove the last set of tips that the user selected
+        Values[["tip_vec"]] <- temp_tip[-length(temp_tip)]
       }
+      
+      tips <- create_tip_list()
+      
+      output$tree_display <- renderPlot({
+        add_map(tree = add_annotations(tree_plot = make_tree_out(),
+                                       tip_vector_in =  tips),
+                metaFile = mFileMatOut())
+      })
     })
     
-    #allow the user to add a heatmap to a tree; change show_map to the value 
+    #allow the user to add a heatmap to a tree; changes show_map to the value 
     #of 1
     observeEvent(add_heatmap(), {
       
-      if (ncol(mFileMatOut() == 0)) {
+      #both if statements (if and the else if) acts as a control for if the user
+      #accidentally presses the add heatmap button without the file loaded and 
+      #only allow heatmap to be plotted if ncol > 0, which it should if user
+      #includes a third column.
+      if (is.null(mFileMatOut())){
+        
+      } else if (ncol(mFileMatOut() > 0)) {
         
         #display that layer onto the tree; as Values[["show_map"]] > 0 is a 
         #requirement of add_map function
@@ -166,6 +182,7 @@ mod_cladeAnnotator_server <-
           #render the plot using the  current_tree_out function.
           current_tree_out()
         }) 
+        
       } else {
         return(NULL)
       }
@@ -296,8 +313,11 @@ mod_cladeAnnotator_server <-
             make_layer(
               tree_plot,
               tips = tip_vector_in[[i]],
-              label = paste0(" Range \nof \nSNP(s)- \n",
-                             paste0(min(snp_mean), sep = ",", max(snp_mean))),
+              label = paste0(anno_text(), "\n",
+                             paste0(min(snp_mean), sep = ",",
+                                    max(snp_mean), "\n"),
+                             paste0(median_text(), "\n"),
+                             paste0(median(snp_mean))),
               color = lab_color(),
               offset = label_offset
             )

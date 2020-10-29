@@ -22,7 +22,9 @@ mod_cladeAnnotator_server(
   label_off,
   lab_color,
   mat_off,
-  heat_col
+  heat_col,
+  anno_text,
+  median_text
 )
 }
 \arguments{
