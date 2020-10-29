@@ -22,6 +22,8 @@ app_ui <- function() {
                               mod_relaunchApp_ui("relaunchApp_ui_example"),
                               width = 3),
                             mainPanel(
+                              mod_tipCheck_ui(
+                                "tipCheck_ui_example"),
                               mod_paramsTree_ui("paramsTree_ui_example"),
                               mod_displayTree_ui("displayTree_ui_example"),
                               mod_cladeAnnotator_ui(

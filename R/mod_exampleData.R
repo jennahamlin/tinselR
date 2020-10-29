@@ -186,7 +186,7 @@ mod_exampleData_server <- function(input, output, session, n_values) {
   #another function (replaceHwithZeros) for the reactive exGeneFileCorOrU
   ex_gene_object <- reactive({
     label <- NULL
-    g<-gene_object_out(replace_column_header(ex_gene_file_cor_or_un()))
+    g <- gene_object_out(replace_column_header(ex_gene_file_cor_or_un()))
     return(g)
   })
   
@@ -198,9 +198,20 @@ mod_exampleData_server <- function(input, output, session, n_values) {
   #return these reactive objects to be used in tree display module
   return(
     list(
-      exMetaFileOut = reactive(ex_meta()), #for clade annotator module
-      extreeFileOut = reactive(ex_tree_file_up()), #for data display module
-      #exGeneObjectOutForS4 = reactive(gene_object_out()), #for data display
-      exGeneObjectForSNP = reactive(ex_gene_object()) #for clade annotator
+      #for adding on a heatmap; sent to cladeAnnotator module
+      exMetaFileOut = reactive(ex_meta()),
+
+      #checks for file and sends user message; sent to tipCheck
+      ex_m_file_out = reactive(ex_meta_file_in()),
+
+      #checks for file and sends user message; sent to tipCheck
+      ex_g_file_out = reactive(ex_gene_file_in()),
+
+      #checks for file and sends user message; sent to tipCheck
+      #and for data display module
+      extreeFileOut = reactive(ex_tree_file_up()),
+
+      ##for clade annotator
+      exGeneObjectForSNP = reactive(ex_gene_object())
     ))
 }

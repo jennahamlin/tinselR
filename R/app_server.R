@@ -14,10 +14,10 @@ app_server <- function(input, output, session) {
 
   #outputs directly a user message if the file tip labels are all the same for
   #the three files and tells user if they can use heatmap button
-  callModule(mod_tipCheck_server, "tipCheck_ui_data", data_display$meta_file_out,
-             data_display$m_file_out, data_display$gene_file_out,
-             data_display$g_file_out, data_display$t_file_out,
-             data_display$tree_file_out)
+  callModule(mod_tipCheck_server, "tipCheck_ui_data",
+             data_display$meta_file_out, data_display$m_file_out,
+             data_display$gene_file_out, data_display$g_file_out,
+             data_display$t_file_out, data_display$tree_file_out)
 
   #module which holds the tree viz parameters and referenced with params$
   params <- callModule(mod_paramsTree_server, "paramsTree_ui_data")
@@ -45,7 +45,8 @@ app_server <- function(input, output, session) {
                               params$anno_text, params$median_text)
 
   #allows tree with annotation and viz parameters to be downloaded
-  callModule(mod_downloadImage_server, "downloadImage_ui_data", tree_w_layers)
+  callModule(mod_downloadImage_server, "downloadImage_ui_data", 
+             tree_w_layers$tree_out)
 
   ####################
   ### EXAMPLE DATA ###
@@ -60,6 +61,13 @@ app_server <- function(input, output, session) {
 
   example_buttons <- callModule(mod_pushButtons_server,
                                 "pushButtons_ui_example")
+  
+  #outputs directly a user message if the file tip labels are all the same for
+  #the three files and tells user if they can use heatmap button
+  callModule(mod_tipCheck_server, "tipCheck_ui_example", 
+             example_data$ex_m_file_out, example_data$ex_m_file_out,
+             example_data$ex_g_file_out, example_data$ex_g_file_out,
+             example_data$extreeFileOut, example_data$extreeFileOut)
   
   example_params <- callModule(mod_paramsTree_server, "paramsTree_ui_example")
 
@@ -87,6 +95,7 @@ app_server <- function(input, output, session) {
                              example_params$anno_text, 
                              example_params$median_text)
 
-  callModule(mod_downloadImage_server, "downloadImage_ui_example", example_tree)
+  callModule(mod_downloadImage_server, "downloadImage_ui_example",
+             example_tree$tree_out)
 
 }

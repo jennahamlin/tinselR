@@ -23,8 +23,9 @@ mod_tipCheck_ui <- function(id) {
   tagList(
 
     tags$table(width = "100%",
-               tags$th("Please upload files for file checking", colspan = "3",
-                       style = "font-size:20px; color:#444444;")),
+               tags$th("File checking error messages - ",
+                       colspan = "3", style = 
+                         "font-size:20px; color:#444444;")),
 
     # this outputs info about if tip labels are not concordant between all
     #three files
@@ -57,7 +58,7 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
     ns <- session$ns
 
     if (is.null(tree_file_out())) {
-      #returns messge from uploadData - "Please import newick tree"
+      #returns message from uploadData - "Please import newick tree"
     } else if (is.null(gene_file_out())) {
       return(HTML(
         '<span style="color:gray">Please upload a genetic distance file</span>')
