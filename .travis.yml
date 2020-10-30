@@ -6,10 +6,21 @@ cache: packages
 
 sudo: false
 
+# environment variables set for all builds
+env:
+  global:
+    - BIOC_USE_DEVEL="FALSE"  ## Use the current release version
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings" 
+
 #Define multiple R-versions; this is for old release and current
 r:
   - oldrel
   - release
+
+# do not build vignettes...takes too long and times out on travis
+r_build_args: --no-build-vignettes --no-manual
+r_check_args: --no-build-vignettes --no-manual --timings
 
 # Set one of your dependencies from CRAN
 #By default, Travis CI will find all R packages listed as dependencies in
@@ -40,7 +51,8 @@ addons:
       - gsfonts
       - libgs-dev
       - qpdf
-      - ghostscript      
+      - ghostscript
+      
 #test multiple operating systems
 os:
   - linux
@@ -54,13 +66,3 @@ script:
 
 after_success:
 - Rscript -e 'library(covr); codecov()'
-
-#neev to confirm if I need the below lines
-env:
-  global:
-    - _R_CHECK_FORCE_SUGGESTS_=False
-    - R_LIBS="http://cran.rstudio.com"
-
-
-
-
