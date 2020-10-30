@@ -1,7 +1,7 @@
 #' @title Example Meta 2
 #'
 #' This is a meta data file for tip correction for 19 isolates of Salmonella
-#' enterica sub species enterica to be used with the newick phylogenetic tree
+#' enterica sub species enterica to be used with the Newick phylogenetic tree
 #' (example tree 2) and the optional genetic distance file (example gene 2).
 #'
 #' @docType data

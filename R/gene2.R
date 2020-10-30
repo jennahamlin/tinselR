@@ -1,7 +1,7 @@
 #' @title Example Gene 2
 #'
 #' This is a genetic distance matrix of SNPs for 14 isolates of Salmonella
-#' enterica sub species enterica to be used with the newick phylogenetic tree
+#' enterica sub species enterica to be used with the Newick phylogenetic tree
 #' (example tree 2) and the optional meta data file (example meta 2).
 #'
 #' @docType data

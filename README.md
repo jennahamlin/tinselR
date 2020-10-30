@@ -1,10 +1,10 @@
 ### What is tinselR?
 
 tinselR (pronunced tinsel-er) at its' most basic level is a graphical viewer of
-newick-formatted phylogenetic trees and as an application for producing
+Newick-formatted phylogenetic trees and as an application for producing
 publication-ready figures. The **power** of tinselR comes with combining a
 genetic distance matrix for annotating a tree for epidemiological outbreak
-analyses. A genetic distance matrix contains snp differences for all pairwise
+analyses. A genetic distance matrix contains SNP differences for all pairwise
 comparisons for the tips on the tree. One can also include a 
 [heatmap](https://yulab-smu.top/treedata-book/chapter7.html) when that data is
 provided in the meta data file.
@@ -55,12 +55,12 @@ run_app()
 **4). Load your data or use the example data**  
 
 *Please click on the 'Data Upload' pane, where you can upload your files.*
-*Example data is availale for playing with tinselR in the 'Example Data' pane* 
+*Example data is available for playing with tinselR in the 'Example Data' pane* 
 *of the application. The example data sets include all three files (tree,* 
 *gene, and meta) and are available for selection via one drop down menu* 
 
 * **Phylogenetic Tree** - required; a 
-[newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
+[Newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 
 * **Genetic Distance data** - optional for use with the annotation function;
 a tsv/txt/csv file - see below for image of genetic distance matrix.
@@ -81,7 +81,7 @@ See image below for a csv file example.
     <img src = "inst/app/www/metaDataExample.PNG" />
 </p>
 
-**5). Alter or annnotate your tree**  
+**5). Alter or annotate your tree**  
 
 #### Once the phylogenetic tree is uploaded you can -
 * Alter visualization parameters. See below for tree with aligned tips.  

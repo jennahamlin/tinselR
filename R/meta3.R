@@ -1,7 +1,7 @@
 #' @title Example Meta 3
 #'
 #' This is a meta data file for tip correction and adding a heatmap for 19
-#' isolates of Salmonella enterica to be used with the newick phylogenetic tree
+#' isolates of Salmonella enterica to be used with the Newick phylogenetic tree
 #' (example tree 3) and the optional genetic distance file (example gene 3).
 #'
 #' @docType data
