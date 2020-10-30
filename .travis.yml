@@ -12,7 +12,8 @@ r:
   - release
 
 # Set one of your dependencies from CRAN
-#By default, Travis CI will find all R packages listed as dependencies in your package’s DESCRIPTION file, and install them from CRAN.
+#By default, Travis CI will find all R packages listed as dependencies in
+#your package’s DESCRIPTION file, and install them from CRAN.
 packages:
   - covr
   
@@ -21,7 +22,8 @@ bioc_packages:
   - ggtree
   - treeio
 
-# Install all system dependencies of ImageMagick. Documented here: https://towardsdatascience.com/travis-ci-for-r-advanced-guide-719cb2d9e0e5
+# Install all system dependencies of ImageMagick. Documented here: 
+#https://towardsdatascience.com/travis-ci-for-r-advanced-guide-719cb2d9e0e5
 addons:
   apt:
     update: true
@@ -45,8 +47,8 @@ os:
 #on the windows build environment
 
 script:
-- R CMD build .
-- R CMD check *tar.gz
+  - R CMD build . --compact-vignettes=gs+qpdf
+  - R CMD check *tar.gz --as-cran
 
 after_success:
 - Rscript -e 'library(covr); codecov()'

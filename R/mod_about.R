@@ -146,7 +146,7 @@ mod_about_ui <- function(id) {
                                        a heatmap with or without annotations",
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/SlidE6.PNG",
+                                                  "www/Slide6.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
                               tags$div(tags$li(tags$em("When you are happy
