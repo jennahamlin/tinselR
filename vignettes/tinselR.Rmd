@@ -115,14 +115,15 @@ knitr::include_graphics(here::here("vignettes/images/slide5.png"))
 **Including metadata for tip correction and heatmap**
 
 Figure \@ref(fig:exampleDataPane6) provides an example metadata file with 
-three columns: 1) 'Tip.labels'; those tip labels within in the Newick tree, 2)
-'Display.labels'; what you would like the tip labels in the tree to be changed
-to, and 3) a third column called what ever you additional metadata of interest
-is. Here, the third column is called 'SourceSite' indicating the collection site
-of the isolates. When the meta data is included and a user pushes the 'Visualize
-Tree' button, automatic tip correction occurs, meaning that the tips within the
-Newick tree convert to what you the user decide ('Display.labels'). The ability 
-to include a [heatmap](https://yulab-smu.top/treedata-book/chapter7.html),
+three columns: 1) 'Tip.labels'; those tip labels within in the Newick-formatted
+tree, 2) 'Display.labels'; what you would like the tip labels in the tree to be
+changed to, and 3) a third column called what you, the user, what that column
+reflects. Here, the third column is called 'SourceSite' indicating the
+collection site of the isolates. When the metadata is included and a user pushes
+the 'Visualize Tree' button, automatic tip correction occurs, meaning that the
+tips within the Newick-formatted tree convert to what you the user decided 
+(e.g. 'Display.labels' column in metadata file). The ability to add a 
+[heatmap](https://yulab-smu.top/treedata-book/chapter7.html),
 allows the user to include either categorical or numerical data for their tree 
 image either with or without annotations (Figure \@ref(fig:exampleDataPane7)). 
 
@@ -139,11 +140,12 @@ knitr::include_graphics(here::here("vignettes/images/slide7.png"))
 
 Once you are happy with the way your tree looks, you can download the image 
 in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane7)). Make 
-sure you adjust the height and width. To activate the ability to download the 
-image, just enter your name in the text box and the 'Download' button will pop
-up. Also, note that once the image has downloaded, if you want to re-download 
-with anything changed, just adjust as you wish and push the 'Download' button
-again. 
+sure you adjust the height and width of the image that you download. Note that
+once the image has downloaded, if you want to re-download with anything changed,
+just adjust as you wish and push the 'Download' button again. For unknown
+reasons of this writing, downloading a pdf on a windows machine can have a 
+serious delay, be patient. This delay in downloading a pdf image does not occur
+on a mac or linux machine. 
 
 #### *Using your data*
 
