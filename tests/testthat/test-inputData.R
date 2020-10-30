@@ -113,10 +113,10 @@ context("connecting genetic distance with meta data")
 data(meta2)
 data(gene2)
 
-m_2 <- meta2 
-g_2 <-gene2
+m_2 <- meta2
+g_2 <- gene2
 
-g_2 <- g_2 %>% dplyr::rename(center = 1) 
+g_2 <- g_2 %>% dplyr::rename(center = 1)
 
 test_that("Length of genetic data 2 for number of unique isolates", {
   expect_length(g_2, 15)
@@ -133,7 +133,7 @@ g_2$center <-
                                       %in% g_2$center)]
 
 test_that("Confirm type of the combined data", {
-  expect_type(g_2, "list" )
+  expect_type(g_2, "list")
 })
 
 ##############################################################################
@@ -144,11 +144,11 @@ data(tree3)
 
 testing_gene <- gene_object_out(replace_column_header(gene3))
 
-tips_in <- c("PNUSAS000901.cleaned", "PNUSAS000876.cleaned", 
+tips_in <- c("PNUSAS000901.cleaned", "PNUSAS000876.cleaned",
              "2015K-1169-M3235-15-050.cleaned",
              "2015K-0966-M3235-15-044.cleaned")
 
-snps <-snp_anno(gene_file = testing_gene, tips = tips_in)
+snps <- snp_anno(gene_file = testing_gene, tips = tips_in)
 
 min_snps <- min(snps)
 max_snps <- max(snps)
@@ -167,5 +167,5 @@ test_that("Confirm length of min snps", {
 })
 
 test_that("Confirm type for min snps", {
-  expect_type(min_snps, 'double')
+  expect_type(min_snps, "double")
 })

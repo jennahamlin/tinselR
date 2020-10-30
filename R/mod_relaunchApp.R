@@ -3,7 +3,7 @@
 #' @title mod_relaunchApp_ui mod_relaunchApp_server
 #'
 #' @description A shiny Module. This module will relaunch the application
-#' and clear out any existing data sets. 
+#' and clear out any existing data sets.
 #'
 #' @rdname mod_relaunchApp
 #'

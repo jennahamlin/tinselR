@@ -2,10 +2,10 @@
 #'
 #' @title mod_aboutExample_ui mod_aboutExample_server
 #'
-#' @description A shiny Module. This module generates information for the 
-#' example data that is pre-loaded when the application launches. 
+#' @description A shiny Module. This module generates information for the
+#' example data that is pre-loaded when the application launches.
 #'
-#'@param id,input,output,session Internal parameters for {shiny}.#'
+#' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #'@noRd
 #'
@@ -19,7 +19,7 @@ mod_aboutExample_ui <- function(id) {
                               tags$strong("Three example datasets are included
                                           to test out the application."),
                               tags$p("The three datasets hopefully highlight how
-                              to best use the application. Data descriptions 
+                              to best use the application. Data descriptions
                                      below -",
                                      tags$br(),
                                      tags$br(),
@@ -36,9 +36,9 @@ mod_aboutExample_ui <- function(id) {
                                      include a heatmap instantaneously.",
                                      tags$br(),
                                      tags$br(),
-                                     tags$li("If you want to add annotations 
+                                     tags$li("If you want to add annotations
                                      then highlight the tip labels to their most
-                                     recent common ancestor,", 
+                                     recent common ancestor,",
                                              tags$a("MRCA", href =
                                                       "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),
                                              ", and press the
@@ -48,11 +48,11 @@ mod_aboutExample_ui <- function(id) {
                               annotations, just press the 'Remove Annotations'
                               button, this will step your annotations back one
                               by one by removing the last placed annotation. For
-                              the 'Remove Annotations' there is no need for 
+                              the 'Remove Annotations' there is no need for
                               highlighting."),
                               tags$br(),
                               tags$br(),
-                              tags$li("If you want to see what the 
+                              tags$li("If you want to see what the
                                      heatmap looks like this is only part of
                                      example data 2 and 3 and will automatically
                                      load/unload if you press the 'Add
@@ -83,9 +83,9 @@ mod_aboutExample_ui <- function(id) {
                                      seen when a user presses the 'Add Tree'
                                      button because the user needs to change
                                      the spacing on the plot; we suggest
-                                     0.09. The metadata has two columns that 
-                                     can be plotted with the heatmap button. 
-                                     One of the columns plotted has missing 
+                                     0.09. The metadata has two columns that
+                                     can be plotted with the heatmap button.
+                                     One of the columns plotted has missing
                                      values (NA). If you press 'Add Heatmap'
                                      make sure to adjust the position of the
                                      heatmap to be less than the spacing on the
@@ -102,14 +102,14 @@ mod_aboutExample_ui <- function(id) {
                                      tags$li(tags$em("example meta 2")),
                                      "This is a meta data file used for
                                      correcting the tip labels, has two columns
-                                     for adding two columns of heatmap, and 
+                                     for adding two columns of heatmap, and
                                      is a tsv file."),
                               tags$br(),
                               tags$br(),
                               tags$p((tags$h5(tags$strong("Data set 3"))),
                                      "This data set will automatically be
                                      seen when a user presses the 'Add Tree'
-                                     button. This dataset includes only one 
+                                     button. This dataset includes only one
                                      column in the metadata.",
                                      tags$li(tags$em("example tree 3")),
                                      "This is a newick formatted tree with
@@ -131,5 +131,4 @@ mod_aboutExample_ui <- function(id) {
 #' @noRd
 mod_aboutExample_server <- function(input, output, session) {
   ns <- session$ns
-  
 }

@@ -14,16 +14,16 @@
 #does not match when all three files are uploaded. The input paramters include
 #tree file, genetic file, and meta file
 sanity <- function(m_file, g_file, t_file) {
-  
+
   #meta data get tips
   m_file_tips <- m_file %>% dplyr::pull(1) %>% sort
-  
+
   #genetic data get tips
   g_file_tips <- g_file %>% dplyr::pull(1) %>% sort
-  
+
   #tree file get tips
   t_file_tips <- sort(t_file$tip.label)
-  
+
   # Check for required column names in meta data file
   if ("Tip.labels" %in% colnames(m_file) != TRUE) {
     return(HTML('<span style = "color:gray">Your metadata file does not contain
@@ -34,7 +34,7 @@ sanity <- function(m_file, g_file, t_file) {
                 the correct column headers. Please correct and try again.
                 </span>'))
   }
-  
+
   # Check for the same number of tips for all three files
   if (length(t_file_tips) != length(g_file_tips) |
       length(t_file_tips) != length(m_file_tips) |
@@ -54,13 +54,12 @@ sanity <- function(m_file, g_file, t_file) {
                 contain the same tip labels!</span>'))}
 }
 
-
 #get the number of columns of the meta data file. Here columns should be 1 or
 #more after transformation of meta data. Tell user how many columns there are
 #as the output here allows the user to use the add heatmap/matrix button.
 not_columns <- function(file) {
   col_n_file <- ncol(file)
-  
+
   if (col_n_file < 1) {
     return("And looks like there is not a column for adding a heatmap")
   } else {
@@ -139,11 +138,11 @@ snp_anno <- function(gene_file, tips) {
   snp_vector <- c()
   for (i in 1:(length(tips) - 1)) { #this goes over a three column dataframe
     for (j in (i + 1):length(tips)) { #i and j are the ids of tips
-      if (tips[i] == tips[j] | is.na(tips[i]) | is.na(tips[j])) 
+      if (tips[i] == tips[j] | is.na(tips[i]) | is.na(tips[j]))
         #if (tips[i] == tips[j]) #don't include self comparisons
         return(NULL)
       #next
-      snp_vector <- append(snp_vector, gene_file %>% #add snps to vector 
+      snp_vector <- append(snp_vector, gene_file %>% #add snps to vector
                              dplyr::filter(
                                label == tips[i] & name == tips[j]) %>%
                              dplyr::pull(value)

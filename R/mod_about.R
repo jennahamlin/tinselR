@@ -17,7 +17,7 @@ mod_about_ui <- function(id) {
     fluidRow(column(12, offset = 0,
                     mainPanel(h1(strong("Getting started with tinselR")),
                               tags$br(),
-                              p("tinselR  (pronounced tinsel-er) at its' most 
+                              p("tinselR  (pronounced tinsel-er) at its' most
                               basic level is a graphical viewer of newick
                               phylogenetic trees and as a program for producing
                                 publication-ready figures.", "The", em("power"),
@@ -32,8 +32,8 @@ mod_about_ui <- function(id) {
                                 happy with the way your tree looks scroll to the
                                 bottom and press Download"),
                               tags$p("If there is a bug, feature request, or
-                                     documentation needed, please file an", 
-                                     a("issue", href = 
+                                     documentation needed, please file an",
+                                     a("issue", href =
                                          "https://github.com/jennahamlin/tinselR/issues"
                                      )),
                               tags$br(),
@@ -43,17 +43,17 @@ mod_about_ui <- function(id) {
                               at the 'Example Data' tab to test out the
                               application. A brief description about the
                               example data is provided in the About the Example
-                                     Data tab."), 
+                                     Data tab."),
                               tags$br(),
                               tags$p("There is only one differences between the
-                              'Example Data' and the 'Data Upload' tabs: the 
+                              'Example Data' and the 'Data Upload' tabs: the
                               'Example Data' tab has pre-loaded data, while the
                               'Data Upload' tab is where you, the user, can
                               upload your own files (i.e. phylogenetic tree,
-                              genetic distance file, and metadata file). By 
+                              genetic distance file, and metadata file). By
                               that we mean, in the 'Example Data' tab, the user
                               only has three options to select from - example
-                              data 1, example data 2, and example data 3 - 
+                              data 1, example data 2, and example data 3 -
                               displayed in one drop down menu. While in the
                               'Data Upload' tab, there are three drop down menus
                               - 1) tree upload, 2) genetic upload, and 3) meta
@@ -83,7 +83,7 @@ mod_about_ui <- function(id) {
                               tags$br(),
                               tags$h4(strong("Data files to upload")),
                               tags$br(),
-                              tags$li(em("1. Phylogenetic Tree"), "- required; 
+                              tags$li(em("1. Phylogenetic Tree"), "- required;
                                       a", a("newick", href =
                                               "https://en.wikipedia.org/wiki/Newick_format"),
                                       "generated tree"),
@@ -118,7 +118,7 @@ mod_about_ui <- function(id) {
                               tags$br(),
                               tags$div(tags$li(tags$em("Once the phylogenetic
                               tree is uploaded you can -")),
-                                       "Alter visualization parameters. See 
+                                       "Alter visualization parameters. See
                                        below for a tree with right aligned tip
                                        labels.",
                                        tags$br(),
@@ -154,7 +154,7 @@ mod_about_ui <- function(id) {
                                                        png, or tiff.")),
                                        tags$br(),
                                        tags$img(src = "www/Slide7.PNG",
-                                                height = "50%", width = "50%")), 
+                                                height = "50%", width = "50%")),
                               tags$br()
                     )
     )

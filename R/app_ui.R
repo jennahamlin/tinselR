@@ -12,7 +12,7 @@ app_ui <- function() {
                  tabPanel("About tinselR", mod_about_ui("about_ui_1")),
                  tabPanel("About Example Data",
                        mod_aboutExample_ui("aboutExample_ui_1")),
-                 tabPanel("About Tree Parameters", 
+                 tabPanel("About Tree Parameters",
                           mod_aboutTreeParams_ui("aboutTreeParams_ui_1")),
                  tabPanel("Example Data",
                           sidebarLayout(

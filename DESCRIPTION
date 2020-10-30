@@ -36,6 +36,7 @@ Imports:
 Suggests: 
     assertthat,
     attempt,
+    bookdown,
     colorspace,
     DT,
     glue,
@@ -48,10 +49,9 @@ Suggests:
     processx,
     purrr,
     rmarkdown,
+    stats,
     testthat (>= 2.1.0),
-    xfun,
-    bookdown,
-    stats
+    xfun
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

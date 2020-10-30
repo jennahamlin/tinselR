@@ -6,7 +6,7 @@
 \title{Example Gene 3
 
 This is a genetic distance matrix of SNPs for 19 isolates of Salmonella
-enterica to be used with the newick phylogenetic tree (example tree 3) and
+enterica to be used with the Newick phylogenetic tree (example tree 3) and
 the optional meta data file (example meta 3).}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 16 rows and 17 columns.
@@ -18,7 +18,7 @@ data(gene3)
 Example Gene 3
 
 This is a genetic distance matrix of SNPs for 19 isolates of Salmonella
-enterica to be used with the newick phylogenetic tree (example tree 3) and
+enterica to be used with the Newick phylogenetic tree (example tree 3) and
 the optional meta data file (example meta 3).
 }
 \examples{

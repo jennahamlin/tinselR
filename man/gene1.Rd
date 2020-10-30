@@ -6,7 +6,7 @@
 \title{Example Gene 1
 
 This is a genetic distance matrix of SNPs for 19 isolates of Eschericia coli
-to be used with the newick phylogenetic tree (example tree 1) and the
+to be used with the Newick phylogenetic tree (example tree 1) and the
 optional meta data file (example meta 1).}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 19 rows and 20 columns.
@@ -18,7 +18,7 @@ data(gene1)
 Example Gene 1
 
 This is a genetic distance matrix of SNPs for 19 isolates of Eschericia coli
-to be used with the newick phylogenetic tree (example tree 1) and the
+to be used with the Newick phylogenetic tree (example tree 1) and the
 optional meta data file (example meta 1).
 }
 \examples{

@@ -50,9 +50,9 @@ mod_displayTree_server <- function(input, output, session,
   # boot_pos - from paramsTree module; this is numeric input from user
   # mid_p - from paramsTree module; this is checkbox input (Y or N)
   # mat_off - from paramsTree module; this is numeric input from user
-  
+
   ns <- session$ns
-  
+
   #midpoint root the tree based on reactive value, if not just display the tree
   mid_tree <- reactive({
     if (mid_p() == TRUE) {
@@ -61,24 +61,24 @@ mod_displayTree_server <- function(input, output, session,
       return(tree_file_out())
     }
   })
-  
+
   #convert phylogenetic tree (midpoint rooted or not) to tidytree to join tree
   #and genetic distance matrix
   tree_object <- reactive({
     tidytree::as_tibble(mid_tree())
   })
-  
+
   #join the treeobject and updated genetic distance file by label and
   #convert to s4 object
   g_and_t_s4 <- reactive({
     combine_g_and_t(tree_object(), geneObjectOutForSNP())
   })
-  
+
   #major plotting reactive using an S4 object called above (gandTS4) or the
   #base mid_tree reactive using the tree_file_out from the Upload or Example
   #data module
   make_tree <- reactive({
-    
+
     # this disconnects the need for genetic distance file to be uploaded for
     if (is.null(input$gandTS4)) {
       tree_plot(mid_tree())
@@ -86,11 +86,11 @@ mod_displayTree_server <- function(input, output, session,
       tree_plot(g_and_t_s4())
     }
   })
-  
+
   ######################################
   #### displayTree server functions ####
   ######################################
-  
+
   #this takes in the tree file and allows for various parameters to be adjusted
   #because those parameters are reactives (i.e. tree_format())
   tree_plot <- function(input_file) {
@@ -106,11 +106,11 @@ mod_displayTree_server <- function(input, output, session,
                          nudge_x = boot_pos())
     return(g)
   }
-  
+
   ############################
   #### displayData output ####
   ############################
-  
+
   #return display tree reactive to be used in cladeAnnotator module
   return(
     list(

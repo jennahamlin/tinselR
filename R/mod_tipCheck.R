@@ -24,7 +24,7 @@ mod_tipCheck_ui <- function(id) {
 
     tags$table(width = "100%",
                tags$th("File checking error messages - ",
-                       colspan = "3", style = 
+                       colspan = "3", style =
                          "font-size:20px; color:#444444;")),
 
     # this outputs info about if tip labels are not concordant between all
@@ -50,14 +50,14 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
   #this will render the output from the sanity function found in the
   #golem_utils_server.R file and takes in 6 reactive files -
   #tree x2, genetic distance x2, meta data x2 - one file from each three sub
-  #sections just acts as a confirmation that the file has been uploaded to 
+  #sections just acts as a confirmation that the file has been uploaded to
   #display the user messages. The other 3 files are the ones that either
-  #sanity or not_columns functions test. For whatever reason, if I used 
+  #sanity or not_columns functions test. For whatever reason, if I used
   #t_file_out instead of tree_file_out in L 61, the user message does not
   #display. In theory is.null(t_file_out) should render the message but it does
-  #not. This could be one place for improvement. Reducing the number of 
+  #not. This could be one place for improvement. Reducing the number of
   #parameters required in teh tipCheck server from 6 to 3, especially since
-  #for the example data, the files are repeated in the app_server.R file. 
+  #for the example data, the files are repeated in the app_server.R file.
 
   output$file_checking <- renderUI({
     ns <- session$ns

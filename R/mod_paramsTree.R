@@ -22,7 +22,7 @@ mod_paramsTree_ui <- function(id) {
                tags$th("Alter Tree Visual Parameters", colspan = "3",
                        style = "font-size:20px; color:#444444;")),
     tags$hr(style = "border-color: #99b6d8;"),
-    
+
     column(
       numericInput(ns("number_scale"), tags$b("Size of Scale Bar - ",
                                               style = "color:#afafae"),
@@ -33,10 +33,10 @@ mod_paramsTree_ui <- function(id) {
       numericInput(ns("boot_position"), tags$b("Bootstrap Positions - ",
                                                style = "color:#afafae"),
                    value = 0.00025, max = 1, step = 0.01),
-      textInput(ns("annotation_text"), tags$b("Label for Annotation - Range", 
+      textInput(ns("annotation_text"), tags$b("Label for Annotation - Range",
                                               style = "color:#afafae"),
                 "Range -"), width = 3),
-    
+
     column(
       numericInput(ns("tip_lim"), tags$b("Add Spacing to Plot - ",
                                          style  = "color:#afafae"),
@@ -47,10 +47,10 @@ mod_paramsTree_ui <- function(id) {
       numericInput(ns("mat_offset"), tags$b("Move Heatmap -",
                                             style = "color:#afafae"),
                    value = 0.05, step = 0.01),
-      textInput(ns("median_text"), tags$b("Label for Annotation - Median", 
+      textInput(ns("median_text"), tags$b("Label for Annotation - Median",
                                               style = "color:#afafae"),
                 "Median -"), width = 3),
-    
+
     column(
       checkboxInput(ns("mid_point"), tags$b("Midpoint Root",
                                             style = "color:#afafae"), TRUE),
@@ -60,9 +60,9 @@ mod_paramsTree_ui <- function(id) {
                                       style = "color:#afafae"),
                   c("blue", "red", "black", "gray")),
       selectInput(ns("heatmap_color"), tags$b("Heatmap Color Options - ",
-                                              style="color:#afafae"),
+                                              style = "color:#afafae"),
                   c("A", "B", "C", "D", "E")), width = 3),
-    
+
     column(
       radioButtons(ns("font_format"), tags$b("Font Format",
                                              style = "color:#afafae"),
@@ -91,7 +91,7 @@ mod_paramsTree_ui <- function(id) {
 
 mod_paramsTree_server <- function(input, output, session) {
   ns <- session$ns
-  
+
   # list of tree visualization parameters that can be changed.
   # if you want to include more tree viz parameters for a user to adjust,
   # add them to the ui above and return them here with name to be used in

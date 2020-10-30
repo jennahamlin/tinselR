@@ -6,7 +6,7 @@
 \title{Example Meta 2
 
 This is a meta data file for tip correction for 19 isolates of Salmonella
-enterica sub species enterica to be used with the newick phylogenetic tree
+enterica sub species enterica to be used with the Newick phylogenetic tree
 (example tree 2) and the optional genetic distance file (example gene 2).}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 14 rows and 4 columns.
@@ -18,7 +18,7 @@ data(meta2)
 Example Meta 2
 
 This is a meta data file for tip correction for 19 isolates of Salmonella
-enterica sub species enterica to be used with the newick phylogenetic tree
+enterica sub species enterica to be used with the Newick phylogenetic tree
 (example tree 2) and the optional genetic distance file (example gene 2).
 }
 \examples{
