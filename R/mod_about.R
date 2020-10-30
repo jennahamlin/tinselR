@@ -123,7 +123,7 @@ mod_about_ui <- function(id) {
                                        labels.",
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/treeWAlignedTips.PNG",
+                                                  "www/Slide4.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
                               tags$div(tags$li(tags$em("Once the genetic
@@ -137,7 +137,7 @@ mod_about_ui <- function(id) {
                                               button. Repeat until you are
                                        satisfied.",
                                        tags$br(),
-                                       tags$img(src = "www/treeWAnno.PNG",
+                                       tags$img(src = "www/Slide5.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
                               tags$div(tags$li(tags$em("If column for heatmap
@@ -146,7 +146,7 @@ mod_about_ui <- function(id) {
                                        a heatmap with or without annotations",
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/treeWAnnoAndHeatmap.PNG",
+                                                  "www/SlidE6.PNG",
                                                 height = "50%", width = "50%")),
                               tags$br(),
                               tags$div(tags$li(tags$em("When you are happy

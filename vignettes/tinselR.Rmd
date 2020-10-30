@@ -62,12 +62,12 @@ PRJNA230403). After clicking on the 'Example Data' tab
 for one of the combined datasets (e.g. example data 1, example data 2, and
 example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
 
-```{r exampleDataPane1, echo = F, out.width = "75%", fig.cap = "Example data pane is circled in blue"}
+```{r exampleDataPane1, echo = F, out.width = "75%", fig.cap = "Landing page for tinselR with 'Example Data' tab circled in blue"}
 knitr::include_graphics(here::here("vignettes/images/slide1.png"))
 ```
 
 
-```{r exampleDataPane2, echo = F, out.width = "75%", fig.cap = "Pre-loaded example dataset 3 is selected for all three data uploads subsections and within in the blue box."}
+```{r exampleDataPane2, echo = F, out.width = "75%", fig.cap = "'Example Data' tab highlighting within the blue box the available  tree visual parameters that can be changed."}
 knitr::include_graphics(here::here("vignettes/images/slide2.png"))
 ```
 
@@ -99,15 +99,15 @@ Unlike with the 'Add Annotation' button, you do not need to highlight which
 annotation you would like to remove. Because of this, the remove annotations
 works by removing the last placed annotation until there are no more. 
 
-```{r exampleDataPane3, echo = F, out.width = "75%", fig.cap = "Example data pane with tree visual parameters enclosed in blue box."}
+```{r exampleDataPane3, echo = F, out.width = "75%", fig.cap = "Pre-loaded example dataset 3 is selected and can be seen once the user presses the 'Visaulize Tree' button, which is shown within the blue box."}
 knitr::include_graphics(here::here("vignettes/images/slide3.png"))
 ```
 
-```{r exampleDataPane4, echo = F, out.width = "75%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. "}
+```{r exampleDataPane4, echo = F, out.width = "75%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. Within the larger blue box, a phylogenetic tree is displayed with tips right aligned. The smaller blue box indicates that the 'align the tips' box has been selected."}
 knitr::include_graphics(here::here("vignettes/images/slide4.png"))
 ```
 
-```{r exampleDataPane5, echo = F, out.width = "75%", fig.cap = "With tips of interested highlight, pressing the 'Add Annotations' button will add annotations to the tree image, which indicate the range of SNPs found for these tips of interest. "}
+```{r exampleDataPane5, echo = F, out.width = "75%", fig.cap = "With tips of interest highlighted, pressing the 'Add Annotations' button will add annotations to the tree image, which indicate the range and median of SNPs for these tips of interest. The tree with annotations is within the larger blue box, while the buttons for add and removing annotations are in the smaller box on the left of image. "}
 knitr::include_graphics(here::here("vignettes/images/slide5.png"))
 ```
 
@@ -127,11 +127,11 @@ tips within the Newick-formatted tree convert to what you the user decided
 allows the user to include either categorical or numerical data for their tree 
 image either with or without annotations (Figure \@ref(fig:exampleDataPane7)). 
 
-```{r exampleDataPane6, echo = F, out.width = "75%", fig.cap = "Example metadata 3 with the third column highlighted in blue indicating information used for adding a heatmap. "}
-knitr::include_graphics(here::here("vignettes/images/slide6.png"))
+```{r exampleDataPane6, echo = F, out.width = "50%", fig.cap = "Example metadata 3 with the third column highlighted in blue indicating information used for adding a heatmap. "}
+knitr::include_graphics(here::here("inst/app/www/metaDataExample.png"))
 ```
 
-```{r exampleDataPane7, echo = F, out.width = "75%", fig.cap = "Tree image with annotations and a heatmap of collection source with the donwload image section enclosed in blue box at the bottom of the image and the add/remove heatmap also highlighted in blue."}
+```{r exampleDataPane7, echo = F, out.width = "75%", fig.cap = "Tree image with annotations and a heatmap of collection source displayed within blue box at the bottom of the image. The add/remove heatmap is also within the blue box on the left of the image."}
 knitr::include_graphics(here::here("vignettes/images/slide7.png"))
 ```
 
@@ -139,13 +139,17 @@ knitr::include_graphics(here::here("vignettes/images/slide7.png"))
 **Downloading your image**
 
 Once you are happy with the way your tree looks, you can download the image 
-in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane7)). Make 
+in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane8)). Make 
 sure you adjust the height and width of the image that you download. Note that
 once the image has downloaded, if you want to re-download with anything changed,
 just adjust as you wish and push the 'Download' button again. For unknown
 reasons of this writing, downloading a pdf on a windows machine can have a 
 serious delay, be patient. This delay in downloading a pdf image does not occur
 on a mac or linux machine. 
+
+```{r exampleDataPane8, echo = F, out.width = "75%", fig.cap = "Tree image with annotations and a heatmap of collection source displayed. The download image options is within the blue box on the bottom of the image."}
+knitr::include_graphics(here::here("vignettes/images/slide8.png"))
+```
 
 #### *Using your data*
 
@@ -156,7 +160,11 @@ genetic distance, and metadata). By that we mean, in the 'Example Data' tab,
 the user only has three options to select from - example data 1, example data 2,
 and example data 3 - displayed in one drop down menu. While in the 'Data Upload'
 tab, there are three drop down menus - 1) tree upload, 2) genetic upload, and 3)
-meta upload.
+meta upload (Figure \@ref(fig:userDataPane1)).
+
+```{r userDataPane1, echo = F, out.width = "75%", fig.cap = "'Data Upoad' tab for user's own data upload The larger blue box contains the three dropdown menus for the three different files a user can upload. The smaller blue boxes indicates the 'Data Upload' tab."}
+knitr::include_graphics(here::here("vignettes/images/slide9.png"))
+```
 
 Given problems that can occur during user upload, we provide file upload error
 messages in hopes of helping, you the user, with checking that all three files
@@ -183,17 +191,17 @@ theory, any application  that can produce a Newick formatted tree should be
 able to be uploaded. 
 
 Currently, our application only supports a genetic distance matrix of SNP 
-differences (Figure \@ref(fig:userData1)). Your distance matrix can be in either
+differences (Figure \@ref(fig:userData2)). Your distance matrix can be in either
 csv, tsv, or txt formats. The metadata file should be in one of these formats 
 as well (csv, tsv, or txt). However, the metadata file requires specific column
-headers (Tip.labels, and Display.labels; Figure \@ref(fig:userData2)),
+headers (Tip.labels, and Display.labels; Figure \@ref(fig:userData3)),
 but the third column, if you choose to include it can be titled whatever. 
 
-```{r userData1, echo = F, out.width = "50%", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
+```{r userData2, echo = F, out.width = "50%", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
 knitr::include_graphics(here::here("inst/app/www/geneDistanceExample.PNG"))
 ```
 
-```{r userData2, echo = F, out.width = "50%", fig.cap = "Meta data example without the heatmap column."}
+```{r userData3, echo = F, out.width = "50%", fig.cap = "Meta data example without the heatmap column."}
 knitr::include_graphics(here::here("inst/app/www/metaDataExample.PNG"))
 ```
 

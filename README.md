@@ -87,7 +87,7 @@ See image below for a csv file example.
 * Alter visualization parameters. See below for tree with aligned tips.  
 
 <p>
-    <img src = "inst/app/www/treeWAlignedTips.PNG" />
+    <img src = "inst/app/www/Slide4.PNG" />
 </p>
 
 #### Once the genetic distance file is uploaded you can -
@@ -95,7 +95,7 @@ See image below for a csv file example.
 with annotated clades including the range of SNPs. 
 
 <p>
-    <img src = "inst/app/www/treeWAnno.PNG" />
+    <img src = "inst/app/www/Slide5.PNG" />
 </p>
 
 #### If column for heatmap is included in metadata file you can -
@@ -103,7 +103,7 @@ with annotated clades including the range of SNPs.
 with annotated clades and a heatmap. 
 
 <p>
-    <img src ="inst/app/www/treeWAnnoAndHeatmap.PNG" />
+    <img src ="inst/app/www/Slide6.PNG" />
 </p>
 
 
