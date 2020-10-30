@@ -141,10 +141,7 @@ Once you are happy with the way your tree looks, you can download the image
 in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane8)). Make 
 sure you adjust the height and width of the image that you download. Note that
 once the image has downloaded, if you want to re-download with anything changed,
-just adjust as you wish and push the 'Download' button again. For unknown
-reasons of this writing, downloading a pdf on a windows machine can have a 
-serious delay, be patient. This delay in downloading a pdf image does not occur
-on a mac or linux machine. 
+just adjust as you wish and push the 'Download' button again.
 
 ```{r exampleDataPane8, echo = F, out.width = "75%", fig.cap = "Tree image with annotations and a heatmap of collection source displayed. The download image options is within the blue box on the bottom of the image."}
 knitr::include_graphics(here::here("vignettes/images/Slide8.PNG"))
