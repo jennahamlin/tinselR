@@ -15,25 +15,25 @@ mod_pushButtons_ui <- function(id) {
   ns <- NS(id)
   tagList(
 
-    actionButton(ns("add_tree"),  "Visualize Tree",
-                 style = "color: #fff; background-color:#334b38 ;
-                 border-color: #334b38; width: 200px;",  icon("tree")),
+    actionButton(ns("add_tree"),  HTML("Visualize <br/> Tree"),
+                 style = "color: #fff; background-color:#334b38;
+                 border-color: #334b38; width: 150px;",  icon("tree")),
 
-    actionButton(ns("add_annotation"), "Add Annotation(s) ",
-                 style = "color: #fff; background-color:#e49600 ;
-                 border-color: #e49600; width: 200px;",  icon("plus")),
+    actionButton(ns("add_annotation"), HTML("Add <br/> Annotation(s)"),
+                 style = "color: #fff; background-color:#e49600;
+                 border-color: #e49600; width: 150px;",  icon("plus")),
 
-    actionButton(ns("remove_annotation"), "Remove Annotation(s)", icon("minus"),
-                 style = "color: #fff; background-color:#275a5c ;
-                 border-color: #275a5c; width: 200px;"),
+    actionButton(ns("remove_annotation"), HTML("Remove <br/> Annotation(s)"),
+                 icon("minus"), style = "color: #fff; background-color:#275a5c;
+                 border-color: #275a5c; width: 150px;"),
 
-    actionButton(ns("add_heatmap"), "Add heatmap", icon("bars"),
-                 style = "color: #fff; background-color: #a4b46b ;
-                 border-color:#a4b46b; width: 200px;"),
+    actionButton(ns("add_heatmap"), HTML("Add <br/> heatmap"), icon("plus"),
+                 style = "color: #fff; background-color: #a4b46b;
+                 border-color:#a4b46b; width: 150px;"),
 
-    actionButton(ns("remove_heatmap"), "Remove heatmap", icon("bars"),
-                 style = "color: #fff; background-color:#899097 ;
-                 border-color:#899097 ; width: 200px;")
+    actionButton(ns("remove_heatmap"), HTML("Remove <br/>  heatmap"),
+                 icon("minus"), style = "color: #fff; background-color:#899097;
+                 border-color:#899097 ; width: 150px;")
   )
 }
 
