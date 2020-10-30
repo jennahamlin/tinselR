@@ -63,12 +63,12 @@ for one of the combined datasets (e.g. example data 1, example data 2, and
 example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
 
 ```{r exampleDataPane1, echo = F, out.width = "75%", fig.cap = "Landing page for tinselR with 'Example Data' tab circled in blue"}
-knitr::include_graphics(here::here("vignettes/images/Slide1.png"))
+knitr::include_graphics(here::here("vignettes/images/Slide1.PNG"))
 ```
 
 
 ```{r exampleDataPane2, echo = F, out.width = "75%", fig.cap = "'Example Data' tab highlighting within the blue box the available  tree visual parameters that can be changed."}
-knitr::include_graphics(here::here("vignettes/images/Slide2.png"))
+knitr::include_graphics(here::here("vignettes/images/Slide2.PNG"))
 ```
 
 **Displaying example tree and genetic distance data**
@@ -86,7 +86,6 @@ are included in the highlighted selection (Figure \@ref(fig:exampleDataPane4)
 and Figure \@ref(fig:exampleDataPane5)). To correctly display the annotation, 
 the user should highlight the tips of interest and include within the 
 highlighted section their most recent common ancestor, 
-[MRCA](https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02),
 (Figure \@ref(fig:exampleDataPane4) and Figure \@ref(fig:exampleDataPane5)). In 
 theory, one can add as many annotations as you want, though at some point the
 annotations may run off the plot area and thus you may need to add more
