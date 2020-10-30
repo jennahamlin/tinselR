@@ -36,25 +36,27 @@ mod_aboutExample_ui <- function(id) {
                                      include a heatmap instantaneously.",
                                      tags$br(),
                                      tags$br(),
-                                     "If you want to add annotations then
-                                     highlight the tip labels to their
-                                     most recent common ancestor,",
-                                     tags$a("MRCA", href =
-                                              "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),
-                                     ", and press the 'Add Annotations' button.
-                                     Repeat until you are satisfied."),
-                              "If you want to remove previously placed
+                                     tags$li("If you want to add annotations 
+                                     then highlight the tip labels to their most
+                                     recent common ancestor,", 
+                                             tags$a("MRCA", href =
+                                                      "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),
+                                             ", and press the
+                                                      'Add Annotations' button.
+                                             Repeat until you are satisfied.")),
+                              tags$li("If you want to remove previously placed
                               annotations, just press the 'Remove Annotations'
                               button, this will step your annotations back one
                               by one by removing the last placed annotation. For
                               the 'Remove Annotations' there is no need for 
-                              highlighting.",
+                              highlighting."),
                               tags$br(),
                               tags$br(),
-                              "If you want to see what the heatmap looks like
-                              this is only part of example data 2 and 3 and will
-                              automatically load/unload if you press the
-                              'Add Heatmap/Remove Heatmap' buttons.",
+                              tags$li("If you want to see what the 
+                                     heatmap looks like this is only part of
+                                     example data 2 and 3 and will automatically
+                                     load/unload if you press the 'Add
+                                             Heatmap/Remove Heatmap' buttons."),
                               tags$br(),
                               tags$br(),
                               tags$p((tags$h5(tags$strong("Data set 1"))),
@@ -129,5 +131,5 @@ mod_aboutExample_ui <- function(id) {
 #' @noRd
 mod_aboutExample_server <- function(input, output, session) {
   ns <- session$ns
-
+  
 }

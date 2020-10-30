@@ -30,6 +30,8 @@ mod_exampleData_ui <- function(id) {
     selectInput(ns("example_data_set"), label = "Example Data", choices = 
                   c("example data 1", "example data 2", "example data 3")),
     
+    tags$em("Exmaple data set 2 - adjust the spacing to plot to equal 0.09."),
+    
     #add horizontal line to separate tree viz parameters
     tags$hr(style = "border-color: #99b6d8;")
   )
