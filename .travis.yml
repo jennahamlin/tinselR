@@ -38,7 +38,9 @@ addons:
       - libfftw3-dev
       - cargo
       - gsfonts
-      
+      - libgs-dev
+      - qpdf
+      - ghostscript      
 #test multiple operating systems
 os:
   - linux
