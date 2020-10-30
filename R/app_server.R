@@ -33,7 +33,8 @@ app_server <- function(input, output, session) {
                      params$node, params$lim, params$boot_pos, params$mid_p)
 
   #annotates tree with incorporated tree viz parameters and allows user to
-  #add visual heatmap
+  #add visual heatmap.Some tree viz parameters are changed here; those that
+  #are specific to snp annotation or heatmap. 
   tree_w_layers <- callModule(mod_cladeAnnotator_server,
                               "cladeAnnotator_ui_data",
                               data_display$mFileMatOut, plot$make_tree_out,
@@ -51,18 +52,23 @@ app_server <- function(input, output, session) {
   ### EXAMPLE DATA ###
   ####################
 
-  #repeated for preloaded data; uplodad the data (tree, genetic, and meta)
+  #repeated for preloaded data; three datasets are provided
+  #(tree, genetic, and meta) and combined to be called example data 1, etc.
   #and call that module example_data. This is the only module that is 
   #re-written, the rest of the modules are the same as above. 
 
-  example_data <- callModule(mod_exampleData_server, "exampleData_ui_1",
-                             example_tree$n_values)
+  example_data <- callModule(mod_exampleData_server, "exampleData_ui_1")
 
-  example_buttons <- callModule(mod_pushButtons_server,
+  example_buttons <- callModule(mod_pushButtons_server, 
                                 "pushButtons_ui_example")
   
   #outputs directly a user message if the file tip labels are all the same for
-  #the three files and tells user if they can use heatmap button
+  #the three files and tells user if they can use heatmap button. The files
+  #sent in the example data are duplicates (e.g. ex_m_file_out)
+  #below as the tipCheck module arguments are positional. The number of
+  #arguments that the tipCheck module takes in is 6. This is one place that 
+  #could use improvement, reducing the number of arguments as intake from 6 to 3
+  #more of a description of this is provided in the tipCheck module. 
   callModule(mod_tipCheck_server, "tipCheck_ui_example", 
              example_data$ex_m_file_out, example_data$ex_m_file_out,
              example_data$ex_g_file_out, example_data$ex_g_file_out,

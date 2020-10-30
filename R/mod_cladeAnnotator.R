@@ -23,7 +23,6 @@
 mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    
     plotOutput(ns("tree_display"), brush = ns("plot_brush"))
   )
 }
@@ -56,8 +55,11 @@ mod_cladeAnnotator_server <-
     #anno_text - from paramsTree; user input text (can be blank or any word)
     #median_text - from paramsTree; user input text (can be blank or any word)
     
-    # Initialize a reactive value and set to zero (count) and an empty
-    #list for tip vector input
+    # Initialize a reactive value and set to zero (count) and empty lists for 
+    #tip vector input and show map functionality. By placing these reactive 
+    #values into a function, we can use that function in a try catch for
+    #allowing the user to not care about switching between already annotated
+    #trees in the exmaple data tab. 
     
     initialize_r_values <- function(){
       Values[["n"]]   <- 0
@@ -96,12 +98,12 @@ mod_cladeAnnotator_server <-
     #displays the tree plot, uses output from the displayTree module
     observeEvent(add_tree(), {
       output$tree_display <- renderPlot({
-        make_tree_out()})
+        g <- make_tree_out()
+        return(g)})
     })
     
     #display that user-brushed layer onto the tree
     observeEvent(add_anno(), {
-      
       #both if statements (if and the else if) acts as a control for if the user
       #accidentally presses the add_anno button without the file loaded or
       #if there is no selected data in the data_with_selection_subset (a blank
@@ -170,23 +172,25 @@ mod_cladeAnnotator_server <-
       })
     })
     
-    #allow the user to add a heatmap to a tree; changes show_map to the value 
-    #of 1
+    #allow user to add a heatmap to a tree; changes show_map to the value of 1
     observeEvent(add_heatmap(), {
       
       #both if statements (if and the else if) acts as a control for if the user
       #accidentally presses the add heatmap button without the file loaded and 
       #only allow heatmap to be plotted if ncol > 0, which it should if user
-      #includes a third column.
+      #includes a third column in the meta data file.
       if (is.null(mFileMatOut())){
+        
         #skip
+        
       } else if (ncol(mFileMatOut() > 0)) {
+        
         #display that layer onto the tree; as Values[["show_map"]] > 0 is a 
         #requirement of add_map function
         Values[["show_map"]] <-  1
         output$tree_display <- renderPlot({
           
-          #render the plot using the  current_tree_out function.
+          #render the plot using the  current_tree_out function defined below
           current_tree_out()
         }) 
         
@@ -227,7 +231,7 @@ mod_cladeAnnotator_server <-
     #function to add layer, uses findMRCA to get the MRCA (node) for the
     #selected tips. The input is the base tree, user selected tips, label 
     #is the bit that draws the annotation with range of snps, color and offset
-    #are reactive paramters that the user can adjust 
+    #are reactive parameters that the user can adjust 
     make_layer <- function(tree, tips, label, color, offset) {
       ggtree::geom_cladelabel(
         node = phytools::findMRCA(ape::as.phylo(tree), tips),
@@ -255,7 +259,7 @@ mod_cladeAnnotator_server <-
       return(tree)
     }
     
-    #this functions calculates the mean # snps and adds that layer as
+    #this functions displays the range of snps and median and adds that layer as
     #annotation. Additionally, it checks for overlap in annotations and adjusts
     #as necessary. The input is the tree and a newly brushed/highlighted region
     add_annotations <- function(tree_plot, tip_vector_in) {
@@ -283,12 +287,23 @@ mod_cladeAnnotator_server <-
           #it overlaps and provide user option to adjust the position of
           #all annotations
           label_offset <- label_off() + n_overlap * 0.004
+          
           #uses the snpAnno function to calculate the mean # of snps for
           #brushed tips
           snps <-
             snp_anno(gene_file = geneObjectForSNP(),
                      tips = current_tips)
-          #generates the layer for the set of brushed tips
+          
+          #generates the layer for the set of brushed tips. Trycatch here
+          #will test the ability to make the layer first then if an error or 
+          #warning occurs the initialize reactive values function will 
+          #reset the counter n (Values[["n"]]), the tip vector
+          #(Values[["tip_vec"]]), and show map (Values[["show_map"]]). This try
+          #catch helps with the example data, so if a user just switches
+          #between them with annotations drawn or added heatmap. It also helps
+          #if the user uploads tree, genetic, annotates, then uploads meta data
+          #In the above instance, all annotations will be lost but a cryptic
+          #error message will not be produced. 
           g <- tryCatch({
             g +
               make_layer(
@@ -320,7 +335,6 @@ mod_cladeAnnotator_server <-
                    metaFile = mFileMatOut())
       return(g)
     }
-    
     
     ##################################
     ## cladeAnnotator server output ##

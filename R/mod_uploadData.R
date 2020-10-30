@@ -159,7 +159,7 @@ mod_uploadData_server <- function(input, output, session) {
       #rename column to center; necessary for next step.
       gene_file_corrected <- gene_file() %>% dplyr::rename(center = 1)
       
-      #the next two lines essentially map the preferred tip lab display in the
+      #the next lines essentially map the preferred tip lab display in the
       #meta data file to that in the genetic distance file, which has the long
       #tip display names so essentially replacing the long tip labels with
       #whatever the user prefers and is included in the meta data file.

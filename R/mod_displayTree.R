@@ -95,7 +95,7 @@ mod_displayTree_server <- function(input, output, session,
   #because those parameters are reactives (i.e. tree_format())
   tree_plot <- function(input_file) {
     label <- NULL
-    ggtree::ggtree(input_file, layout = tree_format()) +
+    g <- ggtree::ggtree(input_file, layout = tree_format()) +
       ggplot2::xlim(NA, lim()) +
       ggtree::geom_tiplab(align = align(), fontface = font(),
                           family = "Helvetica", size = 3) +
@@ -104,6 +104,7 @@ mod_displayTree_server <- function(input, output, session,
                                       subset = !is.na(as.numeric(label)) &
                                         as.numeric(label) > node()),
                          nudge_x = boot_pos())
+    return(g)
   }
   
   ############################
