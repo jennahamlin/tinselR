@@ -35,7 +35,7 @@ mod_paramsTree_ui <- function(id) {
                    value = 0.00025, max = 1, step = 0.01),
       textInput(ns("annotation_text"), tags$b("Label for Annotation - Range", 
                                               style = "color:#afafae"),
-                "Range"), width = 3),
+                "Range -"), width = 3),
     
     column(
       numericInput(ns("tip_lim"), tags$b("Add Spacing to Plot - ",
@@ -49,7 +49,7 @@ mod_paramsTree_ui <- function(id) {
                    value = 0.05, step = 0.01),
       textInput(ns("median_text"), tags$b("Label for Annotation - Median", 
                                               style = "color:#afafae"),
-                "Median"), width = 3),
+                "Median -"), width = 3),
     
     column(
       checkboxInput(ns("mid_point"), tags$b("Midpoint Root",

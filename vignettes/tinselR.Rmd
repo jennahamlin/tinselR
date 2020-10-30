@@ -27,19 +27,19 @@ protecting our food sources by identifying bacterial contamination at a higher
 resolution than previous methods. To understand organismal relationships in
 response to potential outbreak investigations from whole-genome data, building
 and interpreting phylogenetic trees is essential for this public health
-workflow. When data is combined from phylogenetic trees and epidemiology, potential
-sources in outbreaks link across temporal and spatial scales. *Our goal was to 
-develop an open-source phylogenetic tree visualization and annotation graphical
-user interface, which will be made available for state public health 
-laboratories.* To accomplish this goal, we developed  **tinselR** (pronounced
-tinsel-er) using the R shiny framework. We choose to build this application in 
-because of R's base graphics and additional phylogenetic packages that are the 
-gold standard for phylogenetic tree graphics. Our tool's minimum input
-requirements are a Newick generated phylogenetic tree in which user inputs
-change parameters of the visualized tree. With either or both the genetic distance
-matrix and the metadata file, the user can include annotations on the image,
-quickly adjust tip labels, and add a heatmap to the phylogenetic tree. These
-modified phylogenetic tree images are downloadable in various formats for
+workflow. When data is combined from phylogenetic trees and epidemiology, 
+potential sources in outbreaks link across temporal and spatial scales.
+*Our goal was to develop an open-source phylogenetic tree visualization and
+annotation graphical user interface, which will be made available for state
+public health laboratories.* To accomplish this goal, we developed  **tinselR**
+(pronounced tinsel-er) using the R shiny framework. We choose to build this
+application in because of R's base graphics and additional phylogenetic packages
+that are the gold standard for phylogenetic tree graphics. Our tool's minimum
+input requirements are a Newick generated phylogenetic tree in which user inputs
+change parameters of the visualized tree. With either or both the genetic 
+distance matrix and the metadata file, the user can include annotations on the
+image, quickly adjust tip labels, and add a heatmap to the phylogenetic tree.
+These modified phylogenetic tree images are downloadable in various formats for
 presentations or publications. These images help public health officials and
 stakeholders discuss the differences or similarities between isolates in
 response to outbreaks. Below we will detail and outline how to use the 
@@ -53,13 +53,14 @@ application, using two example datasets.
 
 When the application is launched, the user can test out the application by
 using one of the pre-loaded datasets located in the 'Example Data' tab (Figure
-\@ref(fig:exampleDataPane1)). We provide three datasets (i.e. Newick tree,
-genetic distance matrix, and metadata file) with the number of isolates ranging
-from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
-PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: PRJNA230403). After 
-clicking on the 'Example Data' tab (Figure \@ref(fig:exampleDataPane1)), the
-user selects from the drop down menu for the three data types, the concordant
-files (e.g. example tree 1, example genetic 1, and example meta 1; (see Figure \@ref(fig:exampleDataPane2)). 
+\@ref(fig:exampleDataPane1)). We provide three datasets (i.e. Newick-formatted
+tree, genetic distance matrix, and metadata file) already combined with the
+number of isolates ranging from 14 - 19. These data are either *Eschericia coli*
+(NCBI Bioproject: PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: 
+PRJNA230403). After clicking on the 'Example Data' tab
+(Figure \@ref(fig:exampleDataPane1)), the user selects from one drop down menu
+for one of the combined datasets (e.g. example data 1, example data 2, and
+example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
 
 ```{r exampleDataPane1, echo = F, out.width = "75%", fig.cap = "Example data pane is circled in blue"}
 knitr::include_graphics(here::here("vignettes/images/slide1.png"))
@@ -72,30 +73,31 @@ knitr::include_graphics(here::here("vignettes/images/slide2.png"))
 
 **Displaying example tree and genetic distance data**
 
-Once you have selected the three files, to begin using the application, press
-the 'Visualize Tree' button. At this point all potential tree visual parameters 
-you want to alter are available using drop down menus (e.g. annotation label 
-color), user input (e.g. size of scale bar), or users selection
-(e.g. midpoint root). All tree visual parameters that a user can adjust are 
-displayed in Figure \@ref(fig:exampleDataPane3).
+Once you have selected one of the datasets, to begin using the application, 
+press the 'Visualize Tree' button. At this point all potential tree visual
+parameters you want to alter are available using drop down menus
+(e.g. annotation label color), user input (e.g. size of scale bar), or 
+users selection (e.g. midpoint root). All tree visual parameters that a user 
+can adjust are displayed in Figure \@ref(fig:exampleDataPane3).
 
 With the genetic distance file uploaded, a user can highlight clades to 
-add annotations which will display the range of snps for tips that are 
-included in the highlighted selection (Figure \@ref(fig:exampleDataPane4) and 
-Figure \@ref(fig:exampleDataPane5)). To correctly display the annotation, 
+add annotations which will display the range and median of SNPs for tips that
+are included in the highlighted selection (Figure \@ref(fig:exampleDataPane4)
+and Figure \@ref(fig:exampleDataPane5)). To correctly display the annotation, 
 the user should highlight the tips of interest and include within the 
-highlighted section their most recent common ancestor, [MRCA](https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02),
+highlighted section their most recent common ancestor, 
+[MRCA](https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02),
 (Figure \@ref(fig:exampleDataPane4) and Figure \@ref(fig:exampleDataPane5)). In 
 theory, one can add as many annotations as you want, though at some point the
 annotations may run off the plot area and thus you may need to add more
-space to plot. The ability to change spacing to the plot is one of the tree 
-visual parameters that can be adjusted (Figure \@ref(fig:exampleDataPane3)). We 
-would also recommend to only include those that help describe the outbreak 
-clades of interest. Any annotation placed on the plot can be removed by pushing
-the 'Remove Annotations' button. Unlike with the 'Add Annotation' button, you
-do not need to highlight which annotation you would like to remove. Because of
-this, the remove annotations works by removing the last placed annotation until
-there are no more. 
+space to plot (Tree visual parameter - 'Add Spacing to Plot'). The ability to
+change spacing to the plot is one of the tree  visual parameters that can be
+adjusted (Figure \@ref(fig:exampleDataPane3)). We would also recommend to only
+include those that help describe the outbreak clades of interest. Any annotation
+placed on the plot can be removed by pushing the 'Remove Annotations' button.
+Unlike with the 'Add Annotation' button, you do not need to highlight which
+annotation you would like to remove. Because of this, the remove annotations
+works by removing the last placed annotation until there are no more. 
 
 ```{r exampleDataPane3, echo = F, out.width = "75%", fig.cap = "Example data pane with tree visual parameters enclosed in blue box."}
 knitr::include_graphics(here::here("vignettes/images/slide3.png"))

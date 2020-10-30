@@ -55,14 +55,15 @@ run_app()
 **4). Load your data or use the example data**  
 
 *Please click on the 'Data Upload' pane, where you can upload your files.*
-*Example data is availale for playing with tinselR in the 'Example Data' pane of* 
-*the application.* 
+*Example data is availale for playing with tinselR in the 'Example Data' pane* 
+*of the application. The example data sets include all three files (tree,* 
+*gene, and meta) and are available for selection via one drop down menu* 
 
 * **Phylogenetic Tree** - required; a 
 [newick](https://en.wikipedia.org/wiki/Newick_format) generated tree 
 
 * **Genetic Distance data** - optional for use with the annotation function;
-a tsv/txt/csv file - see below for image of genetic distance matrix
+a tsv/txt/csv file - see below for image of genetic distance matrix.
 
 <p>
 
@@ -72,7 +73,7 @@ a tsv/txt/csv file - see below for image of genetic distance matrix
 
 * **Metadata** - optional for easy correction of tip labels or adding a heatmap;
 a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels.
-See image below for a csv file example 
+See image below for a csv file example.
 
 <p>
 
@@ -97,7 +98,7 @@ with annotated clades including the range of SNPs.
     <img src = "inst/app/www/treeWAnno.PNG" />
 </p>
 
-#### If column for heatmap included in meta data file you can -
+#### If column for heatmap is included in metadata file you can -
 * add the heatmap on to a tree with or without annotations. See below for a tree
 with annotated clades and a heatmap. 
 
@@ -109,7 +110,8 @@ with annotated clades and a heatmap.
 **Known issues as October 23, 2020**
 
 - If user uploads tree and genetic distance matrix and then annotates the tree, 
-error pops up if user then tries to upload a meta data file. 
+and then selects a meta data file, all previously placed annotations are wiped
+from the tree image. 
 
 If you are interested in seeing the session info for the computer that developed
 this application please visit this 
