@@ -24,6 +24,8 @@ mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotOutput(ns("tree_display"), brush = ns("plot_brush"))
+    #,
+    #bookmarkButton()
   )
 }
 

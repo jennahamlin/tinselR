@@ -13,11 +13,11 @@ mod_aboutTreeParams_ui <- function(id) {
     fluidRow(column(12, offset = 0,
                     mainPanel(h2(strong("Description of Tree Parameters")),
                               tags$br(),
-                              tags$strong("Below we define the tree parameters
+                              tags$strong("Below are defined the tree parameters
                                           that a user may adjust. Please
-                                          note that these parameters are
-                                          what is available for adjustment
-                                          in the package ggtree or ggplot2."),
+                                          note that these parameters are those 
+                                          that are found in the package ggtree
+                                          or ggplot2."),
                               tags$br(),
                               tags$br(),
                               tags$li(tags$em("Add spacing to plot -"), "This

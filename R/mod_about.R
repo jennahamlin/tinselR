@@ -30,7 +30,7 @@ mod_about_ui <- function(id) {
                                 the application while launched
                                 (i.e. no data is stored.) When you are
                                 happy with the way your tree looks scroll to the
-                                bottom and press Download"),
+                                bottom and press Download."),
                               tags$p("If there is a bug, feature request, or
                                      documentation needed, please file an",
                                      a("issue", href =
