@@ -320,6 +320,8 @@ mod_cladeAnnotator_server <-
             warning = function(war) {
               initialize_r_values()
             }, error = function(err) {
+              message("Unable to remember annotated clades when a meta data
+                      file is added after annotation has begun")
               initialize_r_values()
             }
           )
