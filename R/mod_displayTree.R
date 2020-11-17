@@ -96,7 +96,8 @@ mod_displayTree_server <- function(input, output, session,
   tree_plot <- function(input_file) {
     label <- NULL
     g <- ggtree::ggtree(input_file, layout = tree_format()) +
-      ggplot2::xlim(NA, lim()) +
+      ggplot2::xlim(0, lim()) +
+      ggplot2::theme(plot.margin = ggplot2::unit(c(0.1,0.1,0.1,0.1),"cm"))+
       ggtree::geom_tiplab(align = align(), fontface = font(),
                           family = "sans", size = 3) +
       ggtree::geom_treescale(width = num_scale(), x = 0.005, y = -3) +

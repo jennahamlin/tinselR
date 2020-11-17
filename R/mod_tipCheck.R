@@ -23,7 +23,7 @@ mod_tipCheck_ui <- function(id) {
   tagList(
 
     tags$table(width = "100%",
-               tags$th("File checking error messages - ",
+               tags$th("File check messages - ",
                        colspan = "3", style =
                          "font-size:20px; color:#444444;")),
 

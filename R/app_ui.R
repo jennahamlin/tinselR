@@ -33,7 +33,7 @@ app_ui <- function() {
                               br(),
                               mod_downloadImage_ui("downloadImage_ui_example")
                             ))),
-                 tabPanel("Data Upload",
+                 tabPanel("Upload Data",
                           sidebarLayout(
                             sidebarPanel(
                               mod_uploadData_ui("uploadData_ui_1"),
