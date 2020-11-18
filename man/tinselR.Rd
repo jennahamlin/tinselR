@@ -5,12 +5,13 @@
 \alias{tinselR}
 \title{tinselR: An R Shiny Application for annotating outbreak phylogenetic trees}
 \description{
-This is a phylogenetic tree application for adding additional information to
-trees. Additional information could come from a genetic distance file or
+This is a phylogenetic tree application for annotating trees with additional
+information. Additional information could come from a genetic distance file or
 meta data file.
 }
-\section{tinselR functions}{
+\section{tinselR modules}{
 
-The tinselR functions ...
+The main modules of tinselR include:
+mod_about -
 }
 
