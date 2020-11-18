@@ -20,7 +20,16 @@ mod_FAQ_ui <- function(id){
                               tags$strong("Below is a list of questions you
                                           may have when using the application
                                           with your own data."),
-                              tags$br())))
+                              tags$br(),
+                              tags$br(),
+                              tags$li(tags$em("Cannot see tree?"), "Please
+                                      try adjusting the parameter 
+                                      'Add spacing to plot'."),
+                              tags$br(),
+                              tags$li(tags$em("Cannot see heatmap?"), "Please
+                                      try adjusting the parameter 'Move Heatmap
+                                      '.")
+                              )))
  
   )
 }
@@ -32,10 +41,3 @@ mod_FAQ_server <- function(input, output, session){
   ns <- session$ns
  
 }
-    
-## To be copied in the UI
-# mod_FAQ_ui("FAQ_ui_1")
-    
-## To be copied in the server
-# callModule(mod_FAQ_server, "FAQ_ui_1")
- 
