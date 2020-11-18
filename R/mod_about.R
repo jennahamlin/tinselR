@@ -87,7 +87,7 @@ mod_about_ui <- function(id) {
                               tags$li(em("1. Phylogenetic Tree"), "- required;
                                       a", a("newick", href =
                                               "https://en.wikipedia.org/wiki/Newick_format"),
-                                      "generated tree"),
+                                      "formatted tree"),
                               tags$br(),
                               tags$div(tags$li(em("2. Genetic Distance Data"),
                                                "- optional for use with the

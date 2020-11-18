@@ -38,8 +38,8 @@ mod_aboutExample_ui <- function(id) {
                                      data 1 ) and press the 'Add Tree button'.
                                      This will display the tree and allow you
                                      to start adjusting the tree visualization
-                                     paramters, add annotation, and if available
-                                     include a heatmap instantaneously.",
+                                     paramters, add annotation, and add a
+                                     heatmap.",
                                      tags$br(),
                                      tags$br(),
                                      tags$li("If you want to add annotations
@@ -47,9 +47,9 @@ mod_aboutExample_ui <- function(id) {
                                      recent common ancestor,",
                                              tags$a("MRCA", href =
                                                       "https://evolution.berkeley.edu/evolibrary/article/phylogenetics_02"),
-                                             ", and press the
-                                                      'Add Annotations' button.
-                                             Repeat until you are satisfied.")),
+                                             ", and press the 'Add Annotations'
+                                             button. Repeat until you are 
+                                             satisfied.")),
                               tags$li("If you want to remove previously placed
                               annotations, just press the 'Remove Annotations'
                               button, this will step your annotations back one
@@ -58,75 +58,74 @@ mod_aboutExample_ui <- function(id) {
                               highlighting."),
                               tags$br(),
                               tags$li("Adding a heatmap is only a possibility 
-                              for example data 2 and 3 and will automatically
+                              for example data 1 and 3 and will automatically
                                      load/unload if you press the 'Add Heatmap/
-                                      Remove Heatmap' buttons."),
+                                      Remove Heatmap' buttons. You may need
+                                      to adjust the position of the heatmap
+                                      relative to the spacing of the plot."),
                               tags$br(),
                               tags$br(),
-                              tags$p((tags$h5(tags$strong("Data set 1"))),
-                                     "This data set will automatically be
-                                     seen when a user presses the 'Add Tree'
-                                     button. This dataset does not have
-                                     metadata for adding the heatmap but does do
-                                     automatic tip label correction. ",
-                                     tags$li(tags$em("example tree 1")),
-                                     "This is a newick formatted tree with
-                                     19 tip labels ",
-                                     tags$li(tags$em("example gene 1")),
-                                     "This is a genetic distance matrix imported
-                                     from a tsv file with the same corresponding
-                                     tips in the example tree 1.",
+                              tags$p((tags$h5(tags$strong("Data set 1"))),"This
+                              data set will automatically be seen when a user
+                              presses the 'Add Tree' button. This dataset
+                              includes only one column in the metadata for the
+                                     heatmap.",
+                                     tags$li(tags$em("example tree 1")), "This
+                                     is a newick formatted tree with 14 tip
+                                     labels.",
+                                     tags$li(tags$em("example gene 1")), "This
+                                     is a genetic distance matrix imported from
+                                     a tsv file with the same corresponding tips
+                                     in the example tree 1.",
                                      tags$li(tags$em("example meta 1")),
                                      "This is a meta data file used for
-                                     correcting the tip labels which contains
-                                     two columns and imported from a csv file.")
-                              ,
-                              tags$br(),
-                              tags$br(),
-                              tags$p((tags$h5(tags$strong("Data set 2"))),
-                                     "This data set will not automatically be
-                                     seen when a user presses the 'Add Tree'
-                                     button because the user needs to change
-                                     the spacing on the plot; we suggest
-                                     0.09. The metadata has two columns that
-                                     can be plotted with the heatmap button.
-                                     One of the columns plotted has missing
-                                     values (NA). If you press 'Add Heatmap'
-                                     make sure to adjust the position of the
-                                     heatmap to be less than the spacing on the
-                                     plot. We suggest this value to be 0.02.
-                                     Both of these options are located in the
-                                     alter tree parameters box.",
-                                     tags$li(tags$em("example tree 2")),
-                                     "This is a newick formatted tree with
-                                     14 tip labels generated by RAxML.",
-                                     tags$li(tags$em("example gene 2")),
-                                     "This is a genetic distance matrix imported
-                                     from a tsv file with the same corresponding
-                                     tips in the example tree 2.",
-                                     tags$li(tags$em("example meta 2")),
-                                     "This is a meta data file used for
-                                     correcting the tip labels, has two columns
-                                     for adding two columns of heatmap, and 
-                                     imported from a tsv file."),
-                              tags$br(),
-                              tags$br(),
-                              tags$p((tags$h5(tags$strong("Data set 3"))),
-                                     "This data set will automatically be
-                                     seen when a user presses the 'Add Tree'
-                                     button. This dataset includes only one
-                                     column in the metadata for the heatmap.",
-                                     tags$li(tags$em("example tree 3")),
-                                     "This is a newick formatted tree with
-                                     14 tip labels.",
-                                     tags$li(tags$em("example gene 3")),
-                                     "This is a genetic distance matrix imported
-                                     from a tsv file with the same corresponding
-                                     tips in the example tree 2.",
-                                     tags$li(tags$em("example meta 3")),
-                                     "This is a meta data file used for
                                      correcting the tip labels and plotting a
-                                     heatmap and was imported from a txt file.")
+                                     heatmap and was imported from a txt file."
+                              ),
+                              tags$br(),
+                              tags$br(),
+                              tags$p((tags$h5(tags$strong("Data set 2"))), "This
+                              data set will automatically be seen when a user
+                              presses the 'Add Tree' button. This dataset does
+                              not have metadata for adding the heatmap but does
+                              do automatic tip label correction. ", 
+                                     tags$li(tags$em("example tree 2")), "This
+                                     is a newick formatted tree with 19 tip
+                                     labels ",
+                                     tags$li(tags$em("example gene 2")), "This
+                                     is a genetic distance matrix imported from
+                                     a tsv file with the same corresponding tips
+                                     in the example tree 2.",
+                                     tags$li(tags$em("example meta 2")), "This
+                                     is a meta data file used for correcting the
+                                     tip labels which contains two columns and
+                                     imported from a csv file."),
+                              tags$br(),
+                              tags$br(),
+                              tags$p((tags$h5(tags$strong("Data set 3"))), "This
+                              data set will not automatically be seen when a
+                              user presses the 'Add Tree' button because the
+                              user needs to change the spacing on the plot; we
+                              suggest 0.09. The metadata has two columns that 
+                              can be plotted with the heatmap button. One of the
+                              columns plotted has missing values (NA). If you
+                              press 'Add Heatmap' make sure to adjust the
+                              position of the heatmap to be less than the
+                              spacing on the plot. We suggest this value to be
+                              0.02. Both of these options are located in the
+                                     alter tree parameters box.",
+                                     tags$li(tags$em("example tree 3")), "This
+                                     is a newick formatted tree with 14 tip
+                                     labels generated by RAxML.",
+                                     tags$li(tags$em("example gene 3")), "This
+                                     is a genetic distance matrix imported from
+                                     a tsv file with the same corresponding tips
+                                     in the example tree 3.",
+                                     tags$li(tags$em("example meta 3")), "This
+                                     is a meta data file used for correcting the
+                                     tip labels, has two columns for adding two
+                                     columns of heatmap, and imported from a tsv
+                                     file.")
                     )))
   )
 }
