@@ -6,7 +6,8 @@
 #' application, which provides users with common tips for issues.
 #'
 #' @rdname mod_FAQ
-#'
+#' 
+#' @param id shiny id
 #'
 #' @importFrom shiny NS tagList
 

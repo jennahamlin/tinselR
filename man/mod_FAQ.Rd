@@ -6,6 +6,9 @@
 \usage{
 mod_FAQ_ui(id)
 }
+\arguments{
+\item{id}{shiny id}
+}
 \description{
 A shiny Module. This module generates the FAQ page for the
 application, which provides users with common tips for issues.

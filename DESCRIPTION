@@ -1,15 +1,11 @@
 Package: tinselR
-Title: An R Shiny Application for Annotating Outbreak
-    Phylogenetic Trees
+Title: An R Shiny Application for annotating outbreak phylogenetic
+  trees
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Jenna",
-           family = "Hamlin",
-           role = c("cre", "aut"),
-           email = "ptx4@cdc.gov")
+Authors@R: person('Jenna', 'Hamlin', email = 'ptx4@cdc.gov', role = c('cre', 'aut'))
 Description: This is a phylogenetic tree application for adding
-    additional information to trees. Additional information could come
-    from a genetic distance file or meta data file.
+  additional information to trees. Additional information could come from a
+  genetic distance file or meta data file.
 License: MIT + file LICENSE
 URL: https://github.com/jennahamlin/tinselR
 BugReports: https://github.com/jennahamlin/tinselR/issues
