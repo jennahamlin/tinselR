@@ -56,7 +56,8 @@ app_ui <- function() {
                               br(),
                               br(),
                               mod_downloadImage_ui("downloadImage_ui_data")
-                            )))
+                            ))),
+                 tabPanel("FAQ", mod_FAQ_ui("FAQ_ui_1"))
       )
     )
   )

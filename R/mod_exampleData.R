@@ -29,8 +29,16 @@ mod_exampleData_ui <- function(id) {
 
     selectInput(ns("example_data_set"), label = "Example Data", choices =
                   c("example data 1", "example data 2", "example data 3")),
-
-    tags$em("Example data set 2 reminder -"), 
+    
+    tags$em("Example data set 1 reminder -"),
+    tags$li("can add heatmap"),
+    tags$br(),
+    
+    tags$em("Example data set 2 reminder -"),
+    tags$li("no heatmap"),
+    tags$br(),
+    
+    tags$em("Example data set 3 reminder -"), 
     tags$li("adjust spacing to plot = 0.09"), 
     tags$li("move heatmap = 0.03"),
 
@@ -51,7 +59,7 @@ mod_exampleData_server <- function(input, output, session) {
   ### EXAMPLE DATA ###
   ####################
 
-  #reactive expressions that loads and allows to user to select from three
+  #reactive expressions that loads and allows the user to select from three
   #different datasets already combined (e.g tree1, gene1, meta1).
   #Example data are made via reading in the data, usethis::use_data(), and
   #finally documenting the data like so - usethis::use_data(tree2, tree2)
@@ -74,9 +82,9 @@ mod_exampleData_server <- function(input, output, session) {
     files[["meta"]] <- c()
   })
 
-  # ############
-  # ### META ###
-  # ############
+  ############
+  ### META ###
+  ############
 
   #reactive which allows the three different data sets to be switched by
   #changing the reactive value of files[["meta"]]
@@ -90,9 +98,9 @@ mod_exampleData_server <- function(input, output, session) {
     }
   })
 
-  # ###############
-  # ### GENETIC ###
-  # ###############
+  ###############
+  ### GENETIC ###
+  ###############
 
   #reactive which allows the three different data sets to be switched by
   # changing the reactive value of files[["gene"]]
@@ -106,9 +114,9 @@ mod_exampleData_server <- function(input, output, session) {
     }
   })
 
-  # ##############
-  # ### TREES ###
-  # ##############
+  ##############
+  ### TREES ###
+  ##############
 
   #reactive which allows the three different data sets to be switched by
   #changing the reactive value of files[["tree"]]

@@ -46,7 +46,7 @@ mod_paramsTree_ui <- function(id) {
                    value = 0.005, step = 0.01),
       numericInput(ns("mat_offset"), tags$b("Move Heatmap -",
                                             style = "color:#afafae"),
-                   value = 0.05, step = 0.01),
+                   value = 0.01, step = 0.01),
       textInput(ns("median_text"), tags$b("Label for Annotation - Median",
                                               style = "color:#afafae"),
                 "Median -"), width = 3),

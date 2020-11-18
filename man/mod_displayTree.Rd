@@ -3,7 +3,7 @@
 \name{mod_displayTree_ui}
 \alias{mod_displayTree_ui}
 \alias{mod_displayTree_server}
-\title{displayTree UI Function}
+\title{mod_displayTree_ui and mod_displayTree_server}
 \usage{
 mod_displayTree_ui(id)
 
@@ -39,6 +39,6 @@ A shiny Module. This module combines the tree with genetic
  combined data.
 }
 \details{
-@title   mod_displayTree_ui and mod_displayTree_server
+displayTree UI Function
 }
 \keyword{internal}

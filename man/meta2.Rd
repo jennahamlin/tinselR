@@ -5,11 +5,11 @@
 \alias{meta2}
 \title{Example Meta 2
 
-This is a meta data file for tip correction for 19 isolates of Salmonella
-enterica sub species enterica to be used with the Newick phylogenetic tree
-(example tree 2) and the optional genetic distance file (example gene 2).}
+This is a meta data file for tip correction for 19 isolates of Eschericia
+coli to be used with the Newick phylogenetic tree (example tree 2) and the
+ optional genetic distance file (example gene 2).}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 14 rows and 4 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 19 rows and 2 columns.
 }
 \usage{
 data(meta2)
@@ -17,14 +17,13 @@ data(meta2)
 \description{
 Example Meta 2
 
-This is a meta data file for tip correction for 19 isolates of Salmonella
-enterica sub species enterica to be used with the Newick phylogenetic tree
-(example tree 2) and the optional genetic distance file (example gene 2).
+This is a meta data file for tip correction for 19 isolates of Eschericia
+coli to be used with the Newick phylogenetic tree (example tree 2) and the
+ optional genetic distance file (example gene 2).
 }
 \examples{
 data(meta2)
  #convert the column Display labels to the row name
-meta2 <- meta2 \%>\% tibble::column_to_rownames(var = "Display.labels")\%>\%
-dplyr::select(-Tip.labels) #exclude column Tip.labels
+meta2 <- meta2 \%>\% tibble::column_to_rownames(var = "Display.labels")
 }
 \keyword{datasets}

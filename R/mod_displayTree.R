@@ -1,6 +1,6 @@
 #' displayTree UI Function
 #'
-#'   @title   mod_displayTree_ui and mod_displayTree_server
+#' @title   mod_displayTree_ui and mod_displayTree_server
 #' @description  A shiny Module. This module combines the tree with genetic
 #'  distance as an S4 object that allows tree plotting and accessing the
 #'  combined data.

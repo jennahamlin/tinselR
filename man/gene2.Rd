@@ -5,11 +5,11 @@
 \alias{gene2}
 \title{Example Gene 2
 
-This is a genetic distance matrix of SNPs for 14 isolates of Salmonella
-enterica sub species enterica to be used with the Newick phylogenetic tree
-(example tree 2) and the optional meta data file (example meta 2).}
+This is a genetic distance matrix of SNPs for 19 isolates of Eschericia coli
+to be used with the Newick phylogenetic tree (example tree 2) and the
+optional meta data file (example meta 2).}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14 rows and 15 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 19 rows and 20 columns.
 }
 \usage{
 data(gene2)
@@ -17,14 +17,14 @@ data(gene2)
 \description{
 Example Gene 2
 
-This is a genetic distance matrix of SNPs for 14 isolates of Salmonella
-enterica sub species enterica to be used with the Newick phylogenetic tree
-(example tree 2) and the optional meta data file (example meta 2).
+This is a genetic distance matrix of SNPs for 19 isolates of Eschericia coli
+to be used with the Newick phylogenetic tree (example tree 2) and the
+optional meta data file (example meta 2).
 }
 \examples{
 data(gene2)
-#convert to three column tibble by the label column
-gene2 <- gene2 \%>\% dplyr::rename( label = 1) \%>\% tidyr::pivot_longer(-label)
+#renames column 2, row 2 from '.' to 'center' for further manipulation
+gene2 <- gene2 \%>\% dplyr::rename(center = 2)
 
 }
 \keyword{datasets}

@@ -5,9 +5,9 @@
 \alias{tree3}
 \title{Example Tree 3
 
-This is a Newick phylogenetic tree for 19 isolates of Salmonella enterica
-to be used with the optional genetic distance matrix (example gene 3) and
- the optional meta data file (example meta 3).}
+This is a Newick phylogenetic tree for 19 isolates of Salmonella enterica sub
+species enterica to be used with the genetic distance matrix
+(example gene 3) and the optional meta data file (example meta 3).}
 \format{
 An object of class \code{phylo} of length 5.
 }
@@ -17,13 +17,12 @@ data(tree3)
 \description{
 Example Tree 3
 
-This is a Newick phylogenetic tree for 19 isolates of Salmonella enterica
-to be used with the optional genetic distance matrix (example gene 3) and
- the optional meta data file (example meta 3).
+This is a Newick phylogenetic tree for 19 isolates of Salmonella enterica sub
+species enterica to be used with the genetic distance matrix
+(example gene 3) and the optional meta data file (example meta 3).
 }
 \examples{
 data(tree3)
-treeout <- ggtree::ggtree(tree3)
-treeout <- treeout + ggtree::geom_tiplab() #add labels to the tree
+tree3 <- ape::plot.phylo(tree3)
 }
 \keyword{datasets}

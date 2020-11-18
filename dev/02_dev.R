@@ -10,6 +10,7 @@
 golem::add_module(name = "about")
 golem::add_module(name = "aboutExample")
 golem::add_module(name = "aboutTreeParams")
+golem::add_module(name = "FAQ")
 
 #upload data - tree, genetic, meta
 golem::add_module(name = "tipCheck")
