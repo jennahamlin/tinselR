@@ -84,7 +84,7 @@ replace_column_header <- function(g_file) {
 
 #additional manipulation of genetic distance matrix for ultimately getting the
 #mean number of SNPs. The input parameter is the genetic data file. 
-gene_object_out  <- function(gene_file) {
+gene_object_out  <- function(gene_file_in) {
   label <- . <- value <- NULL
   gene_file %>%
     #remove na
