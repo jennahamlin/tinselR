@@ -1,16 +1,19 @@
-#' downloadImage UI Function
+#' downloadImage Function
 #'
 #' @title   mod_downloadImage_ui and mod_downloadImage_server
 #'
 #' @description  A shiny Module. This module allows one to download the
 #' adjusted tree image. Current download formats include png, pdf, and tiff.
 #'
+#' @rdname mod_downloadImage
+#' 
 #' @param id shiny id
 #' @param input internal
 #' @param output internal
 #' @param session internal
+#' @param treeout from cladeAnnotator module; mostly like class of ggtree, gg, 
+#' gglot2 if user combined genetic data with tree data; if not then class phylo
 #'
-#' @rdname mod_downloadImage
 #'
 #' @keywords internal
 #' @export
@@ -58,6 +61,10 @@ mod_downloadImage_ui <- function(id) {
 mod_downloadImage_server <- function(input, output, session, tree_out) {
   ns <- session$ns
 
+  #inputs
+  #tree_out -mostly like class of ggtree, gg, gglot2 if user combined genetic 
+  #data with tree data; if not then class phylo 
+  
   output$downloadPlot <- downloadHandler(
     filename = function() {
       paste("data-",  Sys.Date(), ".", input$file_type,  sep = "")},
@@ -76,7 +83,7 @@ mod_downloadImage_server <- function(input, output, session, tree_out) {
   #the file 'tinseUserCount.txt' serves as an approximation for user count
   #based on the number of downloads. Please note this is a very rough
   #approximation. If someone does not want to include this; then comment
-  #the below code out (L71 - 78) and make sure to remove the line
+  #the below code out (L81 - 89) and make sure to remove the line
   #`shinyjs::hidden` in the UI above. Once those things are done, then the
   #download button is automatically displayed.
   # observeEvent(input$text, {

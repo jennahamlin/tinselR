@@ -1,8 +1,11 @@
-###functions
+########################
+#### golem_utils ui ####
+########################
 
-##uploadData ui functions
+#This holds functions that are used in the module uploadData ui
 
-#function to upload a file
+#function to upload a file. file_id is the id assigned to the file. file_label 
+#is the label assigned to the file as visible in the ui
 file_upload <- function(file_id, file_label) {
   fileInput(file_id,
             file_label,
@@ -13,6 +16,8 @@ file_upload <- function(file_id, file_label) {
                        ".tsv"))
   }
 
+#function which holds the type of input separators. file_id is the id assigned 
+#to the file. file_label is the label assigned to the file as visible in the ui
 input_separator <- function(file_id, file_label) {
   radioButtons(file_id,
                file_label,

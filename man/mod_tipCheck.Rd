@@ -22,23 +22,24 @@ mod_tipCheck_server(
 \arguments{
 \item{id, input, output, session}{internal}
 
-\item{meta_file_out}{imported meta file for confirming that file is uploaded}
+\item{meta_file_out}{used to confirm that file is uploaded; on/off}
 
-\item{m_file_out}{imported meta data file for tip checking}
+\item{m_file_out}{meta data that is read in used  file for tip checking}
 
-\item{gene_file_out}{imported gene file for confirming that file is uploaded}
+\item{gene_file_out}{used to confirm that file is uploaded; on/off}
 
-\item{g_file_out}{imported genetic distance file for tip checking}
+\item{g_file_out}{gene data that is read in used for tip checking}
 
-\item{t_file_out}{imported tree for tip checking}
+\item{t_file_out}{tree data that is read in for tip checking}
 
-\item{tree_file_out}{imported tree file to confirm file is uploaded}
+\item{tree_file_out}{used to confirm that file is uploaded; on/off}
 }
 \description{
-A shiny Module. This module generates the landing page for the
-application and provides a link to the github repo where users may file
-an issue
+A shiny Module. This module generates messages for the user
+regarding the files uploaded and if column(s) for a heatmap is available.
+This module contains 3 functions located in the golem_utils_server
+file (sanity, not_coluns, and m_file_conversion).
 }
 \details{
-tipCheck UI Function
+tipCheck Function
 }

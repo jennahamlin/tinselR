@@ -2,17 +2,24 @@
 % Please edit documentation in R/mod_FAQ.R
 \name{mod_FAQ_ui}
 \alias{mod_FAQ_ui}
-\title{mod_about_ui mod_about_server}
+\title{mod_FAQ_ui mod_FAQ_server}
 \usage{
 mod_FAQ_ui(id)
 }
 \arguments{
-\item{id}{shiny id}
+\item{id}{Internal parameters for {shiny}.}
+
+\item{input}{internal}
+
+\item{output}{internal}
+
+\item{session}{internal}
 }
 \description{
 A shiny Module. This module generates the FAQ page for the
 application, which provides users with common tips for issues.
 }
 \details{
-FAQ UI Function
+FAQ Function
 }
+\keyword{internal}

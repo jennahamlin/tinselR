@@ -1,20 +1,22 @@
-#' tipCheck UI Function
+#' tipCheck Function
 #'
 #' @title mod_tipCheck_ui mod_tipCheck_server
 #'
-#' @description A shiny Module. This module generates the landing page for the
-#' application and provides a link to the github repo where users may file
-#' an issue
+#' @description A shiny Module. This module generates messages for the user
+#' regarding the files uploaded and if column(s) for a heatmap is available.
+#' This module contains 3 functions located in the golem_utils_server
+#' file (sanity, not_coluns, and m_file_conversion).  
+#' 
 #'
 #' @rdname mod_tipCheck
 #'
 #' @param id,input,output,session internal
-#' @param t_file_out imported tree for tip checking
-#' @param tree_file_out imported tree file to confirm file is uploaded
-#' @param g_file_out imported genetic distance file for tip checking
-#' @param gene_file_out imported gene file for confirming that file is uploaded
-#' @param meta_file_out imported meta file for confirming that file is uploaded
-#' @param m_file_out imported meta data file for tip checking
+#' @param t_file_out tree data that is read in for tip checking
+#' @param tree_file_out used to confirm that file is uploaded; on/off
+#' @param gene_file_out used to confirm that file is uploaded; on/off
+#' @param g_file_out gene data that is read in used for tip checking
+#' @param meta_file_out used to confirm that file is uploaded; on/off
+#' @param m_file_out meta data that is read in used  file for tip checking
 #'
 #' @importFrom shiny NS tagList
 #' @importFrom tibble column_to_rownames
@@ -46,7 +48,15 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
                                 m_file_out, gene_file_out, g_file_out,
                                 t_file_out, tree_file_out) {
   ns <- session$ns
-
+  
+  #inputs
+  #t_file_out tree data that is read in for tip checking
+  #tree_file_out used to confirm that file is uploaded; on/off
+  #gene_file_out used to confirm that file is uploaded; on/off
+  #g_file_out gene data that is read in used for tip checking
+  #meta_file_out used to confirm that file is uploaded; on/off
+  #m_file_out meta data that is read in used  file for tip checking
+  
   #this will render the output from the sanity function found in the
   #golem_utils_server.R file and takes in 6 reactive files -
   #tree x2, genetic distance x2, meta data x2 - one file from each three sub
@@ -56,9 +66,9 @@ mod_tipCheck_server <- function(input, output, session, meta_file_out,
   #t_file_out instead of tree_file_out in L 61, the user message does not
   #display. In theory is.null(t_file_out) should render the message but it does
   #not. This could be one place for improvement. Reducing the number of
-  #parameters required in teh tipCheck server from 6 to 3, especially since
+  #parameters required in thh tipCheck server from 6 to 3, especially since
   #for the example data, the files are repeated in the app_server.R file.
-
+  
   output$file_checking <- renderUI({
     ns <- session$ns
 

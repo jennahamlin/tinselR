@@ -1,15 +1,15 @@
-#' pushButtons UI Function
+#' pushButtons Function
 #'
 #' @title mod_pushButtons_ui mod_pushButtons_server
 #'
 #' @description A shiny Module. This module generates the displayed action
-#' buttons for add/remove annotations and add/remove heatmap.
+#' buttons for adding the tree, add/remove annotations, or add/remove heatmap.
 #'
 #' @rdname mod_pushButtons
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#'
+#' @keywords internal
 #' @importFrom shiny NS tagList
 mod_pushButtons_ui <- function(id) {
   ns <- NS(id)

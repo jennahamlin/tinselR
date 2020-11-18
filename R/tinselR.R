@@ -6,9 +6,57 @@
 #' 
 #' 
 #' @section tinselR modules:
-#' The main modules of tinselR include:
-#' mod_about - 
+#' The modules of tinselR are described below:
+#' 
+#' mod_about -  this module generates the landing page for the application and
+#' provides a link to the github repo where users may file an issue.
+#'  
+#' mod_aboutExample -  this module generates the tab detailing the example data
+#' that is pre-loaded when the application launches.
 #'
+#' mod_aboutTreeParams - this module generates the landing page which describes
+#' the tree parameters that a user can adjust.
+#'
+#' mod_cladeAnnotator - this module allows the user to add or remove annotations
+#' and checks for overlap between those annotations and allows the addition of
+#' the heatmap. The final annotated tree is sent to the downloadTree module for
+#' downloading. This module uses 6 functions: create_tip_list, make_layer,
+#' add_map, add_annotations, current_tree_out and snp_anno.
+#' 
+#' mod_displayTree - this module combines the tree with genetic distance that 
+#' allows tree plotting and accessing the combined genetic data for adding
+#' annotations. This module uses 2 functions: tree_plot and combine_g_and_t.
+#'
+#' mod_exampleData -  this module sources the pre-loaded example data (e.g. tree
+#' (x3), genetic distance file (x3), and meta data file (x3)), which are already
+#' combined as a dataset (e.g. example data 1 is the combined data files of 
+#' example tree 1, example genetic 1, and example meta 1). This module uses 3
+#' functions: replace_column_header, gene_object_out, m_file_conversion.
+#' 
+#' mod_FAQ - this module generates the tab for a frequently asked questions
+#' section.
+#' 
+#' mod_paramsTree - this module holds all of the parameters that can be
+#' adjusted for the phylogenetic tree and ultimately are passed to either the 
+#' displayTree or cladeAnnotator module.
+#' 
+#' mod_pushButtons - this module generates the action buttons for adding a tree,
+#' adding/removing a tree, or adding/removing a heatmap.
+#' 
+#' mod_relaunchApp - this module will relaunch the entire application and clear
+#' out any exisiting tree images that are plotted.
+#' 
+#' mod_tipCheck - this module generates messages for the user regarding the 
+#' files uploaded and if column(s) for a heatmap is available. This module uses
+#' 3 functions: sanity, not_columns, and m_file_conversion.
+#' 
+#' mod_uploadData - this module allows the user to upload three different types
+#' of files and does file checking to confirm the correct delimiter is selected.
+#' The output from this module is sent to three different modules (tipCheck, 
+#' displayTree, and cladeAnnotator). This module uses 5 server functions: 
+#' read_data, file_type, file_check, replace_column_header, gene_object_out.
+#' This module uses 2 ui functions: file_upload and input_separator. 
+#' 
 #' @docType package
 #' @name tinselR
 NULL

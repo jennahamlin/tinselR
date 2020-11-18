@@ -32,13 +32,37 @@ mod_displayTree_server(
 \item{output}{internal}
 
 \item{session}{internal}
+
+\item{tree_file_out}{- from upload/example Data module. class of phylo}
+
+\item{geneObjectOutForSNP}{- from upload/example Data module. class of
+"spec_tbl_df", "tbl_df", "tbl", and "data.frame" 
+#' @param align - from paramsTree module; this is checkbox input (Y or N)}
+
+\item{tree_format}{- from paramsTree module; checkbox input (multiple choice)}
+
+\item{font}{- from paramsTree module; checkbox input (multiple choice)}
+
+\item{num_scale}{- from paramsTree module; this is numeric input from user}
+
+\item{node}{- from paramsTree module; this is numeric input from user}
+
+\item{lim}{- from paramsTree module; this is numeric input from user}
+
+\item{boot_pos}{- from paramsTree module; this is numeric input from user}
+
+\item{mid_p}{- from paramsTree module; this is checkbox input (Y or N)}
+
+\item{mat_off}{- from paramsTree module; this is numeric input from user}
 }
 \description{
 A shiny Module. This module combines the tree with genetic
- distance as an S4 object that allows tree plotting and accessing the
- combined data.
+distance as an tidytree object that allows tree plotting and accessing the
+combined data. This module contains 1 function at the end of the script
+that is used within (tree_plot) and one function in the golem_utils_server
+file (combine_g_and_t).
 }
 \details{
-displayTree UI Function
+displayTree Function
 }
 \keyword{internal}

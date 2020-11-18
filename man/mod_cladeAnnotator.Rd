@@ -35,13 +35,44 @@ mod_cladeAnnotator_server(
 \item{output}{internal}
 
 \item{session}{internal}
+
+\item{mFileMatOut}{- from dataDisplay module; is a dataframe}
+
+\item{make_tree_out}{- from dataDisplay module; class of ggtree, gg, ggplot2}
+
+\item{add_tree}{- from pushButtons module; is an action button (Y or N)}
+
+\item{add_anno}{- from pushButtons module; is an action button (Y or N)}
+
+\item{remove_anno}{- from pushButtons module; is an action button (Y or N)}
+
+\item{add_heatmap}{- from pushButtons module; is an action button (Y or N)}
+
+\item{remove_heatmap}{- from pushButtons module; is an action button (Y or N)}
+
+\item{geneObjectForSNP}{- from upload/example Data module. Is a tibble}
+
+\item{lab_color}{- from paramsTree; select input from user (multiple choice)}
+
+\item{mat_off}{- from paramsTree module; this is numeric input from user}
+
+\item{anno_text}{- from paramsTree; user input text (blank or any word)}
+
+\item{median_text}{- from paramsTree; user input text (blank or any word)}
+
+\item{label_off-}{from paramsTree module; this is numeric input from user}
+
+\item{heat_color}{- from paramsTree; select input from user (multiple choice)}
 }
 \description{
 A shiny Module. This module allows the user to add or
 remove annotations and checks for overlap between those annotations and
-allows the addition of the heatmap.
+allows the addition of the heatmap. This module contains 5 functions at the 
+end of the script that are used within (create_tip_list, make_layer,
+add_map, add_annotations, and current_tree_out) and one function in the
+golem_utils_server file (snp_anno).
 }
 \details{
-cladeAnnotator UI Function
+cladeAnnotator Function
 }
 \keyword{internal}

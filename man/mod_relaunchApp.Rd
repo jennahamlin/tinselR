@@ -17,5 +17,6 @@ A shiny Module. This module will relaunch the application
 and clear out any existing data sets.
 }
 \details{
-relaunchApp UI Function
+relaunchApp Function
 }
+\keyword{internal}

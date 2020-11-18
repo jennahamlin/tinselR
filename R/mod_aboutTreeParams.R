@@ -1,11 +1,18 @@
-#' aboutTreeParams UI Function
+#' aboutTreeParams Function
+#' 
+#' @title mod_aboutTreeParams_ui mod_aboutTreeParams_server
 #'
-#' @description A shiny Module.
+#' @description A shiny Module. This module generates the landing page which
+#' describes the tree parameters that a user can adjust.
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @rdname mod_aboutTreeParams
 #'
-#' @noRd
+#' @param id Internal parameters for {shiny}.
+#' @param input internal
+#' @param output internal
+#' @param session internal
 #'
+#' @keywords internal
 #' @importFrom shiny NS tagList
 mod_aboutTreeParams_ui <- function(id) {
   ns <- NS(id)

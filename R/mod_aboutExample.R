@@ -1,14 +1,20 @@
-#' aboutExample UI Function
+#' aboutExample Function
 #'
 #' @title mod_aboutExample_ui mod_aboutExample_server
 #'
-#' @description A shiny Module. This module generates information for the
-#' example data that is pre-loaded when the application launches.
+#' @description A shiny Module. This module generates the tab, which 
+#' contains information regarding the example data sets that is pre-loaded
+#'  when the application launches.
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @rdname mod_aboutExample
 #'
-#'@noRd
+#' @param id Internal parameters for {shiny}.
+#' @param input internal
+#' @param output internal
+#' @param session internal
+#
 #'
+#' @keywords internal
 #' @importFrom shiny NS tagList
 mod_aboutExample_ui <- function(id) {
   ns <- NS(id)

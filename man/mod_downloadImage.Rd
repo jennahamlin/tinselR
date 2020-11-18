@@ -17,12 +17,15 @@ mod_downloadImage_server(input, output, session, tree_out)
 \item{output}{internal}
 
 \item{session}{internal}
+
+\item{treeout}{from cladeAnnotator module; mostly like class of ggtree, gg, 
+gglot2 if user combined genetic data with tree data; if not then class phylo}
 }
 \description{
 A shiny Module. This module allows one to download the
 adjusted tree image. Current download formats include png, pdf, and tiff.
 }
 \details{
-downloadImage UI Function
+downloadImage Function
 }
 \keyword{internal}

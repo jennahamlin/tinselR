@@ -1,18 +1,23 @@
-#' uploadData UI Function
+#' uploadData Function
 #'
 #' @title   mod_uploadData_ui and mod_uploadData_server
 #' @description  A shiny Module. This module allows the user to upload three
-#'  different types of files and does file checking to confirm the correct
-#'  delimiter is selected. The output from this module is sent to three
-#'  different modules (tipCheck, displayTree, and cladeAnnotator).
+#' different types of files and does file checking to confirm the correct
+#' delimiter is selected. The output from this module is sent to three
+#' different modules (tipCheck, displayTree, and cladeAnnotator). This module 
+#' contains 3 functions located at the end of the script that are used within 
+#' (read_data, file_type, and file_check) and two functions in the
+#' golem_utils_server file (replace_column_header and gene_object_out). The
+#' uploadData_ui contains two scripts located in the golem_utils_ui file (
+#' file_upload and input_separator). 
 #'
-#'
+#' @rdname mod_uploadData
+#' 
 #' @param id shiny id
 #' @param input internal
 #' @param output internal
 #' @param session internal
 #'
-#' @rdname mod_uploadData
 #'
 #' @keywords internal
 #' @export
@@ -74,7 +79,8 @@ mod_uploadData_server <- function(input, output, session) {
   ### META ###
   ############
 
-  #1. reactive expression that holds meta data file and sends tipCheck message
+  #1. reactive expression that confirms meta data file will be included and
+  #sends tipCheck message
   meta_file_up <- reactive({
     input$meta_file
   })
@@ -104,7 +110,8 @@ mod_uploadData_server <- function(input, output, session) {
   ### GENETIC ###
   ###############
 
-  #1. reactive expression that holds the genetic distance file
+  #1. reactive expression that confirms if the genetic distance file will be 
+  #included
   gene_file_up <- reactive({
     input$gene_file
   })
@@ -273,7 +280,6 @@ mod_uploadData_server <- function(input, output, session) {
       tree_file_out = reactive(tree_file_up()),
 
       #require tree file for concordant tip checking; send to tipCheck
-      #holds tree does not read it in.
       t_file_out = reactive({
         req(input$tree_file)
         treeio::read.newick(input$tree_file$datapath)

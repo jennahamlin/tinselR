@@ -1,16 +1,19 @@
-#' FAQ UI Function
+#' FAQ Function
 #'
-#' @title mod_about_ui mod_about_server
+#' @title mod_FAQ_ui mod_FAQ_server
 #'
 #' @description A shiny Module. This module generates the FAQ page for the
 #' application, which provides users with common tips for issues.
 #'
 #' @rdname mod_FAQ
 #' 
-#' @param id shiny id
+#' @param id Internal parameters for {shiny}.
+#' @param input internal
+#' @param output internal
+#' @param session internal
 #'
+#' @keywords internal
 #' @importFrom shiny NS tagList
-
 mod_FAQ_ui <- function(id){
   ns <- NS(id)
   tagList(

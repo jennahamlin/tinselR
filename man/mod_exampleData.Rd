@@ -21,9 +21,12 @@ mod_exampleData_server(input, output, session)
 \description{
 A shiny Module. This module sources the pre-loaded
 example data (e.g. tree (x3), genetic distance file (x3), and meta data file
-(x3)).
+(x3)), which are already combined as a dataset (e.g. example data 1 is the
+combined data files of example tree 1, example genetic 1, and example 
+meta 1.) This module contains 3 functions located in the golem_utils_server
+file (replace_column_header, gene_object_out, m_file_conversion).
 }
 \details{
-exampleData UI function
+exampleData function
 }
 \keyword{internal}

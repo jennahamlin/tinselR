@@ -18,5 +18,6 @@ application and provides a link to the github repo where users may file
 an issue.
 }
 \details{
-about UI Function
+about Function
 }
+\keyword{internal}

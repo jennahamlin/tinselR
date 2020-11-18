@@ -1,17 +1,34 @@
-#' cladeAnnotator UI Function
+#' cladeAnnotator Function
 #'
 #' @title   mod_cladeAnnotator_ui and mod_cladeAnnotator_server
 #'
 #' @description  A shiny Module. This module allows the user to add or
 #' remove annotations and checks for overlap between those annotations and
-#' allows the addition of the heatmap.
+#' allows the addition of the heatmap. This module contains 5 functions at the 
+#' end of the script that are used within (create_tip_list, make_layer,
+#' add_map, add_annotations, and current_tree_out) and one function in the
+#' golem_utils_server file (snp_anno). 
+#'
+#' @rdname mod_cladeAnnotator
 #'
 #' @param id shiny id
 #' @param input internal
 #' @param output internal
 #' @param session internal
-#'
-#' @rdname mod_cladeAnnotator
+#' @param mFileMatOut - from dataDisplay module; is a dataframe
+#' @param make_tree_out - from dataDisplay module; class of ggtree, gg, ggplot2 
+#' @param add_tree - from pushButtons module; is an action button (Y or N)
+#' @param add_anno - from pushButtons module; is an action button (Y or N)
+#' @param remove_anno - from pushButtons module; is an action button (Y or N)
+#' @param add_heatmap - from pushButtons module; is an action button (Y or N)
+#' @param remove_heatmap - from pushButtons module; is an action button (Y or N)
+#' @param geneObjectForSNP - from upload/example Data module. Is a tibble
+#' @param label_off- from paramsTree module; this is numeric input from user
+#' @param lab_color - from paramsTree; select input from user (multiple choice)
+#' @param mat_off - from paramsTree module; this is numeric input from user
+#' @param heat_color - from paramsTree; select input from user (multiple choice)
+#' @param anno_text - from paramsTree; user input text (blank or any word)
+#' @param median_text - from paramsTree; user input text (blank or any word)
 #'
 #' @keywords internal
 #' @export
@@ -24,8 +41,6 @@ mod_cladeAnnotator_ui <- function(id) {
   ns <- NS(id)
   tagList(
     plotOutput(ns("tree_display"), brush = ns("plot_brush"))
-    #,
-    #bookmarkButton()
   )
 }
 
@@ -43,7 +58,7 @@ mod_cladeAnnotator_server <-
 
     #inputs
     #mFileMatOut - from dataDisplay module; is a dataframe
-    #make_tree_out - from dataDisplay module; is a ggtree object
+    #make_tree_out - from dataDisplay module; class of ggtree, gg, ggplot2
     #add_tree - from pushButtons module; is an action button (Y or N)
     #add_anno - from pushButtons module; is an action button (Y or N)
     #remove_anno - from pushButtons module; is an action button (Y or N)

@@ -1,4 +1,4 @@
-#' relaunchApp UI Function
+#' relaunchApp Function
 #'
 #' @title mod_relaunchApp_ui mod_relaunchApp_server
 #'
@@ -8,7 +8,8 @@
 #' @rdname mod_relaunchApp
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
-#'
+#' 
+#' @keywords internal
 #' @importFrom shiny NS tagList
 mod_relaunchApp_ui <- function(id) {
   ns <- NS(id)

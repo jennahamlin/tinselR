@@ -11,7 +11,7 @@
 ## tipCheck server function
 #Function to check imported data files for tip label agreement. If no tip label
 #agreement, tells user what is problematic; this can include if number of tips
-#does not match when all three files are uploaded. The input paramters include
+#does not match when all three files are uploaded. The input parameters include
 #tree file, genetic file, and meta file
 sanity <- function(m_file, g_file, t_file) {
 
@@ -55,8 +55,9 @@ sanity <- function(m_file, g_file, t_file) {
 }
 
 #get the number of columns of the meta data file. Here columns should be 1 or
-#more after transformation of meta data. Tell user how many columns there are
-#as the output here allows the user to use the add heatmap/matrix button.
+#more after transformation of meta data, which is the input parameter (file).
+#Tell user how many columns there are as the output here allows the user to use
+#the add heatmap/matrix button.
 not_columns <- function(file) {
   col_n_file <- ncol(file)
 
@@ -73,17 +74,16 @@ not_columns <- function(file) {
 #### uploadData and exampleData server functions ####
 #####################################################
 
-#change column1, row1 to the id of label
-#necessary for downstream steps
-replace_column_header <- function(gene_file_in) {
+#change column1, row1 to the id of label.The input parameter is the genetic
+#distance file. Necessary for downstream steps
+replace_column_header <- function(g_file) {
   . <- NULL
   dplyr::rename(gene_file_in, label = 1)
   #rename column 1 to label for joining of data sets later
 }
 
 #additional manipulation of genetic distance matrix for ultimately getting the
-#mean number of SNPs
-
+#mean number of SNPs. The input parameter is the genetic data file. 
 gene_object_out  <- function(gene_file) {
   label <- . <- value <- NULL
   gene_file %>%
@@ -114,16 +114,14 @@ m_file_conversion <- function(m_file) {
     dplyr::select(-Tip.labels)
 }
 
-
 ###################################################
 #### displayData server and testthat functions ####
 ###################################################
 
-#this combines the genetic distance file and the tree data by the 'label'
+#this combines the genetic distance file and the tree data by 'label'
 combine_g_and_t <- function(tree_file, gene_file) {
   dplyr::full_join(tree_file, gene_file, by = "label")
 }
-
 
 ######################################################
 #### cladeAnnotator server and testthat functions ####
@@ -132,8 +130,7 @@ combine_g_and_t <- function(tree_file, gene_file) {
 #function which gets the snps for two tips and puts them into the snpVector
 #input is the manipulated genetic distance file and the user selected tips
 snp_anno <- function(gene_file, tips) {
-  #adding this helps with devtools::check() note of 'no visible binding for
-  #global variables
+#below deals with devtools::check() 'no visible binding for global variables
   label <- name <- value <- NULL
   snp_vector <- c()
   for (i in 1:(length(tips) - 1)) { #this goes over a three column dataframe

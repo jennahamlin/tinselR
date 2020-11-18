@@ -23,6 +23,6 @@ A shiny Module. This module holds all of the parameters that
 can be adjusted for the visualization of a phylogenetic tree.
 }
 \details{
-paramsTree UI Function
+paramsTree Function
 }
 \keyword{internal}

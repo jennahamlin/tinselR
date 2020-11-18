@@ -1,4 +1,4 @@
-#' about UI Function
+#' about Function
 #'
 #' @title mod_about_ui mod_about_server
 #'
@@ -10,6 +10,7 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
+#' @keywords internal
 #' @importFrom shiny NS tagList
 mod_about_ui <- function(id) {
   ns <- NS(id)
