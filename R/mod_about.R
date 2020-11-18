@@ -113,7 +113,7 @@ mod_about_ui <- function(id) {
                                                for example."),
                                        tags$br(),
                                        tags$img(src = "www/metaDataExample.PNG",
-                                                height = "50%", width = "50%")),
+                                                height = "75%", width = "75%")),
                               tags$br(),
                               tags$h4(strong("Ways to alter your tree image")),
                               tags$br(),
@@ -125,7 +125,7 @@ mod_about_ui <- function(id) {
                                        tags$br(),
                                        tags$img(src =
                                                   "www/Slide4.PNG",
-                                                height = "50%", width = "50%")),
+                                                height = "75%", width = "75%")),
                               tags$br(),
                               tags$div(tags$li(tags$em("Once the genetic
                               distance file is uploaded you can -")), "Add
@@ -139,7 +139,8 @@ mod_about_ui <- function(id) {
                                        satisfied.",
                                        tags$br(),
                                        tags$img(src = "www/Slide5.PNG",
-                                                height = "50%", width = "50%")),
+                                                height = "100%", width = "100%")
+                                       ),
                               tags$br(),
                               tags$div(tags$li(tags$em("If column for heatmap
                                                        included in metadata
@@ -148,14 +149,16 @@ mod_about_ui <- function(id) {
                                        tags$br(),
                                        tags$img(src =
                                                   "www/Slide6.PNG",
-                                                height = "50%", width = "50%")),
+                                                height = "100%", width = "100%")
+                                       ),
                               tags$br(),
                               tags$div(tags$li(tags$em("When you are happy
                               with the image, you can download it as a pdf,
                                                        png, or tiff.")),
                                        tags$br(),
                                        tags$img(src = "www/Slide7.PNG",
-                                                height = "50%", width = "50%")),
+                                                height = "100%", width = "100%")
+                                       ),
                               tags$br()
                     )
     )
