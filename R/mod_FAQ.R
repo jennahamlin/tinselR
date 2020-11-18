@@ -3,11 +3,10 @@
 #' @title mod_about_ui mod_about_server
 #'
 #' @description A shiny Module. This module generates the FAQ page for the
-#' application, which provides users with commmon tips for issues.
+#' application, which provides users with common tips for issues.
 #'
 #' @rdname mod_FAQ
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @importFrom shiny NS tagList
 
@@ -30,7 +29,6 @@ mod_FAQ_ui <- function(id){
                                       try adjusting the parameter 'Move Heatmap
                                       '.")
                               )))
- 
   )
 }
     

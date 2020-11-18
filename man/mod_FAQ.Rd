@@ -6,12 +6,9 @@
 \usage{
 mod_FAQ_ui(id)
 }
-\arguments{
-\item{id, input, output, session}{Internal parameters for {shiny}.}
-}
 \description{
 A shiny Module. This module generates the FAQ page for the
-application, which provides users with commmon tips for issues.
+application, which provides users with common tips for issues.
 }
 \details{
 FAQ UI Function

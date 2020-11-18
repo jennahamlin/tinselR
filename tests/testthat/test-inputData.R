@@ -119,7 +119,7 @@ g_2 <- gene2
 g_2 <- g_2 %>% dplyr::rename(center = 1)
 
 test_that("Length of genetic data 2 for number of unique isolates", {
-  expect_length(g_2, 15)
+  expect_length(g_2, 20)
 })
 
 
@@ -139,10 +139,10 @@ test_that("Confirm type of the combined data", {
 ##############################################################################
 context("confirm median and range calcuated correctly")
 
-data(gene3)
-data(tree3)
+data(gene1)
+data(tree1)
 
-testing_gene <- gene_object_out(replace_column_header(gene3))
+testing_gene <- gene_object_out(replace_column_header(gene1))
 
 tips_in <- c("PNUSAS000901.cleaned", "PNUSAS000876.cleaned",
              "2015K-1169-M3235-15-050.cleaned",
