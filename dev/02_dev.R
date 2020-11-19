@@ -17,38 +17,15 @@ golem::add_module(name = "tipCheck")
 golem::add_module(name = "uploadData")
 golem::add_module(name = "exampleData")
 
-#upload data - tree, genetic, meta functions
-golem::add_fct("read_data", module = "uploadData")
-golem::add_fct("file_type", module = "uploadData")
-golem::add_fct("file_check", module = "uploadData")
-golem::add_fct("replace_column_header", module = "uploadData")
-golem::add_fct("gene_object_out", module = "uploadData")
-
-
-#upload data - tree, genetic, meta functions
-golem::add_fct("sanity", module = "tipCheck")
-golem::add_fct("m_file_conversion", module = "tipCheck")
-golem::add_fct("not_columns", module = "tipCheck")
-
 #tree parameters and display
 golem::add_module(name = "pushButtons")
 golem::add_module(name = "paramsTree")
 golem::add_module(name = "displayTree")
 golem::add_module(name = "exampleDisplay")
 
-#tree parameters and display functions
-golem::add_fct("combine_g_and_t", module = "displayTree")
-
 #annotation module
 golem::add_module(name = "cladeAnnotator")
 golem::add_module(name = "addMatrix")
-
-#annotation module functions
-golem::add_fct("create_tip_list", module = "cladeAnnotator")
-golem::add_fct("add_annotations", module = "cladeAnnotator")
-golem::add_fct("snp_anno", module = "cladeAnnotator")
-golem::add_fct("make_layer", module = "cladeAnnotator")
-golem::add_fct("add_map", module = "cladeAnnotator")
 
 #download image
 golem::add_module(name = "downloadImage")
