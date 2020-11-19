@@ -57,6 +57,127 @@
 #' read_data, file_type, file_check, replace_column_header, gene_object_out.
 #' This module uses 2 ui functions: file_upload and input_separator. 
 #' 
+#' @section tinselR functions:
+#' The functions of tinselR are described below:
+#' 
+#' @section tinselR utils server functions:
+#' The functions that are shared between modules or unit testing are included
+#' in file called goelm_utils_server.R We describe those functions below and 
+#' indicated where these functions are called.
+#' 
+#' sanity - Inputs: m_file, g_file, t_file - which are the three different
+#' file types a user can upload and are imported (meta, file, genetic distance 
+#' file, and a tree file). g_file class - spec_tbl_df, tbl_df, tbl, data.frame; 
+#' m_file class - spec_tbl_df, tbl_df, tbl, data.frame; t_file class - phylo.
+#' Output: ui displayed messages indicating if the files are concordant in tip
+#' labels and informing the user where an inconsistency is in tip labels for the
+#' three files. Used in tipcheck module and unit tests.
+#' 
+#' not_columns - Input: file - this file is the meta data file that has been
+#' converted using the function m_file conversion. file class - spec_tbl_df, 
+#' tbl_df, tbl, data.frame. Output: ui displayed message that tells user if
+#' there is a column included that allows the user to add a heatmap. Used in
+#' tipcheck module and unit tests.
+#' 
+#' replace_column_header - Inputs: gene_file_in - this is the genetic distance 
+#' file which is imported. gene_file_in class - spec_tbl_df, tbl_df, tbl,
+#' data.frame. Output: spec_tbl_df, tbl_df, tbl, data.frame with row 1, column 1
+#' changed to 'label', which is done for joining this file with the tree file.
+#' Used in uploadData and exampleData module.
+#' 
+#' gene_object_out - Inputs: gene_file_in - this is the genetic distance 
+#' file which is imported. gene_file_in class - spec_tbl_df, tbl_df, tbl,
+#' data.frame. Output: spec_tbl_df, tbl_df, tbl, data.frame. Essentially, this
+#' converts the matrix to a three column data frame (isolate 1, isolate 2, and 
+#' pairwise snp differences between them). It also removes rows with na and self
+#' comparisons as that would skew the calculation of mean snps. Used in
+#' uploadData and exampleData module.
+#' 
+#' m_file_conversion - Input: m_file - this file is the meta data file that has 
+#' been converted using the function m_file conversion. m_file class - 
+#' spec_tbl_df, tbl_df, tbl, data.frame. Output: meta data file with converted
+#' tips labels to row names and the removal of the original tip labels that you
+#' a user is correcting for. used in tipCheck and exampleData modules. 
+#' 
+#' combine_g_and_t - Inputs: tree_file and gene_file - these files are used 
+#' to be combined by the shared id of label. gene_file class - spec_tbl_df,
+#' tbl_df, tbl, data.frame; t_file class - phylo. Output - a tibble that
+#' will be converted to a treedata object. Used in displayData module and 
+#' unit tests. 
+#' 
+#' snp_anno - Inputs: gene_file and tips - gene_file is the converted three 
+#' column genetic distance file; while the tips input all user selected tips. 
+#' gene_file class - spec_tbl_df, tbl_df, tbl, data.frame; tips class - list. 
+#' Output: is a numeric vector of snp differences for the selection of
+#' highlighted tips. Used in the cladeAnnotator module and unit tests. 
+#' 
+#' @section tinselR module specific functions:
+#' The functions that are only used in specific modules are defined in those
+#' modules. We describe those functions below and indicated the modules these
+#' functions are associated with. 
+#' 
+#' @section cladeAnnotator module server functions
+#' create_tip_list - Inputs: none. Output: is a list with incremented counts 
+#' associated with a user selection or brushed tips.  
+#' 
+#' make_layer - Inputs: tree, tips, label, color, offset - tree is a treedata
+#' object, tips - user selected tips, label - determines the node for where the
+#' annotation is drawn and is used subsequently to calculate the median and 
+#' range of snps in the add_annotation function, color - user determined color
+#' of the label, offset - user determined offset from the tip labels. Output: 
+#' ultimately remembers all layers that need to be added to a phylogenetic tree.
+#' 
+#' add_map - Inputs: tree, metaFile - tree is a treedata object, metaFile is of
+#' class - spec_tbl_df, tbl_df, tbl, data.frame after converting the meta data 
+#' file. Output: is a column for the heatmap color coded by the data within
+#' the column (e.g. source site data colored by collection source). 
+#' 
+#' add_annotations - Inputs: tree_plot and tip_vector_in - tree_plot is a 
+#' treedata object while tip_vector_in uses the function create_tip_list to
+#' known which tips have been selected. This function determines if there are 
+#' overlapping tip labels in user selected tips. If so, then adjusts the
+#' placement of the annotation. Additionally, this function relies on the
+#' make_layer function to determine the placement of drawn on annotations and 
+#' adds the median and range of snps for annotations.
+#' 
+#' current_tree_out - Inputs: none. Outputs - tree which includes the added 
+#' heatmap if avaiable, added annotations if selected. 
+#' 
+#' @section displayTree module server functions 
+#' 
+#' tree_plot - Input: either a tree of class phylo if no genetic data uploaded 
+#' or a treedata object. Output: tree of class ggtree, gg, ggplot.
+#' 
+#' @section uploadData module server functions
+#' 
+#' read_data - Inputs: file_path and sep. file_path is the path to the location
+#' of the file you are interested in uploading, while sep is the delimiter for
+#' the selected file, which can be a comma or tab. Output: is an imported file
+#' for genetic distance and/or meta data file. 
+#' 
+#' file_type - Inputs: in_var is the input delimiter for the file uploaded. 
+#' Output: returns either a comma or a tab, which is used in file_check function
+#' to determine if the correct delimiter has be selected.
+#' 
+#' file_check - Inputs: file_up, file_type, file_sep - file_up is the file a 
+#' user has uploaded, file_type is the mapped type of delimiter, file_sep is the 
+#' user selected separator used in the read_data function. Output: ui displayed
+#' message which confirms if user has selected the corrector delimiter for the 
+#' files they uploaded. 
+#' 
+#' @section uploadData module ui functions located in golem_utils_ui.R file
+#' 
+#' file_upload - Inputs: file_id and file_label - file_id is the assigned id
+#' to the file, while file_label is the label assigned to the file and is
+#' visible in the ui. Outputs: Ultimately the uploaded file type can be of
+#' text, csv, or txt format. 
+#' 
+#' input_separator - Inputs: file_id and file_label - file_id is the assigned id
+#' to the file, while file_label is the label assigned to the file and is
+#' visible in the ui. Output is the type of file format can either be tab or 
+#' comma. 
+#' 
+#' 
 #' @docType package
 #' @name tinselR
 NULL
