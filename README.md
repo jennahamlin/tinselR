@@ -23,7 +23,7 @@ If you have any the above, please submit an *issue* on github located
 
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=master)](https://travis-ci.com/jennahamlin/tinselR)
+[![Travis build status](https://travis-ci.org/jennahamlin/tinselR.svg?branch=master)](https://travis-ci.org/jennahamlin/tinselR)
 <!-- badges: end -->
 <hr>
 
