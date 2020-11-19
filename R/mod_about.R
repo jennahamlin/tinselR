@@ -98,7 +98,8 @@ mod_about_ui <- function(id) {
                                        tags$br(),
                                        tags$img(src =
                                                   "www/geneDistanceExample.PNG",
-                                                height = "50%", width = "50%")),
+                                                height = "100%", width = "100%")
+                                       ),
                               tags$br(),
                               tags$div(tags$li(em("3. Meta Data"), "- optional
                               for easy correction of tip labels and addition
@@ -113,7 +114,8 @@ mod_about_ui <- function(id) {
                                                for example."),
                                        tags$br(),
                                        tags$img(src = "www/metaDataExample.PNG",
-                                                height = "75%", width = "75%")),
+                                                height = "100%", width = "100%")
+                                       ),
                               tags$br(),
                               tags$h4(strong("Ways to alter your tree image")),
                               tags$br(),
@@ -125,7 +127,8 @@ mod_about_ui <- function(id) {
                                        tags$br(),
                                        tags$img(src =
                                                   "www/Slide4.PNG",
-                                                height = "75%", width = "75%")),
+                                                height = "100%", width = "100%")
+                                       ),
                               tags$br(),
                               tags$div(tags$li(tags$em("Once the genetic
                               distance file is uploaded you can -")), "Add

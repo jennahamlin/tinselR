@@ -59,7 +59,7 @@ golem::use_recommended_deps()
 # If you want to change the favicon (default is golem's one)
 # can make my own https://favicon.io/favicon-generator/
 golem::remove_favicon()
-golem::use_favicon("~/Desktop/tinselR/favicon/favicon.ico")
+golem::use_favicon("~/Desktop/tinselR/favicon_io/favicon.ico")
 
 # Add helper functions
 golem::use_utils_ui()
