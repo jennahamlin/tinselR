@@ -10,7 +10,7 @@ authors:
 - name: Jennafer A. P. Hamlin
 orcid: 0000-0001-7037-134X
 affiliation: 1
-- nameWil: Teofil Nakov
+- name: Teofil Nakov
 affiliation: 2
 - name: Amanda Williams-Newkirk
 affilition: 3
