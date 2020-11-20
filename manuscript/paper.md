@@ -49,6 +49,19 @@ differences or similarities between isolates in response to outbreaks. Below,
 we detail how to install the application and describe the example data that is
 pre-loaded so that a new user can familiarize themselves with the application.
 
+# About Pre-loaded Example Data
+
+When the application is launched, the user can test out the application by
+using one of the pre-loaded datasets located in the 'Example Data' tab
+(Figure 1). We provide three datasets (i.e. Newick formatted tree,
+genetic distance matrix, and metadata file) already combined with the number of
+isolates ranging from 14 - 19. These data are either *Eschericia coli* 
+(NCBI Bioproject: PRJNA218110) or *Salmonella enterica* (NCBI Bioproject:
+PRJNA230403). After clicking on the 'Example Data' tab, the user selects from
+one drop down menu for one of the combined datasets (e.g. example data 1,
+example data 2, and example data 3 (Figure 2). Using example data set 1, we 
+demonstrate the capabilities of tinselR (Figure 3). 
+
 # Installation
 
 **1). Install devtools package**
@@ -73,28 +86,21 @@ library(tinselR)
 run_app()
 ```
 
-# About Pre-loaded Example Data
-
-When the application is launched, the user can test out the application by
-using one of the pre-loaded datasets located in the 'Example Data' tab [tinselR landing page with the example data tab indicated in the blue box](#fig:image1).
-We provide three datasets (i.e. Newick formatted tree, genetic distance matrix,
-and metadata file) already combined with the number of isolates ranging
-from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
-PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: PRJNA230403). After
-clicking on the 'Example Data' tab, the user selects from one drop down menu
-for one of the combined datasets (e.g. example data 1, example data 2, and
-example data 3.
-
 # Figures
 
+<p>
+    <img src = "image1.PNG" />
+    <h4> Figure 1: tinselR landing page with the example data tab indicated in the blue box. </h4>
+</p>
 
-<div id="fig:image1>
-![tinselR landing page with the example data tab indicated in the blue box\label{fig:image1}](image1.PNG) 
+<p>
+    <img src = "image2.PNG" />
+    <h4> Figure 2: Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected. </h4>
+</p>
 
-</div>
+<p>
+    <img src = "image3.PNG" />
+    <h4> Figure 3: Display of exmaple dataset 1 with annotations and a heatmap. </h4>
+</p>
 
-
-![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
-
-![Display of exmaple dataset 1 with annotations and a heatmap](image3.PNG)
  
