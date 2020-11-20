@@ -11,11 +11,9 @@ authors:
 orcid: 0000-0001-7037-134X
 affiliation: 1
 affiliations:
-- name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and
-  Prevention, Atlanta, GA, USA
+- name: CDC
 index: 1
 date: "20 November 2020"
-bibliography: paper.bib
 ---
 
 # Summary
