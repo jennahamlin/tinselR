@@ -1,19 +1,20 @@
 ---
-title: 'tinselR'
+title: "tinselR"
 tags:
-  - R
-  - RShiny
-  - phylogenetics
-  - epidemiology
-  - outbreak analysis
-authors:
-  - name: Jennafer A. P. Hamlin
-orcid: 0000-0001-7037-134X
+- R
+- RShiny
+- phylogenetics
+- epidemiology
+- outbreak analysis
+date: "20 November 2020"
+output: pdf_document
 affiliation: 1
 affiliations:
-  - name: CDC
+- name: CDC
 index: 1
-date: 20 November 2020
+authors:
+- name: Jennafer A. P. Hamlin
+orcid: 0000-0001-7037-134X
 ---
 
 # Summary
@@ -75,7 +76,7 @@ run_app()
 # About Pre-loaded Example Data
 
 When the application is launched, the user can test out the application by
-using one of the pre-loaded datasets located in the 'Example Data' tab @fig:description.
+using one of the pre-loaded datasets located in the 'Example Data' tab.
 We provide three datasets (i.e. Newick formatted tree, genetic distance matrix,
 and metadata file) already combined with the number of isolates ranging
 from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
@@ -89,12 +90,7 @@ example data 3.
 
 ![tinselR landing page with the example data tab indicated in the blue box.](image1.PNG)
 
-### Figure 1 - tinselR landing page with the example data tab indicated in the blue box.
-
-![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG) {#fig:description}
-
-### Figure 2 - Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.
+![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
 
 ![Display of exmaple dataset 1 with annotations and a heatmap](image3.PNG)
  
-### Figure 3 - Display of exmaple dataset 1 with annotations and a heatmap  
