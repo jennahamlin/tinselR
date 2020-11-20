@@ -75,7 +75,7 @@ run_app()
 # About Pre-loaded Example Data
 
 When the application is launched, the user can test out the application by
-using one of the pre-loaded datasets located in the 'Example Data' tab.
+using one of the pre-loaded datasets located in the 'Example Data' tab @fig:description.
 We provide three datasets (i.e. Newick formatted tree, genetic distance matrix,
 and metadata file) already combined with the number of isolates ranging
 from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
@@ -91,7 +91,7 @@ example data 3.
 
 ### Figure 1 - tinselR landing page with the example data tab indicated in the blue box.
 
-![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
+![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG) {#fig:description}
 
 ### Figure 2 - Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.
 
