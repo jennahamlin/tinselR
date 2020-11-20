@@ -1,5 +1,5 @@
 ---
-title: "tinselR
+title: "tinselR"
 output: pdf_document
 ---
 
