@@ -86,7 +86,7 @@ example data 3.
 
 # Figures
 
-![tinselR landing page with the example data tab indicated in the blue box.]()
-![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.]()
-![Display of exmaple dataset 1 with annotations and a heatmap](image3.PNG)
+[tinselR landing page with the example data tab indicated in the blue box.](image1.PNG)
+[Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image.2.PNT)
+[Display of exmaple dataset 1 with annotations and a heatmap](image3.PNG)
   
