@@ -2,10 +2,10 @@
   title: 'tinselR'
 tags:
   - R
-- RShiny
-- phylogenetics
-- epidemiology
-- outbreak analysis
+  - RShiny
+  - phylogenetics
+  - epidemiology
+  - outbreak analysis
 authors:
   - name: Jennafer A. P. Hamlin
 orcid: 0000-0001-7037-134X
