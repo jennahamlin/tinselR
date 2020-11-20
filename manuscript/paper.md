@@ -1,20 +1,31 @@
 ---
 title: "tinselR"
+authors:
+- affiliation: '1'
+  name: Jennafer A. P. Hamlin
+  orcid: 0000-0001-7037-134X
+- affiliation: '2'
+  name: Teofil Nakov
+  orcid: XXX
+- affiliation: '3'
+  name: Amanda Williams-Newkirk
+date: "20 November 2020"
+bibliography: paper.bib
 tags:
 - R
 - RShiny
-- phylogenetics
+- phylognetics
 - epidemiology
 - outbreak analysis
-authors:
-- name: Jennafer A. P. Hamlin
-orcid: 0000-0001-7037-134X
-affiliation: 1
 affiliations:
-- name: CDC
-index: 1
-date: "20 November 2020"
+- index: '1'
+  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
+- index: '2'
+  name: University of Arkansas
+- index: '3'
+  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
 ---
+
 
 # Summary
 
