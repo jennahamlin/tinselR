@@ -88,15 +88,12 @@ example data 3.See figure \ref{mylabel}.
 # Figures
 
 
-<div id="fig:lalune">
-![A voyage to the moon\label{fig:lalune}](image1.PNG)
-
-</div>
-
-[The voyage to the moon](#fig:lalune).
+<p>
+    <img src = "image1.PNG" />
+    <h4> tinselR landing page with the example data tab indicated in the blue box </h4>
+</p>
 
 
-![tinselR landing page with the example data tab indicated in the blue box.\label{mylabel}]
 
 ![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
 
