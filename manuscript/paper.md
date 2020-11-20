@@ -70,6 +70,17 @@ BiocManager::install("ggtree")
 devtools::install_github("jennahamlin/tinselR")
 library(tinselR)
 run_app()
-
 ```
+
+# Example Data
+
+When the application is launched, the user can test out the application by
+using one of the pre-loaded datasets located in the 'Example Data' tab.
+We provide three datasets (i.e. Newick formatted tree, genetic distance matrix,
+and metadata file) already combined with the number of isolates ranging
+from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
+PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: PRJNA230403). After
+clicking on the 'Example Data' tab, the user selects from one drop down menu
+for one of the combined datasets (e.g. example data 1, example data 2, and
+example data 3.
   
