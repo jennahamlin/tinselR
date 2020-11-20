@@ -1,5 +1,5 @@
 ---
-  title: 'tinselR'
+title: 'tinselR'
 tags:
   - R
   - RShiny
