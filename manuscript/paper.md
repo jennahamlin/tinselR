@@ -6,15 +6,16 @@ tags:
 - phylogenetics
 - epidemiology
 - outbreak analysis
-date: "20 November 2020"
-output: pdf_document
-affiliation: 1
-affiliations:
-- name: CDC
-index: 1
 authors:
 - name: Jennafer A. P. Hamlin
 orcid: 0000-0001-7037-134X
+affiliation: 1
+affiliations:
+- name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+    Atlanta, GA, USA
+index: 1
+date: "20 November 2020"
+bibliography: paper.bib
 ---
 
 # Summary
@@ -85,6 +86,18 @@ devtools::install_github("jennahamlin/tinselR")
 library(tinselR)
 run_app()
 ```
+
+# Acceptable Inputs
+
+Any program that generates a phylogenetic tree in the Newick format can be used.
+For example, *RAxML* [@stamatakis2014raxml]outputs in Newick format and thus are acceptable inputs of 
+a phylogenetic tree. 
+Currently, our application only supports a genetic distance matrix of SNP 
+differences. Your distance matrix can be in either csv, tsv, or txt formats.
+The metadata file should be in one of these formats as well (csv, tsv, or txt).
+However, the metadata file requires specific column headers
+(Tip.labels, and Display.labels), but the third column, if you choose to include
+it can be titled whatever is informative for you. 
 
 # Figures
 
