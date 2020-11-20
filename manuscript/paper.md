@@ -26,13 +26,13 @@ resolution than previously. To understand organismal relationships in response
 to outbreak investigations from whole-genome data, building and interpreting
 phylogenetic trees are essential for this public health workflow. Placing
 new outbreak isolates within the broader context of species diversity allows for
-identification across temporal or spatial scales similarities or differences
-for those newly sequenced isolates. Thus, our goal was to develop an open-source
-graphical user interface for phylogenetic tree visualization and annotation for
-both external (state public health laboratories) partners and internal users.
-Given that many state public health laboratories have limited bioinformatics
-support one of our main constraints is that the application be free and easily
-installable. To accomplish this goal, we developed **tinselR**
+identification across temporal or spatial scales regarding similarities or
+differences for those newly sequenced isolates. Thus, our goal was to develo
+an open-source graphical user interface for phylogenetic tree visualization and
+annotation for both external (state public health laboratories) partners and
+internal users. Given that many state public health laboratories have limited
+bioinformatics support one of our main constraints is that the application be
+free and easily installable. To accomplish this goal, we developed **tinselR**
 (pronounced tinsel-er) using the Rshiny framework as a R package.
 Beyond the above requirements listed for developing this application,
 we choose the R programming languagebecause of R's base graphics and additional
@@ -83,12 +83,12 @@ from 14 - 19. These data are either *Eschericia coli* (NCBI Bioproject:
 PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: PRJNA230403). After
 clicking on the 'Example Data' tab, the user selects from one drop down menu
 for one of the combined datasets (e.g. example data 1, example data 2, and
-example data 3.
+example data 3.See figure \ref{mylabel}.
 
 # Figures
 
 
-![tinselR landing page with the example data tab indicated in the blue box.](image1.PNG)
+![tinselR landing page with the example data tab indicated in the blue box.\label{mylabel}](image1.PNG)
 
 ![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
 
