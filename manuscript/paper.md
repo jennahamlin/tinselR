@@ -47,4 +47,29 @@ These images help public health officials and stakeholders discuss the
 differences or similarities between isolates in response to outbreaks. Below,
 we detail how to install the application and describe the example data that is
 pre-loaded so that a new user can familiarize themselves with the application.
+
+# Installation
+
+**1). Install devtools package**
+ 
+Run the below code in your R console -    
+ 
+`install.packages("devtools", dep=T)`
+ 
+**2). Install ggtree and treeio**
+ 
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("ggtree")
+```
+
+**3). Install and launch the tinselR shiny application**
+ 
+```
+devtools::install_github("jennahamlin/tinselR")
+library(tinselR)
+run_app()
+
+```
   
