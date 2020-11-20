@@ -91,7 +91,7 @@ example data 3.
 
 ### Figure 1 - tinselR landing page with the example data tab indicated in the blue box.
 
-![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image.2.PNG)
+![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
 
 ### Figure 2 - Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.
 
