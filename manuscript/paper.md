@@ -15,4 +15,36 @@ affiliations:
 index: 1
 date: 20 November 2020
 ---
+
+# Summary
+
+Across the United States, public health laboratories at the state-level now
+perform whole-genome sequencing for foodborne pathogens, a milestone for
+protecting our food sources by identifying bacterial contamination at a higher
+resolution than previously. To understand organismal relationships in response
+to outbreak investigations from whole-genome data, building and interpreting
+phylogenetic trees are essential for this public health workflow. Placing
+new outbreak isolates within the broader context of species diversity allows for
+identification across temporal or spatial scales similarities or differences
+for those newly sequenced isolates. Thus, our goal was to develop an open-source
+graphical user interface for phylogenetic tree visualization and annotation for
+both external (state public health laboratories) partners and internal users.
+Given that many state public health laboratories have limited bioinformatics
+support one of our main constraints is that the application be free and easily
+installable. To accomplish this goal, we developed **tinselR**
+(pronounced tinsel-er) using the Rshiny framework as a R package.
+Beyond the above requirements listed for developing this application,
+we choose the R programming languagebecause of R's base graphics and additional
+phylogenetic packages that are the gold standard for phylogenetic tree graphics.
+Our tool's minimum input requirements are a Newick formatted phylogenetic tree
+in which user-selected inputs change parameters of the visualized tree.
+For example, a user can quickly transform tip labels to either bold or bold and
+italic font format. With a genetic distance matrix or the metadata file, or
+both, the user can include annotations on the image, quickly adjust tip labels,
+or add a heatmap to the phylogenetic tree. These modified phylogenetic tree
+images are downloadable in various formats for presentations or publications.
+These images help public health officials and stakeholders discuss the
+differences or similarities between isolates in response to outbreaks. Below,
+we detail how to install the application and describe the example data that is
+pre-loaded so that a new user can familiarize themselves with the application.
   
