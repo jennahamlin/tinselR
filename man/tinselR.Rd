@@ -63,3 +63,68 @@ read_data, file_type, file_check, replace_column_header, gene_object_out.
 This module uses 2 ui functions: file_upload and input_separator.
 }
 
+\section{tinselR functions}{
+
+The functions of tinselR are described below:
+}
+
+\section{tinselR utils server functions}{
+
+The functions that are shared between modules or unit testing are included
+in file called goelm_utils_server.R We describe those functions below and 
+indicated where these functions are called.
+
+sanity - Inputs: m_file, g_file, t_file - which are the three different
+file types a user can upload and are imported (meta, file, genetic distance 
+file, and a tree file). g_file class - spec_tbl_df, tbl_df, tbl, data.frame; 
+m_file class - spec_tbl_df, tbl_df, tbl, data.frame; t_file class - phylo.
+Output: ui displayed messages indicating if the files are concordant in tip
+labels and informing the user where an inconsistency is in tip labels for the
+three files. Used in tipcheck module and unit tests.
+
+not_columns - Input: file - this file is the meta data file that has been
+converted using the function m_file conversion. file class - spec_tbl_df, 
+tbl_df, tbl, data.frame. Output: ui displayed message that tells user if
+there is a column included that allows the user to add a heatmap. Used in
+tipcheck module and unit tests.
+
+replace_column_header - Inputs: gene_file_in - this is the genetic distance 
+file which is imported. gene_file_in class - spec_tbl_df, tbl_df, tbl,
+data.frame. Output: spec_tbl_df, tbl_df, tbl, data.frame with row 1, column 1
+changed to 'label', which is done for joining this file with the tree file.
+Used in uploadData and exampleData module.
+
+gene_object_out - Inputs: gene_file_in - this is the genetic distance 
+file which is imported. gene_file_in class - spec_tbl_df, tbl_df, tbl,
+data.frame. Output: spec_tbl_df, tbl_df, tbl, data.frame. Essentially, this
+converts the matrix to a three column data frame (isolate 1, isolate 2, and 
+pairwise snp differences between them). It also removes rows with na and self
+comparisons as that would skew the calculation of mean snps. Used in
+uploadData and exampleData module.
+
+m_file_conversion - Input: m_file - this file is the meta data file that has 
+been converted using the function m_file conversion. m_file class - 
+spec_tbl_df, tbl_df, tbl, data.frame. Output: meta data file with converted
+tips labels to row names and the removal of the original tip labels that you
+a user is correcting for. used in tipCheck and exampleData modules. 
+
+combine_g_and_t - Inputs: tree_file and gene_file - these files are used 
+to be combined by the shared id of label. gene_file class - spec_tbl_df,
+tbl_df, tbl, data.frame; t_file class - phylo. Output - a tibble that
+will be converted to a treedata object. Used in displayData module and 
+unit tests. 
+
+snp_anno - Inputs: gene_file and tips - gene_file is the converted three 
+column genetic distance file; while the tips input all user selected tips. 
+gene_file class - spec_tbl_df, tbl_df, tbl, data.frame; tips class - list. 
+Output: is a numeric vector of snp differences for the selection of
+highlighted tips. Used in the cladeAnnotator module and unit tests.
+}
+
+\section{tinselR module specific functions}{
+
+The functions that are only used in specific modules are defined in those
+modules. We describe those functions below and indicated the modules these
+functions are associated with.
+}
+

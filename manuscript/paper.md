@@ -72,7 +72,7 @@ library(tinselR)
 run_app()
 ```
 
-# Example Data
+# About Pre-loaded Example Data
 
 When the application is launched, the user can test out the application by
 using one of the pre-loaded datasets located in the 'Example Data' tab.
@@ -83,4 +83,10 @@ PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: PRJNA230403). After
 clicking on the 'Example Data' tab, the user selects from one drop down menu
 for one of the combined datasets (e.g. example data 1, example data 2, and
 example data 3.
+
+# Figures
+
+![tinselR landing page with the example data tab indicated in the blue box.]()
+![Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected.]()
+![Display of exmaple dataset 1 with annotations and a heatmap]()
   
