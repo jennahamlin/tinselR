@@ -55,10 +55,10 @@ to either bold or bold and italic font format. With a genetic distance matrix or
 the metadata file, or both, the user can include annotations on the image,
 automatically adjust tip labels, or add a heatmap to the phylogenetic tree.
 These modified tree images are downloadable in various formats for presentations
-or publications. These images help public health officials and stakeholders
-communicate regarding isolates in response to outbreaks. Below, we detail how to
-install the application and describe the example data that is pre-loaded so that
-a new user can familiarize themselves with the application.
+or publications. Ultimately, these images help public health officials and 
+stakeholders communicate regarding isolates in response to outbreaks. Below, we
+detail how to install the application and describe the example data that is
+pre-loaded so that a new user can familiarize themselves with the application.
 
 # Installation
 
@@ -87,14 +87,15 @@ run_app()
 # Acceptable Inputs
 
 Any program that generates a phylogenetic tree in the Newick format can be used.
-For example, *RAxML* [@stamatakis2014raxml] outputs in Newick format and thus
-are acceptable inputs of a user uploaded phylogenetic tree. Currently, our
-application only supports a genetic distance matrix of SNP  differences between 
-tips on the tree. Your distance matrix can be in either csv, tsv, or txt
+For example, *RAxML* [@stamatakis2014raxml] outputs trees in Newick format and
+thus are acceptable inputs of a user uploaded phylogenetic tree. Currently, our
+application only supports a genetic distance matrix of SNP differences between 
+tips on the tree. Your genetic distance matrix can be in either csv, tsv, or txt
 formats. The metadata file should be in one of these formats as well (csv, tsv,
 or txt). However, the metadata file requires specific column headers
-(Tip.labels, and Display.labels), but the third column, if you are interested in
-plotting a heatmapcan be titled whatever is informative for you. 
+(e.g. Tip.labels, and Display.labels as column 1 and column 2 respectively), but
+the third column, if you are interested in plotting a heatmapcan be titled
+whatever is informative for the user. 
 
 # About Pre-loaded Example Data
 
@@ -102,12 +103,12 @@ When tinselR is launched, the user can test out the application by using one of
 the pre-loaded datasets located in the 'Example Data' tab (Figure 1). We provide
 three datasets (i.e. Newick formatted tree, genetic distance matrix, and
 metadata file) already combined. These data are either *Eschericia coli* 
-(NCBI Bioproject: PRJNA218110) or *Salmonella enterica* (NCBI Bioproject:
-PRJNA230403) with the number of isolates ranging from 14 - 19 depending on the 
-dataset.After clicking on the 'Example Data' tab, the user selects from one drop
-down menu for one of the combined datasets (e.g. example data 1, example data 2,
-and example data 3 (Figure 2). Using example data set 1, we highlight the
-capabilities of tinselR (Figure 3). 
+(from NCBI Bioproject: PRJNA218110) or *Salmonella enterica* 
+(from NCBI Bioproject: PRJNA230403) with the number of isolates ranging from
+14 - 19 depending on the dataset. After clicking on the 'Example Data' tab,
+the user selects from one drop down menu for one of the combined datasets
+(e.g. example data 1, example data 2, and example data 3 (Figure 2).
+Using example data set 1, we highlight the capabilities of tinselR (Figure 3). 
 
 # Figures
 
@@ -128,7 +129,10 @@ capabilities of tinselR (Figure 3).
 
 # Development for local-user experience 
 
-One note regarding tinselR is to keep in mind that the application has only been tested by single-user instances. If one hosts the application on a personal server, then testing if multiple users can access the application should be done before release.
+One note regarding tinselR, to keep in mind, is that the application has only
+been tested by single-user instances. If one hosts the application on a personal
+server, then testing if multiple users can access the application should be done
+before release.
 
 # Acknowledgements
 
