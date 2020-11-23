@@ -11,19 +11,19 @@ authors:
   name: Amanda Williams-Newkirk
   orcid: XXX
 date: "20 November 2020"
-output: pdf_document
+bibliography: paper.bib
 tags:
 - R
 - RShiny
-- phylogenetics
+- phylognetics
 - epidemiology
 - outbreak analysis
 affiliations:
-  - index: '1'
+- index: '1'
   name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
-  - index: '2'
+- index: '2'
   name: University of Arkansas
-  - index: '3'
+- index: '3'
   name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
 bibliography: paper.bib
 ---
