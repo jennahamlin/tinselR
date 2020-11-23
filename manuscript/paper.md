@@ -19,13 +19,13 @@ tags:
 - epidemiology
 - outbreak analysis
 affiliations:
-- index: '1'
-name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+  - index: '1'
+  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention,
 Atlanta, GA, USA
-- index: '2'
-name: University of Arkansas
+  - index: '2'
+  name: University of Arkansas
 - index: '3'
-name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention,
 Atlanta, GA, USA
 bibliography: paper.bib
 ---
