@@ -35,15 +35,16 @@ Across the United States, public health laboratories at the state-level now
 perform whole-genome sequencing for foodborne pathogens, a milestone for
 protecting our food sources by identifying bacterial contamination at a higher
 resolution than previously. To understand organismal relationships in response
-to outbreak investigations, building and interpreting phylogenetic trees are essential for this public health workflow. Placing
-new outbreak isolates within the broader context of species diversity allows for
-identification across temporal or spatial scales regarding similarities or
-differences for those newly sequenced isolates. Thus, our goal was to develo
-an open-source graphical user interface for phylogenetic tree visualization and
-annotation for both external (state public health laboratories) partners and
-internal users. Given that many state public health laboratories have limited
-bioinformatics support one of our main constraints is that the application be
-free and easily installable. To accomplish this goal, we developed **tinselR**
+to outbreak investigations, building and interpreting phylogenetic trees is an
+essential component for this public health workflow. Placing new outbreak
+isolates within the broader context of within species diversity allows for
+identification across temporal or spatial scales similarities or differences for
+those newly sequenced isolates. Thus, our goal was to develop an open-source
+graphical user interface for phylogenetic tree visualization and annotation for
+both external (state public health laboratories) partners and internal users.
+Given that many state public health laboratories have limited bioinformatics
+support one of our main constraints is that the application be free and easily
+installable. To accomplish this goal, we developed **tinselR** 
 (pronounced tinsel-er) using the Rshiny framework as a R package.
 Beyond the above requirements listed for developing this application,
 we choose the R programming languagebecause of R's base graphics and additional
