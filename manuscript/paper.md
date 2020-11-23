@@ -11,20 +11,23 @@ authors:
   name: Amanda Williams-Newkirk
   orcid: XXX
 date: "20 November 2020"
-bibliography: paper.bib
+output: pdf_document
 tags:
 - R
 - RShiny
-- phylognetics
+- phylogenetics
 - epidemiology
 - outbreak analysis
 affiliations:
 - index: '1'
-  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
+name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+Atlanta, GA, USA
 - index: '2'
-  name: University of Arkansas
+name: University of Arkansas
 - index: '3'
-  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
+name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+Atlanta, GA, USA
+bibliography: paper.bib
 ---
 
 
@@ -34,8 +37,7 @@ Across the United States, public health laboratories at the state-level now
 perform whole-genome sequencing for foodborne pathogens, a milestone for
 protecting our food sources by identifying bacterial contamination at a higher
 resolution than previously. To understand organismal relationships in response
-to outbreak investigations from whole-genome data, building and interpreting
-phylogenetic trees are essential for this public health workflow. Placing
+to outbreak investigations, building and interpreting phylogenetic trees are essential for this public health workflow. Placing
 new outbreak isolates within the broader context of species diversity allows for
 identification across temporal or spatial scales regarding similarities or
 differences for those newly sequenced isolates. Thus, our goal was to develo
@@ -63,21 +65,21 @@ pre-loaded so that a new user can familiarize themselves with the application.
 # Installation
 
 **1). Install devtools package**
- 
+
 Run the below code in your R console -    
- 
+
 `install.packages("devtools", dep=T)`
- 
+
 **2). Install ggtree and treeio**
- 
+
 ```
 if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+install.packages("BiocManager")
 BiocManager::install("ggtree")
 ```
 
 **3). Install and launch the tinselR shiny application**
- 
+
 ```
 devtools::install_github("jennahamlin/tinselR")
 library(tinselR)
@@ -111,18 +113,18 @@ demonstrate the capabilities of tinselR (Figure 3).
 # Figures
 
 <p>
-    <img src = "image1.PNG" />
-    <h4> Figure 1: tinselR landing page with the example data tab indicated in the blue box. </h4>
+<img src = "image1.PNG" />
+<h4> Figure 1: tinselR landing page with the example data tab indicated in the blue box. </h4>
 </p>
 
 <p>
-    <img src = "image2.PNG" />
-    <h4> Figure 2: Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected. </h4>
+<img src = "image2.PNG" />
+<h4> Figure 2: Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected. </h4>
 </p>
 
 <p>
-    <img src = "image3.PNG" />
-    <h4> Figure 3: Display of example dataset 1 with annotations and a heatmap. </h4>
+<img src = "image3.PNG" />
+<h4> Figure 3: Display of example dataset 1 with annotations and a heatmap. </h4>
 </p>
 
 # Acknowledgements
@@ -131,4 +133,3 @@ This publication was supported by Cooperative Agreement Number U60OE000103, fund
 
 
 # References
- 
