@@ -32,13 +32,13 @@ bibliography: paper.bib
 # Summary
 Across the United States, public health laboratories at the state-level now
 perform whole-genome sequencing for many pathogens, a milestone for protecting 
-our public health by identifying bacterial contamination at a higher resolution
-than previously [@armstrong2019pathogen]. To understand organismal relationships
-in response to an outbreak investigations, building, and interpreting
-phylogenetic trees is an essential component for this public health workflow.
-Placing new outbreak isolates within the broader context of within-species
-diversity identifies similarities or differences across temporal or spatial
-scales regarding newly sequenced isolates [@pybus2013evolutionary]. Thus, our
+our public health by identifying organisms at a higher resolution than
+previously [@armstrong2019pathogen]. To understand organismal relationships
+in response to an outbreak investigation, building, and interpreting phylogenetic 
+trees is an essential component for this public health workflow. Placing 
+new outbreak isolates within the broader context of within-species diversity 
+identifies similarities or differences across temporal or spatial scales 
+regarding these newly sequenced isolates [@pybus2013evolutionary]. Thus, our
 goal was to develop an open-source graphical user interface for phylogenetic
 tree visualization and annotation primarily for external partners (e.g. state
 public health laboratories) but also internal users (i.e. Centers for Disease
@@ -50,12 +50,12 @@ easily installable. To accomplish this, we used the Rshiny framework
 above requirements listed, the R programming language also contains some of the
 gold standard packages for phylogenetic analyses and visualization (e.g. ape
 [@paradis2004ape], and ggtree [@yu2017ggtree]). tinselR's minimum input
-requirements are a Newick formatted phylogenetic tree, once loaded,
+requirements are a Newick formatted phylogenetic tree and once loaded,
 user-selected inputs change parameters of the visualized tree. For example, a
 user can quickly transform tip labels to either bold or bold and italic font
 format. With a genetic distance matrix or the metadata file, or both, the user
-can include annotations on the image, automatically adjust the position of tip
-labels, or add a heatmap to the phylogenetic tree. These modified tree images
+can include annotations on the image, automatically change the tip labels,
+or add a heatmap to the phylogenetic tree. These modified tree images
 are downloadable in various formats (pdf, png, or tiff) for presentations or
 publications. Ultimately, these images help public health officials and 
 stakeholders communicate in response to outbreaks. Below, we detail how to
