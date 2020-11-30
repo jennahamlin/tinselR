@@ -116,7 +116,7 @@
 #' modules. We describe those functions below and indicated the modules these
 #' functions are associated with. 
 #' 
-#' @section cladeAnnotator module server functions
+#' @section cladeAnnotator module server functions:
 #' create_tip_list - Inputs: none. Output: is a list with incremented counts 
 #' associated with a user selection or brushed tips.  
 #' 
@@ -143,12 +143,12 @@
 #' current_tree_out - Inputs: none. Outputs - tree which includes the added 
 #' heatmap if avaiable, added annotations if selected. 
 #' 
-#' @section displayTree module server functions 
+#' @section displayTree module server functions:
 #' 
 #' tree_plot - Input: either a tree of class phylo if no genetic data uploaded 
 #' or a treedata object. Output: tree of class ggtree, gg, ggplot.
 #' 
-#' @section uploadData module server functions
+#' @section uploadData module server functions:
 #' 
 #' read_data - Inputs: file_path and sep. file_path is the path to the location
 #' of the file you are interested in uploading, while sep is the delimiter for
@@ -165,7 +165,7 @@
 #' message which confirms if user has selected the corrector delimiter for the 
 #' files they uploaded. 
 #' 
-#' @section uploadData module ui functions located in golem_utils_ui.R file
+#' @section uploadData module ui functions located in golem_utils_ui.R file:
 #' 
 #' file_upload - Inputs: file_id and file_label - file_id is the assigned id
 #' to the file, while file_label is the label assigned to the file and is

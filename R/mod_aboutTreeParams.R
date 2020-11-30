@@ -96,8 +96,8 @@ mod_aboutTreeParams_ui <- function(id) {
                               tags$li(tags$em("Tree Layout -"), "This provides
                                       the user the option for the tree layout
                                       to be either 'rectangular', 'slanted', or
-                                      'circular'."),
-                              ))),
+                                      'circular'.")
+                              )))
   )
 }
 
