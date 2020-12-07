@@ -1,30 +1,29 @@
 ---
-title: "tinselR"
-authors:
-- affiliation: 'Current'
-  name: Jennafer A. P. Hamlin
-  orcid: 0000-0001-7037-134X
-- affiliation: '2'
-  name: Teofil Nakov
-  orcid: XXX
-- affiliation: '3'
-  name: Amanda Williams-Newkirk
-  orcid: 0000-0002-3466-2921
-  name: Jennafer A. P. Hamlin
-  orcid: 0000-0001-7037-134X
-date: "7 December 2020"
-bibliography: paper.bib
+title: "tinselR - – An RShiny Application for Annotating Outbreak Trees."
 tags:
 - R
 - RShiny
 - phylogenetics
 - epidemiology
 - outbreak analysis
+date: "7 December 2020"
+authors:
+- name: Jennafer A. P. Hamlin
+  orcid: 0000-0001-7037-134X
+  affiliation: Current, 1, 3
+- name: Teofil Nakov
+  orcid: 0000-0002-5023-9269
+  affiliation: 2
+- name: Amanda Williams-Newkirk
+  orcid: 0000-0002-3466-2921
+  affiliation: 3
 affiliations:
 - index: 'Current'
   name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
+- index: '1'
+  name: Association of PUblic Health Laboratories Bioinformatics Fellow
 - index: '2'
-  name: University of Arkansas
+  name: Department of Biological Sciences, University of Arkansas, Fayetteville, Arkansas, USA
 - index: '3'
   name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
 bibliography: paper.bib
