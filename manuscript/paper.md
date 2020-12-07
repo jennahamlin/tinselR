@@ -161,11 +161,14 @@ conditions before providing access from a server for production purposes.
 
 # Acknowledgements
 
-This publication was supported by Cooperative Agreement Number U60OE000103,
-funded by Centers for Disease Control and Prevention through the Association of
-Public Health Laboratories. Its contents are solely the responsibility of the
-authors and do not necessarily represent the official views of Centers for
-Disease Control and Prevention or the Association of Public Health Laboratories.
+We would like to thank those who participated in testing the application and
+providing valuable feedback during code review including the members of Biome 
+team at CDC. This publication was supported by Cooperative Agreement Number
+60OE000103, funded by Centers for Disease Control and Prevention through the
+Association of Public Health Laboratories. Its contents are solely the
+responsibility of the authors and do not necessarily represent the official
+views of Centers for Disease Control and Prevention or the Association of Public
+Health Laboratories.
 
 
 # References
