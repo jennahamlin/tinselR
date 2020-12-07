@@ -1,5 +1,5 @@
 ---
-title: "tinselR - – An RShiny Application for Annotating Outbreak Trees."
+title: "tinselR – An RShiny Application for Annotating Outbreak Trees."
 tags:
 - R
 - RShiny
