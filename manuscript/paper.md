@@ -9,7 +9,7 @@ authors:
   orcid: XXX
 - affiliation: '3'
   name: Amanda Williams-Newkirk
-  orcid: XXX
+  orcid: 0000-0002-3466-2921
 date: "20 November 2020"
 bibliography: paper.bib
 tags:
@@ -20,59 +20,61 @@ tags:
 - outbreak analysis
 affiliations:
 - index: '1'
-  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
+  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and
+Prevention, Atlanta, GA, USA
 - index: '2'
   name: University of Arkansas
 - index: '3'
-  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
+  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and
+Prevention, Atlanta, GA, USA
 bibliography: paper.bib
 ---
 
 
 # Summary
-Across the United States, public health laboratories at the state-level now
-perform whole-genome sequencing for many pathogens, a milestone for protecting 
-our public health by identifying organisms at a higher resolution than
-previously [@armstrong2019pathogen]. To understand organismal relationships
-in response to an outbreak investigation, building, and interpreting phylogenetic 
-trees is an essential component for this public health workflow. Placing 
-new outbreak isolates within the broader context of within-species diversity 
-identifies similarities or differences across temporal or spatial scales 
-regarding these newly sequenced isolates [@pybus2013evolutionary]. Thus, our
-goal was to develop an open-source graphical user interface for phylogenetic
-tree visualization and annotation primarily for external partners (e.g. state
-public health laboratories) but also internal users (i.e. Centers for Disease
-Control and Prevention). To make our application broadly usable and given that
-many state public health laboratories have limited bioinformatics support, one
-of our main developmental focal points was that an application be both free and
-easily installable. To accomplish this, we used the Rshiny framework
-[@chang2017shiny] to develop **tinselR** (pronounced tinsel-er). Beyond the
-above requirements listed, the R programming language also contains some of the
-gold standard packages for phylogenetic analyses and visualization (e.g. ape
-[@paradis2004ape], and ggtree [@yu2017ggtree]). tinselR's minimum input
-requirements are a Newick formatted phylogenetic tree and once loaded,
-user-selected inputs change parameters of the visualized tree. For example, a
-user can quickly transform tip labels to either bold or bold and italic font
-format. With a genetic distance matrix or the metadata file, or both, the user
-can include annotations on the image, automatically change the tip labels,
-or add a heatmap to the phylogenetic tree. These modified tree images
-are downloadable in various formats (pdf, png, or tiff) for presentations or
-publications. Ultimately, these images help public health officials and 
-stakeholders communicate in response to outbreaks. Below, we detail how to
-install the application and describe the example data that is pre-loaded so
-that a new user can familiarize themselves with the application.
+Across the United States, public health laboratories perform whole-genome
+sequencing for many pathogens, a milestone for protecting public health by
+subtyping organisms at a higher resolution than was previously possible
+[@armstrong2019pathogen]. These high resolution subtypes can be used to
+determine the relationships between organisms, which can be visualized with
+phylogenetic trees. Once the genetic relationships of pathogens are known,
+empirically derived thresholds can be used to identify possible outbreaks, and
+additional epidemiological data can be added to the visualization. In
+combination, these data can be used to inform the design of investigations to
+confirm the occurrance of an outbreak and identify potential transmission
+routes. If appropriate, interventions such as the recall of contaminated
+products and public announcements may be issued. The creation and markup of
+phylogenetic trees is an essential component for this public health workflow.
+Our goal was to develop as open-source graphical user interface for
+phylogenetictree visualization and annotation usable by persons without
+specialized bioinformatics or data visualization skills. Given that the R
+programming language contains some of the gold standard packages for
+phylogenetic analyses and visualization (e.g. ape[@paradis2004ape], and ggtree
+[@yu2017ggtree]), we used the Rshiny framework[@chang2017shiny] to develop
+**tinselR** (pronounced tinsel-er) to provide GUI access to the tools in ape,
+ggtree, and other key packages. TinselR's minimum input requirement is a Newick
+formatted phylogenetic tree. Once loaded, user-selected inputs change the
+appearance of the displayed tree. For example, a user can quickly transform tip
+label formating. By adding a genetic distance matrix and/or metadata file, the
+user can include annotations on the image, relabel tips, or add a heatmap to the
+phylogenetic tree. These modified tree images are downloadable in various
+formats (pdf, png, or tiff) for presentations, publications, or other
+communications with collaborators. Below we detail how to install the
+application and describe the example data that is pre-loaded so that a new user
+can familiarize themselves with the application.
 
 # Installation
 
-As tinselR is currently hosted on github, users will need to download the
-R package devtools [@wickham2016devtools] along with ggtree [@yu2017ggtree] and
-treeio [@wang2020treeio]. Both ggtree and treeio are hosted on Bioconductor 
-project and can be accessed with BiocManager [@morgan2019biocmanager]. Once
-those complete installing, tinselR can be installed via install_github command
-from devtools. Below we provide explicit code for installing the  application.
-The final line of code below (run_app()), will launch the application. Note that
-when the install_github command is run, additional packages required for the
-application will be installed as well. 
+To install TinselR from GitHub, users will need to install the
+
+R package devtools [@wickham2016devtools] from the Comprehensive R Archive
+Network or other repositiory. The R packages ggtree [@yu2017ggtree] and treeio
+[@wang2020treeio] are also required and can be installed from Bioconductor using
+BiocManager [@morgan2019biocmanager]. Once these dependencies are installed,
+tinselR can be installed via the install_github command from devtools. Explicit
+installation commands are below, and the final command (run_app()) will launch
+the application. Note that install_github will also install other missing R
+dependencies. 
 
 **1). Install devtools package**
 
@@ -98,65 +100,72 @@ run_app()
 
 # Acceptable Inputs
 
-Any program that generates a phylogenetic tree in the Newick format can be used.
-For example, RAxML [@stamatakis2014raxml] outputs trees in Newick format and
-thus are acceptable inputs of a user uploaded tree. Currently, our application
-only supports a genetic distance matrix of single nucleotide polymorphisms (SNP)
-differences between tips on the tree. A genetic distance matrix can be in either
-csv, tsv, or txt formats. The metadata file should be in one of these formats as
-well (csv, tsv, or txt). The primary use of the metadata file is, once loaded,
-will automatically convert tip labels in the phylogenetic tree to whatever you 
-want. For example, many tip labels in a tree can include information that is not
-informative or is repetitive. Using a minimum of two columns with column headers
-Tip.labels, and Display.labels (column 1 and column 2 respectively), the column
-Tip.labels represents the tip labels in the phylogenetic tree that is uploaded.
-While the column Display.labels represents what the tip labels should display.
-Once this file is uploaded along with a phylogenetic tree, the switch between 
-Tip.labels and Display.labels happens instantaneously. A secondary function of
-the metadata file is the possible inclusion of information to be displayed as a 
-heatmap next to the tree. For example one may want to include information about 
-the collection site if that varies by isolates. If this third column is included
-in the metadata file, the header of column can be titled anything that the user
-wants to be displayed. 
+TinselR will accept Newick tree files from any program, e.g. RAxML
+[@stamatakis2014raxml], as input. The genetic distance matrix file must contain
+a square matrix of single nucleotide polymorphism (SNP) differences between tips
+on the tree. The metadata file is a table of additional information to be
+displayed on the tree. The header of the first column must be Tip.labels and it
+must contain the labels for all tree tips. The tip labels contained in the
+Newick tree, distance matrix, and metadata files must match prior to upload or
+tinselR will report an error. If the user wishes to relabel the tips on the
+final tree image, alternative labels can be provided in the metadata file using
+the column header Display.labels. If desired, users may include additional
+columns in the metadata file such as collection site and display the information
+in a heatmap next to the tree. Headers for these additional columns in the
+metadata file are flexible because they are not automatically recoginized and
+used by tinselR. CSV, TSV, and TXT formats are accepted for the genetic distance
+and metadata files. File types can be set independently for each input.
+
 
 # About Pre-loaded Example Data
 
-When tinselR is launched, the user can test out the application by using one of
-the pre-loaded datasets located in the 'Example Data' tab (Figure 1). We provide
-three datasets (i.e. Newick formatted tree, genetic distance matrix, and
-metadata file). These data are either *Eschericia coli* (from NCBI Bioproject:
-PRJNA218110) or *Salmonella enterica* (from NCBI Bioproject: PRJNA230403) 
-with the number of isolates ranging from 14 - 19. After clicking on the
-'Example Data' tab, users can select from the drop down menu one of the datasets
-(e.g. example data 1, example data 2, and example data 3 (Figure 2).
-Using example data set 1, we highlight the capabilities of tinselR (Figure 3). 
+When tinselR is launched, new users can explore the application using one ofthe
+pre-loaded datasets located in the 'Example Data' tab (Figure 1). We
+providethree datasets (i.e. Newick formatted tree, genetic distance matrix,
+andmetadata file). These data are either *Eschericia coli* (from NCBI
+Bioproject:PRJNA218110) or *Salmonella enterica* (from NCBI Bioproject:
+PRJNA230403) with the number of isolates ranging from 14 - 19. After clicking on
+the'Example Data' tab, users can select one of the datasets(e.g. example data 1,
+example data 2, and example data 3 (Figure 2) from the drop down menu.We
+highlight the capabilities of tinselR (Figure 3) using example data 1 below. 
+
 
 # Figures
 
 <p>
 <img src = "image1.PNG" />
-<h4> Figure 1: tinselR landing page with the example data tab indicated in the blue box. </h4>
+<h4> Figure 1: tinselR landing page with the example data tab indicated in the
+blue box. </h4>
 </p>
 
 <p>
 <img src = "image2.PNG" />
-<h4> Figure 2: Example data tab with action buttons and the location of the drop-down menu for the example data. Here example data set 1 is selected. </h4>
+<h4> Figure 2: Example data tab with action buttons and the location of the
+drop-down menu for the example data. Here example data set 1 is selected. </h4>
+
 </p>
 
 <p>
 <img src = "image3.PNG" />
-<h4> Figure 3: Example dataset 1 displayed with annotations and a heatmap indicating collection source. </h4>
+<h4> Figure 3: Example dataset 1 displayed with annotations and a heatmap
+indicating collection source. </h4>
 </p>
 
 # Development for local-user experience 
 
-One note regarding tinselR, to keep in mind, is that the application has only
-been tested by single-user instances. If one hosts the application on a server, 
-then testing if multiple users can access the application should be done before
-providing access.
+Although it is possible to host ShinyR applications on a server, to date TinselR
+has only been tested by single users running the application locally. We
+recommend testing to ensure tinselR performs as expected under multiuser
+conditions before providing access from a server for production purposes.
+
 
 # Acknowledgements
 
-This publication was supported by Cooperative Agreement Number U60OE000103, funded by Centers for Disease Control and Prevention through the Association of Public Health Laboratories. Its contents are solely the responsibility of the authors and do not necessarily represent the official views of Centers for Disease Control and Prevention or the Association of Public Health Laboratories.
+This publication was supported by Cooperative Agreement Number U60OE000103,
+funded by Centers for Disease Control and Prevention through the Association of
+Public Health Laboratories. Its contents are solely the responsibility of the
+authors and do not necessarily represent the official views of Centers for
+Disease Control and Prevention or the Association of Public Health Laboratories.
+
 
 # References
