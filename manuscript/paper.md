@@ -1,3 +1,4 @@
+
 ---
 title: "tinselR"
 authors:
@@ -9,7 +10,7 @@ authors:
   orcid: XXX
 - affiliation: '3'
   name: Amanda Williams-Newkirk
-  orcid: 0000-0002-3466-2921
+  orcid: XXX
 date: "20 November 2020"
 bibliography: paper.bib
 tags:
@@ -20,16 +21,13 @@ tags:
 - outbreak analysis
 affiliations:
 - index: '1'
-  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and
-Prevention, Atlanta, GA, USA
+  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
 - index: '2'
   name: University of Arkansas
 - index: '3'
-  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and
-Prevention, Atlanta, GA, USA
+  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
 bibliography: paper.bib
 ---
-
 
 # Summary
 Across the United States, public health laboratories perform whole-genome
