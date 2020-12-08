@@ -48,7 +48,7 @@ phylogenetic tree visualization and annotation usable by persons without
 specialized bioinformatics or data visualization skills. Given that the R
 programming language contains some of the gold standard packages for
 phylogenetic analyses and visualization (e.g. ape[@paradis2004ape], and ggtree
-[@yu2017ggtree]), we used the Rshiny framework[@chang2017shiny] to develop
+[@yu2017ggtree]), we used the Rshiny framework [@chang2017shiny] to develop
 **tinselR** (pronounced tinsel-er) to provide GUI access to the tools in ape,
 ggtree, and other key packages. tinselR's minimum input requirement is a Newick
 formatted phylogenetic tree. Once loaded, user-selected inputs change the
