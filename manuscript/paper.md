@@ -124,10 +124,12 @@ pre-loaded datasets located in the 'Example Data' tab (Figure 1). We
 provide three datasets (i.e. Newick formatted tree, genetic distance matrix,
 and metadata file). These data are either *Eschericia coli* (from NCBI
 Bioproject:PRJNA218110) or *Salmonella enterica* (from NCBI Bioproject:
-PRJNA230403) with the number of isolates ranging from 14 - 19. After clicking on
-the 'Example Data' tab, users can select one of the datasets (e.g. example data
-1, example data 2, and example data 3 (Figure 2) from the drop down menu. We
-highlight the capabilities of tinselR (Figure 3) using example data 1 below. 
+PRJNA230403) with the number of isolates ranging from 14 - 19. The genomic data
+used in the example data sets was generated and used under the CDC IRB protocol
+7172. After clicking on the 'Example Data' tab, users can select one of the
+datasets (e.g. example data 1, example data 2, and example data 3 (Figure 2)
+from the drop down menu. We highlight the capabilities of tinselR (Figure 3)
+using example data 1 below. 
 
 
 # Figures
@@ -163,9 +165,10 @@ conditions before providing access from a server for production purposes.
 
 We would like to thank those who participated in testing the application and
 providing valuable feedback during code review including the members of Biome 
-team at CDC. This publication was supported by Cooperative Agreement Number
-60OE000103, funded by Centers for Disease Control and Prevention through the
-Association of Public Health Laboratories. Its contents are solely the
+team at CDC. We also thank J. Notoma for help getting tinselR up and running on 
+the CDC internal server. This publication was supported by Cooperative Agreement
+Number 60OE000103, funded by Centers for Disease Control and Prevention through
+the Association of Public Health Laboratories. Its contents are solely the
 responsibility of the authors and do not necessarily represent the official
 views of Centers for Disease Control and Prevention or the Association of Public
 Health Laboratories.
