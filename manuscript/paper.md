@@ -43,11 +43,11 @@ confirm the occurrence of an outbreak and identify potential transmission
 routes. If appropriate, interventions such as the recall of contaminated
 products and public announcements may be issued. Thus, creation and markup of
 phylogenetic trees is an essential component for this public health workflow.
-Our goal was to develop as open-source graphical user interface (GUI) for
+Our goal was to develop an open-source graphical user interface (GUI) for
 phylogenetic tree visualization and annotation usable by persons without
 specialized bioinformatics or data visualization skills. Given that the R
 programming language contains some of the gold standard packages for
-phylogenetic analyses and visualization (e.g. ape[@paradis2004ape], and ggtree
+phylogenetic analyses and visualization (e.g. ape [@paradis2004ape], and ggtree
 [@yu2017ggtree]), we used the Rshiny framework [@chang2017shiny] to develop
 **tinselR** (pronounced tinsel-er) to provide GUI access to the tools in ape,
 ggtree, and other key packages. tinselR's minimum input requirement is a Newick
@@ -107,27 +107,27 @@ changed or displayed on the tree. The tip labels contained in the Newick tree,
 distance matrix, and metadata files must match prior to upload or tinselR will
 report an error. The primary function of the metadata file is to relabel the 
 tips on the tree image. The header of the first column must be Tip.labels and it
-must contain the labels for all tree tips. The alternative labels can be
-provided in the metadata file using the column header Display.labels in column
-two. If desired, users may include additional columns in the metadata file
-such as collection site and display the information in a heatmap next to the
-tree. Headers for these additional columns in the metadata file are flexible
-because they are not automatically recognized and used by tinselR.
-CSV, TSV, and TXT formats are accepted for the genetic distance and metadata
-files. File types can be set independently for each input.
+must contain the labels for all tree tips in the uploaded Newick file. The
+alternative labels can be provided in the metadata file using the column header
+Display.labels in column two. If desired, users may include additional columns
+in the metadata file, such as collection site, and display the information in a
+heatmap next to the tree. Headers for these additional columns in the metadata
+file are flexible because they are not automatically recognized and used by
+tinselR. CSV, TSV, and TXT formats are accepted for the genetic distance and
+metadata files. File types can be set independently for each input.
 
 
 # About Pre-loaded Example Data
 
-When tinselR is launched, new users can explore the application using one ofthe
-pre-loaded datasets located in the 'Example Data' tab (Figure 1). We
+When tinselR is launched, new users can explore the application using one of 
+the pre-loaded datasets located in the 'Example Data' tab (Figure 1). We
 provide three datasets (i.e. Newick formatted tree, genetic distance matrix,
 and metadata file). These data are either *Eschericia coli* (from NCBI
 Bioproject:PRJNA218110) or *Salmonella enterica* (from NCBI Bioproject:
 PRJNA230403) with the number of isolates ranging from 14 - 19. The genomic data
 used in the example data sets was generated and used under the CDC IRB protocol
 7172. After clicking on the 'Example Data' tab, users can select one of the
-datasets (e.g. example data 1, example data 2, and example data 3 (Figure 2)
+datasets (e.g. example data 1, example data 2, and example data 3; Figure 2)
 from the drop down menu. We highlight the capabilities of tinselR (Figure 3)
 using example data 1 below. 
 
