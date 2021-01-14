@@ -134,11 +134,10 @@ using example data 1 below.
 
 # Figures
 
-<p>
-<img src = "image1.PNG" />
-<h4> Figure 1: tinselR landing page with the example data tab indicated in the
-blue box. </h4>
-</p>
+
+![Figure 1: tinselR landing page with the example data tab indicated in the
+blue box.](image1.PNG)
+
 
 <p>
 <img src = "image2.PNG" />
