@@ -30,6 +30,7 @@ bibliography: paper.bib
 ---
 
 # Summary
+
 Across the United States, public health laboratories perform whole-genome
 sequencing for many pathogens, a milestone for protecting public health by
 subtyping organisms at a higher resolution than was previously possible
@@ -116,7 +117,6 @@ file are flexible because they are not automatically recognized and used by
 tinselR. CSV, TSV, and TXT formats are accepted for the genetic distance and
 metadata files. File types can be set independently for each input.
 
-
 # About Pre-loaded Example Data
 
 When tinselR is launched, new users can explore the application using one of 
@@ -131,25 +131,16 @@ datasets (e.g. example data 1, example data 2, and example data 3; Figure 2)
 from the drop down menu. We highlight the capabilities of tinselR (Figure 3)
 using example data 1 below. 
 
-
 # Figures
 
 ![Figure 1: tinselR landing page with the example data tab indicated in the
-blue box.](image1.PNG){width=250px}
+blue box.](image1.PNG)
 
+![Figure 2: Example data tab with action buttons and the location of the
+drop-down menu for the example data. Here example data set 1 is selected.](image2.PNG)
 
-<p>
-<img src = "image2.PNG" />
-<h4> Figure 2: Example data tab with action buttons and the location of the
-drop-down menu for the example data. Here example data set 1 is selected. </h4>
-
-</p>
-
-<p>
-<img src = "image3.PNG" />
-<h4> Figure 3: Example dataset 1 displayed with annotations and a heatmap
-indicating collection source. </h4>
-</p>
+![Figure 3: Example dataset 1 displayed with annotations and a heatmap
+indicating collection source.](image3.PNG)
 
 # Development for local-user experience 
 
@@ -157,7 +148,6 @@ Although it is possible to host ShinyR applications on a server, to date tinselR
 has only been tested by single users running the application locally. We
 recommend testing to ensure tinselR performs as expected under multi-user
 conditions before providing access from a server for production purposes.
-
 
 # Acknowledgements
 
@@ -170,6 +160,5 @@ the Association of Public Health Laboratories. Its contents are solely the
 responsibility of the authors and do not necessarily represent the official
 views of Centers for Disease Control and Prevention or the Association of Public
 Health Laboratories.
-
 
 # References
