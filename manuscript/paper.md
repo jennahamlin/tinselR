@@ -135,7 +135,7 @@ using example data 1 below.
 # Figures
 
 ![Figure 1: tinselR landing page with the example data tab indicated in the
-blue box. -fullwidth](image1.PNG)
+blue box.](image1.PNG){width=250px}
 
 
 <p>
