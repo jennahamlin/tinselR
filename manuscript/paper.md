@@ -7,6 +7,20 @@ tags:
 - epidemiology
 - outbreak analysis
 date: "7 December 2020"
+output: pdf_document
+affiliations:
+- index: Current
+  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+    Atlanta, GA, USA
+- index: '1'
+  name: Association of PUblic Health Laboratories Bioinformatics Fellow
+- index: '2'
+  name: Department of Biological Sciences, University of Arkansas, Fayetteville, Arkansas,
+    USA
+- index: '3'
+  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention,
+    Atlanta, GA, USA
+bibliography: paper.bib
 authors:
 - name: Jennafer A. P. Hamlin
   orcid: 0000-0001-7037-134X
@@ -17,16 +31,6 @@ authors:
 - name: Amanda Williams-Newkirk
   orcid: 0000-0002-3466-2921
   affiliation: 3
-affiliations:
-- index: 'Current'
-  name: Respiratory Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
-- index: '1'
-  name: Association of PUblic Health Laboratories Bioinformatics Fellow
-- index: '2'
-  name: Department of Biological Sciences, University of Arkansas, Fayetteville, Arkansas, USA
-- index: '3'
-  name: Enteric Diseases Laboratory Branch, Centers for Disease Control and Prevention, Atlanta, GA, USA
-bibliography: paper.bib
 ---
 
 # Summary
@@ -61,6 +65,10 @@ formats (pdf, png, or tiff) for presentations, publications, or other
 communications with collaborators. Below we detail how to install the
 application and describe the example data that is pre-loaded so that a new user
 can familiarize themselves with the application.
+
+# Statement of Need
+
+Public health genomic surveillance is a young and rapidly evolving field that exists at the intersection of genomics and epidemiology. Phylogenetic trees showing ​bacterial isolates' relatedness with annotated epidemiologic data are critical for identifying potential outbreaks. Neither the genetic nor the epidemiological data alone are sufficient, and no other type of analysis can replace it. In addition to the routine use of this software for outbreak investigation, ​it will play a critical role in establishing new genetic subtyping schemes. The applied research to develop new typing schemes for identifying isolates belonging to outbreak clusters remains reliant upon the manual review of many trees containing large numbers of isolates from well described historical outbreak. For many organisms, no a priori genomic relatedness threshold exists, and the examination of trees is the only way to establish a hypothesis for validation. Tinselr is both a visualization tool and an analysis package, and its user-friendly interface is uniquely suited to the needs of public health genomic surveillance.
 
 # Installation
 
