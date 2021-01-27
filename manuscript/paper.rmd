@@ -1,21 +1,22 @@
 ---
 title: "tinselR – An RShiny Application for Annotating Outbreak Trees"
 output:
+  word_document: default
   pdf_document:
-    keep_tex: true
-    extra_dependencies: ["float"]
+    keep_tex: yes
+    extra_dependencies: float
 bibliography: paper.bib
 header-includes:
-  - \usepackage{helvet} #font package
-  - \usepackage[T1]{fontenc}
-  - \renewcommand\familydefault{\sfdefault}
-  - \usepackage{parskip} #skip identation of paragraphs
-  - \usepackage[left]{lineno} #line number package
-  - \linenumbers #add line numbers to the pages
-  - \usepackage{setspace}\doublespacing
+- \usepackage{helvet}
+- \usepackage[T1]{fontenc}
+- \renewcommand\familydefault{\sfdefault}
+- \usepackage{parskip}
+- \usepackage[left]{lineno}
+- \linenumbers
+- \usepackage{setspace}\doublespacing
 ---
 
-Running Title: 
+Running Title: tinselR for annotating phylogenetic trees
 \newline
 \newline
 Jennafer A. P. Hamlin^current,1,2,#^ Teofil Nakov^3^, and Amanda Williams Newkirk^2^  
@@ -69,7 +70,7 @@ nucleotide polymorphism (SNP) differences between the tree tips. The metadata
 file is a table of additional information to be changed or displayed on the
 tree. The tip labels in the Newick tree, distance matrix, and metadata files
 must match before upload, or tinselR will report an error. The primary function
-of the metadata file is to relabel the tips on the tree image. The header ofthe
+of the metadata file is to relabel the tips on the tree image. The header of the
 first column must be Tip.labels, and it must contain the labels for all tree
 tips in the uploaded Newick file. The alternative identification labels can be
 provided in the metadata file using the column header Display.labels in column
@@ -101,10 +102,11 @@ three datasets (i.e., Newick formatted tree, genetic distance matrix, and
 metadata file). These data are either *Escherichia coli* (from NCBI Bioproject:
 PRJNA218110) or *Salmonella enterica* (from NCBI Bioproject: PRJNA230403) with
 the number of isolates ranging from 14 - 19. The genomic data used in the
-example data sets was generated and used under the CDC IRB protocol 7172. After
+example data sets were generated and used under the CDC IRB protocol 7172. After
 clicking on the 'Example Data' tab, users can select one of the datasets
 (e.g., example data 1, 2, and 3) from the drop-down menu. We highlight
 the capabilities of tinselR (Figure 1) using example data 1 below. 
+\newline
 Run the below code in your R console -    
                              
 **1). Install devtools package**
