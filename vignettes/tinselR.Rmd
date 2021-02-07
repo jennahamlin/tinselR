@@ -1,5 +1,5 @@
 ---
-  title: "tinselR"
+title: "tinselR"
 author: 
   - "Contributors"
   - "Jenna Hamlin"
@@ -8,8 +8,8 @@ author:
 date: "`r Sys.Date()`"
 output:
   bookdown::html_document2:
-  toc: yes
-toc_float: yes
+    toc: yes
+    toc_float: yes
 link-citations: yes
 pkgdown:
   as_is: true
@@ -18,8 +18,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-  
-  ```{r, include = FALSE}
+
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -43,7 +43,7 @@ potential sources in outbreaks link across temporal and spatial scales.
 *Our goal was to develop an open-source phylogenetic tree visualization and
 annotation graphical user interface, which will be made available for state
 public health laboratories.* To accomplish this goal, we developed  **tinselR**
-  (pronounced tinsel-er) using the R shiny framework. We choose to build this
+(pronounced tinsel-er) using the R shiny framework. We choose to build this
 application in because of R's base graphics and additional phylogenetic packages
 that are the gold standard for phylogenetic tree graphics. Our tool's minimum
 input requirements are a Newick formatted phylogenetic tree in which user inputs
@@ -61,36 +61,36 @@ application, using two example datasets.
 #### *Testing with example data*
 
 **Example data**
-  
-  When the application is launched, the user can test out the application by
+
+When the application is launched, the user can test out the application by
 using one of the pre-loaded datasets located in the 'Example Data' tab (Figure
-                                                                        \@ref(fig:exampleDataPane1)). We provide three datasets (i.e. Newick-formatted
-                                                                                                                                 tree, genetic distance matrix, and metadata file) already combined with the
+\@ref(fig:exampleDataPane1)). We provide three datasets (i.e. Newick-formatted
+tree, genetic distance matrix, and metadata file) already combined with the
 number of isolates ranging from 14 - 19. These data are either *Eschericia coli*
-  (NCBI Bioproject: PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: 
-                                                             PRJNA230403). After clicking on the 'Example Data' tab
+(NCBI Bioproject: PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: 
+PRJNA230403). After clicking on the 'Example Data' tab
 (Figure \@ref(fig:exampleDataPane1)), the user selects from one drop down menu
 for one of the combined datasets (e.g. example data 1, example data 2, and
-                                  example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
-                                  
-                                  
+example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
+
+
 ```{r exampleDataPane1, echo = F, out.width = "100%", fig.cap = "Landing page for tinselR with 'Example Data' tab circled in blue"}
 knitr::include_graphics("Slide1.SVG")
 ```
-                                  
+
 ```{r exampleDataPane2, echo = F, out.width = "100%", fig.cap = "'Example Data' tab highlighting within the blue box the available  tree visual parameters that can be changed."}
 knitr::include_graphics("Slide2.SVG")
 ```
-                                  
+
 **Displaying example tree and genetic distance data**
-                                    
+
 Once you have selected one of the datasets, to begin using the application, 
 press the 'Visualize Tree' button. At this point all potential tree visual
 parameters you want to alter are available using drop down menus
 (e.g. annotation label color), user input (e.g. size of scale bar), or 
 users selection (e.g. midpoint root). All tree visual parameters that a user 
 can adjust are displayed in Figure \@ref(fig:exampleDataPane3).
-                                  
+
 With the genetic distance file uploaded, a user can highlight clades to 
 add annotations which will display the range and median of SNPs for tips that
 are included in the highlighted selection (Figure \@ref(fig:exampleDataPane4)
@@ -108,21 +108,21 @@ placed on the plot can be removed by pushing the 'Remove Annotations' button.
 Unlike with the 'Add Annotation' button, you do not need to highlight which
 annotation you would like to remove. Because of this, the remove annotations
 works by removing the last placed annotation until there are no more. 
-                                  
+
 ```{r exampleDataPane3, echo = F, out.width = "100%", fig.cap = "Pre-loaded example dataset 1 is selected and can be seen once the user presses the 'Visaulize Tree' button, which is shown within the blue box."}
 knitr::include_graphics("Slide3.SVG")
 ```
-                                  
+
 ```{r exampleDataPane4, echo = F, out.width = "100%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. Within the larger blue box, a phylogenetic tree is displayed with tips right aligned. The smaller blue box indicates that the 'align the tips' box has been selected."}
 knitr::include_graphics("Slide4.SVG")
 ```
-                                  
+
 ```{r exampleDataPane5, echo = F, out.width = "100%", fig.cap = "With tips of interest highlighted, pressing the 'Add Annotations' button will add annotations to the tree image, which indicate the range and median of SNPs for these tips of interest. The tree with annotations is within the larger blue box, while the buttons for add and removing annotations are in the smaller box on the left of image. "}
 knitr::include_graphics("Slide5.SVG")
 ```
-                                  
+
 **Including metadata for tip correction and heatmap**
-                                    
+
 Figure \@ref(fig:exampleDataPane6) provides an example metadata file with 
 three columns: 1) 'Tip.labels'; those tip labels within in the Newick-formatted
 tree, 2) 'Display.labels'; what you would like the tip labels in the tree to be
@@ -137,8 +137,8 @@ allows the user to include either categorical or numerical data for their tree
 image either with or without annotations (Figure \@ref(fig:exampleDataPane7)). 
 
 <img src="metaDataExample.PNG">
-  
-  ```{r exampleDataPane6, echo = F, out.width = "50%", fig.cap = "Example metadata 1 with the third column highlighted in blue indicating information used for adding a heatmap. "}
+
+```{r exampleDataPane6, echo = F, out.width = "50%", fig.cap = "Example metadata 1 with the third column highlighted in blue indicating information used for adding a heatmap. "}
 knitr::include_graphics(here::here("inst/app/www/metaDataExample.PNG"))
 ```
 
@@ -147,8 +147,8 @@ knitr::include_graphics("Slide7.SVG")
 ```
 
 **Downloading your image**
-  
-  Once you are happy with the way your tree looks, you can download the image 
+
+Once you are happy with the way your tree looks, you can download the image 
 in either pdf, png, or tiff formats (Figure \@ref(fig:exampleDataPane8)). Make 
 sure you adjust the height and width of the image that you download. Note that
 once the image has downloaded, if you want to re-download with anything changed,
@@ -163,7 +163,7 @@ knitr::include_graphics("Slide8.SVG")
 There is only two differences between the 'Example Data' and the 'Data Upload'
 tabs: the example data tab has pre-loaded data, while the data
 upload tab is where you, the user, can upload your own files (i.e. tree, 
-                                                              genetic distance, and metadata). By that we mean, in the 'Example Data' tab,
+genetic distance, and metadata). By that we mean, in the 'Example Data' tab,
 the user only has three options to select from - example data 1, example data 2,
 and example data 3 - displayed in one drop down menu. While in the 'Data Upload'
 tab, there are three drop down menus - 1) tree upload, 2) genetic upload, and 3)
@@ -182,10 +182,10 @@ File checking happens independently of if the user wants the information.
 By that, we mean a user can ignore the file check messages if they do not need
 them and proceed using the application. Please note that this concordant tip 
 checking will only display a message if all three files are uploaded (tree, 
-                                                                      genetic, and meta). However, some file checking does occur for the genetic and 
+genetic, and meta). However, some file checking does occur for the genetic and 
 meta data independent of if all three files are uploaded. Beyond the mechanism
 in which the user starts using the application ('Data Upload' or 'Example Data'
-                                                tab) the application is exactly the same, thus why we highly encourage
+tab) the application is exactly the same, thus why we highly encourage
 users to play with the example data first just to familiarize yourself with the
 application. Note, we have only tested the application using trees with ~ 30
 tips with success, beyond that we are interested to see how the application
