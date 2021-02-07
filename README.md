@@ -70,11 +70,7 @@ selection via one drop down menu*
 
 <p>
 
-<h4>
-
-genetic Distance screenshot
-
-</h4>
+<h4>genetic Distance screenshot</h4>
 
 <img src='man/figures/geneDistanceExample.PNG' />
 
@@ -87,13 +83,8 @@ genetic Distance screenshot
 
 <p>
 
-<h4>
-
-meta Data screenshot
-
-</h4>
-
-    <img src = "inst/app/www/metaDataExample.PNG" />
+<h4>meta Data screenshot</h4>
+<img src='man/figures/metaDataExample.PNG' />
 
 </p>
 
@@ -106,7 +97,7 @@ meta Data screenshot
 
 <p>
 
-<img src = "inst/app/www/Slide4.PNG" />
+<img src = 'man/figures/Slide4.PNG' />
 
 </p>
 
@@ -117,7 +108,7 @@ meta Data screenshot
 
 <p>
 
-<img src = "inst/app/www/Slide5.PNG" />
+<img src = 'man/figures/Slide5.PNG' />
 
 </p>
 
@@ -128,7 +119,7 @@ meta Data screenshot
 
 <p>
 
-<img src ="inst/app/www/Slide6.PNG" />
+<img src ='man/figures/Slide6.PNG' />
 
 </p>
 
