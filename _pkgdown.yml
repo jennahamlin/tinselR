@@ -1,8 +1,8 @@
-url: https://github.com/jennahamlin/tinselR/tree/master
-authors:
-  Jenna Hamlin:
-    href: https://jennahamlin.github.io/
-  Teo Nakov:
-    href: https://teofil.discindo.org/
-  Jo Williams-Newkirk:
-    href: https://scholar.google.com/citations?user=eziIhI4AAAAJ&hl=en
+reference:
+- title: "tinselR - upload data and example data"
+  desc: >
+    Functions for uploading data or using the 
+    example data
+- contents: 
+  - mod_uploadData_ui
+  - mod_exampleData_ui
