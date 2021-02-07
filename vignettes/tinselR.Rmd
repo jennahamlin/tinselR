@@ -1,7 +1,14 @@
 ---
 title: "tinselR"
-output: bookdown::html_document2
-
+author: 
+  - "Jenna Hamlin"
+  - "Teo Nakov"
+  - "Jo Williams-Newkirk"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_document:
+    toc: yes
+    toc_float: yes
 vignette: >
   %\VignetteIndexEntry{tinselR}
   %\VignetteEngine{knitr::rmarkdown}
@@ -62,13 +69,18 @@ PRJNA230403). After clicking on the 'Example Data' tab
 for one of the combined datasets (e.g. example data 1, example data 2, and
 example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
 
+
+
+<img src="Slide1.SVG">
+
 ```{r exampleDataPane1, echo = F, out.width = "100%", fig.cap = "Landing page for tinselR with 'Example Data' tab circled in blue"}
-knitr::include_graphics(here::here("images/Slide1.SVG"))
+knitr::include_graphics(here::here("vignettes/images/Slide1.SVG"))
 ```
 
 
+
 ```{r exampleDataPane2, echo = F, out.width = "100%", fig.cap = "'Example Data' tab highlighting within the blue box the available  tree visual parameters that can be changed."}
-knitr::include_graphics(here::here("images/Slide2.SVG"))
+knitr::include_graphics(here::here("vignettes/images/Slide2.SVG"))
 ```
 
 **Displaying example tree and genetic distance data**
