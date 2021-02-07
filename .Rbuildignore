@@ -12,4 +12,5 @@ $run_dev.*
 ^metaDataScreenshot.png
 ^.github$
 ^_pkgdown\.yml$
+^docs$
 ^pkgdown$
