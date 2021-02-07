@@ -1,6 +1,7 @@
 #' uploadData Function
 #'
 #' @title   mod_uploadData_ui and mod_uploadData_server
+#' 
 #' @description  A shiny Module. This module allows the user to upload three
 #' different types of files and does file checking to confirm the correct
 #' delimiter is selected. The output from this module is sent to three
