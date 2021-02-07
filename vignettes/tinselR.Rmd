@@ -138,7 +138,7 @@ image either with or without annotations (Figure \@ref(fig:exampleDataPane7)).
 
 
 ```{r exampleDataPane6, echo = F, out.width = "50%", fig.cap = "Example metadata 1 with the third column highlighted in blue indicating information used for adding a heatmap. "}
-knitr::include_graphics(here::here("inst/app/www/metaDataExample.PNG"))
+knitr::include_graphics("metaDataExample.PNG")
 ```
 
 ```{r exampleDataPane7, echo = F, out.width = "100%", fig.cap = "Tree image with annotations and a heatmap of collection source displayed within blue box at the bottom of the image. The add/remove heatmap is also within the blue box on the left of the image."}
@@ -200,15 +200,11 @@ Currently, our application only supports a genetic distance matrix of SNP
 differences (Figure \@ref(fig:userData2)). Your distance matrix can be in either
 csv, tsv, or txt formats. The metadata file should be in one of these formats 
 as well (csv, tsv, or txt). However, the metadata file requires specific column
-headers (Tip.labels, and Display.labels; Figure \@ref(fig:userData3)),
+headers (Tip.labels, and Display.labels; Figure \@ref(fig:exampleDataPane6)),
 but the third column, if you choose to include it can be titled whatever. 
 
 ```{r userData2, echo = F, out.width = "50%", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
 knitr::include_graphics("geneDistanceExample.PNG")
-```
-
-```{r userData3, echo = F, out.width = "50%", fig.cap = "Meta data example without the heatmap column."}
-knitr::include_graphics("metaDataExample.PNG")
 ```
 
 One caveat to note, is that if the user does this specific sequence of steps,

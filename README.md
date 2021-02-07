@@ -76,7 +76,7 @@ genetic Distance screenshot
 
 </h4>
 
-<img src="geneDistanceExample.PNG">
+<img src='man/figures/geneDistanceExample.PNG' />
 
 </p>
 
