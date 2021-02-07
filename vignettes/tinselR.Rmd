@@ -1,6 +1,7 @@
 ---
 title: "tinselR"
 author: 
+  - "Contributors"
   - "Jenna Hamlin"
   - "Teo Nakov"
   - "Jo Williams-Newkirk"
@@ -134,6 +135,8 @@ tips within the Newick-formatted tree convert to what you the user decided
 [heatmap](https://yulab-smu.top/treedata-book/chapter7.html),
 allows the user to include either categorical or numerical data for their tree 
 image either with or without annotations (Figure \@ref(fig:exampleDataPane7)). 
+
+<img src="metaDataExample.PNG">
 
 ```{r exampleDataPane6, echo = F, out.width = "50%", fig.cap = "Example metadata 1 with the third column highlighted in blue indicating information used for adding a heatmap. "}
 knitr::include_graphics(here::here("inst/app/www/metaDataExample.PNG"))

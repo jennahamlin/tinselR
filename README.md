@@ -68,7 +68,7 @@ a tsv/txt/csv file - see below for image of genetic distance matrix.
 <p>
 
 <h4> genetic Distance screenshot </h4>
-    <img src = "inst/app/www/geneDistanceExample.PNG" />
+    <img src='man/figures/geneDistanceExample.PNG'
 </p>
 
 * **Metadata** - optional for easy correction of tip labels or adding a heatmap;
