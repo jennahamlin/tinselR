@@ -1,3 +1,7 @@
+---
+output: github_document
+---
+
 ### What is tinselR?
 
 tinselR (pronunced tinsel-er) at its' most basic level is a graphical viewer of
