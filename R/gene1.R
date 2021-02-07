@@ -6,9 +6,9 @@
 #'
 #' @docType data
 #'
-#' @rdname gene3
+#' @rdname gene1
 #'
-#' @usage data(gene3)
+#' @usage data(gene1)
 #'
 #' @keywords datasets
 #'
