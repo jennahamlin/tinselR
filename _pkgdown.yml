@@ -1,8 +1,8 @@
-url: https://github.com/jennahamlin/tinselR/tree/master
-authors:
-  Jenna Hamlin:
-    href: https://jennahamlin.github.io/
-  Teo Nakov:
-    href: https://teofil.discindo.org/
-  Jo Williams-Newkirk:
-    href: https://scholar.google.com/citations?user=eziIhI4AAAAJ&hl=en
+reference:
+- title: "Connecting to Spark"
+  desc: >
+    Functions for installing Spark components and managing
+    connections to Spark
+- contents: 
+  - mod_uploadData_ui
+  - mod_exampleData_ui
