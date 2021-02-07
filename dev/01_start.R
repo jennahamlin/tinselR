@@ -18,12 +18,12 @@ golem::fill_desc(
   author_first_name = "Jenna", # Your First Name
   author_last_name = "Hamlin",  # Your Last Name
   author_email = "ptx4@cdc.gov",      # Your Email
-  repo_url = "https://github.com/jennahamlin/tinselR" # URL of the GitHub Repo
+  repo_url = "https://github.com/jennahamlin/tinselR", # URL of the GitHub Repo
   author_first_name = "Teo", 
-  author_last_name"Nakov",
-  author_email = "teofiln@gmail.com"
+  author_last_name = "Nakov",
+  author_email = "teofiln@gmail.com",
   author_first_name = "Jo",
-  author_last_name = "Williams-Newkirk"
+  author_last_name = "Williams-Newkirk",
   author_email = "igy7@cdc.gov"
 )
 
