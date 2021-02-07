@@ -72,6 +72,8 @@ selection via one drop down menu*
 
 <h4>
 
+<img src="man/figures/geneDistanceExample.PNG">
+
 genetic Distance screenshot
 
 </h4>
