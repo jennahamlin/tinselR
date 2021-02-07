@@ -80,7 +80,7 @@ knitr::include_graphics("Slide1.SVG")
 
 
 ```{r exampleDataPane2, echo = F, out.width = "100%", fig.cap = "'Example Data' tab highlighting within the blue box the available  tree visual parameters that can be changed."}
-knitr::include_graphics("Slide1.SVG")
+knitr::include_graphics("Slide2.SVG")
 ```
 
 **Displaying example tree and genetic distance data**
