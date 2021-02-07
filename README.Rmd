@@ -69,11 +69,11 @@ run_app()
 * **Genetic Distance data** - optional for use with the annotation function;
 a tsv/txt/csv file - see below for image of genetic distance matrix.
 
-<p>
 
-<h4> genetic Distance screenshot </h4>
-    <img src='man/figures/geneDistanceExample.PNG' />
-</p>
+
+```{r exampleDataPane3, echo = F, out.width = "100%", fig.cap = "Example of genetic distance matrix."}
+knitr::include_graphics("geneDistanceEXample.PNG")
+```
 
 * **Metadata** - optional for easy correction of tip labels or adding a heatmap;
 a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels.
