@@ -204,11 +204,11 @@ headers (Tip.labels, and Display.labels; Figure \@ref(fig:userData3)),
 but the third column, if you choose to include it can be titled whatever. 
 
 ```{r userData2, echo = F, out.width = "50%", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
-knitr::include_graphics(here::here("inst/app/www/geneDistanceExample.PNG"))
+knitr::include_graphics("geneDistanceExample.PNG")
 ```
 
 ```{r userData3, echo = F, out.width = "50%", fig.cap = "Meta data example without the heatmap column."}
-knitr::include_graphics(here::here("inst/app/www/metaDataExample.PNG"))
+knitr::include_graphics("metaDataExample.PNG")
 ```
 
 One caveat to note, is that if the user does this specific sequence of steps,
