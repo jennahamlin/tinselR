@@ -159,7 +159,7 @@ mod_about_ui <- function(id) {
                               with the image, you can download it as a pdf,
                                                        png, or tiff.")),
                                        tags$br(),
-                                       tags$img(src = "www/Slide7.PNG",
+                                       tags$img(src = "www/Slide8.PNG",
                                                 height = "100%", width = "100%")
                                        ),
                               tags$br()
