@@ -1,8 +1,9 @@
 reference:
-- title: "tinselR - upload data and example data"
+- title: "upload data and example data"
   desc: >
     Functions for uploading data or using the 
     example data
 - contents: 
   - mod_uploadData_ui
+  - read_data
   - mod_exampleData_ui
