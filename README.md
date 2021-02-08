@@ -76,11 +76,16 @@ selection via one drop down menu
     Display.labels and Tip.labels. See image below for a csv file
     example.
 
-*Examples of both the genetic distance matrix and the metadata file*
+**Examples of both the genetic distance matrix and the metadata file**
 
-Genetic Distance          |  Metadata File 
-:-------------------------:|:-------------------------:
-![](man/figures/slide10.PNG) | ![](man/figures/slide6.PNG)
+*Genetic Distance*
+
+<img src="man/figures/slide10.PNG" width="75%" /> 
+
+*Metadata File* 
+
+<img src="man/figures/slide6.PNG" width="75%" /> 
+
 
 
 **5). Alter or annotate your tree**
