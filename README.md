@@ -14,8 +14,8 @@ image looks, you can download as either a pdf, png, or tiff.
 
 ### Issues, problems, suggestions, thoughts
 
-If you have any the above, please submit an *issue on github located
-[here]*(https://github.com/jennahamlin/tinselR/issues).
+If you have any the above, please submit an *issue on githublocated
+[here](https://github.com/jennahamlin/tinselR/issues).*
 
 ### Requires -
 
@@ -28,7 +28,7 @@ If you have any the above, please submit an *issue on github located
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/jennahamlin/tinselR.svg?branch=master)](https://travis-ci.org/jennahamlin/tinselR)
+status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=release-V0.0.0.90)](https://travis-ci.org/jennahamlin/tinselR)
 <!-- badges: end -->
 
 <hr>
