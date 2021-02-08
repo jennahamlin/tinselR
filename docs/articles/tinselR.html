@@ -199,7 +199,7 @@ image either with or without annotations
 (Figure <a href="#fig:exampleDataPane7">7</a>).
 <br><br><div class="figure" style="text-align: center">
 <span id="fig:exampleDataPane6"></span>
-<img src="Slide6.PNG" alt="Example metadata 1 with the third column included with information used for adding a heatmap. " width="50%"><p class="caption">
+<img src="Slide6.PNG" alt="Example metadata 1 with the third column included with information used for adding a heatmap. " width="75%"><p class="caption">
 Figure 6: Example metadata 1 with the third column included with information used for adding a heatmap.
 </p>
 </div>
@@ -234,7 +234,7 @@ tabs: the example data tab has pre-loaded data, while the data
 upload tab is where you, the user, can upload your own files (i.e. tree,
 genetic distance, and metadata). By that we mean, in the ‘Example Data’ tab,
 the user only has three options to select from - example data 1, example data 2, and example data 3 - displayed in one drop down menu. While in the ‘Data Upload’ tab, there are three drop down menus - 1) tree upload, 2) genetic upload, and 3)meta upload (Figure <a href="#fig:userDataPane1">9</a>). The only required file is the Newick-formatted tree, the other two files are optional.
-<br><br><div class="figure" style="text-align: center">
+<br><br><div class="figure">
 <span id="fig:userDataPane1"></span>
 <img src="Slide9.PNG" alt="'Data Upoad' tab for user's own data upload The larger blue box contains the three dropdown menus for the three different files a user can upload. The smaller blue boxes indicates the 'Data Upload' tab." width="100%"><p class="caption">
 Figure 9: ‘Data Upoad’ tab for user’s own data upload The larger blue box contains the three dropdown menus for the three different files a user can upload. The smaller blue boxes indicates the ‘Data Upload’ tab.
@@ -247,9 +247,9 @@ Second, given problems that can occur during user upload, we provide file upload
 <h5 class="hasAnchor">
 <a href="#file-types-and-format-for-uploaded-data" class="anchor"></a><span class="header-section-number">0.0.2.2.2</span> File types and format for uploaded data</h5>
 The application relies on treeio’s function read.newick (<code><a href="https://docs.ropensci.org/treeio/reference/read.newick.html">treeio::read.newick</a></code>),to read in a Newick-formatted tree. treeio is associated with the package ggtree, which extends the ggplot2 plotting system to phylogenetic trees. In theory, any application that can produce a Newick-formatted tree should be able to be uploaded. The tip labels in the Newick tree, distance matrix, and metadata files must match before upload. The genetic distance matrix file must contain a square matrix of single nucleotide polymorphism (SNP) differences between the tree tips (Figure <a href="#fig:userData2">10</a>). The metadata file is a table of additional information to be changed or displayed on the tree. The primary function of the metadata file is to relabel the tips on the tree image. The header of the first column must be Tip.labels, and it must contain the labels for all tree tips in the uploaded Newick file (Figure <a href="#fig:exampleDataPane6">6</a>). The alternative identification labels can be provided in the metadata file using the column header Display.labels in column two. If desired, users may include additional columns in the metadata file, such as the collection site (Figure <a href="#fig:exampleDataPane6">6</a>), and display the information in a heatmap next to the tree. Headers for these other columns in the metadata file are flexible because they are not automatically recognized and used by tinselR. Acceptable formats include CSV, TSV, and TXT for the genetic distance and metadata files. Users can set file types independently for each input.
-<br><br><div class="figure">
+<br><br><div class="figure" style="text-align: center">
 <span id="fig:userData2"></span>
-<img src="Slide10.PNG" alt="Genetic distance matrix example with tip labels that match the Newick phylogeneti tree." width="50%"><p class="caption">
+<img src="Slide10.PNG" alt="Genetic distance matrix example with tip labels that match the Newick phylogeneti tree." width="75%"><p class="caption">
 Figure 10: Genetic distance matrix example with tip labels that match the Newick phylogeneti tree.
 </p>
 </div>

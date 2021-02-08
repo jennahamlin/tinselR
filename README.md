@@ -9,12 +9,13 @@ epidemiological outbreak analyses. A genetic distance matrix contains
 SNP differences for all pairwise comparisons for the tips on the tree.
 One can also include a
 [heatmap](https://yulab-smu.top/treedata-book/chapter7.html) when that
-data is provided in the meta data file.
+data is provided in the meta data file. When you are happy with the way the
+image looks, you can download as either a pdf, png, or tiff.
 
 ### Issues, problems, suggestions, thoughts
 
-If you have any the above, please submit an *issue* on github located
-[here](https://github.com/jennahamlin/tinselR/issues).
+If you have any the above, please submit an *issue on github located
+[here]*(https://github.com/jennahamlin/tinselR/issues).
 
 ### Requires -
 
@@ -46,6 +47,8 @@ Run this code in your R console -
         install.packages("BiocManager")
     
     BiocManager::install("ggtree")
+    
+*Note - installation of ggtree should automatically cause treeio to install*
 
 **3). Install and launch the tinselR shiny application**
 
@@ -55,11 +58,11 @@ Run this code in your R console -
 
 **4). Load your data or use the example data**
 
-*Please click on the ‘Data Upload’ pane, where you can upload your
+Please click on the ‘Data Upload’ pane, where you can upload your
 files.* *Example data is available for playing with tinselR in the
 ‘Example Data’ pane* *of the application. The example data sets
 include all three files (tree,* *gene, and meta) and are available for
-selection via one drop down menu*
+selection via one drop down menu
 
   - **Phylogenetic Tree** - required; a
     [Newick](https://en.wikipedia.org/wiki/Newick_format) generated tree
@@ -67,33 +70,36 @@ selection via one drop down menu*
   - **Genetic Distance data** - optional for use with the annotation
     function; a tsv/txt/csv file - see below for image of genetic
     distance matrix.
-
-<p>
-
-<h4>genetic Distance screenshot</h4>
-
-<img src='man/figures/geneDistanceExample.PNG' />
-
-</p>
-
+    
   - **Metadata** - optional for easy correction of tip labels or adding
     a heatmap; a tsv/txt/csv file - requires column headers of
     Display.labels and Tip.labels. See image below for a csv file
     example.
 
-<p>
+*Examples of both the genetic distance matrix and the metadata file*
 
-<h4>meta Data screenshot</h4>
-<img src='man/figures/metaDataExample.PNG' />
+Genetic Distance          |  Metadata File 
+:-------------------------:|:-------------------------:
+![](man/figures/slide1.PNG) | ![](man/figures/slide2.PNG)
 
-</p>
 
 **5). Alter or annotate your tree**
 
-#### Once the phylogenetic tree is uploaded you can -
+##### Once the phylogenetic tree is uploaded you can -
 
-  - Alter visualization parameters. See below for tree with aligned
+  - Alter visualization parameters. See below for part of a tree with aligned
     tips.
+
+<p>
+
+<img src = 'man/figures/Slide3.PNG' />
+
+</p>
+
+##### Once the genetic distance file is uploaded you can -
+
+  - add annotation to the visual representation of the tree. See below
+    for a tree with annotated clades including the range of SNPs.
 
 <p>
 
@@ -101,18 +107,7 @@ selection via one drop down menu*
 
 </p>
 
-#### Once the genetic distance file is uploaded you can -
-
-  - add annotation to the visual representation of the tree. See below
-    for a tree with annotated clades including the range of SNPs.
-
-<p>
-
-<img src = 'man/figures/Slide5.PNG' />
-
-</p>
-
-#### If column for heatmap is included in metadata file you can -
+##### If column for heatmap is included in metadata file you can -
 
   - add the heatmap on to a tree with or without annotations. See below
     for a tree with annotated clades and a heatmap.

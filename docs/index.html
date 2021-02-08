@@ -85,7 +85,7 @@
 <div id="issues-problems-suggestions-thoughts" class="section level3">
 <h3 class="hasAnchor">
 <a href="#issues-problems-suggestions-thoughts" class="anchor"></a>Issues, problems, suggestions, thoughts</h3>
-<p>If you have any the above, please submit an <em>issue</em> on github located <a href="https://github.com/jennahamlin/tinselR/issues">here</a>.</p>
+<p>If you have any the above, please submit an <em>issue on github located [here]</em>(<a href="https://github.com/jennahamlin/tinselR/issues" class="uri">https://github.com/jennahamlin/tinselR/issues</a>).</p>
 </div>
 <div id="requires--" class="section level3">
 <h3 class="hasAnchor">
@@ -111,60 +111,55 @@
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"ggtree"</span>)</span></code></pre></div>
+<p><em>Note - installation of ggtree should automatically cause treeio to install</em></p>
 <p><strong>3). Install and launch the tinselR shiny application</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"jennahamlin/tinselR"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">library</span>(tinselR)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">run_app</span>()</span></code></pre></div>
 <p><strong>4). Load your data or use the example data</strong></p>
-<p><em>Please click on the ‘Data Upload’ pane, where you can upload your files.</em> <em>Example data is available for playing with tinselR in the ‘Example Data’ pane</em> <em>of the application. The example data sets include all three files (tree,</em> <em>gene, and meta) and are available for selection via one drop down menu</em></p>
+<p>Please click on the ‘Data Upload’ pane, where you can upload your files.* <em>Example data is available for playing with tinselR in the ‘Example Data’ pane</em> <em>of the application. The example data sets include all three files (tree,</em> *gene, and meta) and are available for selection via one drop down menu</p>
 <ul>
 <li><p><strong>Phylogenetic Tree</strong> - required; a <a href="https://en.wikipedia.org/wiki/Newick_format">Newick</a> generated tree</p></li>
 <li><p><strong>Genetic Distance data</strong> - optional for use with the annotation function; a tsv/txt/csv file - see below for image of genetic distance matrix.</p></li>
+<li><p><strong>Metadata</strong> - optional for easy correction of tip labels or adding a heatmap; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels. See image below for a csv file example.</p></li>
 </ul>
-<p>
-</p>
-<h4>
-genetic Distance screenshot
-</h4>
-<p><img src="reference/figures/geneDistanceExample.PNG"></p>
-
-<ul>
-<li>
-<strong>Metadata</strong> - optional for easy correction of tip labels or adding a heatmap; a tsv/txt/csv file - requires column headers of Display.labels and Tip.labels. See image below for a csv file example.</li>
-</ul>
-<p>
-</p>
-<h4>
-meta Data screenshot
-</h4>
-<p><img src="reference/figures/metaDataExample.PNG"></p>
-
+<p><em>Examples of both the genetic distance matrix and the metadata file</em></p>
+<table class="table">
+<thead><tr class="header">
+<th align="center">Genetic Distance</th>
+<th align="center">Metadata File</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center"><img src="reference/figures/slide1.PNG"></td>
+<td align="center"><img src="reference/figures/slide2.PNG"></td>
+</tr></tbody>
+</table>
 <p><strong>5). Alter or annotate your tree</strong></p>
-<div id="once-the-phylogenetic-tree-is-uploaded-you-can--" class="section level4">
-<h4 class="hasAnchor">
-<a href="#once-the-phylogenetic-tree-is-uploaded-you-can--" class="anchor"></a>Once the phylogenetic tree is uploaded you can -</h4>
+<div id="once-the-phylogenetic-tree-is-uploaded-you-can--" class="section level5">
+<h5 class="hasAnchor">
+<a href="#once-the-phylogenetic-tree-is-uploaded-you-can--" class="anchor"></a>Once the phylogenetic tree is uploaded you can -</h5>
 <ul>
-<li>Alter visualization parameters. See below for tree with aligned tips.</li>
+<li>Alter visualization parameters. See below for part of a tree with aligned tips.</li>
+</ul>
+<p>
+</p>
+<p><img src="reference/figures/Slide3.PNG"></p>
+
+</div>
+<div id="once-the-genetic-distance-file-is-uploaded-you-can--" class="section level5">
+<h5 class="hasAnchor">
+<a href="#once-the-genetic-distance-file-is-uploaded-you-can--" class="anchor"></a>Once the genetic distance file is uploaded you can -</h5>
+<ul>
+<li>add annotation to the visual representation of the tree. See below for a tree with annotated clades including the range of SNPs.</li>
 </ul>
 <p>
 </p>
 <p><img src="reference/figures/Slide4.PNG"></p>
 
 </div>
-<div id="once-the-genetic-distance-file-is-uploaded-you-can--" class="section level4">
-<h4 class="hasAnchor">
-<a href="#once-the-genetic-distance-file-is-uploaded-you-can--" class="anchor"></a>Once the genetic distance file is uploaded you can -</h4>
-<ul>
-<li>add annotation to the visual representation of the tree. See below for a tree with annotated clades including the range of SNPs.</li>
-</ul>
-<p>
-</p>
-<p><img src="reference/figures/Slide5.PNG"></p>
-
-</div>
-<div id="if-column-for-heatmap-is-included-in-metadata-file-you-can--" class="section level4">
-<h4 class="hasAnchor">
-<a href="#if-column-for-heatmap-is-included-in-metadata-file-you-can--" class="anchor"></a>If column for heatmap is included in metadata file you can -</h4>
+<div id="if-column-for-heatmap-is-included-in-metadata-file-you-can--" class="section level5">
+<h5 class="hasAnchor">
+<a href="#if-column-for-heatmap-is-included-in-metadata-file-you-can--" class="anchor"></a>If column for heatmap is included in metadata file you can -</h5>
 <ul>
 <li>add the heatmap on to a tree with or without annotations. See below for a tree with annotated clades and a heatmap.</li>
 </ul>
