@@ -80,7 +80,7 @@ selection via one drop down menu
 
 Genetic Distance          |  Metadata File 
 :-------------------------:|:-------------------------:
-![](man/figures/slide1.PNG) | ![](man/figures/slide2.PNG)
+![](man/figures/slide10.PNG) | ![](man/figures/slide6.PNG)
 
 
 **5). Alter or annotate your tree**
