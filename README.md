@@ -52,7 +52,7 @@ Run this code in your R console -
 
 **3). Install and launch the tinselR shiny application**
 
-    devtools::install_github("jennahamlin/tinselR")
+    devtools::install_github("jennahamlin/tinselR@release-V0.0.0.90")
     library(tinselR)
     run_app()
 
