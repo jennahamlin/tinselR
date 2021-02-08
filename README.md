@@ -28,11 +28,7 @@ If you have any the above, please submit an *issue on github located
 <!-- badges: start -->
 
 [![Travis build
-<<<<<<< HEAD
-status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=release-V0.0.0.90)](https://travis-ci.org/jennahamlin/tinselR)
-=======
-status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=elease-V0.0.0.90)](https://travis-ci.org/jennahamlin/tinselR)
->>>>>>> master
+status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=master)](https://travis-ci.org/jennahamlin/tinselR)
 <!-- badges: end -->
 
 <hr>
