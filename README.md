@@ -114,7 +114,7 @@ Genetic Distance          |  Metadata File
 
 <p>
 
-<img src ='man/figures/Slide6.PNG' />
+<img src ='man/figures/Slide5.PNG' />
 
 </p>
 
