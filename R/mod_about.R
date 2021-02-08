@@ -97,7 +97,7 @@ mod_about_ui <- function(id) {
                                                example."),
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/geneDistanceExample.PNG",
+                                                  "www/Slide1.PNG",
                                                 height = "100%", width = "100%")
                                        ),
                               tags$br(),
@@ -113,7 +113,7 @@ mod_about_ui <- function(id) {
                                                decide. See image below
                                                for example."),
                                        tags$br(),
-                                       tags$img(src = "www/metaDataExample.PNG",
+                                       tags$img(src = "www/Slide2.PNG",
                                                 height = "100%", width = "100%")
                                        ),
                               tags$br(),
@@ -126,7 +126,7 @@ mod_about_ui <- function(id) {
                                        labels.",
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/Slide4.PNG",
+                                                  "www/Slide3.PNG",
                                                 height = "100%", width = "100%")
                                        ),
                               tags$br(),
@@ -141,7 +141,7 @@ mod_about_ui <- function(id) {
                                               button. Repeat until you are
                                        satisfied.",
                                        tags$br(),
-                                       tags$img(src = "www/Slide5.PNG",
+                                       tags$img(src = "www/Slide4.PNG",
                                                 height = "100%", width = "100%")
                                        ),
                               tags$br(),
@@ -151,7 +151,7 @@ mod_about_ui <- function(id) {
                                        a heatmap with or without annotations",
                                        tags$br(),
                                        tags$img(src =
-                                                  "www/Slide6.PNG",
+                                                  "www/Slide5.PNG",
                                                 height = "100%", width = "100%")
                                        ),
                               tags$br(),
