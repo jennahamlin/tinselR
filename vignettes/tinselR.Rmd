@@ -1,5 +1,5 @@
 ---
-title: "tinselR"
+title: "tinselR - an RShiny app for phylogenetic tree annotation"
 author: 
   - "Contributors"
   - "Jenna Hamlin"
@@ -74,19 +74,21 @@ tree, genetic distance matrix, and metadata file) already combined with the
 number of isolates ranging from 14 - 19. These data are either *Eschericia coli*
 (NCBI Bioproject: PRJNA218110) or *Salmonella enterica* (NCBI Bioproject: 
 PRJNA230403). After clicking on the 'Example Data' tab
-(Figure \@ref(fig:exampleDataPane1)), the user selects from one drop down menu
+(Figure \@ref(fig:exampleDataPane1)), the user selects from the drop down menu
 one of the combined datasets (e.g. example data 1, example data 2, and
 example data 3; (see Figure \@ref(fig:exampleDataPane2)). 
 
 
-```{r exampleDataPane1, echo = F, out.width = "75%", fig.cap = "Landing page for tinselR with 'Example Data' tab highlighted in blue."}
-knitr::include_graphics("Slide1.SVG")
+```{r exampleDataPane1, echo = F, out.width = "100%", fig.cap = "Landing page for tinselR with 'Example Data' tab highlighted in blue."}
+knitr::include_graphics("Slide1.PNG")
 ```
-
-```{r exampleDataPane2, echo = F, out.width = "75%", fig.cap = "'Example Data' tab with available tree visual parameters highlighted within the blue box."}
-knitr::include_graphics("Slide2.SVG")
+<br>
+<br>
+```{r exampleDataPane2, echo = F, out.width = "100%", fig.cap = "Pre-loaded example dataset 1 is selected and can be seen once the user presses the 'Visaulize Tree' button."}
+knitr::include_graphics("Slide2.PNG")
 ```
-
+<br>
+<br>
 **Displaying example tree and genetic distance data**
 
 Once you have selected one of the datasets, to begin using the application, 
@@ -95,7 +97,13 @@ parameters you want to alter are available using drop down menus
 (e.g. annotation label color), user input (e.g. size of scale bar), or 
 users selection (e.g. midpoint root). All tree visual parameters that a user 
 can adjust are displayed in Figure \@ref(fig:exampleDataPane3).
-
+<br>
+<br>
+```{r exampleDataPane3, echo = F, out.width = "100%", fig.cap = "'Example Data' tab with available tree visual parameters highlighted within the blue box."}
+knitr::include_graphics("Slide3.PNG")
+```
+<br>
+<br>
 With the genetic distance file uploaded, a user can highlight clades to 
 add annotations which will display the range and median of SNPs for tips that
 are included in the highlighted selection (Figure \@ref(fig:exampleDataPane4)
@@ -113,19 +121,18 @@ placed on the plot can be removed by pushing the 'Remove Annotations' button.
 Unlike with the 'Add Annotation' button, you do not need to highlight which
 annotation you would like to remove. Because of this, the remove annotations
 works by removing the last placed annotation until there are no more. 
-
-```{r exampleDataPane3, echo = F, out.width = "75%", fig.cap = "Pre-loaded example dataset 1 is selected and can be seen once the user presses the 'Visaulize Tree' button."}
-knitr::include_graphics("Slide3.SVG")
+<br>
+<br>
+```{r exampleDataPane4, echo = F, out.width = "100%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. Within the larger blue box, a phylogenetic tree is displayed with tips right aligned. The smaller blue box indicates that the 'align the tips' box has been selected."}
+knitr::include_graphics("Slide4.PNG")
 ```
-
-```{r exampleDataPane4, echo = F, out.width = "75%", fig.cap = "Pressing 'Visualize Tree' button will allow the tree to be viewed on screen. Within the larger blue box, a phylogenetic tree is displayed with tips right aligned. The smaller blue box indicates that the 'align the tips' box has been selected."}
-knitr::include_graphics("Slide4.SVG")
+<br>
+<br>
+```{r exampleDataPane5, echo = F, out.width = "100%", fig.cap = "With tips of interest highlighted, pressing the 'Add Annotations' button will add annotations to the tree image, which indicate the range and median of SNPs for these tips of interest. The tree with annotations is within the larger blue box, while the buttons for adding/removing annotations are in the smaller box on the left of image. "}
+knitr::include_graphics("Slide5.PNG")
 ```
-
-```{r exampleDataPane5, echo = F, out.width = "75%", fig.cap = "With tips of interest highlighted, pressing the 'Add Annotations' button will add annotations to the tree image, which indicate the range and median of SNPs for these tips of interest. The tree with annotations is within the larger blue box, while the buttons for adding annotations is in the smaller box on the left of image. "}
-knitr::include_graphics("Slide5.SVG")
-```
-
+<br>
+<br>
 **Including metadata for tip correction and heatmap**
 
 Figure \@ref(fig:exampleDataPaneMeta) provides an example metadata file with 
@@ -145,11 +152,13 @@ image either with or without annotations (Figure \@ref(fig:exampleDataPane6)).
 ```{r exampleDataPaneMeta, echo = F, out.width = "50%", fig.cap = "Example metadata 1 with the third column highlighted in blue indicating information used for adding a heatmap. "}
 knitr::include_graphics("metaDataExample.PNG")
 ```
-
+<br>
+<br>
 ```{r exampleDataPane6, echo = F, out.width = "100%", fig.cap = "Tree image with annotations and a heatmap of collection source displayed within blue box. The add heatmap is also within the blue box on the left of the image."}
-knitr::include_graphics("Slide6.SVG")
+knitr::include_graphics("Slide6.PNG")
 ```
-
+<br>
+<br>
 **Downloading your image**
 
 Once you are happy with the way your tree looks, you can download the image 
@@ -158,10 +167,11 @@ sure you adjust the height and width of the image that you download. Note that
 once the image has downloaded, if you want to re-download with anything changed,
 just adjust as you wish and push the 'Download' button again.
 
-```{r exampleDataPane7, echo = F, out.width = "100%", fig.cap = "**Tree image with annotations and a heatmap of collection source displayed. The download image options is within the blue box on the bottom of the image.**"}
-knitr::include_graphics("Slide7.SVG")
+```{r exampleDataPane7, echo = F, out.width = "100%", fig.cap = "Tree image with annotations and a heatmap of collection source displayed. The download image options is within the blue box on the bottom of the image."}
+knitr::include_graphics("Slide7.PNG")
 ```
-
+<br>
+<br>
 #### *Using your data*
 
 There is only two differences between the 'Example Data' and the 'Data Upload'
@@ -172,11 +182,13 @@ the user only has three options to select from - example data 1, example data 2,
 and example data 3 - displayed in one drop down menu. While in the 'Data Upload'
 tab, there are three drop down menus - 1) tree upload, 2) genetic upload, and 3)
 meta upload (Figure \@ref(fig:userDataPane1)).
-
+<br>
+<br>
 ```{r userDataPane1, echo = F, out.width = "100%", fig.cap = "'Data Upoad' tab for user's own data upload The larger blue box contains the three dropdown menus for the three different files a user can upload. The smaller blue boxes indicates the 'Data Upload' tab."}
-knitr::include_graphics("Slide8.SVG")
+knitr::include_graphics("Slide8.PNG")
 ```
-
+<br>
+<br>
 Given problems that can occur during user upload, we provide file upload error
 messages in hopes of helping, you the user, with checking that all three files
 are concordant in terms of tip label information as this is the main mechanism
