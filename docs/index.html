@@ -107,16 +107,16 @@
 <p>Run this code in your R console -</p>
 <p><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools", dep=T)</a></code></p>
 <p><strong>2). Install ggtree and treeio</strong></p>
+<p><em>Note - installation of ggtree should automatically cause treeio to install</em></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"ggtree"</span>)</span></code></pre></div>
-<p><em>Note - installation of ggtree should automatically cause treeio to install</em></p>
 <p><strong>3). Install and launch the tinselR shiny application</strong></p>
+<p><em>Note - the released for production version should be installed by specifying the release branch (e.g. @release-V0.0.090)</em></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"jennahamlin/tinselR@release-V0.0.0.90"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">library</span>(tinselR)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">run_app</span>()</span></code></pre></div>
-<p><em>Note - the released for production version should be installed by specifying the release branch (e.g. @release-V0.0.090)</em></p>
 <p><strong>4). Load your data or use the example data</strong></p>
 <p>Please click on the ‘Data Upload’ pane, where you can upload your files.* <em>Example data is available for playing with tinselR in the ‘Example Data’ pane</em> <em>of the application. The example data sets include all three files (tree,</em> *gene, and meta) and are available for selection via one drop down menu</p>
 <ul>
@@ -128,7 +128,7 @@
 <p><em>Genetic Distance</em></p>
 <p><img src="reference/figures/Slide10.PNG" width="100%"></p>
 <p><em>Metadata File</em></p>
-<p><img src="reference/figures/Slide6.PNG" width="75%"></p>
+<p><img src="reference/figures/Slide10.PNG" width="75%"></p>
 <p><strong>5). Alter or annotate your tree</strong></p>
 <div id="once-the-phylogenetic-tree-is-uploaded-you-can--" class="section level5">
 <h5 class="hasAnchor">
