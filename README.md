@@ -56,6 +56,8 @@ Run this code in your R console -
     library(tinselR)
     run_app()
 
+*Note - the released for production version should be installed by specifying the release branch (e.g. @release-V0.0.090)*
+
 **4). Load your data or use the example data**
 
 Please click on the ‘Data Upload’ pane, where you can upload your
