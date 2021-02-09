@@ -43,20 +43,21 @@ Run this code in your R console -
 
 **2). Install ggtree and treeio**
 
+*Note - installation of ggtree should automatically cause treeio to install*
+
     if (!requireNamespace("BiocManager", quietly = TRUE))
         install.packages("BiocManager")
     
     BiocManager::install("ggtree")
-    
-*Note - installation of ggtree should automatically cause treeio to install*
 
 **3). Install and launch the tinselR shiny application**
+
+*Note - the released for production version should be installed by specifying the release branch (e.g. @release-V0.0.090)*
 
     devtools::install_github("jennahamlin/tinselR@release-V0.0.0.90")
     library(tinselR)
     run_app()
 
-*Note - the released for production version should be installed by specifying the release branch (e.g. @release-V0.0.090)*
 
 **4). Load your data or use the example data**
 
