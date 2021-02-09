@@ -82,7 +82,7 @@ selection via one drop down menu
 
 *Genetic Distance*
 
-<img src = 'man/figures/Slide6.PNG' width = '100%' /> 
+<img src = 'man/figures/Slide10.PNG' width = '100%' /> 
 
 *Metadata File* 
 
