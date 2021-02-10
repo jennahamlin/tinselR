@@ -19,3 +19,6 @@ navbar:
     href: reference/index.html
   - text: News
     href: news/index.html
+  right:
+  - icon: www/favicon.ico
+    href: https://github.com/jennahamlin/tinselR
