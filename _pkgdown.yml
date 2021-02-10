@@ -7,3 +7,18 @@ reference:
   - mod_uploadData_ui
   - read_data
   - mod_exampleData_ui
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Installation
+    href: index.html
+  - text: Get started
+    href: articles/index.html
+  - text: Reference
+    href: reference/index.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: www/favicon.ico
+    href: https://github.com/jennahamlin/tinselR
