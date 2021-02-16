@@ -2,7 +2,7 @@
 #'
 #' @title   mod_downloadImage_ui and mod_downloadImage_server
 #'
-#' @description  A shiny Module. This module allows one to download the
+#' @description  A shiny Module. This module allows user to download the
 #' adjusted tree image. Current download formats include png, pdf, and tiff.
 #'
 #' @rdname mod_downloadImage

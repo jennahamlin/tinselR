@@ -6,8 +6,10 @@
 #' remove annotations and checks for overlap between those annotations and
 #' allows the addition of the heatmap. This module contains 5 functions at the 
 #' end of the script that are used within (create_tip_list, make_layer,
-#' add_map, add_annotations, and current_tree_out) and one function in the
-#' golem_utils_server file (snp_anno). 
+#' add_map, add_annotations, and current_tree_out). These functions allow the
+#' placement of annotations for all selected tips. This module also contains one
+#' function in the golem_utils_server file (snp_anno), which gets the snps
+#' for the selected tips. 
 #'
 #' @rdname mod_cladeAnnotator
 #'

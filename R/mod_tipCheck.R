@@ -5,7 +5,8 @@
 #' @description A shiny Module. This module generates messages for the user
 #' regarding the files uploaded and if column(s) for a heatmap is available.
 #' This module contains 3 functions located in the golem_utils_server
-#' file (sanity, not_coluns, and m_file_conversion).  
+#' file (sanity, not_columns, and m_file_conversion). Essentially. these
+#' functions are used for checking or converting files for downstream analyses.
 #' 
 #'
 #' @rdname mod_tipCheck

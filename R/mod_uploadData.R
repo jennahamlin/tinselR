@@ -7,10 +7,14 @@
 #' delimiter is selected. The output from this module is sent to three
 #' different modules (tipCheck, displayTree, and cladeAnnotator). This module 
 #' contains 3 functions located at the end of the script that are used within 
-#' (read_data, file_type, and file_check) and two functions in the
-#' golem_utils_server file (replace_column_header and gene_object_out). The
-#' uploadData_ui contains two scripts located in the golem_utils_ui file (
-#' file_upload and input_separator). 
+#' (read_data, file_type, and file_check). Essentially, these functions are for
+#' reading in the data and checking that the selected file type gives the
+#' expected output. This module also contains three functions in the
+#' golem_utils_server file (replace_column_header, gene_object_out, 
+#' m_file_conversion). Essentially, these functions are used to manipulate the 
+#' files to combine them.  The uploadData_ui contains two scripts located in the
+#' golem_utils_ui file (file_upload and input_separator), which reduce the code
+#' in the ui of this module.  
 #'
 #' @rdname mod_uploadData
 #' 
@@ -196,6 +200,22 @@ mod_uploadData_server <- function(input, output, session) {
   #####################################
   #### uploadData server functions ####
   #####################################
+  
+  #function to read in the data using readr::read_delim
+  #filePath is the path to the location of the file you want to read in
+  #sep is the specified delimiter, probably either a tab or comma
+  #the other bits here help with reading in the file: trim whitespace, skip
+  #empty row, column names, and how to read in the data; default is
+  #set at column as characters
+  read_data <- function(file_path, sep) {
+    readr::read_delim(file_path,
+                      sep,
+                      trim_ws = TRUE,
+                      skip_empty_rows = TRUE,
+                      col_names = TRUE,
+                      col_types =
+                        readr::cols(.default = readr::col_character()))
+  }
 
 
   #function which maps the type of file uploaded based on user selection. For

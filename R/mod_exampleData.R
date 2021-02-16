@@ -8,7 +8,9 @@
 #' combined data files of example tree 1, example genetic 1, and example 
 #' meta 1.) This module contains 3 functions located in the golem_utils_server
 #' file (replace_column_header, gene_object_out, m_file_conversion). 
-#'
+#' Essentially, these functions are used to manipulate the files to combine
+#' them. 
+#' 
 #' @rdname mod_exampleData
 #'
 #' @param id shiny id

@@ -59,8 +59,11 @@ mod_displayTree_server(
 A shiny Module. This module combines the tree with genetic
 distance as an tidytree object that allows tree plotting and accessing the
 combined data. This module contains 1 function at the end of the script
-that is used within (tree_plot) and one function in the golem_utils_server
-file (combine_g_and_t).
+that is used within (tree_plot). The tree_plot function allows for various
+parameters to be changed dynaically on the tree image. This module also uses 
+one function in the golem_utils_server file (combine_g_and_t), which combines
+the tree and genetic distance matrix that has already been transformed with
+the meta data file.
 }
 \details{
 displayTree Function

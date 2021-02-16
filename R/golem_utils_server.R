@@ -99,7 +99,7 @@ gene_object_out  <- function(gene_file) {
 }
 
 ######################################################
-###### tipCheck and exampleData server function ######
+# uploadData, tipCheck, andexampleData server function 
 ######################################################
 
 #function to read in the meta data file; transform and determine if there is a

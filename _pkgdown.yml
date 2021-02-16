@@ -1,12 +1,31 @@
 reference:
-- title: "upload data and example data"
+- title: "Upload data and example data"
   desc: >
-    Functions for uploading data or using the 
-    example data
+    Modules that contain functions for
+    uploading data or using the example data
 - contents: 
   - mod_uploadData_ui
-  - read_data
   - mod_exampleData_ui
+  - mod_tipCheck_ui
+- title: "Display the tree"
+  desc: >
+    Module that contain functions for
+    displaying the phylogenetic tree
+- contents:
+  - mod_displayTree_ui
+- title: "Add annotations to the tree"
+  desc: >
+    Module that contains functions for
+    adding/removing either annotations
+    or heatmap
+- contents:
+  - mod_cladeAnnotator_ui
+- title: "Download the tree image"
+  desc: >
+    Module that contains a function for
+    downloading the adjusted tree image
+- contents:
+  - mod_downloadImage_ui
 navbar:
   title: ~
   type: default

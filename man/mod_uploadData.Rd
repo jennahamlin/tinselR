@@ -24,10 +24,14 @@ different types of files and does file checking to confirm the correct
 delimiter is selected. The output from this module is sent to three
 different modules (tipCheck, displayTree, and cladeAnnotator). This module 
 contains 3 functions located at the end of the script that are used within 
-(read_data, file_type, and file_check) and two functions in the
-golem_utils_server file (replace_column_header and gene_object_out). The
-uploadData_ui contains two scripts located in the golem_utils_ui file (
-file_upload and input_separator).
+(read_data, file_type, and file_check). Essentially, these functions are for
+reading in the data and checking that the selected file type gives the
+expected output. This module also contains three functions in the
+golem_utils_server file (replace_column_header, gene_object_out, 
+m_file_conversion). Essentially, these functions are used to manipulate the 
+files to combine them.  The uploadData_ui contains two scripts located in the
+golem_utils_ui file (file_upload and input_separator), which reduce the code
+in the ui of this module.
 }
 \details{
 uploadData Function

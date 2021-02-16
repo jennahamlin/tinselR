@@ -22,7 +22,7 @@ mod_downloadImage_server(input, output, session, tree_out)
 gglot2 if user combined genetic data with tree data; if not then class phylo}
 }
 \description{
-A shiny Module. This module allows one to download the
+A shiny Module. This module allows user to download the
 adjusted tree image. Current download formats include png, pdf, and tiff.
 }
 \details{
