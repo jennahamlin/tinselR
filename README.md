@@ -14,8 +14,8 @@ image looks, you can download as either a pdf, png, or tiff.
 
 ### Issues, problems, suggestions, thoughts
 
-If you have any the above, please submit an *issue on github located
-[here](https://github.com/jennahamlin/tinselR/issues).*
+If you have any the above, please submit an *[issue](https://github.com/jennahamlin/tinselR/issues)*
+on github.
 
 ### Requires -
 
@@ -87,7 +87,7 @@ selection via one drop down menu
 
 *Genetic Distance*
 
-<img src = "man/figures/Slide10.PNG" width = '100%' /> 
+<img src = 'man/figures/Slide10.PNG' width = '100%' /> 
 
 
 
@@ -100,18 +100,18 @@ selection via one drop down menu
 
 <p>
 
-<img src = 'man/figures/Slide3.PNG' />
+<img src = 'man/figures/Slide4.PNG' />
 
 </p>
 
 ##### Once the genetic distance file is uploaded you can -
 
   - add annotation to the visual representation of the tree. See below
-    for a tree with annotated clades including the range of SNPs.
+    for a tree with annotated clade including the range of SNPs.
 
 <p>
 
-<img src = 'man/figures/Slide4.PNG' />
+<img src = 'man/figures/Slide5.PNG' />
 
 </p>
 
@@ -122,7 +122,7 @@ selection via one drop down menu
 
 <p>
 
-<img src ='man/figures/Slide5.PNG' />
+<img src ='man/figures/Slide7.PNG' />
 
 </p>
 
