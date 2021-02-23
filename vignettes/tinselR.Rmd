@@ -178,13 +178,13 @@ Second, given problems that can occur during user upload, we provide file upload
 The application relies on treeio's function read.newick (`treeio::read.newick`),to read in a Newick-formatted tree. treeio is associated with the package ggtree, which extends the ggplot2 plotting system to phylogenetic trees. In theory, any application  that can produce a Newick-formatted tree should be able to be uploaded. The tip labels in the Newick tree, distance matrix, and metadata files must match before upload. The genetic distance matrix file must contain a square matrix of single nucleotide polymorphism (SNP) differences between the tree tips (Figure \@ref(fig:userData2)). The metadata file is a table of additional information to be changed or displayed on the tree. The primary function of the metadata file is to relabel the tips on the tree image. The header of the first column must be Tip.labels, and it must contain the labels for all tree tips in the uploaded Newick file (Figure \@ref(fig:exampleDataPane6)). The alternative identification labels can be provided in the metadata file using the column header Display.labels in column two. If desired, users may include additional columns in the metadata file, such as the collection site (Figure \@ref(fig:exampleDataPane6)), and display the information in a heatmap next to the tree. Headers for these other columns in the metadata file are flexible because they are not automatically recognized and used by tinselR. Acceptable formats include CSV, TSV, and TXT for the genetic distance and metadata files. Users can set file types independently for each input.
 <br>
 <br>
-```{r userData2, echo = F, out.width = "75%", fig.align="center", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogeneti tree."}
+```{r userData2, echo = F, out.width = "75%", fig.align="center", fig.cap = "Genetic distance matrix example with tip labels that match the Newick phylogenetic tree."}
 knitr::include_graphics("Slide10.PNG")
 ```
 <br>
 <br>
 
-##### Caveats
+### Caveats
 Note, we have only tested the application using trees with ~ 30
 tips with success, beyond that tip number we are interested to see how the application does, so please do let us know. 
 
