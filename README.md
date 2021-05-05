@@ -23,7 +23,7 @@ on github.
     see the quick start for how to install ggtree.
   - [treeio](http://bioconductor.org/packages/release/bioc/html/treeio.html);
     which will install with ggtree.
-  - R version \>= 3.5
+  - R version \>= 3.6
 
 <!-- badges: start -->
 
