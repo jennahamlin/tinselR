@@ -53,12 +53,15 @@ addons:
       - qpdf
       - ghostscript
 
-disable_homebrew: true
-      
 #test multiple operating systems
 os:
   - linux
-  - osx
+
+matrix:
+     include:
+         - os: osx
+           osx_image: xcode12.5
+    -
 #  - windows #windows build are in early access stage and r is not supported
 #on the windows build environment
 
