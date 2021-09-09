@@ -30,7 +30,7 @@ on github.
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/jennahamlin/tinselR.svg?branch=master)](https://travis-ci.org/jennahamlin/tinselR)
+status](https://app.travis-ci.com/jennahamlin/tinselR.svg?branch=release-V0.0.0.90)](https://travis-ci.org/jennahamlin/tinselR)
 <!-- badges: end -->
 
 <hr>
