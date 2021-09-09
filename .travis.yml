@@ -61,6 +61,7 @@ matrix:
      include:
          - os: osx
            osx_image: xcode12.5
+           fortran: false
 
 #  - windows #windows build are in early access stage and r is not supported
 #on the windows build environment
