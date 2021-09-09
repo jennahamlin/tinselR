@@ -12,7 +12,7 @@ One can also include a
 data is provided in the meta data file. When you are happy with the way the
 image looks, you can download as either a pdf, png, or tiff.
 
-We have an open access publication for [tinselR](https://journals.asm.org/doi/full/10.1128/MRA.00227-21) in Microbial Resouce Annocements. 
+We have an open access publication for [tinselR](https://journals.asm.org/doi/full/10.1128/MRA.00227-21) in Microbial Resource Announcements. 
 
 ### Issues, problems, suggestions, thoughts
 
